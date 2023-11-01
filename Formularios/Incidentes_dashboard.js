@@ -45,4 +45,21 @@
       });
     }
   });
+
+  /* opcion para que se vea la pestaña de seguimiento */
+  const seguimientoDiv = document.querySelector('#Seguimiento');
+  const detallesDiv = document.querySelector('#Detalles_incidente');
+
+// Add click event listeners to the Seguimiento and Detalles buttons
+document.querySelector('#SeguimientoButton').addEventListener('click', () => {
+  seguimientoDiv.style.display = seguimientoDiv.style.display === 'none' ? 'block' : 'none';
+  detallesDiv.style.display = 'none';
+});
+
+document.querySelector('#DetallesButton').addEventListener('click', () => {
+  detallesDiv.style.display = detallesDiv.style.display === 'none' ? 'block' : 'none';
+  seguimientoDiv.style.display = 'none';
+
+  
+});
 })();
