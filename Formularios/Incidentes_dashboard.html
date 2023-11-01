@@ -357,7 +357,6 @@
       </div>
     </div>
   </div>
-
   <!-- Ventana emergente o modal -->
 
   <div class="modal fade" id="modalDetallesIncidente" tabindex="-1" aria-labelledby="Detalles_incidente"
@@ -376,55 +375,75 @@
 
             <div class="row">
               <div class="col-6">
+                <button id="DetallesButton">
                 <h6 class="text-muted text-bold">Detalles</h6>
+              </button>
               </div>
               <div class="col-6">
+                <button id="SeguimientoButton">
                 <h6 class="text-muted text-bold">Seguimiento</h6>
+              </button>
               </div>
             </div>
           </div>
         </div>
         <!-- cuerpo de la ventana nesesario ponerlo -->
         <div class="modal-body">
-          <div class="border-bottom row">
-            <h6 class="text-muted text-bold">Autor del reporte</h6>
-            <div class="col-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                class="bi bi-person-circle border-right" viewBox="0 0 16 16">
-                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                <path fill-rule="evenodd"
-                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-              </svg>
+          <div id="Detalles_incidente" style="display: block; width: 700px;">
+            <div class="border-bottom row">
+              <h6 class="text-muted text-bold">Autor del reporte</h6>
+              <div class="col-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                  class="bi bi-person-circle border-right" viewBox="0 0 16 16">
+                  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                  <path fill-rule="evenodd"
+                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                </svg>
+              </div>
+              <div class="col-8">
+                <p class="lead text-black">María Rodríguez</p>
+              </div>
             </div>
-            <div class="col-8">
-              <p class="lead text-black">María Rodríguez</p>
+            <div style="padding: 5%;">
+              <h6 class="text-muted text-bold">Incidente</h6>
+              <p class="lead text-black">Dimensiones de columnas fundidas de primera planta</p>
+              <h6 class="text-muted text-bold">Estado</h6>
+              <p class="lead text-black">Inicializado</p>
+              <h6 class="text-muted text-bold">Gravedad</h6>
+              <p class="lead text-black">Alto</p>
+              <h6 class="text-muted text-bold">Descripcion</h6>
+              <p class="lead text-black">Se verificaron que las dimensiones de las columnas hechas no cumplen con los
+                diseños
+                en
+                planos</p>
+              <h6 class="text-muted text-bold">Involucrados</h6>
+              <p class="lead text-black"></p>No se presentan Involucrados</p>
+              <h6 class="text-muted text-bold">Sugerencias</h6>
+              <p class="lead text-black">Se le informa al contratista que debe demoler las columnas A1 y A3 porque no
+                cumplieron
+                con las
+                dimensiones de los diseños en planos</p>
+              <h6 class="text-muted text-bold">Proyecto</h6>
+              <p class="lead text-black">Proyecto de Carretera Transversal</p>
+
+
+              <h6 class="text-muted text-bold">Fecha y hora del reporte</h6>
+              <p class="lead text-black">2023-10-24 18:59:27</p>
             </div>
           </div>
-          <div style="padding: 5%;">
-            <h6 class="text-muted text-bold">Incidente</h6>
-            <p class="lead text-black">Dimensiones de columnas fundidas de primera planta</p>
-            <h6 class="text-muted text-bold">Estado</h6>
-            <p class="lead text-black">Inicializado</p>
-            <h6 class="text-muted text-bold">Gravedad</h6>
-            <p class="lead text-black">Alto</p>
+          <div id="Seguimiento" style="display: none;">
+            <p class="lead text-black">2023-10-24 18:59:28</p>
             <h6 class="text-muted text-bold">Descripcion</h6>
-            <p class="lead text-black">Se verificaron que las dimensiones de las columnas hechas no cumplen con los
-              diseños
-              en
-              planos</p>
-            <h6 class="text-muted text-bold">Involucrados</h6>
-            <p class="lead text-black"></p>No se presentan Involucrados</p>
+            <p class="lead text-black">Se realizó una nueva inspección en el área afectada para verificar la efectividad de las medidas tomadas.</p>
             <h6 class="text-muted text-bold">Sugerencias</h6>
-            <p class="lead text-black">Se le informa al contratista que debe demoler las columnas A1 y A3 porque no
-              cumplieron
-              con las
-              dimensiones de los diseños en planos</p>
-            <h6 class="text-muted text-bold">Proyecto</h6>
-            <p class="lead text-black">Proyecto de Carretera Transversal</p>
-
-
+            <p class="lead text-black">Se confirmó que las correcciones fueron exitosas y se levantó la suspensión de labores.</p>
+            <br>
             <h6 class="text-muted text-bold">Fecha y hora del reporte</h6>
-            <p class="lead text-black">2023-10-24 18:59:27</p>
+            <p class="lead text-black">2023-10-24 19:59:27</p>
+            <h6 class="text-muted text-bold">Descripcion</h6>
+            <p class="lead text-black">Se programó una reunión de seguimiento con el contratista para evaluar el avance de las correcciones.</p>
+            <h6 class="text-muted text-bold">Sugerencias</h6>
+            <p class="lead text-black">El contratista presentó avances significativos y se acordó continuar supervisando el progreso.</p>
           </div>
         </div>
         <!-- pie de pagina de la ventana opcional -->
@@ -434,6 +453,8 @@
       </div>
     </div>
   </div>
+
+  <p>Esto es un conflicto por culpa de juanma</p>
 
 
   <script src="Incidentes_dashboard.js"></script>
