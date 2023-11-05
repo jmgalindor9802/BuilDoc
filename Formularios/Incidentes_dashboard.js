@@ -46,7 +46,7 @@
     }
   });
 
-  /* opcion para que se vea la pestaña de seguimiento */
+  /* opcion para que se vea la pestaña de seguimiento del heder del modal*/
   const seguimientoDiv = document.querySelector('#Seguimiento');
   const detallesDiv = document.querySelector('#Detalles_incidente');
   // Add click event listeners to the Seguimiento and Detalles buttons
@@ -61,16 +61,16 @@ document.querySelector('#DetallesButton').addEventListener('click', () => {
   seguimientoDiv.style.display = 'none';
 });
 
-  /* opcion para que se vea la pestaña de seguimiento */
+  /* opcion para que se vea la pestaña de seguimiento del menu desplegable*/
   const seguimiento_desplegable_div = document.querySelector('#Seguimiento');
   const detalle_desplegable_div = document.querySelector('#Detalles_incidente');
   // Add click event listeners to the Seguimiento and Detalles buttons
-document.querySelector('#btn-desplegable-seguimiento').addEventListener('click', () => {
+document.querySelector('.btn-desplegable-seguimiento').addEventListener('click', () => {
   seguimiento_desplegable_div.style.display = seguimiento_desplegable_div.style.display === 'none' ? 'block' : 'none';
   detalle_desplegable_div.style.display = 'none';
 });
 
-document.querySelector('#btn-desplegable-detalles').addEventListener('click', () => {
+document.querySelector('.btn-desplegable-detalles').addEventListener('click', () => {
   detalle_desplegable_div.style.display = detalle_desplegable_div.style.display === 'none' ? 'block' : 'none';
   seguimiento_desplegable_div.style.display = 'none';
 });
