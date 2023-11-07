@@ -1,0 +1,12 @@
+.color_Fondo{
+    background-color: #e2e2e2ff;
+}
+.border-top {
+    border-top: 1px solid black; 
+}
+
+ul.nav {
+    margin: 0; /* Elimina el margen */
+    padding: 0; /* Elimina el relleno */
+}
+

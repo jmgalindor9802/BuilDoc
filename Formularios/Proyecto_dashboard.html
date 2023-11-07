@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Proyecto</title>
+  <link rel="shortcut icon" href="recursos/HeadLogo.png" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+
+  <style>
+    .border-left {
+      border-left: 1px solid #d7d7d7;
+      height: 100%;
+    }
+
+    .custom-btn {
+      background-color: #0074e4;
+      color: #ffffff;
+    }
+
+    .vh-80 {
+      max-height: 50vh;
+      overflow-y: auto;
+    }
+
+    .custom-form {
+      padding-left: 8%;
+      padding-right: 8%;
+    }
+
+    .custom-nav {
+      padding-left: 4%;
+      padding-right: 4%;
+    }
+
+    .sticky-header thead th {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background-color: #ffffff;
+    }
+  </style>
+</head>
+
+<body style="height: 100vh; display: flex; flex-direction: column; overflow: hidden;">
+  <header>
+    <iframe src="Header.html" class="w-100" height="78" style="max-height:78px;" title="Encabezado"></iframe>
+  </header>
+
+  <div class="row flex-grow-1 ">
+    <div class="col-lg-2 ">
+      <iframe src="Menu.html" class="w-100 " height="100%" style="max-height: 100%;" title="Menú principal"></iframe>
+    </div>
+    <div class="col-10 border-left custom-form">
+      <nav aria-label="breadcrumb"">
+        <ol class=" breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="#">Proyectos</a></li>
+        </ol>
+      </nav>
+      <div>
+        <h4 class="mb-3">Proyectos</h4>
+        <a href="Proyecto.html"><button class="btn btn-lg float-end custom-btn" type="submit"
+            style="font-size: 15px; margin-right: 5px;">+ Crear
+            proyecto</button></a>
+        <button class="btn btn-lg float-end custom-btn" type="submit"
+          style="font-size: 15px; margin-right: 5px;">Proyectos eliminados</button>
+        <h1 class="display-6 mb-3" style="margin-bottom: 5px;">Proyectos</h1>
+        <div class="dropdown mb-3">
+          <button id="proyectoSeleccionado" class="btn btn-secondary dropdown-toggle" type="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Todos los proyectos
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Todos los proyectos</a></li>
+            <li><a class="dropdown-item" href="#">Bogotá</a></li>
+            <li><a class="dropdown-item" href="#">Medellín</a></li>
+            <li><a class="dropdown-item" href="#">Barranquilla</a></li>
+            <li><a class="dropdown-item" href="#">Cali</a></li>
+            <li><a class="dropdown-item" href="#">Cartagena</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="table-responsive vh-80">
+        <table id="tablaProyectos" class="table table-striped table-hover sticky-header">
+          <caption>Esta tabla muestra los proyectos existentes.</caption>
+          <thead>
+            <tr>
+              <th scope="col">Proyecto</th>
+              <th scope="col">Municipio</th>
+              <th scope="col">Cliente</th>
+              <th scope="col">Fecha de Creacion</th>
+              <th scope="col" class="text-center">Opciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Puente Peatonal</td>
+              <td>Bogotá</td>
+              <td>Constructora Bolívar</td>
+              <td>2023-06-15 12:45:30</td>
+              <td>
+                <div class="container text-center">
+                  <div class="row text-center">
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EditarProyecto">Editar</button>
+                    </div>
+                    <div class="modal" id="EditarProyecto" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+                      tabindex="-1">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Editar</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <h1 class="modal-title fs-6" id="NombreProyectoLabel" style="text-align: start;">Proyecto:
+                            </h1>
+                            <h2 id="NombreProyectoValue"></h2>
+                            <br>
+                            <h1 class="modal-title fs-6" id="DescripcionProyectoLabel" style="text-align: start;">
+                              Descripcion:</h1>
+                            <h2 id="DescripcionProyectoValue"></h2>
+                            <br>
+                            <h1 class="modal-title fs-6" id="MunicipioProyectoLabel" style="text-align: start;">
+                              Municipio:</h1>
+                            <h2 id="MunicipioProyectoValue"></h2>
+                            <br>
+                            <h1 class="modal-title fs-6" id="DireccionProyectoLabel" style="text-align: start;">
+                              Direccion:</h1>
+                            <h2 id="DireccionProyectoValue"></h2>
+                            <br>
+                            <h1 class="modal-title fs-6" id="RutaProyectoLabel" style="text-align: start;">Ruta:</h1>
+                            <h2 id="RutaProyectoValue"></h2>
+                            <br>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                              <button type="button" class="btn btn-primary">Guardar</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#DetallesProyecto">Detalles</button>
+                    </div>
+                    <div class="modal" id="DetallesProyecto" aria-hidden="true"
+                      aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Detalles</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <h1 class="modal-title fs-6" id="NombreProyecto" style="text-align: start;">Proyecto:</h1>
+                            <h2></h2>
+                            <br>
+                            <h1 class="modal-title fs-6" id="DescripcionProyecto" style="text-align: start;">
+                              Descripcion:</h1>
+                            <h2></h2>
+                            <br>
+                            <h1 class="modal-title fs-6" id="DireccionProyecto" style="text-align: start;">Municipio:
+                            </h1>
+                            <h2></h2>
+                            <br>
+                            <h1 class="modal-title fs-6" id="DireccionProyecto" style="text-align: start;">Direccion:
+                            </h1>
+                            <h2></h2>
+                            <br>
+                            <h1 class="modal-title fs-6" id="RutaProyecto" style="text-align: start;">Ruta:</h1>
+                            <h2></h2>
+                            <br>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EliminarProyecto">Eliminar</button>
+                    </div>
+                    <div class="modal" tabindex="-1" id="EliminarProyecto">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">Eliminar proyecto</h5>
+                          </div>
+                          <div class="modal-body">
+                            <p>¿Estás seguro de eliminar este proyecto?</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary">Aceptar</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Construcción de Viaducto Sur</td>
+              <td>Medellín</td>
+              <td>Constructora Bolívar</td>
+              <td>2023-08-22 08:30:15</td>
+              <td>
+                <div class="container text-center">
+                  <div class="row text-center">
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EditarProyecto">Editar</button>
+                    </div>
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#DetallesProyecto">Detalles</button>
+                    </div>
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EliminarProyecto">Eliminar</button>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Proyecto de Carretera Transversal</td>
+              <td>Barranquilla</td>
+              <td>Constructora Bolívar</td>
+              <td>2023-05-10 15:20:45</td>
+              <td>
+                <div class="container text-center">
+                  <div class="row text-center">
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EditarProyecto">Editar</button>
+                    </div>
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#DetallesProyecto">Detalles</button>
+                    </div>
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EliminarProyecto">Eliminar</button>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Ampliación de Aeropuerto Internacional</td>
+              <td>Cali</td>
+              <td>Constructora Bolívar</td>
+              <td>2023-07-18 10:55:00</td>
+              <td>
+                <div class="container text-center">
+                  <div class="row text-center">
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EditarProyecto">Editar</button>
+                    </div>
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#DetallesProyecto">Detalles</button>
+                    </div>
+                    <div class="col">
+                      <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EliminarProyecto">Eliminar</button>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Proyecto de Túnel Subterráneo</td>
+              <td>Bogotá</td>
+              <td>Constructora Bolívar</td>
+              <td>2023-09-01 14:10:20</td>
+              <td>
+                <div class="container text-center">
+                  <div class="row text-center">
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EditarProyecto">Editar</button>
+                    </div>
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#DetallesProyecto">Detalles</button>
+                    </div>
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EliminarProyecto">Eliminar</button>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Construcción de Puentes y Pasarelas</td>
+              <td>Medellín</td>
+              <td>Constructora Bolívar</td>
+              <td>2023-03-30 11:25:40</td>
+              <td>
+                <div class="container text-center">
+                  <div class="row text-center">
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EditarProyecto">Editar</button>
+                    </div>
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#DetallesProyecto">Detalles</button>
+                    </div>
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EliminarProyecto">Eliminar</button>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Proyecto de Reciclaje de Agua</td>
+              <td>Cartagena</td>
+              <td>Constructora Bolívar</td>
+              <td>2023-10-05 13:35:50</td>
+              <td>
+                <div class="container text-center">
+                  <div class="row text-center">
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EditarProyecto">Editar</button>
+                    </div>
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#DetallesProyecto">Detalles</button>
+                    </div>
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EliminarProyecto">Eliminar</button>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Construcción de Vías Rurales</td>
+              <td>Bogotá</td>
+              <td>Constructora Bolívar</td>
+              <td>2023-04-12 09:40:10</td>
+              <td>
+                <div class="container text-center">
+                  <div class="row text-center">
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EditarProyecto">Editar</button>
+                    </div>
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#DetallesProyecto">Detalles</button>
+                    </div>
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EliminarProyecto">Eliminar</button>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Proyecto de Presa Hidroeléctrica</td>
+              <td>Medellín</td>
+              <td>Constructora Bolívar</td>
+              <td>2023-11-20 16:15:30</td>
+              <td>
+                <div class="container text-center">
+                  <div class="row text-center">
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EditarProyecto">Editar</button>
+                    </div>
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#DetallesProyecto">Detalles</button>
+                    </div>
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EliminarProyecto">Eliminar</button>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="Proyecto.js"></script>
+  <script src="Proyecto_dashboard.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

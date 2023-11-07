@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Usuario</title>
+  <link rel="shortcut icon" href="recursos/HeadLogo.png" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+
+  <style>
+    .border-left {
+      border-left: 1px solid #d7d7d7;
+      height: 100%;
+    }
+
+    .custom-btn {
+      background-color: #0074e4;
+      color: #ffffff;
+    }
+
+    .vh-80 {
+      max-height: 50vh;
+      overflow-y: auto;
+    }
+
+    .custom-form {
+      padding-left: 8%;
+      padding-right: 8%;
+    }
+
+    .custom-nav {
+      padding-left: 4%;
+      padding-right: 4%;
+    }
+
+    .sticky-header thead th {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background-color: #ffffff;
+    }
+  </style>
+</head>
+
+<body style="height: 100vh; display: flex; flex-direction: column; overflow: hidden;">
+  <header>
+    <iframe src="Header.html" class="w-100" height="78" style="max-height:78px;" title="Encabezado"></iframe>
+  </header>
+
+  <div class="row flex-grow-1 ">
+    <div class="col-lg-2 ">
+      <iframe src="Menu.html" class="w-100 " height="100%" style="max-height: 100%;" title="Menú principal"></iframe>
+    </div>
+    <div class="col-10 border-left custom-form">
+      <nav aria-label="breadcrumb"">
+        <ol class=" breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="#">Usuarios</a></li>
+        </ol>
+      </nav>
+      <div>
+        <h4 class="mb-3">Usuarios</h4>
+        <a href="Usuario.html"><button class="btn btn-lg float-end custom-btn" type="submit"
+            style="font-size: 15px; margin-right: 5px;">+ Crear
+            usuario</button></a>
+        <button class="btn btn-lg float-end custom-btn" type="submit"
+          style="font-size: 15px; margin-right: 5px;">Usuarios eliminados</button>
+        <h1 class="display-6 mb-3" style="margin-bottom: 5px;">Usuarios</h1>
+        <div class="dropdown mb-3">
+          <button id="proyectoSeleccionado" class="btn btn-secondary dropdown-toggle" type="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Todos los usuarios
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Bogotá</a></li>
+            <li><a class="dropdown-item" href="#">Medellín</a></li>
+            <li><a class="dropdown-item" href="#">Barranquilla</a></li>
+            <li><a class="dropdown-item" href="#">Cali</a></li>
+            <li><a class="dropdown-item" href="#">Cartagena</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="table-responsive vh-80">
+        <table id="tablaUsuarios" class="table table-striped table-hover sticky-header">
+          <caption>Esta tabla muestra los usuarios existentes.</caption>
+          <thead>
+            <tr>
+              <th scope="col">Nombre</th>
+              <th scope="col">Municipio</th>
+              <th scope="col">Telefono</th>
+              <th scope="col">Correo</th>
+              <th scope="col" class="text-center">Opciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Julian Amado</td>
+              <td>Bogotá</td>
+              <td>3143878100</td>
+              <td>j.amadosena@gmail.com</td>
+              <td>
+                <div class="container text-center">
+                  <div class="row text-center">
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EditarUsuario">Editar</button>
+                    </div>
+                    <div class="modal" id="EditarUsuario" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+                      tabindex="-1">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Editar</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <h1 class="modal-title fs-6" id="MunicipioUsuarioLabel" style="text-align: start;">
+                              Municipio:
+                            </h1>
+                            <h2 id="MunicipioUsuarioLabel"></h2>
+                            <br>
+                            <h1 class="modal-title fs-6" id="DireccionUsuarioLabel" style="text-align: start;">
+                              Direccion:</h1>
+                            <h2 id="DireccionUsuarioLabel"></h2>
+                            <br>
+                            <h1 class="modal-title fs-6" id="TelefonoUsuarioLabel" style="text-align: start;">
+                              Telefono:</h1>
+                            <h2 id="TelefonoUsuarioLabel"></h2>
+                            <br>
+                            <h1 class="modal-title fs-6" id="CorreoUsuarioLabel" style="text-align: start;">
+                              Correo:</h1>
+                            <h2 id="CorreoUsuarioLabel"></h2>
+                            <br>
+                            <h1 class="modal-title fs-6" id="EpsUsuarioLabel" style="text-align: start;">
+                              EPS:</h1>
+                            <h2 id="EpsUsuarioLabel"></h2>
+                            <br>
+                            <h1 class="modal-title fs-6" id="ArlUsuarioLabel" style="text-align: start;">ARL:</h1>
+                            <h2 id="ArlUsuarioLabel"></h2>
+                            <br>
+                            <h1 class="modal-title fs-6" id="ProyectoUsuarioLabel" style="text-align: start;">
+                              Proyecto:</h1>
+                            <br>
+                            <div class="col-md-6">
+                              <select class="form-select" id="ProyectoSelect" required>
+                                <option value="">Elegir...</option>
+                                <option>Proyecto de Carretera Transversal</option>
+                                <option>Proyecto de Túnel Subterráneo</option>
+                                <option>Ampliación de Aeropuerto Internacional</option>
+                              </select>
+                              <div class="invalid-feedback">
+                                Se requiere un proyecto válido.
+                              </div>
+                            </div>
+                            <br>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                              <button type="button" class="btn btn-primary">Guardar</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#DetallesUsuario">Detalles</button>
+                    </div>
+                    <div class="modal" id="DetallesUsuario" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+                      tabindex="-1">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Detalles</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <h1 class="modal-title fs-6" id="CcUsuario" style="text-align: start;">Cedula de Ciudadania:
+                            </h1>
+                            <h2></h2>
+                            <br>
+                            <h1 class="modal-title fs-6" id="NombreUsuario" style="text-align: start;">Nombre:</h1>
+                            <h2></h2>
+                            <br>
+                            <h1 class="modal-title fs-6" id="ProfesionUsuario" style="text-align: start;">
+                              Profesion:</h1>
+                            <h2></h2>
+                            <br>
+                            <h1 class="modal-title fs-6" id="MunicipioUsuario" style="text-align: start;">Municipio:
+                            </h1>
+                            <h2></h2>
+                            <br>
+                            <h1 class="modal-title fs-6" id="DireccionResidencia" style="text-align: start;">Direccion:
+                            </h1>
+                            <h2></h2>
+                            <br>
+                            <h1 class="modal-title fs-6" id="TelefonoUsuario" style="text-align: start;">Telefono:
+                            </h1>
+                            <h2></h2>
+                            <br>
+                            <h1 class="modal-title fs-6" id="CorreoUsuario" style="text-align: start;">Correo:
+                            </h1>
+                            <h2></h2>
+                            <br>
+                            <h1 class="modal-title fs-6" id="EpsUsuario" style="text-align: start;">EPS:</h1>
+                            <h2></h2>
+                            <br>
+                            <h1 class="modal-title fs-6" id="ArlUsuario" style="text-align: start;">ARL:</h1>
+                            <h2></h2>
+                            <br>
+                            <h1 class="modal-title fs-6" id="FechaNacimiento" style="text-align: start;">Fecha de
+                              Nacimiento:</h1>
+                            <h2></h2>
+                            <br>
+                            <h1 class="modal-title fs-6" id="ProyectoUsuario" style="text-align: start;">Proyecto:</h1>
+                            <h2></h2>
+                            <br>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EliminarUsuario">Eliminar</button>
+                    </div>
+                    <div class="modal" tabindex="-1" id="EliminarUsuario">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">Eliminar usuario</h5>
+                          </div>
+                          <div class="modal-body">
+                            <p>¿Estás seguro de eliminar este usuario?</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary">Aceptar</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Juan Pérez</td>
+              <td>Medellín</td>
+              <td>555-123-4567</td>
+              <td>juan.perez@email.com</td>
+              <td>
+                <div class="container text-center">
+                  <div class="row text-center">
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EditarUsuario">Editar</button>
+                    </div>
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#DetallesUsuario">Detalles</button>
+                    </div>
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EliminarUsuario">Eliminar</button>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Ana Sánchez</td>
+              <td>Barranquilla</td>
+              <td>555-234-5678</td>
+              <td>ana.sanchez@email.com</td>
+              <td>
+                <div class="container text-center">
+                  <div class="row text-center">
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EditarUsuario">Editar</button>
+                    </div>
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#DetallesUsuario">Detalles</button>
+                    </div>
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EliminarUsuario">Eliminar</button>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Luis Rodríguez</td>
+              <td>Cali</td>
+              <td>555-345-6789</td>
+              <td>luis.rodriguez@email.com</td>
+              <td>
+                <div class="container text-center">
+                  <div class="row text-center">
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EditarUsuario">Editar</button>
+                    </div>
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#DetallesUsuario">Detalles</button>
+                    </div>
+                    <div class="col">
+                      <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EliminarUsuario">Eliminar</button>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>María Gómez</td>
+              <td>Bogotá</td>
+              <td>555-456-7890</td>
+              <td>maria.gomez@email.com</td>
+              <td>
+                <div class="container text-center">
+                  <div class="row text-center">
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EditarUsuario">Editar</button>
+                    </div>
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#DetallesUsuario">Detalles</button>
+                    </div>
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EliminarUsuario">Eliminar</button>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Pedro Martínez</td>
+              <td>Medellín</td>
+              <td>555-567-8901</td>
+              <td>pedro.martinez@email.com</td>
+              <td>
+                <div class="container text-center">
+                  <div class="row text-center">
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EditarUsuario">Editar</button>
+                    </div>
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#DetallesUsuario">Detalles</button>
+                    </div>
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EliminarUsuario">Eliminar</button>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Laura González</td>
+              <td>Cartagena</td>
+              <td>555-678-9012</td>
+              <td>laura.gonzalez@email.com</td>
+              <td>
+                <div class="container text-center">
+                  <div class="row text-center">
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EditarUsuario">Editar</button>
+                    </div>
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#DetallesUsuario">Detalles</button>
+                    </div>
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EliminarUsuario">Eliminar</button>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Carlos López</td>
+              <td>Bogotá</td>
+              <td>555-789-0123</td>
+              <td>carlos.lopez@email.com</td>
+              <td>
+                <div class="container text-center">
+                  <div class="row text-center">
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EditarUsuario">Editar</button>
+                    </div>
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#DetallesUsuario">Detalles</button>
+                    </div>
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EliminarUsuario">Eliminar</button>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Marta Fernández</td>
+              <td>Medellín</td>
+              <td>555-890-1234</td>
+              <td>marta.fernandez@email.com</td>
+              <td>
+                <div class="container text-center">
+                  <div class="row text-center">
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EditarUsuario">Editar</button>
+                    </div>
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#DetallesUsuario">Detalles</button>
+                    </div>
+                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#EliminarUsuario">Eliminar</button>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="Usuario.js"></script>
+  <script src="Usuario_dashboard.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+p {
+	text-align: justify;
+}
+
+.vertical-line {
+	border-left: 2px solid #000;
+	height: 200px;
+	margin: 0 20px;
+}
+
+.Imagen {
+	border-radius: 5px;
+}
