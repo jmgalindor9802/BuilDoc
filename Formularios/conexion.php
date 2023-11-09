@@ -2,8 +2,8 @@
 
 $host = "localhost";
 $user = "root";
-$clave = "";
-$bd = "";
+$clave = " ";
+$bd = "bd_buildoc";
 
 $conectar=mysqli_connect($host, $user, $clave, $bd);
 
