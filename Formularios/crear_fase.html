@@ -83,8 +83,30 @@
                                 <label for="country" class="form-label">Proyecto</label>
                                 <select class="form-select" id="country" required>
                                     <option value="">Elegir...</option>
-                                    <option>Construcción de Planta de Tratamiento - Medellín</option>
-                                    <option>Construcción de Planta de Tratamiento - Bucaramanga</option>
+                                    <?php
+                                    require 'conexion.php';
+                                    
+                                    // Realizar una consulta para obtener los proyectos de la base de datos
+                                    $query = "SELECT proNombre FROM ga_proyecto";
+                                    $result = mysqli_query($conectar, $query);
+                                    
+                                    // Verificar si la consulta fue exitosa
+                                    if ($result) {
+                                        // Iterar a través de los resultados y generar las opciones del select
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            echo "<option>" . $row['proNombre'] . "</option>";
+                                        }
+                                    
+                                        // Liberar el resultado
+                                        mysqli_free_result($result);
+                                    } else {
+                                        // Manejar el error si la consulta falla
+                                        echo "Error en la consulta: " . mysqli_error($conectar);
+                                    }
+                                    
+                                    // Cerrar la conexión a la base de datos
+                                    mysqli_close($conectar);
+                                    ?>
                                 </select>
                                 <div class="invalid-feedback">
                                     Seleccione una fase.
