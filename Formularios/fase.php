@@ -2,24 +2,13 @@
 
 require 'conexion.php';
 
-$CC = $_POST["CC"];
-$nombre = $_POST["NombreUsu"];
-$apellido = $_POST["ApellidoUsu"];
-$nombreEPS = $_POST["EPSusu"];
-$nombreARL = $_POST["ARLusu"];
-$fechaNacimiento = $_POST["FechaNacimientoUsu"];
-$municipio = $_POST["DireccionUsu"];
-$direccion = $_POST["MunicipioUsu"];
-$profesion = $_POST["ProfesionUsu"];
-$contrasenia = $_POST["ContraseniaUsu"];
-$telefono = $_POST["TelefonoUsu"];
-$correo = $_POST["CorreoUsu"];
 
-$insert = "INSERT INTO usuario(pk_id_usuario, usuNombre, usuApellido, usuNombre_eps, usuNombre_arl, 
-usuFecha_nacimiento, usuMunicipio, usuDireccion_residencia, usuProfesion, usuContrasenia, 
-usuTelefono, usuCorreo) VALUES ('$CC', '$nombre', '$apellido', '$nombreEPS', '$nombreARL', 
-'$fechaNacimiento', '$municipio', '$direccion', '$profesion', '$contrasenia', '$telefono', 
-'$correo')";
+$Nombre = $_POST["Nombre_fase"];
+$Proyecto = $_POST["Proyecto_fase"];
+$Descripcion = $_POST["Descripcion_fase"];
+
+
+$insert = "INSERT INTO gt_fase(fasNombre, fasDescripcion, fk_id_proyecto) VALUES ('$Nombre', '$Proyecto', '$Descripcion')";
 
 $query = mysqli_query($conectar, $insert);
 

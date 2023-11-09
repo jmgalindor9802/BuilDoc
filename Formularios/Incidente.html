@@ -69,7 +69,7 @@
                     <div class="row g-3">
                         <div class="col-sm-6">
                             <label id="NombreProyecto" for="firstName" class="form-label">Incidente</label>
-                            <input type="text" class="form-control" id="firstName" placeholder="Nombre Proyecto"
+                            <input name="Nombre_incidente" type="text" class="form-control" id="firstName" placeholder="Nombre Proyecto"
                                 value="" required required maxlength="280">
                             <div class="invalid-feedback">
                                 Se requiere un nombre válido.
@@ -77,7 +77,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="proyecto" class="form-label">Proyecto</label>
-                            <select class="form-select" id="proyecto" required>
+                            <select name="Proyecto_incidente" class="form-select" id="proyecto" required>
                                 <option value="">Seleccionar...</option>
                                 <option value="1">Proyecto de Puente Peatonal</option>
                                 <option value="2">Construcción de Viaducto Sur</option>
@@ -95,16 +95,16 @@
                             <div class="row g-3">
                                 <div class="col-md-4">
                                     <label for="nombreInvolucrado" class="form-label">Nombre</label>
-                                    <input type="text" class="form-control" id="nombreInvolucrado" placeholder="Nombre">
+                                    <input name="Nombre_involucrado" type="text" class="form-control" id="nombreInvolucrado" placeholder="Nombre">
                                 </div>
                                 <div class="col-md-4">
                                     <label for="apellidoInvolucrado" class="form-label">Apellido</label>
-                                    <input type="text" class="form-control" id="apellidoInvolucrado"
+                                    <input name="Apellido_involucrado" type="text" class="form-control" id="apellidoInvolucrado"
                                         placeholder="Apellido">
                                 </div>
                                 <div class="col-md-4">
                                     <label for="idInvolucrado" class="form-label">Número de Identificación</label>
-                                    <input type="text" class="form-control" id="idInvolucrado"
+                                    <input name="Identificación_involucrado" type="text" class="form-control" id="idInvolucrado"
                                         placeholder="Número de Identificación">
                                     <!-- Agrega el div para mostrar el mensaje de error -->
                                     <div class="invalid-feedback" id="idInvolucradoError">
@@ -124,7 +124,7 @@
                         <!-- Fin de la sub lista de involucrados -->
                         <div class="mb-3">
                             <label for="Descripcion" class="form-label">Descripción</label>
-                            <textarea class="form-control" id="Descripcion" rows="5"
+                            <textarea name="Descripcion_incidente" class="form-control" id="Descripcion" rows="5"
                                 placeholder="Descripción sobre cómo sucedió el incidente" required
                                 maxlength="5000"></textarea>
                             <div class="invalid-feedback">
@@ -133,7 +133,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="Sugerencia" class="form-label">Sugerencia</label>
-                            <textarea class="form-control" id="Sugerencia" rows="5"
+                            <textarea name="Sugerencia_incidente" class="form-control" id="Sugerencia" rows="5"
                                 placeholder="Añada una sugerencia para que el incidente no vuelva a suceder"
                                 maxlength="5000"></textarea>
                         </div>
@@ -148,7 +148,7 @@
                                         d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
                                 </svg>
                             </button>
-                            <select class="form-select" id="Gravedad" required>
+                            <select name="Gravedad_incidente" class="form-select" id="Gravedad" required>
                                 <option value="">Seleccione...</option>
                                 <option value="I">I</option>
                                 <option value="II">II</option>
@@ -162,7 +162,7 @@
                         <br>
                         <div class="col-md-6">
                             <label for="Evidencia" class="form-label">Evidencia</label>
-                            <input class="form-control" type="file" id="Evidencia" multiple>
+                            <input name="Evidencia_incidente" class="form-control" type="file" id="Evidencia" multiple>
                             <div class="invalid-feedback">
                                 Se requiere adjuntar una evidencia válida.
                             </div>
