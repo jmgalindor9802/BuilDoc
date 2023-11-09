@@ -61,10 +61,10 @@
       <iframe src="Menu.html" class="w-100 " height="100%" style="max-height: 100%;" title="Menú principal"></iframe>
     </div>
     <div class="col-10 border-left custom-form">
-      <nav aria-label="breadcrumb"">
+      <nav aria-label="breadcrumb">
         <ol class=" breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-        <li class="breadcrumb-item"><a href="#">Proyectos</a></li>
+          <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+          <li class="breadcrumb-item"><a href="#">Proyectos</a></li>
         </ol>
       </nav>
       <div>
@@ -74,7 +74,7 @@
             proyecto</button></a>
         <button class="btn btn-lg float-end custom-btn" type="submit"
           style="font-size: 15px; margin-right: 5px;">Proyectos eliminados</button>
-        <h1 class="display-6 mb-3" style="margin-bottom: 5px;">Proyectos</h1>
+        <h1 class="display-6 mb-3" style="margin-bottom: 5px;">Ultimos proyectos creados</h1>
         <div class="dropdown mb-3">
           <button id="proyectoSeleccionado" class="btn btn-secondary dropdown-toggle" type="button"
             data-bs-toggle="dropdown" aria-expanded="false">
@@ -90,6 +90,7 @@
           </ul>
         </div>
       </div>
+
       <div class="table-responsive vh-80">
         <table id="tablaProyectos" class="table table-striped table-hover sticky-header">
           <caption>Esta tabla muestra los proyectos existentes.</caption>
@@ -99,7 +100,7 @@
               <th scope="col">Municipio</th>
               <th scope="col">Cliente</th>
               <th scope="col">Fecha de Creacion</th>
-              <th scope="col" class="text-center">Opciones</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -109,101 +110,29 @@
               <td>Constructora Bolívar</td>
               <td>2023-06-15 12:45:30</td>
               <td>
-                <div class="container text-center">
-                  <div class="row text-center">
-                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                        data-bs-target="#EditarProyecto">Editar</button>
-                    </div>
-                    <div class="modal" id="EditarProyecto" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
-                      tabindex="-1">
-                      <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Editar</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body">
-                            <h1 class="modal-title fs-6" id="NombreProyectoLabel" style="text-align: start;">Proyecto:
-                            </h1>
-                            <h2 id="NombreProyectoValue"></h2>
-                            <br>
-                            <h1 class="modal-title fs-6" id="DescripcionProyectoLabel" style="text-align: start;">
-                              Descripcion:</h1>
-                            <h2 id="DescripcionProyectoValue"></h2>
-                            <br>
-                            <h1 class="modal-title fs-6" id="MunicipioProyectoLabel" style="text-align: start;">
-                              Municipio:</h1>
-                            <h2 id="MunicipioProyectoValue"></h2>
-                            <br>
-                            <h1 class="modal-title fs-6" id="DireccionProyectoLabel" style="text-align: start;">
-                              Direccion:</h1>
-                            <h2 id="DireccionProyectoValue"></h2>
-                            <br>
-                            <h1 class="modal-title fs-6" id="RutaProyectoLabel" style="text-align: start;">Ruta:</h1>
-                            <h2 id="RutaProyectoValue"></h2>
-                            <br>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                              <button type="button" class="btn btn-primary">Guardar</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                        data-bs-target="#DetallesProyecto">Detalles</button>
-                    </div>
-                    <div class="modal" id="DetallesProyecto" aria-hidden="true"
-                      aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-                      <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Detalles</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body">
-                            <h1 class="modal-title fs-6" id="NombreProyecto" style="text-align: start;">Proyecto:</h1>
-                            <h2></h2>
-                            <br>
-                            <h1 class="modal-title fs-6" id="DescripcionProyecto" style="text-align: start;">
-                              Descripcion:</h1>
-                            <h2></h2>
-                            <br>
-                            <h1 class="modal-title fs-6" id="DireccionProyecto" style="text-align: start;">Municipio:
-                            </h1>
-                            <h2></h2>
-                            <br>
-                            <h1 class="modal-title fs-6" id="DireccionProyecto" style="text-align: start;">Direccion:
-                            </h1>
-                            <h2></h2>
-                            <br>
-                            <h1 class="modal-title fs-6" id="RutaProyecto" style="text-align: start;">Ruta:</h1>
-                            <h2></h2>
-                            <br>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                        data-bs-target="#EliminarProyecto">Eliminar</button>
-                    </div>
-                    <div class="modal" tabindex="-1" id="EliminarProyecto">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title">Eliminar proyecto</h5>
-                          </div>
-                          <div class="modal-body">
-                            <p>¿Estás seguro de eliminar este proyecto?</p>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-primary">Aceptar</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                    <path
+                      d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                  </svg>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a id="btn-desplegable-detalles" href="#" class="dropdown-item" data-bs-toggle="modal"
+                      data-bs-target="#ActualizarProyecto">Actualizar</a></li>
+                  <li><a id="btn-desplegable-seguimiento" href="#" class="dropdown-item" data-bs-toggle="modal"
+                      data-bs-target="#DetallesProyecto">Detalles</a></li>
+                  <li><a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
+                      data-bs-target="#EliminarProyecto">Archivar <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                        height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                        <path
+                          d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+                        <path
+                          d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+                      </svg></a>
+                  </li>
+                </ul>
+
               </td>
             </tr>
             <tr>
@@ -212,19 +141,28 @@
               <td>Constructora Bolívar</td>
               <td>2023-08-22 08:30:15</td>
               <td>
-                <div class="container text-center">
-                  <div class="row text-center">
-                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                        data-bs-target="#EditarProyecto">Editar</button>
-                    </div>
-                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                        data-bs-target="#DetallesProyecto">Detalles</button>
-                    </div>
-                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                        data-bs-target="#EliminarProyecto">Eliminar</button>
-                    </div>
-                  </div>
-                </div>
+                <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                    <path
+                      d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                  </svg>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a id="btn-desplegable-detalles" href="#" class="dropdown-item" data-bs-toggle="modal"
+                      data-bs-target="#ActualizarProyecto">Actualizar</a></li>
+                  <li><a id="btn-desplegable-seguimiento" href="#" class="dropdown-item" data-bs-toggle="modal"
+                      data-bs-target="#DetallesProyecto">Detalles</a></li>
+                  <li><a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
+                      data-bs-target="#EliminarProyecto">Archivar <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                        height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                        <path
+                          d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+                        <path
+                          d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+                      </svg></a>
+                  </li>
+                </ul>
               </td>
             </tr>
             <tr>
@@ -233,19 +171,28 @@
               <td>Constructora Bolívar</td>
               <td>2023-05-10 15:20:45</td>
               <td>
-                <div class="container text-center">
-                  <div class="row text-center">
-                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                        data-bs-target="#EditarProyecto">Editar</button>
-                    </div>
-                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                        data-bs-target="#DetallesProyecto">Detalles</button>
-                    </div>
-                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                        data-bs-target="#EliminarProyecto">Eliminar</button>
-                    </div>
-                  </div>
-                </div>
+                <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                    <path
+                      d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                  </svg>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a id="btn-desplegable-detalles" href="#" class="dropdown-item" data-bs-toggle="modal"
+                      data-bs-target="#ActualizarProyecto">Actualizar</a></li>
+                  <li><a id="btn-desplegable-seguimiento" href="#" class="dropdown-item" data-bs-toggle="modal"
+                      data-bs-target="#DetallesProyecto">Detalles</a></li>
+                  <li><a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
+                      data-bs-target="#EliminarProyecto">Archivar <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                        height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                        <path
+                          d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+                        <path
+                          d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+                      </svg></a>
+                  </li>
+                </ul>
               </td>
             </tr>
             <tr>
@@ -254,20 +201,28 @@
               <td>Constructora Bolívar</td>
               <td>2023-07-18 10:55:00</td>
               <td>
-                <div class="container text-center">
-                  <div class="row text-center">
-                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                        data-bs-target="#EditarProyecto">Editar</button>
-                    </div>
-                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                        data-bs-target="#DetallesProyecto">Detalles</button>
-                    </div>
-                    <div class="col">
-                      <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                        data-bs-target="#EliminarProyecto">Eliminar</button>
-                    </div>
-                  </div>
-                </div>
+                <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                    <path
+                      d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                  </svg>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a id="btn-desplegable-detalles" href="#" class="dropdown-item" data-bs-toggle="modal"
+                      data-bs-target="#ActualizarProyecto">Actualizar</a></li>
+                  <li><a id="btn-desplegable-seguimiento" href="#" class="dropdown-item" data-bs-toggle="modal"
+                      data-bs-target="#DetallesProyecto">Detalles</a></li>
+                  <li><a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
+                      data-bs-target="#EliminarProyecto">Archivar <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                        height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                        <path
+                          d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+                        <path
+                          d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+                      </svg></a>
+                  </li>
+                </ul>
               </td>
             </tr>
             <tr>
@@ -276,19 +231,28 @@
               <td>Constructora Bolívar</td>
               <td>2023-09-01 14:10:20</td>
               <td>
-                <div class="container text-center">
-                  <div class="row text-center">
-                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                        data-bs-target="#EditarProyecto">Editar</button>
-                    </div>
-                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                        data-bs-target="#DetallesProyecto">Detalles</button>
-                    </div>
-                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                        data-bs-target="#EliminarProyecto">Eliminar</button>
-                    </div>
-                  </div>
-                </div>
+                <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                    <path
+                      d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                  </svg>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a id="btn-desplegable-detalles" href="#" class="dropdown-item" data-bs-toggle="modal"
+                      data-bs-target="#ActualizarProyecto">Actualizar</a></li>
+                  <li><a id="btn-desplegable-seguimiento" href="#" class="dropdown-item" data-bs-toggle="modal"
+                      data-bs-target="#DetallesProyecto">Detalles</a></li>
+                  <li><a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
+                      data-bs-target="#EliminarProyecto">Archivar <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                        height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                        <path
+                          d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+                        <path
+                          d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+                      </svg></a>
+                  </li>
+                </ul>
               </td>
             </tr>
             <tr>
@@ -297,19 +261,28 @@
               <td>Constructora Bolívar</td>
               <td>2023-03-30 11:25:40</td>
               <td>
-                <div class="container text-center">
-                  <div class="row text-center">
-                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                        data-bs-target="#EditarProyecto">Editar</button>
-                    </div>
-                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                        data-bs-target="#DetallesProyecto">Detalles</button>
-                    </div>
-                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                        data-bs-target="#EliminarProyecto">Eliminar</button>
-                    </div>
-                  </div>
-                </div>
+                <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                    <path
+                      d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                  </svg>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a id="btn-desplegable-detalles" href="#" class="dropdown-item" data-bs-toggle="modal"
+                      data-bs-target="#ActualizarProyecto">Actualizar</a></li>
+                  <li><a id="btn-desplegable-seguimiento" href="#" class="dropdown-item" data-bs-toggle="modal"
+                      data-bs-target="#DetallesProyecto">Detalles</a></li>
+                  <li><a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
+                      data-bs-target="#EliminarProyecto">Archivar <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                        height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                        <path
+                          d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+                        <path
+                          d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+                      </svg></a>
+                  </li>
+                </ul>
               </td>
             </tr>
             <tr>
@@ -318,19 +291,28 @@
               <td>Constructora Bolívar</td>
               <td>2023-10-05 13:35:50</td>
               <td>
-                <div class="container text-center">
-                  <div class="row text-center">
-                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                        data-bs-target="#EditarProyecto">Editar</button>
-                    </div>
-                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                        data-bs-target="#DetallesProyecto">Detalles</button>
-                    </div>
-                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                        data-bs-target="#EliminarProyecto">Eliminar</button>
-                    </div>
-                  </div>
-                </div>
+                <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                    <path
+                      d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                  </svg>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a id="btn-desplegable-detalles" href="#" class="dropdown-item" data-bs-toggle="modal"
+                      data-bs-target="#ActualizarProyecto">Actualizar</a></li>
+                  <li><a id="btn-desplegable-seguimiento" href="#" class="dropdown-item" data-bs-toggle="modal"
+                      data-bs-target="#DetallesProyecto">Detalles</a></li>
+                  <li><a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
+                      data-bs-target="#EliminarProyecto">Archivar <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                        height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                        <path
+                          d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+                        <path
+                          d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+                      </svg></a>
+                  </li>
+                </ul>
               </td>
             </tr>
             <tr>
@@ -339,19 +321,28 @@
               <td>Constructora Bolívar</td>
               <td>2023-04-12 09:40:10</td>
               <td>
-                <div class="container text-center">
-                  <div class="row text-center">
-                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                        data-bs-target="#EditarProyecto">Editar</button>
-                    </div>
-                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                        data-bs-target="#DetallesProyecto">Detalles</button>
-                    </div>
-                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                        data-bs-target="#EliminarProyecto">Eliminar</button>
-                    </div>
-                  </div>
-                </div>
+                <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                    <path
+                      d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                  </svg>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a id="btn-desplegable-detalles" href="#" class="dropdown-item" data-bs-toggle="modal"
+                      data-bs-target="#ActualizarProyecto">Actualizar</a></li>
+                  <li><a id="btn-desplegable-seguimiento" href="#" class="dropdown-item" data-bs-toggle="modal"
+                      data-bs-target="#DetallesProyecto">Detalles</a></li>
+                  <li><a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
+                      data-bs-target="#EliminarProyecto">Archivar <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                        height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                        <path
+                          d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+                        <path
+                          d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+                      </svg></a>
+                  </li>
+                </ul>
               </td>
             </tr>
             <tr>
@@ -360,19 +351,28 @@
               <td>Constructora Bolívar</td>
               <td>2023-11-20 16:15:30</td>
               <td>
-                <div class="container text-center">
-                  <div class="row text-center">
-                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                        data-bs-target="#EditarProyecto">Editar</button>
-                    </div>
-                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                        data-bs-target="#DetallesProyecto">Detalles</button>
-                    </div>
-                    <div class="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                        data-bs-target="#EliminarProyecto">Eliminar</button>
-                    </div>
-                  </div>
-                </div>
+                <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                    <path
+                      d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                  </svg>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a id="btn-desplegable-detalles" href="#" class="dropdown-item" data-bs-toggle="modal"
+                      data-bs-target="#ActualizarProyecto">Actualizar</a></li>
+                  <li><a id="btn-desplegable-seguimiento" href="#" class="dropdown-item" data-bs-toggle="modal"
+                      data-bs-target="#DetallesProyecto">Detalles</a></li>
+                  <li><a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
+                      data-bs-target="#EliminarProyecto">Archivar <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                        height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                        <path
+                          d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+                        <path
+                          d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+                      </svg></a>
+                  </li>
+                </ul>
               </td>
             </tr>
           </tbody>
@@ -381,6 +381,179 @@
     </div>
   </div>
 
+  <!-- Ventanas emergentes o modals -->
+  <div class="modal" id="ActualizarProyecto" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Actualizar</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h1 class="modal-title fs-6" id="NombreProyectoLabel" style="text-align: start;">Nombre:
+          </h1>
+          <input class="float-start" name="NombreAct" type="text">
+          <br>
+          <br>
+          <h1 class="modal-title fs-6" id="DescripcionProyectoLabel" style="text-align: start;">
+            Descripcion:</h1>
+          <input class="float-start" name="DescripcionAct" type="text">
+          <br>
+          <br>
+          <h1 class="modal-title fs-6" id="MunicipioProyectoLabel" style="text-align: start;">
+            Municipio:</h1>
+          <input class="float-start" name="MunicipioAct" type="text">
+          <br>
+          <br>
+          <h1 class="modal-title fs-6" id="DireccionProyectoLabel" style="text-align: start;">
+            Direccion:</h1>
+          <input class="float-start" name="DireccionAct" type="text">
+          <br>
+          <br>
+          <h1 class="modal-title fs-6" id="RutaProyectoLabel" style="text-align: start;">Ruta:</h1>
+          <input class="float-start" name="RutaAct" type="text">
+          <br>
+          <br>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="DetallesProyecto" tabindex="-1" aria-labelledby="DetallesProyecto" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+      <div class="modal-content">
+        <!-- Encabezado de la ventana importante ponerlo -->
+        <div class="modal-header">
+          <div class="row align-items-center w-100">
+            <div class="col-6">
+              <h5 class="modal-title">Proyecto</h5>
+            </div>
+            <div class="col-6 text-end">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="row align-items-center" style="margin-top: 20px;">
+              <div class="col-4">
+                <button id="DetallesButton" class="btn btn-detalles" type="button">
+                  Detalles
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- cuerpo de la ventana nesesario ponerlo -->
+        <div class="modal-body">
+          <div id="Detalles_incidente" style="display: block; width: 700px;">
+            <div class="border-bottom row">
+              <h6 class="text-muted text-bold">Autor del reporte</h6>
+              <div class="col-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                  class="bi bi-person-circle border-right" viewBox="0 0 16 16">
+                  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                  <path fill-rule="evenodd"
+                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                </svg>
+              </div>
+              <div class="col-8">
+                <p class="lead text-black">María Rodríguez</p>
+              </div>
+            </div>
+            <div style="padding: 5%;">
+              <h6 class="text-muted text-bold">Incidente</h6>
+              <p class="lead text-black">Dimensiones de columnas fundidas de primera planta</p>
+              <h6 class="text-muted text-bold">Estado</h6>
+              <p class="lead text-black">Inicializado</p>
+              <h6 class="text-muted text-bold">Gravedad</h6>
+              <p class="lead text-black">Alto</p>
+              <h6 class="text-muted text-bold">Descripcion</h6>
+              <p class="lead text-black">Se verificaron que las dimensiones de las columnas hechas no
+                cumplen con los
+                diseños
+                en
+                planos</p>
+              <h6 class="text-muted text-bold">Involucrados</h6>
+              <p class="lead text-black"></p>No se presentan Involucrados</p>
+              <h6 class="text-muted text-bold">Sugerencias</h6>
+              <p class="lead text-black">Se le informa al contratista que debe demoler las columnas A1
+                y A3 porque no
+                cumplieron
+                con las
+                dimensiones de los diseños en planos</p>
+              <h6 class="text-muted text-bold">Proyecto</h6>
+              <p class="lead text-black">Proyecto de Carretera Transversal</p>
+
+
+              <h6 class="text-muted text-bold">Fecha y hora del reporte</h6>
+              <p class="lead text-black">2023-10-24 18:59:27</p>
+            </div>
+          </div>
+          <div id="Seguimiento" style="display: none;">
+            <div class="row">
+              <div class="col-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-circle-fill linea-tiempo" viewBox="0 0 16 16">
+                  <circle cx="8" cy="8" r="8" />
+                </svg>
+              </div>
+              <div class="col-11">
+                <h6 class="text-muted text-bold">Fecha y hora del reporte</h6>
+                <p class="lead text-black">2023-10-24 18:59:28</p>
+                <h6 class="text-muted text-bold">Descripcion</h6>
+                <p class="lead text-black">Se realizó una nueva inspección en el área afectada para
+                  verificar la
+                  efectividad
+                  de las medidas tomadas.</p>
+                <h6 class="text-muted text-bold">Sugerencias</h6>
+                <p class="lead text-black">Se confirmó que las correcciones fueron exitosas y se
+                  levantó la suspensión
+                  de
+                  labores.</p>
+              </div>
+              <br>
+              <div class="col-1 linea-tiempo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-circle-fill linea-tiempo" viewBox="0 0 16 16">
+                  <circle cx="8" cy="8" r="8" />
+                </svg>
+              </div>
+              <div class="col-11">
+                <h6 class="text-muted text-bold">Fecha y hora del reporte</h6>
+                <p class="lead text-black">2023-10-24 19:59:27</p>
+                <h6 class="text-muted text-bold">Descripcion</h6>
+                <p class="lead text-black">Se programó una reunión de seguimiento con el contratista
+                  para evaluar el
+                  avance
+                  de las correcciones.</p>
+                <h6 class="text-muted text-bold">Sugerencias</h6>
+                <p class="lead text-black">El contratista presentó avances significativos y se acordó
+                  continuar
+                  supervisando
+                  el progreso.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal" tabindex="-1" id="EliminarProyecto">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Eliminar proyecto</h5>
+        </div>
+        <div class="modal-body">
+          <p>¿Estás seguro de eliminar este proyecto?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <script src="Proyecto.js"></script>
   <script src="Proyecto_dashboard.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
