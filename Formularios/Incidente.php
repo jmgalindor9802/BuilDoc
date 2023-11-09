@@ -14,8 +14,8 @@ $GraInc = $_POST["Gravedad_incidente"];
 $EviInc = $_POST["Evidencia_incidente"];
 
 
-$insert = "INSERT INTO gt_fase(incNombre, incDescripcion, fk_id_proyecto) 
-VALUES ('$Nombre', '$Proyecto', '$Descripcion')";
+$insert = "INSERT INTO gt_fase(incNombre, incDescripcion, incEstado, incGravedad, incFecha, incSugerencias, fk_id_usuario, fk_id_proyecto) 
+VALUES ('$Nombre', '$Proyecto', '$NomInv', '$ApeInv', '$IdInv', '$DescInc', '$SugInc', '$GraInc', '$EviInc')";
 
 $query = mysqli_query($conectar, $insert);
 
