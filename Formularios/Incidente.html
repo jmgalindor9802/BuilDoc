@@ -64,13 +64,14 @@
             <div class="col-12 custom-form vh-80">
                 <br>
 
-                <form class="needs-validation " style="max-height: 70vh" novalidate>
+                <form action="Incidente.php" class="needs-validation " style="max-height: 70vh" novalidate>
 
                     <div class="row g-3">
                         <div class="col-sm-6">
                             <label id="NombreProyecto" for="firstName" class="form-label">Incidente</label>
-                            <input name="Nombre_incidente" type="text" class="form-control" id="firstName" placeholder="Nombre Proyecto"
-                                value="" required required maxlength="280">
+                            <input name="Nombre_incidente" type="text" class="form-control" id="firstName"
+                                placeholder="Nombre Proyecto" value="" required required maxlength="280">
+                            value="" required required maxlength="280">
                             <div class="invalid-feedback">
                                 Se requiere un nombre válido.
                             </div>
@@ -95,17 +96,18 @@
                             <div class="row g-3">
                                 <div class="col-md-4">
                                     <label for="nombreInvolucrado" class="form-label">Nombre</label>
-                                    <input name="Nombre_involucrado" type="text" class="form-control" id="nombreInvolucrado" placeholder="Nombre">
+                                    <input name="Nombre_involucrado" type="text" class="form-control"
+                                        id="nombreInvolucrado" placeholder="Nombre">
                                 </div>
                                 <div class="col-md-4">
                                     <label for="apellidoInvolucrado" class="form-label">Apellido</label>
-                                    <input name="Apellido_involucrado" type="text" class="form-control" id="apellidoInvolucrado"
-                                        placeholder="Apellido">
+                                    <input name="Apellido_involucrado" type="text" class="form-control"
+                                        id="apellidoInvolucrado" placeholder="Apellido">
                                 </div>
                                 <div class="col-md-4">
                                     <label for="idInvolucrado" class="form-label">Número de Identificación</label>
-                                    <input name="Identificación_involucrado" type="text" class="form-control" id="idInvolucrado"
-                                        placeholder="Número de Identificación">
+                                    <input name="Identificación_involucrado" type="text" class="form-control"
+                                        id="idInvolucrado" placeholder="Número de Identificación">
                                     <!-- Agrega el div para mostrar el mensaje de error -->
                                     <div class="invalid-feedback" id="idInvolucradoError">
                                         El campo de identificación debe contener solo números.
