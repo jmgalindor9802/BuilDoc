@@ -40,12 +40,15 @@
 </head>
 
 <body style="height: 100vh; display: flex; flex-direction: column; overflow: hidden;">
+  <!-- Encabezado de la pagina -->
   <header>
+    <!-- Revisar que  max-height:78px funcione sin problemas en diferentes pantallas-->
     <iframe src="Header.html" class="w-100" height="78" style="max-height:78px;" title="Encabezado"></iframe>
   </header>
 
-  <div class="row flex-grow-1 ">
-    <div class="col-lg-2 ">
+  <div class="row flex-grow-1">
+    <div class="col-lg-2">
+      <!-- Menu lateral izquierdo que permite el despasamiento de la pagina -->
       <iframe src="Menu.html" class="w-100 " height="100%" style="max-height: 100%;" title="Menú principal"></iframe>
     </div>
     <div class="col-10 border-left custom-form">
@@ -65,21 +68,24 @@
           <div class="row g-3">
             <div class="col-sm-12">
               <label id="NumeroDocumento" for="document" class="form-label">Número de documento</label>
-              <input name="CC" type="number" class="form-control" id="document" placeholder="Documento usuario" value="" required>
+              <input name="CC" type="number" class="form-control" id="document" placeholder="Documento usuario" value=""
+                required>
               <div class="invalid-feedback">
                 Se requiere un numero válido.
               </div>
             </div>
             <div class="col-sm-6">
               <label id="NombreUsu" for="firstName" class="form-label">Nombre</label>
-              <input name="NombreUsu" type="text" class="form-control" id="firstName" placeholder="Nombre usuario" value="" required>
+              <input name="NombreUsu" type="text" class="form-control" id="firstName" placeholder="Nombre usuario"
+                value="" required>
               <div class="invalid-feedback">
                 Se requiere un nombre válido.
               </div>
             </div>
             <div class="col-md-6">
               <label id="ApellidoUsu" for="lastName" class="form-label">Apellido</label>
-              <input name="ApellidoUsu" type="text" class="form-control" id="lastName" placeholder="Apellido usuario" value="" required>
+              <input name="ApellidoUsu" type="text" class="form-control" id="lastName" placeholder="Apellido usuario"
+                value="" required>
               <div class="invalid-feedback">
                 Se requiere un apellido válido.
               </div>
@@ -101,7 +107,8 @@
             <div class="col-6">
               <label for="Nacimiento" class="form-label">Fecha de nacimiento</label>
               <div class="input-group has-validation">
-                <input name="FechaNacimientoUsu" type="date" class="form-control" id="Nacimiento" placeholder="Fecha de nacimiento" required>
+                <input name="FechaNacimientoUsu" type="date" class="form-control" id="Nacimiento"
+                  placeholder="Fecha de nacimiento" required>
                 <div class="invalid-feedback">
                   Se requiere una fecha válida.
                 </div>
@@ -132,7 +139,8 @@
             <div class="col-sm-6">
               <label for="direccion" class="form-label">Dirección de residencia</label>
               <div class="input-group has-validation">
-                <input name="DireccionUsu" type="text" class="form-control" id="direccion" placeholder="Dirección residencia" required>
+                <input name="DireccionUsu" type="text" class="form-control" id="direccion"
+                  placeholder="Dirección residencia" required>
                 <div class="invalid-feedback">
                   Se requiere una direccion válido.
                 </div>
@@ -141,7 +149,8 @@
             <div class="col-md-6">
               <label for="municipio" class="form-label">Municipio de residencia</label>
               <div class="input-group has-validation">
-                <input name="MunicipioUsu" type="text" class="form-control" id="municipio" placeholder="Municipio residencia" required>
+                <input name="MunicipioUsu" type="text" class="form-control" id="municipio"
+                  placeholder="Municipio residencia" required>
                 <div class="invalid-feedback">
                   Se requiere una municipio válido.
                 </div>
@@ -150,7 +159,8 @@
             <div class="col-md-6">
               <label for="Correo" class="form-label">Correo electrónico</label>
               <div class="input-group has-validation">
-                <input name="CorreoUsu" type="email" class="form-control" id="Correo" placeholder="Correo electrónico" required>
+                <input name="CorreoUsu" type="email" class="form-control" id="Correo" placeholder="Correo electrónico"
+                  required>
                 <div class="invalid-feedback">
                   Se requiere un correo válido.
                 </div>
@@ -159,7 +169,8 @@
             <div class="col-md-6">
               <label for="teléfono" class="form-label">Número de teléfono</label>
               <div class="input-group has-validation">
-                <input name="TelefonoUsu" type="number" class="form-control" id="teléfono" placeholder="Número teléfonico" required>
+                <input name="TelefonoUsu" type="number" class="form-control" id="teléfono"
+                  placeholder="Número teléfonico" required>
                 <div class="invalid-feedback">
                   Se requiere un teléfono válido.
                 </div>
@@ -168,7 +179,8 @@
             <div class="col-md-6">
               <label for="Profesión" class="form-label">Profesión</label>
               <div class="input-group has-validation">
-                <input name="ProfesionUsu" type="text" class="form-control" id="Profesión" placeholder="Nombre profesión" required>
+                <input name="ProfesionUsu" type="text" class="form-control" id="Profesión"
+                  placeholder="Nombre profesión" required>
                 <div class="invalid-feedback">
                   Se requiere una profesión válida.
                 </div>
@@ -177,7 +189,8 @@
             <div class="col-md-6">
               <label for="Contraseña" class="form-label">Contraseña</label>
               <div class="input-group has-validation">
-                <input name="ContraseniaUsu" type="password" class="form-control" id="Contraseña" placeholder="Contraseña usuario" required>
+                <input name="ContraseniaUsu" type="password" class="form-control" id="Contraseña"
+                  placeholder="Contraseña usuario" required>
                 <div class="invalid-feedback">
                   Se requiere una contraseña válida.
                 </div>
@@ -190,7 +203,6 @@
         </form>
       </div>
     </div>
-  </div>
   </div>
 
   <script src="Usuario.js"></script>
