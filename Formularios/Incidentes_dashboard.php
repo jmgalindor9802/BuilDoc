@@ -88,7 +88,7 @@
       <div>
         <h4 class="mb-3">Incidentes</h4>
 
-        <a href="Incidente.html">
+        <a href="ReportarIncidente.php">
           <!-- Boton para agregar nuevos incidentes -->
           <button class="btn btn-lg float-end custom-btn" type="submit" style="font-size: 15px;"><svg
               xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg"
