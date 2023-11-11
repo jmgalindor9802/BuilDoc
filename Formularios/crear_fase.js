@@ -62,6 +62,7 @@
       if (form.checkValidity()) {
         form.submit(); // Envía el formulario
         confirmModal.hide(); // Cierra el modal después de enviar
+        window.location.href = "Tareas_dashboard.php";
       } else {
         form.classList.add('was-validated'); // Muestra los mensajes de validación
       }
