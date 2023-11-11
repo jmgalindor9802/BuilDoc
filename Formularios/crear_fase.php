@@ -155,7 +155,6 @@
                                 }
                             });
                         });
-                    });
                 </script>
                  <!-- Modal de confirmación -->
                  <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
