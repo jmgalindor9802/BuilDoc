@@ -8,8 +8,6 @@
   <link rel="shortcut icon" href="recursos/HeadLogo.png" type="image/x-icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
@@ -69,7 +67,7 @@
       </nav>
       <div>
         <h4 class="mb-3">Proyectos</h4>
-        <a href="Proyecto.html"><button class="btn btn-lg float-end custom-btn" type="submit"
+        <a href="crear_proyecto.php"><button class="btn btn-lg float-end custom-btn" type="submit"
             style="font-size: 15px; margin-right: 5px;">+ Crear
             proyecto</button></a>
         <button class="btn btn-lg float-end custom-btn" type="submit"
@@ -176,6 +174,7 @@
             <div class="col-6">
               <h5 class="modal-title"><?php echo $resultado ['proNombre']?></h5>
             </div>
+
           </div>
         </div>
         <!-- cuerpo de la ventana nesesario ponerlo -->

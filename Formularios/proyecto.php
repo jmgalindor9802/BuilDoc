@@ -1,22 +1,40 @@
-<?php 
+<?php
+require("conexion.php");
 
-require 'conexion.php';
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Datos del formulario principal
+    $nombre = $_POST["ProyectoNombre"];
+    $municipio = $_POST["ProyectoMunicipio"];
+    $direccion = $_POST["ProyectoDireccion"];
+    $descripcion = $_POST["ProyectoDescripcion"];
+    $cliente = $_POST["ProyectoCliente"];
 
-$CC = $_POST["Nombre"];
+    // Consulta para la inserción en la tabla principal
+    $insert_proyecto = "INSERT INTO ga_proyecto(proNombre, proMunicipio, proDireccion, proDescripcion, proRuta, fk_id_cliente) 
+                       VALUES ('$nombre', '$municipio', '$direccion', '$descripcion', '', '$cliente')";
 
+    // Ejecutar la consulta para insertar en ga_proyecto
+    $result_proyecto = mysqli_query($conectar, $insert_proyecto);
 
-$insert = "INSERT INTO ) VALUES ()";
+    if ($result_proyecto) {
+        // Obtener el ID del proyecto recién insertado
+        $id_proyecto = mysqli_insert_id($conectar);
 
-$query = mysqli_query($conectar, $insert);
+        // Datos del formulario de usuarios asignados
+        $usuarios_asignados = isset($_POST["usuarios_proyecto"]) ? $_POST["usuarios_proyecto"] : [];
 
-if($query){
+        // Consulta para la inserción en la tabla intermedia
+        foreach ($usuarios_asignados as $id_usuario) {
+            $insert_intermedia = "INSERT INTO usuarios_proyectos(fk_id_usuario, fk_id_proyecto) 
+                                 VALUES ('$id_usuario', '$id_proyecto')";
+            $result_intermedia = mysqli_query($conectar, $insert_intermedia);
 
-    echo "Los datos se amacenaron correctamente.";
+        }
 
-}else{
-
-    echo "Error, no se guardaron los datos correctamente.";
-
+        echo "Proyecto creado exitosamente.";
+    } else {
+        echo "Error al crear el proyecto: " . mysqli_error($conectar);
+    }
 }
 
 ?>

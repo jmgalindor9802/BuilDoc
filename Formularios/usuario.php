@@ -17,7 +17,8 @@ $correo = $_POST["CorreoUsu"];
 
 $insert = "INSERT INTO usuario(pk_id_usuario, usuNombre, usuApellido, usuNombre_eps, usuNombre_arl, 
 usuFecha_nacimiento, usuMunicipio, usuDireccion_residencia, usuProfesion, usuContrasenia, 
-usuTelefono, usuCorreo) VALUES ('$CC', '$nombre', '$apellido', '$nombreEPS', '$nombreARL', 
+usuTelefono, usuCorreo) 
+VALUES ('$CC', '$nombre', '$apellido', '$nombreEPS', '$nombreARL', 
 '$fechaNacimiento', '$municipio', '$direccion', '$profesion', '$contrasenia', '$telefono', 
 '$correo')";
 
