@@ -156,48 +156,92 @@
       </div>
     </div>
   </div>
+  
+  <?php 
+  require("conexion.php");
+            
+  $sql = $conectar->query("SELECT * from ga_proyecto
+  INNER JOIN ga_cliente ON ga_proyecto.fk_id_cliente = ga_cliente.pk_id_cliente");
 
+  while ($resultado = $sql->fetch_assoc()){
+            
+  ?>
   <!-- Ventanas emergentes o modals -->
-  <div class="modal" id="ActualizarProyecto" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
+  <div class="modal fade" id="ActualizarProyecto" tabindex="-1" aria-labelledby="ActualizarProyecto" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
       <div class="modal-content">
+        <!-- Encabezado de la ventana importante ponerlo -->
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Actualizar</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <h1 class="modal-title fs-6" id="NombreProyectoLabel" style="text-align: start;">Nombre:
-          </h1>
-          <input class="float-start" name="NombreAct" type="text">
-          <br>
-          <br>
-          <h1 class="modal-title fs-6" id="DescripcionProyectoLabel" style="text-align: start;">
-            Descripcion:</h1>
-          <input class="float-start" name="DescripcionAct" type="text">
-          <br>
-          <br>
-          <h1 class="modal-title fs-6" id="MunicipioProyectoLabel" style="text-align: start;">
-            Municipio:</h1>
-          <input class="float-start" name="MunicipioAct" type="text">
-          <br>
-          <br>
-          <h1 class="modal-title fs-6" id="DireccionProyectoLabel" style="text-align: start;">
-            Direccion:</h1>
-          <input class="float-start" name="DireccionAct" type="text">
-          <br>
-          <br>
-          <h1 class="modal-title fs-6" id="RutaProyectoLabel" style="text-align: start;">Ruta:</h1>
-          <input class="float-start" name="RutaAct" type="text">
-          <br>
-          <br>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary">Guardar</button>
+          <div class="row align-items-center w-100">
+            <div class="col-6">
+              <h5 class="modal-title"><?php echo $resultado ['proNombre']?></h5>
+            </div>
           </div>
+        </div>
+        <!-- cuerpo de la ventana nesesario ponerlo -->
+        <div class="modal-body">
+          <div id="Act" style="display: block; width: 700px;">
+            <div class="border-bottom row">
+              <div class="col-8">
+                <p class="lead text-black">Actualización Proyecto</p>
+              </div>
+            </div>
+            <div style="padding: 5%;">
+            <h6 class="text-muted text-bold">Nuevo nombre</h6>
+            <input type="text" name="proNombreActualizar" class="form-control" id="proNombreActualizar" 
+            placeholder="Nombre" required>
+            <div class="invalid-feedback">
+                  Se requiere una dirección válido.
+            </div>
+            <br>
+            <h6 class="text-muted text-bold">Nuevo municipio</h6>
+            <input type="text" name="proMunicipioActualizar" class="form-control" id="proMunicipioActualizar" 
+            placeholder="Municipio" required>
+            <div class="invalid-feedback">
+                  Se requiere una dirección válido.
+            </div>
+            <br>  
+            <h6 class="text-muted text-bold">Nueva direccion</h6>
+            <input type="text" name="proDireccionActualizar" class="form-control" id="proDireccionActualizar" 
+            placeholder="Direccion" required>
+            <br>  
+            <h6 class="text-muted text-bold">Nueva descripcion</h6>
+            <input type="text" name="proDescripcionActualizar" class="form-control" id="proDescripcionActualizar" 
+            placeholder="Descripcion" required>
+            <div class="invalid-feedback">
+                  Se requiere una dirección válido.
+            </div>
+            <br>            
+            <h6 class="text-muted text-bold">Nueva ruta</h6>
+            <input type="text" name="proRutaActualizar" class="form-control" id="prRutaActualizar" 
+            placeholder="Ruta" required>
+            <div class="invalid-feedback">
+                  Se requiere una dirección válido.
+            </div>
+            <br>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary">Guardar</button>
         </div>
       </div>
     </div>
   </div>
+  <?php
+  }
+  ?>
+
+  <?php 
+  require("conexion.php");
+            
+  $sql = $conectar->query("SELECT * from ga_proyecto
+  INNER JOIN ga_cliente ON ga_proyecto.fk_id_cliente = ga_cliente.pk_id_cliente");
+
+  while ($resultado = $sql->fetch_assoc()){
+            
+  ?>
   <div class="modal fade" id="DetallesProyecto" tabindex="-1" aria-labelledby="DetallesProyecto" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-lg">
       <div class="modal-content">
@@ -205,115 +249,57 @@
         <div class="modal-header">
           <div class="row align-items-center w-100">
             <div class="col-6">
-              <h5 class="modal-title">Proyecto</h5>
+              <h5 class="modal-title"><?php echo $resultado ['proNombre']?></h5>
             </div>
             <div class="col-6 text-end">
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="row align-items-center" style="margin-top: 20px;">
-              <div class="col-4">
-                <button id="DetallesButton" class="btn btn-detalles" type="button">
-                  Detalles
-                </button>
-              </div>
-            </div>
+            
           </div>
         </div>
         <!-- cuerpo de la ventana nesesario ponerlo -->
         <div class="modal-body">
           <div id="Detalles_incidente" style="display: block; width: 700px;">
             <div class="border-bottom row">
-              <h6 class="text-muted text-bold">Autor del reporte</h6>
-              <div class="col-4">
-                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                  class="bi bi-person-circle border-right" viewBox="0 0 16 16">
-                  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                  <path fill-rule="evenodd"
-                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-                </svg>
-              </div>
               <div class="col-8">
-                <p class="lead text-black">María Rodríguez</p>
+                <p class="lead text-black">Informacion Proyecto</p>
               </div>
             </div>
             <div style="padding: 5%;">
-              <h6 class="text-muted text-bold">Incidente</h6>
-              <p class="lead text-black">Dimensiones de columnas fundidas de primera planta</p>
-              <h6 class="text-muted text-bold">Estado</h6>
-              <p class="lead text-black">Inicializado</p>
-              <h6 class="text-muted text-bold">Gravedad</h6>
-              <p class="lead text-black">Alto</p>
+            <h6 class="text-muted text-bold">Municipio</h6>
+              <p class="lead text-black"><?php echo $resultado ['proMunicipio']?></p>
+              <h6 class="text-muted text-bold">Direccion</h6>
+              <p class="lead text-black"><?php echo $resultado ['proDireccion']?></p>
               <h6 class="text-muted text-bold">Descripcion</h6>
-              <p class="lead text-black">Se verificaron que las dimensiones de las columnas hechas no
-                cumplen con los
-                diseños
-                en
-                planos</p>
-              <h6 class="text-muted text-bold">Involucrados</h6>
-              <p class="lead text-black"></p>No se presentan Involucrados</p>
-              <h6 class="text-muted text-bold">Sugerencias</h6>
-              <p class="lead text-black">Se le informa al contratista que debe demoler las columnas A1
-                y A3 porque no
-                cumplieron
-                con las
-                dimensiones de los diseños en planos</p>
-              <h6 class="text-muted text-bold">Proyecto</h6>
-              <p class="lead text-black">Proyecto de Carretera Transversal</p>
-
-
-              <h6 class="text-muted text-bold">Fecha y hora del reporte</h6>
-              <p class="lead text-black">2023-10-24 18:59:27</p>
+              <p class="lead text-black"><?php echo $resultado ['proDescripcion']?></p>
+              <h6 class="text-muted text-bold">Fecha de Creacion</h6>
+              <p class="lead text-black"><?php echo $resultado ['proFecha_creacion']?></p>
+              <h6 class="text-muted text-bold">Ruta</h6>
+              <p class="lead text-black"><?php echo $resultado ['proRuta']?></p>
             </div>
-          </div>
-          <div id="Seguimiento" style="display: none;">
-            <div class="row">
-              <div class="col-1">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                  class="bi bi-circle-fill linea-tiempo" viewBox="0 0 16 16">
-                  <circle cx="8" cy="8" r="8" />
-                </svg>
+            <div class="border-bottom row">
+              <div class="col-8">
+                <p class="lead text-black">Informacion Cliente</p>
               </div>
-              <div class="col-11">
-                <h6 class="text-muted text-bold">Fecha y hora del reporte</h6>
-                <p class="lead text-black">2023-10-24 18:59:28</p>
-                <h6 class="text-muted text-bold">Descripcion</h6>
-                <p class="lead text-black">Se realizó una nueva inspección en el área afectada para
-                  verificar la
-                  efectividad
-                  de las medidas tomadas.</p>
-                <h6 class="text-muted text-bold">Sugerencias</h6>
-                <p class="lead text-black">Se confirmó que las correcciones fueron exitosas y se
-                  levantó la suspensión
-                  de
-                  labores.</p>
-              </div>
-              <br>
-              <div class="col-1 linea-tiempo">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                  class="bi bi-circle-fill linea-tiempo" viewBox="0 0 16 16">
-                  <circle cx="8" cy="8" r="8" />
-                </svg>
-              </div>
-              <div class="col-11">
-                <h6 class="text-muted text-bold">Fecha y hora del reporte</h6>
-                <p class="lead text-black">2023-10-24 19:59:27</p>
-                <h6 class="text-muted text-bold">Descripcion</h6>
-                <p class="lead text-black">Se programó una reunión de seguimiento con el contratista
-                  para evaluar el
-                  avance
-                  de las correcciones.</p>
-                <h6 class="text-muted text-bold">Sugerencias</h6>
-                <p class="lead text-black">El contratista presentó avances significativos y se acordó
-                  continuar
-                  supervisando
-                  el progreso.</p>
-              </div>
+            </div>
+            <div style="padding: 5%;">
+            <h6 class="text-muted text-bold">Nombre</h6>
+              <p class="lead text-black"><?php echo $resultado ['cliNombre']?></p>
+              <h6 class="text-muted text-bold">Correo</h6>
+              <p class="lead text-black"><?php echo $resultado ['cliCorreo']?></p>
+              <h6 class="text-muted text-bold">Telefono</h6>
+              <p class="lead text-black"><?php echo $resultado ['cliTelefono']?></p>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <?php
+  }
+  ?>
+
+
   <div class="modal" tabindex="-1" id="EliminarProyecto">
     <div class="modal-dialog">
       <div class="modal-content">
