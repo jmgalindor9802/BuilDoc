@@ -110,7 +110,6 @@
                                 Seleccione una fase.
                             </div>
                         </div>
-                       
                     </div>
                     <br>
   <!-- DESCRIPCION DE LA FASE -->
@@ -125,37 +124,9 @@
                     <br>
                                  <!-- Botón "Guardar fase" que abre el modal -->
                 <button class="btn btn-lg float-end custom-btn" id="guardarFaseButton" style="font-size: 15px;">Guardar fase</button>
-                <script>
-                    
-                    document.addEventListener("DOMContentLoaded", function () {
-                        var form = document.querySelector('.needs-validation');
-                        var guardarFaseButton = document.getElementById('guardarFaseButton');
-                        var confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
-
-                        guardarFaseButton.addEventListener('click', function () {
-                            // Verifica si el formulario es válido antes de abrir el modal
-                            if (form.checkValidity()) {
-                                confirmModal.show();
-                            } else {
-                                form.classList.add('was-validated');
-                            }
-                        });
-
-                        // Agrega un evento de clic al botón de "Confirmar" dentro del modal
-                        var confirmarModalButton = document.getElementById('confirmarModalButton');
-                        confirmarModalButton.addEventListener('click', function () {
-                            // Verifica si el formulario es válido antes de enviarlo
-                            if (form.checkValidity()) {
-                                form.submit(); // Envía el formulario
-                                confirmModal.hide(); // Cierra el modal después de enviar
-                            } else {
-                                form.classList.add('was-validated'); // Muestra los mensajes de validación
-                            }
-                        });
-                    });
-                </script>
+                
                  <!-- Modal de confirmación -->
-                 <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -171,7 +142,22 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                </div>
+                <!-- Modal de éxito -->
+                <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h5 class="modal-title" id="successModalLabel">Éxito</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        </button>
+                                    </div>
+                                <div class="modal-body">
+                                    La fase se ha creado exitosamente.
+                                </div>
+                            </div>
+                            
+             </div>
                 </form>
             </div>
         </div>
@@ -183,5 +169,6 @@
         crossorigin="anonymous"></script>
         
 </body>
+            
 
 </html>
