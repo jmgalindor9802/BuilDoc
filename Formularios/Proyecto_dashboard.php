@@ -104,12 +104,25 @@
             </tr>
           </thead>
           <tbody>
+            <?php
+            
+            require(conexion.php);
+            
+            $sql = $conectar->query("SELECT * from ga_proyecto
+            INNER JOIN ga_cliente ON ga_proyecto.fk_id_proyecto = ga_cliente.pk_id_cliente");
+
+
+
+            while ($resultado = $sql->fetch_assoc()){
+            
+            ?>
+
             <tr>
-              <td>Puente Peatonal</td>
-              <td>Bogotá</td>
-              <td>Constructora Bolívar</td>
-              <td>2023-06-15 12:45:30</td>
-              <td>
+              <th scope="row"><?php echo $resultado ['proNombre']?></th>
+              <th scope="row"><?php echo $resultado ['proMunicipio']?></th>
+              <th scope="row"><?php echo $resultado ['fk_id_cliente']?></th>
+              <th scope="row"><?php echo $resultado ['proFecha_creacion']?></th>
+              <th scope="row">
                 <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
@@ -133,8 +146,11 @@
                   </li>
                 </ul>
 
-              </td>
+              </th>
             </tr>
+            <?php
+            }
+            ?>
             <tr>
               <td>Construcción de Viaducto Sur</td>
               <td>Medellín</td>
