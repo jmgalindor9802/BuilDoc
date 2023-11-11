@@ -69,19 +69,18 @@
             <h4 class="mb-3 custom-form">Nueva fase</h4>
             <div class="col-12 custom-form vh-80">
                 <br>
-                <form action="fase.php" class="needs-validation " style="max-height: 70vh" novalidate>
-<!-- INSERTAR NOMBRE FASE -->
+                <form action="fase.php" method="post" class="needs-validation " style="max-height: 70vh" novalidate>
+  <!-- INSERTAR NOMBRE FASE -->
                     <div class="row g-3">
                         <div class="col-sm-6">
                             <label id="Nombre_fase" for="Nombre_fase" class="form-label">Nombre de la
                                 fase</label>
-                            <input name="Nombre_fase" type="text" class="form-control" id="firstName"
-                                placeholder="Nombre de la fase" required>
+                            <input name="Nombre_fase" type="text" class="form-control" id="firstName" placeholder="Nombre de la fase" required>
                             <div class="invalid-feedback">
                                 Se requiere un nombre válido.
                             </div>
                         </div>
-<!-- INSERTAR PROYECTO CON LISTA DESPLEGABLE -->
+  <!-- INSERTAR PROYECTO CON LISTA DESPLEGABLE -->
                         <div class="col-md-6">
                             <label for="country" class="form-label">Proyecto</label>
                             <select  name="Proyecto_fase" class="form-select" id="country" required>
@@ -95,7 +94,7 @@
                                 }
                                 
                                 // Consulta para obtener nombres e IDs de proyectos de la base de datos
-                                $sql = "SELECT pk_id_proyecto, proNombre FROM ga_proyecto";
+                                $sql = "SELECT pk_id_proyecto, proNombre FROM ga_proyecto ORDER BY proNombre";
                                 $result = mysqli_query($conectar, $sql);
 
                                 // Rellenar opciones del select con los resultados de la consulta
@@ -114,7 +113,7 @@
                        
                     </div>
                     <br>
-
+  <!-- DESCRIPCION DE LA FASE -->
                     <div class="row g-3">
                         <label id="Descripcion_fase" for="Descripcion_fase" class="form-label">Descripción</label>
                         <textarea name="Descripcion_fase" class="form-control" id="exampleFormControlTextarea1" rows="4"
@@ -122,14 +121,59 @@
                         <div class="invalid-feedback">
                             Se requiere una descripción válida.
                         </div>
+                    </div>
+                    <br>
+                                 <!-- Botón "Guardar fase" que abre el modal -->
+                <button class="btn btn-lg float-end custom-btn" id="guardarFaseButton" style="font-size: 15px;">Guardar fase</button>
+                <script>
+                    
+                    document.addEventListener("DOMContentLoaded", function () {
+                        var form = document.querySelector('.needs-validation');
+                        var guardarFaseButton = document.getElementById('guardarFaseButton');
+                        var confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
 
+                        guardarFaseButton.addEventListener('click', function () {
+                            // Verifica si el formulario es válido antes de abrir el modal
+                            if (form.checkValidity()) {
+                                confirmModal.show();
+                            } else {
+                                form.classList.add('was-validated');
+                            }
+                        });
 
-                        <div class="py-4">
-                            <button class="btn btn-lg float-end custom-btn" type="submit" style="font-size: 15px;">Guardar fase</button>
-
+                        // Agrega un evento de clic al botón de "Confirmar" dentro del modal
+                        var confirmarModalButton = document.getElementById('confirmarModalButton');
+                        confirmarModalButton.addEventListener('click', function () {
+                            // Verifica si el formulario es válido antes de enviarlo
+                            if (form.checkValidity()) {
+                                form.submit(); // Envía el formulario
+                                confirmModal.hide(); // Cierra el modal después de enviar
+                            } else {
+                                form.classList.add('was-validated'); // Muestra los mensajes de validación
+                            }
+                        });
+                    });
+                </script>
+                 <!-- Modal de confirmación -->
+                 <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="confirmModalLabel">Confirmar envío</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    ¿Estás seguro de que deseas enviar el formulario?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-primary" id="confirmarModalButton">Confirmar</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
                 </form>
             </div>
         </div>
@@ -139,6 +183,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
+        
 </body>
 
 </html>
