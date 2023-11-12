@@ -12,61 +12,35 @@
       form.classList.add('was-validated');
     }, false);
   });
-
-  // Agrega un evento de clic al botón "Guardar fase" que abre el modal
-  const guardarFaseButton = document.getElementById('guardarFaseButton');
-  const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
-
-  guardarFaseButton.addEventListener('click', function (event) {
-    // Previene la acción predeterminada del botón
-    event.preventDefault();
-
-    // Verifica si el formulario es válido antes de abrir el modal
-    if (forms[0].checkValidity()) {
-      // Muestra el modal solo si el formulario es válido
-      confirmModal.show();
-    } else {
-      forms[0].classList.add('was-validated');
-      confirmModal.hide(); // Si no es válido, cierra el modal (si está abierto)
-    }
-  });
-
-  // Agrega un evento de clic al botón de "Confirmar" dentro del modal
-  const confirmarModalButton = document.getElementById('confirmarModalButton');
-  confirmarModalButton.addEventListener('click', function () {
-    // Verifica si el formulario es válido antes de enviarlo
-    if (forms[0].checkValidity()) {
-      // Envía el formulario
-      forms[0].submit();
-      confirmModal.hide(); // Cierra el modal después de enviar
-    } else {
-      forms[0].classList.add('was-validated'); // Muestra los mensajes de validación
-    }
-  });
-
-  // Código existente
   document.addEventListener("DOMContentLoaded", function () {
     var form = document.querySelector('.needs-validation');
     var guardarFaseButton = document.getElementById('guardarFaseButton');
     var confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+    var successModal = new bootstrap.Modal(document.getElementById('successModal'));
 
     guardarFaseButton.addEventListener('click', function () {
-      // Abre el modal cuando se hace clic en "Guardar fase"
-      confirmModal.show();
+        // Verifica si el formulario es válido antes de abrir el modal
+        if (form.checkValidity()) {
+            confirmModal.show();
+        } else {
+            form.classList.add('was-validated');
+        }
     });
 
     // Agrega un evento de clic al botón de "Confirmar" dentro del modal
     var confirmarModalButton = document.getElementById('confirmarModalButton');
     confirmarModalButton.addEventListener('click', function () {
-      // Verifica si el formulario es válido antes de enviarlo
-      if (form.checkValidity()) {
-        form.submit(); // Envía el formulario
-        confirmModal.hide(); // Cierra el modal después de enviar
-        window.location.href = "Tareas_dashboard.php";
-      } else {
-        form.classList.add('was-validated'); // Muestra los mensajes de validación
-      }
+        // Verifica si el formulario es válido antes de enviarlo
+        if (form.checkValidity()) {
+            form.submit(); // Envía el formulario
+            confirmModal.hide(); // Cierra el modal después de enviar
+             // Muestra el modal de éxito después de 2 segundos
+             alert("Fase creada con éxito"); // Prueba de alerta
+              window.location.href = "Tareas_dashboard.php";
+        } else {
+            form.classList.add('was-validated'); // Muestra los mensajes de validación
+        }
     });
-  });
-
+});
+  
 })();
