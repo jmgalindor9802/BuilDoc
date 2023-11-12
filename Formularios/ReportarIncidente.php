@@ -185,7 +185,7 @@
                         </div>
                         <!-- Botón "Guardar fase" que abre el modal -->
                         <button class="btn btn-lg float-end custom-btn" id="guardarFaseButton"
-                            style="font-size: 15px;">Guardar fase</button>
+                            style="font-size: 15px;">Guardar incidente</button>
                         <script>
 
                             document.addEventListener("DOMContentLoaded", function () {

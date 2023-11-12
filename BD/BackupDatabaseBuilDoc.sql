@@ -108,7 +108,7 @@ create table gii_inspeccion (
   insDescripcion varchar (5000) not null,
   insEstado ENUM ("PENDIENTE","EN PROGRESO", "COMPLETADO") not null,
   insFecha_inicial DATETIME not null,
-  insPeriodicidad ENUM ("DIARIA", "SEMANAL", "MENSUAL") null,
+  insPeriodicidad ENUM ("DIARIA", "SEMANAL", "MENSUAL", "NINGUNA") null,
   insFecha_final DATETIME NULL,
   fk_id_usuario BIGINT (20) not null,
   fk_id_proyecto BIGINT (20) not null,
