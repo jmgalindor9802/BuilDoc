@@ -22,13 +22,16 @@ if (
  $GraInc = $_POST["Gravedad_incidente"];
  $SugInc = $_POST["Sugerencia_incidente"];
  $Proyecto = $_POST["Proyecto_incidente"];
- $NomInv = $_POST["Nombre_involucrado"];
- $ApeInv = $_POST["Apellido_involucrado"];
- $IdInv = (int) $_POST["Identificación_involucrado"];
- $JusInv= $_POST["Justificacion_involucrado"];
+ $items1 = ($_POST["Nombre_involucrado"]);
+ $items2 = ($_POST["Apellido_involucrado"]);
+ $items3 = array_map('intval' , $_POST["Identificación_involucrado"]);
+ $items4 = ($_POST["Justificacion_involucrado"]);
  $EviInc = $_POST["Evidencia_incidente"];
-
- // Llamada al procedimiento almacenado
+ var_dump($items1);
+ var_dump($items2);
+ var_dump($items3);
+ var_dump($items4);
+ 
  $stmt = $conectar->prepare("CALL InsertarIncidente(?, ?, ?, ?, ?, ?, ?)");
  $stmt->bind_param("sssssii", $Nombre, $DescInc, $EstadoInc, $GraInc, $SugInc, $autor, $Proyecto);
 
@@ -40,7 +43,53 @@ if (
 }
 // Cerrar la conexión y liberar recursos
 $stmt->close();
-mysqli_close($conectar);
+// Llamada al procedimiento almacenado
+if (
+    isset($items1) && !empty($items1) &&
+    isset($items2) && !empty($items2) &&
+    isset($items3) && !empty($items3) &&
+    isset($items4) && !empty($items4)
+) {
+    /* SEPARAR VALORES DE ARRAYS, EN ESTE CASO SON 4 ARRAYS UNO POR CADA INPUT 
+    (IDINVOLUCRADO, NOMBRE, APELLIDO Y JUSTIFICACION */
+        while(true) {
+            /* RECUPERAR LOS VALORES DE LOS ARREGLOS */
+            $item1 = current($items1);
+		    $item2 = current($items2);
+		    $item3 = filter_var(current($items3), FILTER_SANITIZE_NUMBER_INT);
+		    $item4 = current($items4);
+            if (!filter_var(current($items3), FILTER_SANITIZE_NUMBER_INT)) {
+                echo 'El valor de la variable $item1 no es un número entero.';
+            }
+            
+            /* ASIGNARLOS A VARIABLES */
+            $idInv=(( $item3 !== false) ? $item3 : ", &nbsp;");
+		    $nomInv=(( $item1 !== false) ? $item1 : ", &nbsp;");
+		    $apeInv=(( $item2 !== false) ? $item2 : ", &nbsp;");
+		    $jusInv=(( $item4 !== false) ? $item4 : ", &nbsp;");
+            $fk= (int) ('78');
+            
+            /* QUERY DE INSERCIÓN */
+            $sql = "INSERT INTO gii_involucrado (invNombre, invApellido, invNumDocumento, invJustificacion, fk_id_incidente) 
+		    VALUES ('$nomInv', '$apeInv', '$idInv', '$jusInv', $fk)";
+
+            $sqlRes = $conectar->query($sql) or die($conectar->error);
+
+            /* obtener el siguiente valor adentro de cada array */
+            $item1 = next( $items1 );
+            $item2 = next( $items2 );
+            $item3 = next( $items3 );
+            $item4 = next( $items4 );
+
+            /* verificar si ya no ahi mas valores dentro de array */
+            if($item1 === false && $item2 === false && $item3 === false && $item4 === false) break;
+
+        }
+
+    }else{
+        echo 'los involucrados estan vacios';
+    }
+    mysqli_close($conectar);
 }else {
     echo "Error: Datos de formulario incompletos.";
 }

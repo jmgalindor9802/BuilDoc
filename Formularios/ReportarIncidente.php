@@ -9,6 +9,23 @@
     <link rel="shortcut icon" href="recursos\HeadLogo.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js"></script>
+
+    <script>
+			
+    		$(function(){
+				// Clona la fila oculta que tiene los campos base, y la agrega al final de la tabla
+				$("#adicional").on('click', function(){
+					$("#tabla tbody tr:eq(0)").clone().removeClass('fila-fija').appendTo("#tabla");
+				});
+			 
+				// Evento que selecciona la fila y la elimina 
+				$(document).on("click",".eliminar",function(){
+					var parent = $(this).parents().get(0);
+					$(parent).remove();
+				});
+			});
+		</script>
 
 
     <style>
@@ -100,36 +117,24 @@
                         </div>
                         <br>
                         <!-- Sub lista de involucrados -->
-                        <div class="mb-3">
+                        <div class="mb-12">
                             <h5>Agregar Involucrados:</h5>
-                            <div class="row g-3">
-                                <div class="col-md-3">
-                                    <label for="nombreInvolucrado" class="form-label">Nombre</label>
-                                    <input name="Nombre_involucrado" type="text" class="form-control"
-                                        id="nombreInvolucrado" placeholder="Nombre">
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="apellidoInvolucrado" class="form-label">Apellido</label>
-                                    <input name="Apellido_involucrado" type="text" class="form-control"
-                                        id="apellidoInvolucrado" placeholder="Apellido">
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="idInvolucrado" class="form-label">Número de Identificación</label>
-                                    <input name="Identificación_involucrado" type="text" class="form-control"
-                                        id="idInvolucrado" placeholder="Número de Identificación">
-                                    <!-- Agrega el div para mostrar el mensaje de error -->
+                            <table class="table bg-info"  id="tabla">
+                                <tr class="fila-fija">
+                                    <td><input required name="Nombre_involucrado[]" placeholder="Nombre"/></td>
+						            <td><input required name="Apellido_involucrado[]" placeholder="Apellido"/></td>
+						            <td><input required name="Identificación_involucrado[]" placeholder="Numero de Identificacion" id="idInvolucrado"/></td>
+						            <!-- Agrega el div para mostrar el mensaje de error -->
                                     <div class="invalid-feedback" id="idInvolucradoError">
-                                        El campo de identificación debe contener solo números.
+                                    El campo de identificación debe contener solo números.
                                     </div>
-                                <div class="col-md-3">
-                                <label for="justificacionInvolucrado" class="form-label">Justificacion</label>
-                                    <input name="Justificacion_involucrado" type="text" class="form-control"
-                                        id="justificacionInvolucrado" placeholder="Justificacion">
-                                </div>
-                                </div>
-                            </div>
-                            <button type="button" class="btn btn-primary" onclick="agregarInvolucrado()">Agregar
-                                Involucrado</button>
+                                    <td><input required name="Justificacion_involucrado[]" placeholder="Justificacion"/></td>
+						            <td class="eliminar"><input type="button"   value="Menos -"/></td>
+                                </tr>
+                            </table>
+                            <div class="btn-der">
+					            <button id="adicional" name="adicional" type="button" class="btn btn-warning"> Más + </button>
+				            </div>
                         </div>
                         <div class="mb-3">
                             <h5>Involucrados Registrados:</h5>
@@ -166,10 +171,9 @@
                             </button>
                             <select name="Gravedad_incidente" class="form-select" id="Gravedad" required>
                                 <option value="">Seleccione...</option>
-                                <option value="I">I</option>
-                                <option value="II">II</option>
-                                <option value="III">III</option>
-                                <option value="IV">IV</option>
+                                <option value="ALTO">ALTO</option>
+                                <option value="MEDIO">MEDIO</option>
+                                <option value="BAJO">BAJO</option>
                             </select>
                             <div class="invalid-feedback">
                                 Se requiere seleccionar un nivel de gravedad válido.
