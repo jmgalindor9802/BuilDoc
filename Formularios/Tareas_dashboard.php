@@ -84,7 +84,7 @@
         <a href="crear_tarea.html"><button class="btn btn-lg float-end custom-btn" type="submit"
           style="font-size: 15px;">+ Crear
           tarea</button></a>
-          <a href="crear_fase.php"><button class="btn btn-lg float-end custom-btn" type="submit"
+          <a href="create_fase_form.php"><button class="btn btn-lg float-end custom-btn" type="submit"
           style="font-size: 15px; margin-right: 10px;">+ Crear fase</button></a>
         <h1 class="display-6">Tareas próximas</h1>
         <div class="dropdown">

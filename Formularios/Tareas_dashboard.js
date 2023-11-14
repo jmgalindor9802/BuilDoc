@@ -138,10 +138,4 @@
       tbody.appendChild(tarea.fila);
     });
   });
-  
-  
-  
-  
-
-
 })();

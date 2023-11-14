@@ -36,7 +36,7 @@
             confirmModal.hide(); // Cierra el modal después de enviar
              // Muestra el modal de éxito después de 2 segundos
              alert("Fase creada con éxito"); // Prueba de alerta
-              window.location.href = "Tareas_dashboard.php";
+              window.location.href = "Tareas_dashboard.php"; //Redirige al dashboard
         } else {
             form.classList.add('was-validated'); // Muestra los mensajes de validación
         }

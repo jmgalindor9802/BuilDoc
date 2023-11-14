@@ -69,7 +69,7 @@
             <h4 class="mb-3 custom-form">Nueva fase</h4>
             <div class="col-12 custom-form vh-80">
                 <br>
-                <form action="fase.php" method="post" class="needs-validation " style="max-height: 70vh" novalidate>
+                <form action="create_fase.php" method="post" class="needs-validation " style="max-height: 70vh" novalidate>
   <!-- INSERTAR NOMBRE FASE -->
                     <div class="row g-3">
                         <div class="col-sm-6">
