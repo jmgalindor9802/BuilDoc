@@ -92,12 +92,31 @@
             data-bs-toggle="dropdown" aria-expanded="false">
             Todos los proyectos
           </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Todos los proyectos</a></li>
-            <li><a class="dropdown-item" href="#">Proyecto de Carretera Transversal</a></li>
-            <li><a class="dropdown-item" href="#">Proyecto de Túnel Subterráneo</a></li>
-            <li><a class="dropdown-item" href="#">Ampliación de Aeropuerto Internacional</a></li>
+          <ul class="dropdown-menu" style="max-height: 200px; overflow-y: auto;">
+              <li><a class="dropdown-item" href="#">Todos los proyectos</a></li>
+
+              <?php
+              require('conexion.php');
+
+              // Verificar la conexión
+              if (!$conectar) {
+                  die("Conexión fallida: " . mysqli_connect_error());
+              }
+
+              // Consulta para obtener nombres e IDs de proyectos de la base de datos
+              $sql = "SELECT pk_id_proyecto, proNombre FROM ga_proyecto ORDER BY proNombre";
+              $result = mysqli_query($conectar, $sql);
+
+              // Rellenar opciones del select con los resultados de la consulta
+              if ($result && mysqli_num_rows($result) > 0) {
+                  while($row = mysqli_fetch_assoc($result)) {
+                      echo '<li><a class="dropdown-item" href="#">' . $row["proNombre"] . '</a></li>';
+                  }
+              }
+              ?>
+
           </ul>
+
           
         </div>
       </div>
