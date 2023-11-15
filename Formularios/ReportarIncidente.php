@@ -19,11 +19,13 @@
 					$("#tabla tbody tr:eq(0)").clone().removeClass('fila-fija').appendTo("#tabla");
 				});
 			 
-				// Evento que selecciona la fila y la elimina 
 				$(document).on("click",".eliminar",function(){
-					var parent = $(this).parents().get(0);
-					$(parent).remove();
-				});
+                    var parent = $(this).parents().get(0);
+                    // Eliminamos la fila
+                    $(parent).remove();
+                    // Eliminamos todos los elementos del input
+                    $(parent).find("input").empty();
+                });
 			});
 		</script>
 
@@ -52,6 +54,12 @@
         .custom-nav {
             padding-left: 4%;
             padding-right: 4%;
+        }
+        .btn-danger {
+            padding: 0px !important;
+            margin: 0px !important;
+            width: 25px;
+            height: 25px;
         }
     </style>
 </head>
@@ -121,15 +129,18 @@
                             <h5>Agregar Involucrados:</h5>
                             <table class="table bg-info"  id="tabla">
                                 <tr class="fila-fija">
-                                    <td><input required name="Nombre_involucrado[]" placeholder="Nombre"/></td>
-						            <td><input required name="Apellido_involucrado[]" placeholder="Apellido"/></td>
-						            <td><input required name="Identificación_involucrado[]" placeholder="Numero de Identificacion" id="idInvolucrado"/></td>
+                                    <td><input name="Nombre_involucrado[]" placeholder="Nombre"/></td>
+						            <td><input name="Apellido_involucrado[]" placeholder="Apellido"/></td>
+						            <td><input name="Identificación_involucrado[]" placeholder="Numero de Identificacion" id="idInvolucrado"/></td>
 						            <!-- Agrega el div para mostrar el mensaje de error -->
                                     <div class="invalid-feedback" id="idInvolucradoError">
                                     El campo de identificación debe contener solo números.
                                     </div>
-                                    <td><input required name="Justificacion_involucrado[]" placeholder="Justificacion"/></td>
-						            <td class="eliminar"><input type="button"   value="Menos -"/></td>
+                                    <td><input name="Justificacion_involucrado[]" placeholder="Justificacion"/></td>
+						            <td class="eliminar"><button type="button" class="btn btn-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+</svg></button></td>
                                 </tr>
                             </table>
                             <div class="btn-der">
@@ -187,9 +198,11 @@
                                 Se requiere adjuntar una evidencia válida.
                             </div>
                         </div>
+                        <div>
                         <!-- Botón "Guardar incidente" que abre el modal -->
-                        <button class="btn btn-lg float-end custom-btn" id="guardarIncidenteButton"
-                            style="font-size: 15px;">Guardar incidente</button>
+                        <button class="btn btn-lg float-end custom-btn" id="guardarIncidenteButton" style="font-size: 15px;"
+    data-bs-toggle="modal" data-bs-target="#confirmModal">Guardar incidente</button>
+                        </div>
                 </form>
             </div>
         </div>
