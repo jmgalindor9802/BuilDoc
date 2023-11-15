@@ -70,21 +70,20 @@
             <div class="col-12 custom-form vh-80">
                 <br>
                 <form action="fase.php" method="post" class="needs-validation " style="max-height: 70vh" novalidate>
-                    <!-- INSERTAR NOMBRE FASE -->
+  <!-- INSERTAR NOMBRE FASE -->
                     <div class="row g-3">
                         <div class="col-sm-6">
                             <label id="Nombre_fase" for="Nombre_fase" class="form-label">Nombre de la
                                 fase</label>
-                            <input name="Nombre_fase" type="text" class="form-control" id="firstName"
-                                placeholder="Nombre de la fase" required>
+                            <input name="Nombre_fase" type="text" class="form-control" id="firstName" placeholder="Nombre de la fase" required>
                             <div class="invalid-feedback">
                                 Se requiere un nombre válido.
                             </div>
                         </div>
-                        <!-- INSERTAR PROYECTO CON LISTA DESPLEGABLE -->
+  <!-- INSERTAR PROYECTO CON LISTA DESPLEGABLE -->
                         <div class="col-md-6">
                             <label for="country" class="form-label">Proyecto</label>
-                            <select name="Proyecto_fase" class="form-select" id="country" required>
+                            <select  name="Proyecto_fase" class="form-select" id="country" required>
                                 <option value="">Elegir...</option>
                                 <?php
                                 require('conexion.php');
@@ -113,7 +112,7 @@
                         </div>
                     </div>
                     <br>
-                    <!-- DESCRIPCION DE LA FASE -->
+  <!-- DESCRIPCION DE LA FASE -->
                     <div class="row g-3">
                         <label id="Descripcion_fase" for="Descripcion_fase" class="form-label">Descripción</label>
                         <textarea name="Descripcion_fase" class="form-control" id="exampleFormControlTextarea1" rows="4"
@@ -168,7 +167,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-
+        
 </body>
             
 

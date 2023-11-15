@@ -10,7 +10,7 @@ if (
     // Obtener datos del formulario
     $Nombre = $_POST["Nombre_fase"];
     $Proyecto = $_POST["Proyecto_fase"];
-    $Descripcion = $_POST["Descripcion_fase"];
+    $Descripcion = $_POST[ "Descripcion_fase"];
     $Estado = "PENDIENTE";
 
     // Llamada al procedimiento almacenado
