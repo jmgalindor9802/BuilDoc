@@ -121,93 +121,50 @@
         </div>
       </div>
         <div class="table-responsive vh-80">
-          <table id="tablaTareas" class="table table-striped table-hover sticky-header" >
-            <caption>Esta tabla muestra las tareas pendientes por proyecto seleccionado</caption>
-            <thead >
-              <tr>
-                <th class="col-2" scope="col">Proyecto</th>
-                <th class="col-2" scope="col">Fase</th>
-                <th class="col-3" scope="col">Tarea</th>
-                <th class="col-2" scope="col">Fecha y Hora Límite</th>
-                <th class="col-2" scope="col">Responsable</th>
-                <th class="col-1" scope="col">Tiempo Restante</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Puente Peatonal</td>
-                <td>Diseño Estructural</td>
-                <td>Matriz de Riesgos de Construcción de Presa Eléctrica</td>
-                <td>2023-11-20T15:20:45</td>
-                <td>Juan Pérez</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Construcción de Viaducto Sur</td>
-                <td>Planificación</td>
-                <td>Planificación de Obra</td>
-                <td>2023-10-22T08:30:15</td>
-                <td>Maria Gómez</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Proyecto de Carretera Transversal</td>
-                <td>Presupuesto</td>
-                <td>Revisión de Presupuesto</td>
-                <td>2023-11-20T15:20:45</td>
-                <td>Luis Ramírez</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Ampliación de Aeropuerto Internacional</td>
-                <td>Estudio Ambiental</td>
-                <td>Evaluación Ambiental</td>
-                <td>2023-11-18T10:55:00</td>
-                <td>Sofía Martínez</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Proyecto de Túnel Subterráneo</td>
-                <td>Inspección de Seguridad</td>
-                <td>Informe de Avance</td>
-                <td>2023-10-27T14:10:20</td>
-                <td>Pablo Mendoza</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Construcción de Puentes y Pasarelas</td>
-                <td>Seguridad</td>
-                <td>Supervisión de Seguridad</td>
-                <td>2023-11-30T11:25:40</td>
-                <td>María González</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Proyecto de Reciclaje de Agua</td>
-                <td>Sostenibilidad</td>
-                <td>Informe de Sostenibilidad</td>
-                <td>2023-12-05T13:35:50</td>
-                <td>José Ramírez</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Construcción de Vías Rurales</td>
-                <td>Mantenimiento</td>
-                <td>Plan de Mantenimiento</td>
-                <td>2023-12-12T09:40:10</td>
-                <td>Lucía Gómez</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Proyecto de Presa Hidroeléctrica</td>
-                <td>Impacto Ambiental</td>
-                <td>Informe de Impacto Ambiental</td>
-                <td>2023-12-20T16:15:30</td>
-                <td>Carlos Pérez</td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
+        <table id="tablaTareas" class="table table-striped table-hover sticky-header">
+    <caption>Esta tabla muestra las tareas pendientes por proyecto seleccionado</caption>
+    <thead>
+    <tr>
+        <th class="col-2" scope="col">Proyecto</th>
+        <th class="col-2" scope="col">Fase</th>
+        <th class="col-3" scope="col">Tarea</th>
+        <th class="col-2" scope="col">Fecha y Hora Límite</th>
+        <th class="col-2" scope="col">Responsable</th>
+        <th class="col-1" scope="col">Tiempo Restante</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <?php
+    require('conexion.php');
+
+    // Verificar la conexión
+    if ($conectar->connect_error) {
+        die("Error en la conexión a la base de datos: " . $conectar->connect_error);
+    }
+
+    // Llamada al procedimiento almacenado
+    $proyecto = isset($_POST['proyecto']) ? $_POST['proyecto'] : NULL;
+    $result = $conectar->query("CALL listar_tareas_pendientes_proximos_7_dias_por_proyecto($proyecto)");
+
+    // Procesar los resultados y mostrar en la tabla
+    while ($row = $result->fetch_assoc()) {
+        echo "<tr>";
+        echo "<td>{$row['Proyecto']}</td>";
+        echo "<td>{$row['Fase']}</td>";
+        echo "<td>{$row['Tarea']}</td>";
+        echo "<td>{$row['Fecha_Limite']}</td>";
+        echo "<td>{$row['Responsable']}</td>";
+        echo "<td>{$row['Tiempo_Restante']}</td>";
+        echo "</tr>";
+    }
+
+    // Cerrar la conexión
+    $conectar->close();
+    ?>
+
+    </tbody>
+</table>
           
               </div>
       </div>
