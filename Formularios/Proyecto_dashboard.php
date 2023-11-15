@@ -70,8 +70,6 @@
         <a href="crear_proyecto.php"><button class="btn btn-lg float-end custom-btn" type="submit"
             style="font-size: 15px; margin-right: 5px;">+ Crear
             proyecto</button></a>
-        <button class="btn btn-lg float-end custom-btn" type="submit"
-          style="font-size: 15px; margin-right: 5px;">Proyectos eliminados</button>
         <h1 class="display-6 mb-3" style="margin-bottom: 5px;">Ultimos proyectos creados</h1>
         <div class="dropdown mb-3">
           <button id="proyectoSeleccionado" class="btn btn-secondary dropdown-toggle" type="button"
@@ -116,11 +114,14 @@
             ?>
 
             <tr>
-              <th scope="row"><?php echo $resultado ['proNombre']?></th>
-              <th scope="row"><?php echo $resultado ['proMunicipio']?></th>
-              <th scope="row"><?php echo $resultado ['cliNombre']?></th>
-              <th scope="row"><?php echo $resultado ['proFecha_creacion']?></th>
-              <th scope="row">
+              <td scope="row"><?php echo $resultado ['proNombre']?></td>
+              <td scope="row"><?php echo $resultado ['proMunicipio']?></td>
+              <td scope="row"><?php echo $resultado ['cliNombre']?></td>
+              <td scope="row"><?php // Utiliza la función date de PHP para formatear la fecha
+                                    $fechaHora = $resultado['proFecha_creacion'];
+                                    $fechaFormateada = date("j M Y", strtotime($fechaHora)); 
+                                    echo $fechaFormateada;?></td>
+              <td scope="row">
                 <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
@@ -144,7 +145,7 @@
                   </li>
                 </ul>
 
-              </th>
+              </td>
             </tr>
             <?php
             }
@@ -272,7 +273,13 @@
               <h6 class="text-muted text-bold">Descripcion</h6>
               <p class="lead text-black"><?php echo $resultado ['proDescripcion']?></p>
               <h6 class="text-muted text-bold">Fecha de Creacion</h6>
-              <p class="lead text-black"><?php echo $resultado ['proFecha_creacion']?></p>
+              <p class="lead text-black"><?php
+                // $resultado['proFecha_creacion'] debería contener la fecha en formato ISO 8601, por ejemplo, "2023-11-15T12:30:00"
+                $fechaHora = $resultado['proFecha_creacion'];
+                // Llama a la función formatearFechaHora con la fecha y hora
+                $fechaHoraFormateada = formatearFechaHora($fechaHora);
+                echo $fechaHoraFormateada;
+              ?></p>
               <h6 class="text-muted text-bold">Ruta</h6>
               <p class="lead text-black"><?php echo $resultado ['proRuta']?></p>
             </div>
@@ -315,11 +322,12 @@
       </div>
     </div>
   </div>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy6n8L4KwGZUXZ0DIXWoA5n3VCXsbD9/D"
+    crossorigin="anonymous"></script>
   <script src="Proyecto.js"></script>
   <script src="Proyecto_dashboard.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous"></script>
 </body>
 
 </html>

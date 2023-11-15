@@ -128,11 +128,11 @@
             ?>
 
             <tr>
-              <th scope="row"><?php echo $resultado ['nombre_completo']?></th>
-              <th scope="row"><?php echo $resultado ['usuMunicipio']?></th>
-              <th scope="row"><?php echo $resultado ['usuTelefono']?></th>
-              <th scope="row"><?php echo $resultado ['usuCorreo']?></th>
-              <th scope="row">
+              <td scope="row"><?php echo $resultado ['nombre_completo']?></td>
+              <td scope="row"><?php echo $resultado ['usuMunicipio']?></td>
+              <td scope="row"><?php echo $resultado ['usuTelefono']?></td>
+              <td scope="row"><?php echo $resultado ['usuCorreo']?></td>
+              <td scope="row">
                 <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
@@ -156,7 +156,7 @@
                   </li>
                 </ul>
 
-              </th>
+              </td>
             </tr>
             <?php
             }
