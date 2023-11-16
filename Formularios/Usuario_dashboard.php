@@ -8,8 +8,6 @@
   <link rel="shortcut icon" href="recursos/HeadLogo.png" type="image/x-icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
@@ -64,10 +62,10 @@
       <iframe src="Menu.html" class="w-100 " height="100%" style="max-height: 100%;" title="Menú principal"></iframe>
     </div>
     <div class="col-10 border-left custom-form">
-      <nav aria-label="breadcrumb"">
+      <nav aria-label="breadcrumb">
         <ol class=" breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-        <li class="breadcrumb-item"><a href="#">Usuarios</a></li>
+          <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+          <li class="breadcrumb-item"><a href="#">Proyectos</a></li>
         </ol>
       </nav>
       <div>
@@ -75,8 +73,6 @@
         <a href="Usuario.html"><button class="btn btn-lg float-end custom-btn" type="submit"
             style="font-size: 15px; margin-right: 5px;">+ Crear
             usuario</button></a>
-        <button class="btn btn-lg float-end custom-btn" type="submit"
-          style="font-size: 15px; margin-right: 5px;">Usuarios eliminados</button>
         <h1 class="display-6 mb-3" style="margin-bottom: 5px;">Usuarios</h1>
         <div class="dropdown mb-3">
           <button id="proyectoSeleccionado" class="btn btn-secondary dropdown-toggle" type="button"
