@@ -1,0 +1,41 @@
+[
+{"type":"header","version":"5.2.1","comment":"Export to JSON plugin for PHPMyAdmin"},
+{"type":"database","name":"bd_buildoc"},
+{"type":"table","name":"gii_involucrado","database":"bd_buildoc","data":
+[
+{"pk_id_involucrado":"1","invNombre":"Mateo","invApellido":"Ramírez","invNumDocumento":"1516789012","invJustificacion":"Retrasos en la entrega de materiales","fk_id_incidente":"4"},
+{"pk_id_involucrado":"2","invNombre":"Natalia","invApellido":"Pérez","invNumDocumento":"1617890123","invJustificacion":"Problemas con la maquinaria","fk_id_incidente":"5"},
+{"pk_id_involucrado":"3","invNombre":"Javier","invApellido":"Sánchez","invNumDocumento":"1718901234","invJustificacion":"Falta de personal en el sitio","fk_id_incidente":"6"},
+{"pk_id_involucrado":"4","invNombre":"Mariana","invApellido":"Rodríguez","invNumDocumento":"1829012345","invJustificacion":"Incumplimiento de normas de seguridad","fk_id_incidente":"7"},
+{"pk_id_involucrado":"5","invNombre":"Lucas","invApellido":"Hernández","invNumDocumento":"1930123456","invJustificacion":"Errores en los cálculos de ingeniería","fk_id_incidente":"8"},
+{"pk_id_involucrado":"6","invNombre":"María","invApellido":"López","invNumDocumento":"2023456789","invJustificacion":"Problemas con los permisos municipales","fk_id_incidente":"9"},
+{"pk_id_involucrado":"7","invNombre":"Valeria","invApellido":"García","invNumDocumento":"2031234567","invJustificacion":"Conflictos entre subcontratistas","fk_id_incidente":"10"},
+{"pk_id_involucrado":"8","invNombre":"Valeria","invApellido":"López","invNumDocumento":"2233456789","invJustificacion":"Inconsistencias en los informes de avance","fk_id_incidente":"11"},
+{"pk_id_involucrado":"9","invNombre":"Luis","invApellido":"Ramírez","invNumDocumento":"2334567890","invJustificacion":"Fallas en la comunicación interna","fk_id_incidente":"12"},
+{"pk_id_involucrado":"10","invNombre":"Laura","invApellido":"Pérez","invNumDocumento":"2435678901","invJustificacion":"Demoras en la programación de actividades","fk_id_incidente":"13"},
+{"pk_id_involucrado":"11","invNombre":"Carlos","invApellido":"Martínez","invNumDocumento":"2536789012","invJustificacion":"Problemas con la logística de transporte","fk_id_incidente":"14"},
+{"pk_id_involucrado":"12","invNombre":"Ana","invApellido":"García","invNumDocumento":"2637890123","invJustificacion":"Requerimientos de diseño no especificados","fk_id_incidente":"15"},
+{"pk_id_involucrado":"13","invNombre":"Javier","invApellido":"Sánchez","invNumDocumento":"2738901234","invJustificacion":"Errores en los documentos de licitación","fk_id_incidente":"16"},
+{"pk_id_involucrado":"14","invNombre":"María","invApellido":"Rodríguez","invNumDocumento":"2849012345","invJustificacion":"Retrasos en la entrega de materiales","fk_id_incidente":"17"},
+{"pk_id_involucrado":"15","invNombre":"Pedro","invApellido":"Hernández","invNumDocumento":"2950123456","invJustificacion":"Problemas con la maquinaria","fk_id_incidente":"18"},
+{"pk_id_involucrado":"16","invNombre":"Camila","invApellido":"López","invNumDocumento":"3034123456","invJustificacion":"Falta de personal en el sitio","fk_id_incidente":"19"},
+{"pk_id_involucrado":"17","invNombre":"Carlos","invApellido":"Ramírez","invNumDocumento":"3034567890","invJustificacion":"Incumplimiento de normas de seguridad","fk_id_incidente":"20"},
+{"pk_id_involucrado":"18","invNombre":"Mateo","invApellido":"Pérez","invNumDocumento":"3134234567","invJustificacion":"Errores en los cálculos de ingeniería","fk_id_incidente":"21"},
+{"pk_id_involucrado":"19","invNombre":"Isabella","invApellido":"Martínez","invNumDocumento":"3234345678","invJustificacion":"Problemas con los permisos municipales","fk_id_incidente":"22"},
+{"pk_id_involucrado":"20","invNombre":"Sofía","invApellido":"Gómez","invNumDocumento":"3334456789","invJustificacion":"Conflictos entre subcontratistas","fk_id_incidente":"23"},
+{"pk_id_involucrado":"21","invNombre":"Lucas","invApellido":"López","invNumDocumento":"3434567890","invJustificacion":"Inconsistencias en los informes de avance","fk_id_incidente":"24"},
+{"pk_id_involucrado":"22","invNombre":"Valentina","invApellido":"Ramírez","invNumDocumento":"3534678901","invJustificacion":"Fallas en la comunicación interna","fk_id_incidente":"25"},
+{"pk_id_involucrado":"23","invNombre":"Diego","invApellido":"Pérez","invNumDocumento":"3634789012","invJustificacion":"Demoras en la programación de actividades","fk_id_incidente":"26"},
+{"pk_id_involucrado":"24","invNombre":"Natalia","invApellido":"Martínez","invNumDocumento":"3734890123","invJustificacion":"Problemas con la logística de transporte","fk_id_incidente":"27"},
+{"pk_id_involucrado":"25","invNombre":"Andrés","invApellido":"García","invNumDocumento":"3834901234","invJustificacion":"Requerimientos de diseño no especificados","fk_id_incidente":"28"},
+{"pk_id_involucrado":"26","invNombre":"María","invApellido":"Hernández","invNumDocumento":"3935012345","invJustificacion":"Errores en los documentos de licitación","fk_id_incidente":"29"},
+{"pk_id_involucrado":"27","invNombre":"Luis","invApellido":"Rodríguez","invNumDocumento":"4035123456","invJustificacion":"Retrasos en la entrega de materiales","fk_id_incidente":"30"},
+{"pk_id_involucrado":"28","invNombre":"Ana","invApellido":"Pérez","invNumDocumento":"4045678901","invJustificacion":"Problemas con la maquinaria","fk_id_incidente":"31"},
+{"pk_id_involucrado":"29","invNombre":"David","invApellido":"Martínez","invNumDocumento":"5056789012","invJustificacion":"Falta de personal en el sitio","fk_id_incidente":"32"},
+{"pk_id_involucrado":"30","invNombre":"Laura","invApellido":"García","invNumDocumento":"6067890123","invJustificacion":"Incumplimiento de normas de seguridad","fk_id_incidente":"33"},
+{"pk_id_involucrado":"31","invNombre":"Pedro","invApellido":"Sánchez","invNumDocumento":"7078901234","invJustificacion":"Errores en los cálculos de ingeniería","fk_id_incidente":"34"},
+{"pk_id_involucrado":"32","invNombre":"Sofía","invApellido":"Rodríguez","invNumDocumento":"8089012345","invJustificacion":"Problemas con los permisos municipales","fk_id_incidente":"35"},
+{"pk_id_involucrado":"33","invNombre":"Diego","invApellido":"Hernández","invNumDocumento":"9090123456","invJustificacion":"Conflictos entre subcontratistas","fk_id_incidente":"36"}
+]
+}
+]

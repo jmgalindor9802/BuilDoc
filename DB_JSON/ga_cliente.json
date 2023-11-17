@@ -1,0 +1,25 @@
+
+[
+{"pk_id_cliente":"100901234","cliNombre":"Proyectos del Futuro Ltda.","cliCorreo":"contacto@proyectosdelfuturo.com","cliTelefono":"8901234567"},
+{"pk_id_cliente":"200890123","cliNombre":"Construcciones Modernas S.A.S.","cliCorreo":"info@construccionesmodernas.com","cliTelefono":"7890123456"},
+{"pk_id_cliente":"300789012","cliNombre":"Obras y Proyectos Integrales Ltda.","cliCorreo":"contacto@obrasyproyectosintegrales.com","cliTelefono":"6789012345"},
+{"pk_id_cliente":"400012345","cliNombre":"Construexpo S.A.","cliCorreo":"info@construexpo.com","cliTelefono":"9012345678"},
+{"pk_id_cliente":"400678901","cliNombre":"Constructora Nueva Era S.A.","cliCorreo":"info@nuevaeraconstruccion.com","cliTelefono":"5678901234"},
+{"pk_id_cliente":"500567890","cliNombre":"Desarrollos Urbanos S.A.","cliCorreo":"contacto@desarrollosurbanos.com","cliTelefono":"4567890123"},
+{"pk_id_cliente":"600456789","cliNombre":"Construcciones del Norte Ltda.","cliCorreo":"contacto@construccionesdelnorte.com","cliTelefono":"3456789012"},
+{"pk_id_cliente":"700345678","cliNombre":"Proyectos Construvalle S.A.S.","cliCorreo":"info@proyectosconstruvalle.com","cliTelefono":"2345678901"},
+{"pk_id_cliente":"800234567","cliNombre":"Ingeniería y Construcción XYZ Ltda.","cliCorreo":"info@ingenieriaxyz.com","cliTelefono":"9876543210"},
+{"pk_id_cliente":"900123456","cliNombre":"Constructora ABC S.A.","cliCorreo":"contacto@constructoraabc.com","cliTelefono":"1234567890"},
+{"pk_id_cliente":"1011234567","cliNombre":"Isabella López","cliCorreo":"isabella@gmail.com","cliTelefono":"9012345678"},
+{"pk_id_cliente":"1012345678","cliNombre":"Juan Pérez","cliCorreo":"juan@gmail.com","cliTelefono":"1234567890"},
+{"pk_id_cliente":"2023456789","cliNombre":"María López","cliCorreo":"maria@hotmail.com","cliTelefono":"9876543210"},
+{"pk_id_cliente":"3034567890","cliNombre":"Carlos Ramírez","cliCorreo":"carlos@yahoo.com","cliTelefono":"2345678901"},
+{"pk_id_cliente":"4045678901","cliNombre":"Ana Gómez","cliCorreo":"ana@gmail.com","cliTelefono":"3456789012"},
+{"pk_id_cliente":"5056789012","cliNombre":"David Martínez","cliCorreo":"david@hotmail.com","cliTelefono":"4567890123"},
+{"pk_id_cliente":"6067890123","cliNombre":"Laura García","cliCorreo":"laura@yahoo.com","cliTelefono":"5678901234"},
+{"pk_id_cliente":"7078901234","cliNombre":"Pedro Sánchez","cliCorreo":"pedro@gmail.com","cliTelefono":"6789012345"},
+{"pk_id_cliente":"8089012345","cliNombre":"Sofía Rodríguez","cliCorreo":"sofia@hotmail.com","cliTelefono":"7890123456"},
+{"pk_id_cliente":"9090123456","cliNombre":"Diego Hernández","cliCorreo":"diego@yahoo.com","cliTelefono":"8901234567"}
+]
+
+
