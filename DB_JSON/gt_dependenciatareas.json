@@ -1,7 +1,4 @@
-[
-{"type":"header","version":"5.2.1","comment":"Export to JSON plugin for PHPMyAdmin"},
-{"type":"database","name":"bd_buildoc"},
-{"type":"table","name":"gt_dependenciatareas","database":"bd_buildoc","data":
+
 [
 {"pk_id_dependencia":"1","depTareaPrincipal":"1","depTareaDependiente":"1"},
 {"pk_id_dependencia":"2","depTareaPrincipal":"2","depTareaDependiente":"2"},
@@ -27,6 +24,4 @@
 {"pk_id_dependencia":"22","depTareaPrincipal":"22","depTareaDependiente":"21"},
 {"pk_id_dependencia":"23","depTareaPrincipal":"23","depTareaDependiente":"22"},
 {"pk_id_dependencia":"24","depTareaPrincipal":"24","depTareaDependiente":"23"}
-]
-}
 ]
