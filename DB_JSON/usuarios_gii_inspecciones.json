@@ -1,7 +1,4 @@
-[
-{"type":"header","version":"5.2.1","comment":"Export to JSON plugin for PHPMyAdmin"},
-{"type":"database","name":"bd_buildoc"},
-{"type":"table","name":"usuarios_gii_inspecciones","database":"bd_buildoc","data":
+
 [
 {"fk_id_usuario":"3734890123","fk_id_inspeccion":"1"},
 {"fk_id_usuario":"3834901234","fk_id_inspeccion":"2"},
@@ -36,6 +33,4 @@
 {"fk_id_usuario":"2950123456","fk_id_inspeccion":"31"},
 {"fk_id_usuario":"3034123456","fk_id_inspeccion":"32"},
 {"fk_id_usuario":"3034567890","fk_id_inspeccion":"33"}
-]
-}
 ]

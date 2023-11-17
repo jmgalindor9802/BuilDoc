@@ -1,7 +1,4 @@
-[
-{"type":"header","version":"5.2.1","comment":"Export to JSON plugin for PHPMyAdmin"},
-{"type":"database","name":"bd_buildoc"},
-{"type":"table","name":"gt_fase","database":"bd_buildoc","data":
+
 [
 {"pk_id_fase":"1","fasNombre":"Diseño Estructural","fasFecha_creacion":"2023-11-09 07:06:02","fasDescripcion":"Creación de planos de cimentación y estructuras principales","fasEstado":"EN PROGRESO","fk_id_proyecto":"12"},
 {"pk_id_fase":"2","fasNombre":"Excavación","fasFecha_creacion":"2023-11-09 07:06:02","fasDescripcion":"Excavación de zanjas para cimientos","fasEstado":"COMPLETADO","fk_id_proyecto":"15"},
@@ -53,6 +50,4 @@
 {"pk_id_fase":"48","fasNombre":"Rehabilitación de Fachadas","fasFecha_creacion":"2023-11-09 07:06:02","fasDescripcion":"Rehabilitación y restauración de fachadas","fasEstado":"PENDIENTE","fk_id_proyecto":"21"},
 {"pk_id_fase":"49","fasNombre":"Puentes y Pasarelas","fasFecha_creacion":"2023-11-09 07:06:02","fasDescripcion":"Construcción de puentes y pasarelas","fasEstado":"PENDIENTE","fk_id_proyecto":"36"},
 {"pk_id_fase":"50","fasNombre":"Diseño de Iluminación","fasFecha_creacion":"2023-11-09 07:06:02","fasDescripcion":"Diseño de sistemas de iluminación","fasEstado":"PENDIENTE","fk_id_proyecto":"31"}
-]
-}
 ]

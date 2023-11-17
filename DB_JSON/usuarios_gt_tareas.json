@@ -1,7 +1,4 @@
-[
-{"type":"header","version":"5.2.1","comment":"Export to JSON plugin for PHPMyAdmin"},
-{"type":"database","name":"bd_buildoc"},
-{"type":"table","name":"usuarios_gt_tareas","database":"bd_buildoc","data":
+
 [
 {"fk_id_usuario":"1011234567","fk_id_tarea":"1"},
 {"fk_id_usuario":"1012345678","fk_id_tarea":"2"},
@@ -53,5 +50,4 @@
 {"fk_id_usuario":"1718901234","fk_id_tarea":"8"},
 {"fk_id_usuario":"1829012345","fk_id_tarea":"9"}
 ]
-}
-]
+
