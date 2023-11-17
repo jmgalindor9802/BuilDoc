@@ -1,8 +1,4 @@
 [
-{"type":"header","version":"5.2.1","comment":"Export to JSON plugin for PHPMyAdmin"},
-{"type":"database","name":"bd_buildoc"},
-{"type":"table","name":"gii_incidente","database":"bd_buildoc","data":
-[
 {"pk_id_incidente":"1","incNombre":"Dimensiones de columnas fundidas de primera planta","incDescripcion":"Se verificaron que las dimensiones de las columnas hechas no cumplen con los diseños en planos","incEstado":"INICIALIZADO","incGravedad":"ALTO","incFecha":"2023-11-09 07:06:02","incSugerencias":"Se le informa al contratista que debe demoler las columnas A1 y A3 porque no cumplieron con las dimensiones de los diseños en planos","fk_id_usuario":"2849012345","fk_id_proyecto":"3"},
 {"pk_id_incidente":"2","incNombre":"Problema con instalación eléctrica","incDescripcion":"Se detectó un cortocircuito en el cuarto de máquinas","incEstado":"INICIALIZADO","incGravedad":"ALTO","incFecha":"2023-11-09 07:06:02","incSugerencias":"Se requiere la intervención de un electricista certificado para solucionar el problema","fk_id_usuario":"2950123456","fk_id_proyecto":"4"},
 {"pk_id_incidente":"3","incNombre":"Fugas de agua en el sótano","incDescripcion":"Se identificaron varias fugas en las tuberías de la planta baja","incEstado":"INICIALIZADO","incGravedad":"MEDIO","incFecha":"2023-11-09 07:06:02","incSugerencias":"Se necesita un fontanero para reparar las fugas","fk_id_usuario":"3034123456","fk_id_proyecto":"5"},
@@ -61,6 +57,4 @@
 {"pk_id_incidente":"56","incNombre":"Problemas con la red de gas","incDescripcion":"Se ha detectado una fuga en la red de gas en la cocina del personal","incEstado":"INICIALIZADO","incGravedad":"ALTO","incFecha":"2023-11-09 07:06:02","incSugerencias":"Se necesita un especialista en sistemas de gas para reparar la fuga","fk_id_usuario":"6067890123","fk_id_proyecto":"18"},
 {"pk_id_incidente":"57","incNombre":"Fugas en el sistema de riego","incDescripcion":"Se ha detectado una fuga en el sistema de riego del jardín trasero","incEstado":"INICIALIZADO","incGravedad":"BAJO","incFecha":"2023-11-09 07:06:02","incSugerencias":"Se necesita un fontanero especializado en sistemas de riego","fk_id_usuario":"7078901234","fk_id_proyecto":"19"},
 {"pk_id_incidente":"58","incNombre":"Problemas con el sistema de ventilación","incDescripcion":"El sistema de ventilación no está proporcionando suficiente aire fresco en la sala de juntas","incEstado":"INICIALIZADO","incGravedad":"MEDIO","incFecha":"2023-11-09 07:06:02","incSugerencias":"Se necesita un técnico en sistemas de ventilación para revisar y reparar el equipo","fk_id_usuario":"8089012345","fk_id_proyecto":"20"}
-]
-}
 ]

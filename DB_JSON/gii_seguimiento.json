@@ -1,8 +1,4 @@
 [
-{"type":"header","version":"5.2.1","comment":"Export to JSON plugin for PHPMyAdmin"},
-{"type":"database","name":"bd_buildoc"},
-{"type":"table","name":"gii_seguimiento","database":"bd_buildoc","data":
-[
 {"pk_id_seguimiento":"1","actDescripcion":"El ingeniero residente verifico las causas y encontró que los planos del contratista estaban desactualizados","actFecha":"2023-11-09 07:06:03","actSugerencia":"Se le entregó los nuevos planos al contratista y la interventoria y director de obra fueron notificados de este suceso","fk_id_incidente":"1"},
 {"pk_id_seguimiento":"2","actDescripcion":"Se realizó una inspección detallada del área y se identificaron los puntos de riesgo.","actFecha":"2023-11-09 07:06:03","actSugerencia":"Se tomaron medidas correctivas inmediatas para mitigar los riesgos identificados.","fk_id_incidente":"2"},
 {"pk_id_seguimiento":"3","actDescripcion":"Se suspendieron temporalmente las labores en el área afectada.","actFecha":"2023-11-09 07:06:03","actSugerencia":"Se notificó al personal de la suspensión y se procedió a reforzar las medidas de seguridad.","fk_id_incidente":"3"},
@@ -93,6 +89,4 @@
 {"pk_id_seguimiento":"88","actDescripcion":"Se realizó una inspección final para asegurar la calidad de la instalación.","actFecha":"2023-11-09 07:06:03","actSugerencia":"Se confirmó que la instalación eléctrica cumple con los estándares de seguridad.","fk_id_incidente":"19"},
 {"pk_id_seguimiento":"89","actDescripcion":"Se recibió una nueva solicitud de cambio en el diseño de la fachada.","actFecha":"2023-11-09 07:06:03","actSugerencia":"Se evaluó la viabilidad del cambio y se ajustaron los planos según la solicitud del cliente.","fk_id_incidente":"20"},
 {"pk_id_seguimiento":"90","actDescripcion":"Se realizó una revisión de los planos actualizados.","actFecha":"2023-11-09 07:06:03","actSugerencia":"Se confirmó que los planos cumplen con las nuevas especificaciones del cliente.","fk_id_incidente":"20"}
-]
-}
 ]

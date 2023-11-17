@@ -1,8 +1,4 @@
 [
-{"type":"header","version":"5.2.1","comment":"Export to JSON plugin for PHPMyAdmin"},
-{"type":"database","name":"bd_buildoc"},
-{"type":"table","name":"gii_involucrado","database":"bd_buildoc","data":
-[
 {"pk_id_involucrado":"1","invNombre":"Mateo","invApellido":"Ramírez","invNumDocumento":"1516789012","invJustificacion":"Retrasos en la entrega de materiales","fk_id_incidente":"4"},
 {"pk_id_involucrado":"2","invNombre":"Natalia","invApellido":"Pérez","invNumDocumento":"1617890123","invJustificacion":"Problemas con la maquinaria","fk_id_incidente":"5"},
 {"pk_id_involucrado":"3","invNombre":"Javier","invApellido":"Sánchez","invNumDocumento":"1718901234","invJustificacion":"Falta de personal en el sitio","fk_id_incidente":"6"},
@@ -36,6 +32,4 @@
 {"pk_id_involucrado":"31","invNombre":"Pedro","invApellido":"Sánchez","invNumDocumento":"7078901234","invJustificacion":"Errores en los cálculos de ingeniería","fk_id_incidente":"34"},
 {"pk_id_involucrado":"32","invNombre":"Sofía","invApellido":"Rodríguez","invNumDocumento":"8089012345","invJustificacion":"Problemas con los permisos municipales","fk_id_incidente":"35"},
 {"pk_id_involucrado":"33","invNombre":"Diego","invApellido":"Hernández","invNumDocumento":"9090123456","invJustificacion":"Conflictos entre subcontratistas","fk_id_incidente":"36"}
-]
-}
 ]
