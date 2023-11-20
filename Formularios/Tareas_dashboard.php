@@ -81,6 +81,7 @@
       </nav>
       <div >
         <h4 class="mb-3">Tareas </h4>
+        
         <a href="crear_tarea.html"><button class="btn btn-lg float-end custom-btn" type="submit"
           style="font-size: 15px;">+ Crear
           tarea</button></a>
@@ -94,7 +95,6 @@
           </button>
           <ul class="dropdown-menu" style="max-height: 200px; overflow-y: auto;">
               <li><a class="dropdown-item" href="#">Todos los proyectos</a></li>
-
               <?php
               require('conexion.php');
 
@@ -145,7 +145,7 @@
 
     // Llamada al procedimiento almacenado
     $proyecto = isset($_POST['proyecto']) ? $_POST['proyecto'] : NULL;
-    $result = $conectar->query("CALL listar_tareas_pendientes_proximos_7_dias_por_proyecto($proyecto)");
+    $result = $conectar->query("CALL listar_tareas_pendientes_proximos_7_dias_por_proyecto(6)");
 
     // Procesar los resultados y mostrar en la tabla
     while ($row = $result->fetch_assoc()) {
@@ -172,9 +172,9 @@
   </div>
 
   <script src="Tareas_dashboard.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 </body>
 
 </html>
