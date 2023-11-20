@@ -6,8 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tareas</title>
   <link rel="shortcut icon" href="recursos/HeadLogo.png" type="image/x-icon">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
 
   <style>
@@ -90,35 +89,26 @@
         <div class="dropdown">
           <button id="proyectoSeleccionado" class="btn btn-secondary dropdown-toggle" type="button"
             data-bs-toggle="dropdown" aria-expanded="false">
-            Todos los proyectos
-          </button>
+                     Proyectos </button>
           <ul class="dropdown-menu" style="max-height: 200px; overflow-y: auto;">
-              <li><a class="dropdown-item" href="#">Todos los proyectos</a></li>
-
-              <?php
-              require('conexion.php');
-
-              // Verificar la conexión
-              if (!$conectar) {
-                  die("Conexión fallida: " . mysqli_connect_error());
-              }
-
-              // Consulta para obtener nombres e IDs de proyectos de la base de datos
-              $sql = "SELECT pk_id_proyecto, proNombre FROM ga_proyecto ORDER BY proNombre";
-              $result = mysqli_query($conectar, $sql);
-
-              // Rellenar opciones del select con los resultados de la consulta
-              if ($result && mysqli_num_rows($result) > 0) {
-                  while($row = mysqli_fetch_assoc($result)) {
-                      echo '<li><a class="dropdown-item" href="#">' . $row["proNombre"] . '</a></li>';
-                  }
-              }
-              ?>
+              <li><a class="dropdown-item" href="#">Todos lods proyectos</a></li>
+              <li><a class="dropdown-item" href="#">Todos lofds proyectos</a></li>
+              <li><a class="dropdown-item" href="#">Todofds los proyectos</a></li>
 
           </ul>
 
           
         </div>
+        <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Dropdown button
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#">Action</a></li>
+    <li><a class="dropdown-item" href="#">Another action</a></li>
+    <li><a class="dropdown-item" href="#">Something else here</a></li>
+  </ul>
+</div>
       </div>
         <div class="table-responsive vh-80">
         <table id="tablaTareas" class="table table-striped table-hover sticky-header">
@@ -136,7 +126,7 @@
     <tbody>
 
     <?php
-    require('conexion.php');
+    include('conexion.php');
 
     // Verificar la conexión
     if ($conectar->connect_error) {
@@ -172,9 +162,8 @@
   </div>
 
   <script src="Tareas_dashboard.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
 </body>
 
 </html>

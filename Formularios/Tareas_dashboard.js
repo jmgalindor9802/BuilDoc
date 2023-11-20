@@ -20,46 +20,6 @@
     );
   });
  
-  document.addEventListener("DOMContentLoaded", function () {
-    const tablaTareas = document.getElementById("tablaTareas");
-    const dropdown = document.querySelector(".dropdown");
-
-    dropdown.addEventListener("click", function (event) {
-      if (event.target.classList.contains("dropdown-item")) {
-        const selectedProject = event.target.textContent;
-        filterTable(selectedProject);
-      }
-    });
-
-    function filterTable(selectedProject) {
-      const rows = tablaTareas.querySelectorAll("tbody tr");
-      rows.forEach(function (row) {
-        const proyecto = row.cells[0].textContent;
-        if (
-          selectedProject === "Todos los proyectos" ||
-          proyecto === selectedProject
-        ) {
-          row.style.display = "";
-        } else {
-          row.style.display = "none";
-        }
-      });
-    }
-  });
-
-  document.addEventListener("DOMContentLoaded", function () {
-    const proyectoSeleccionadoBtn = document.getElementById(
-      "proyectoSeleccionado"
-    );
-    const dropdown = document.querySelector(".dropdown");
-
-    dropdown.addEventListener("click", function (event) {
-      if (event.target.classList.contains("dropdown-item")) {
-        const selectedProject = event.target.textContent;
-        proyectoSeleccionadoBtn.textContent = selectedProject;
-      }
-    });
-  });
 
   document.addEventListener('DOMContentLoaded', function () {
     // Función para calcular el tiempo restante
@@ -138,4 +98,4 @@
       tbody.appendChild(tarea.fila);
     });
   });
-})();
+});
