@@ -1,5 +1,4 @@
 DELIMITER //
-use BD_BUILDOC;
 /*---GESTION DE ARCHIVOS---*/
 
 /*Listar todos los proyectos por nombre de un municipio especifico, 
