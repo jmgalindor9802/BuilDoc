@@ -67,7 +67,7 @@
       </nav>
       <div>
         <h4 class="mb-3">Proyectos</h4>
-        <a href="crear_proyecto.php"><button class="btn btn-lg float-end custom-btn" type="submit"
+        <a href="crear_proyecto_form.php"><button class="btn btn-lg float-end custom-btn" type="submit"
             style="font-size: 15px; margin-right: 5px;">+ Crear
             proyecto</button></a>
         <h1 class="display-6 mb-3" style="margin-bottom: 5px;">Ultimos proyectos creados</h1>
@@ -144,7 +144,6 @@
                       </svg></a>
                   </li>
                 </ul>
-
               </td>
             </tr>
             <?php
