@@ -80,6 +80,7 @@
       </nav>
       <div >
         <h4 class="mb-3">Tareas </h4>
+        
         <a href="crear_tarea.html"><button class="btn btn-lg float-end custom-btn" type="submit"
           style="font-size: 15px;">+ Crear
           tarea</button></a>
@@ -91,9 +92,26 @@
             data-bs-toggle="dropdown" aria-expanded="false">
                      Proyectos </button>
           <ul class="dropdown-menu" style="max-height: 200px; overflow-y: auto;">
-              <li><a class="dropdown-item" href="#">Todos lods proyectos</a></li>
-              <li><a class="dropdown-item" href="#">Todos lofds proyectos</a></li>
-              <li><a class="dropdown-item" href="#">Todofds los proyectos</a></li>
+              <li><a class="dropdown-item" href="#">Todos los proyectos</a></li>
+              <?php
+              require('conexion.php');
+
+              // Verificar la conexión
+              if (!$conectar) {
+                  die("Conexión fallida: " . mysqli_connect_error());
+              }
+
+              // Consulta para obtener nombres e IDs de proyectos de la base de datos
+              $sql = "SELECT pk_id_proyecto, proNombre FROM ga_proyecto ORDER BY proNombre";
+              $result = mysqli_query($conectar, $sql);
+
+              // Rellenar opciones del select con los resultados de la consulta
+              if ($result && mysqli_num_rows($result) > 0) {
+                  while($row = mysqli_fetch_assoc($result)) {
+                      echo '<li><a class="dropdown-item" href="#">' . $row["proNombre"] . '</a></li>';
+                  }
+              }
+              ?>
 
           </ul>
 
@@ -135,7 +153,7 @@
 
     // Llamada al procedimiento almacenado
     $proyecto = isset($_POST['proyecto']) ? $_POST['proyecto'] : NULL;
-    $result = $conectar->query("CALL listar_tareas_pendientes_proximos_7_dias_por_proyecto($proyecto)");
+    $result = $conectar->query("CALL listar_tareas_pendientes_proximos_7_dias_por_proyecto(6)");
 
     // Procesar los resultados y mostrar en la tabla
     while ($row = $result->fetch_assoc()) {
@@ -162,8 +180,9 @@
   </div>
 
   <script src="Tareas_dashboard.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>

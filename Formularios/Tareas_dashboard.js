@@ -98,4 +98,23 @@
       tbody.appendChild(tarea.fila);
     });
   });
+
+  $(document).ready(function() {
+    $('.dropdown-item').click(function(e) {
+        e.preventDefault();
+        var idProyecto = $(this).data('idproyecto');
+        $('#proyectoSeleccionado').html($(this).text()); // Actualiza el botón del dropdown con el proyecto seleccionado
+
+        // Realiza la solicitud AJAX para obtener y mostrar las tareas correspondientes
+        $.ajax({
+            type: 'POST',
+            url: 'obtener_tareas.php', // Archivo PHP que procesa la solicitud
+            data: { proyecto: idProyecto },
+            success: function(data) {
+                $('#tablaTareas tbody').html(data); // Actualiza el cuerpo de la tabla con las nuevas tareas
+            }
+        });
+    });
+});
+
 });
