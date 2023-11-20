@@ -191,7 +191,6 @@
                         <button class="btn btn-lg float-end custom-btn" id="guardarFaseButton"
                             style="font-size: 15px;">Guardar incidente</button>
                         <script>
-
                             document.addEventListener("DOMContentLoaded", function () {
                                 var form = document.querySelector('.needs-validation');
                                 var guardarFaseButton = document.getElementById('guardarFaseButton');
