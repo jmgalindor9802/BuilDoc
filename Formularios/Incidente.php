@@ -1,8 +1,6 @@
 <?php 
 
 require 'conexion.php';
-
-var_dump($_POST);
 // Verificar si los datos del formulario están presentes
 if (
     isset($_POST["Nombre_incidente"]) && !empty($_POST["Nombre_incidente"]) &&
@@ -28,11 +26,6 @@ if (
         $items3 = array_map('intval' , $_POST["Identificación_involucrado"]);
         $items4 = ($_POST["Justificacion_involucrado"]);
         $EviInc = $_POST["Evidencia_incidente"];
-        var_dump($items1);
-        var_dump($items2);
-        var_dump($items3);
-        var_dump($items4);
- 
         $stmt = $conectar->prepare("CALL InsertarIncidente(?, ?, ?, ?, ?, ?, ?)");
         $stmt->bind_param("sssssii", $Nombre, $DescInc, $EstadoInc, $GraInc, $SugInc, $autor, $Proyecto);
 

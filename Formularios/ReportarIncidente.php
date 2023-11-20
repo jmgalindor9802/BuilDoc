@@ -9,25 +9,25 @@
     <link rel="shortcut icon" href="recursos\HeadLogo.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js"></script>
 
     <script>
-			
-    		$(function(){
-				// Clona la fila oculta que tiene los campos base, y la agrega al final de la tabla
-				$("#adicional").on('click', function(){
-					$("#tabla tbody tr:eq(0)").clone().removeClass('fila-fija').appendTo("#tabla");
-				});
-			 
-				$(document).on("click",".eliminar",function(){
-                    var parent = $(this).parents().get(0);
-                    // Eliminamos la fila
-                    $(parent).remove();
-                    // Eliminamos todos los elementos del input
-                    $(parent).find("input").empty();
-                });
-			});
-		</script>
+
+        $(function () {
+            // Clona la fila oculta que tiene los campos base, y la agrega al final de la tabla
+            $("#adicional").on('click', function () {
+                $("#tabla tbody tr:eq(0)").clone().removeClass('fila-fija').appendTo("#tabla");
+            });
+
+            $(document).on("click", ".eliminar", function () {
+                var parent = $(this).parents().get(0);
+                // Eliminamos la fila
+                $(parent).remove();
+                // Eliminamos todos los elementos del input
+                $(parent).find("input").empty();
+            });
+        });
+    </script>
 
 
     <style>
@@ -55,6 +55,7 @@
             padding-left: 4%;
             padding-right: 4%;
         }
+
         .btn-danger {
             padding: 0px !important;
             margin: 0px !important;
@@ -127,25 +128,31 @@
                         <!-- Sub lista de involucrados -->
                         <div class="mb-12">
                             <h5>Agregar Involucrados:</h5>
-                            <table class="table bg-info"  id="tabla">
+                            <table class="table bg-info" id="tabla">
                                 <tr class="fila-fija">
-                                    <td><input name="Nombre_involucrado[]" placeholder="Nombre"/></td>
-						            <td><input name="Apellido_involucrado[]" placeholder="Apellido"/></td>
-						            <td><input name="Identificación_involucrado[]" placeholder="Numero de Identificacion" id="idInvolucrado"/></td>
-						            <!-- Agrega el div para mostrar el mensaje de error -->
+                                    <td><input name="Nombre_involucrado[]" placeholder="Nombre" /></td>
+                                    <td><input name="Apellido_involucrado[]" placeholder="Apellido" /></td>
+                                    <td><input name="Identificación_involucrado[]"
+                                            placeholder="Numero de Identificacion" id="idInvolucrado" /></td>
+                                    <!-- Agrega el div para mostrar el mensaje de error -->
                                     <div class="invalid-feedback" id="idInvolucradoError">
-                                    El campo de identificación debe contener solo números.
+                                        El campo de identificación debe contener solo números.
                                     </div>
-                                    <td><input name="Justificacion_involucrado[]" placeholder="Justificacion"/></td>
-						            <td class="eliminar"><button type="button" class="btn btn-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
-  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-</svg></button></td>
+                                    <td><input name="Justificacion_involucrado[]" placeholder="Justificacion" /></td>
+                                    <td class="eliminar"><button type="button" class="btn btn-danger"><svg
+                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                                <path
+                                                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                                            </svg></button></td>
                                 </tr>
                             </table>
                             <div class="btn-der">
-					            <button id="adicional" name="adicional" type="button" class="btn btn-warning"> Más + </button>
-				            </div>
+                                <button id="adicional" name="adicional" type="button" class="btn btn-warning"> Más +
+                                </button>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <h5>Involucrados Registrados:</h5>
@@ -198,107 +205,51 @@
                                 Se requiere adjuntar una evidencia válida.
                             </div>
                         </div>
-                        <!-- Botón "Guardar fase" que abre el modal -->
-                        <button class="btn btn-lg float-end custom-btn" id="guardarFaseButton"
+                        <button class="btn btn-lg float-end custom-btn" id="guardarIncidenteButton"
                             style="font-size: 15px;">Guardar incidente</button>
-                        <script>
-                            document.addEventListener("DOMContentLoaded", function () {
-                                var form = document.querySelector('.needs-validation');
-                                var guardarFaseButton = document.getElementById('guardarFaseButton');
-                                var confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
-
-                                guardarFaseButton.addEventListener('click', function () {
-                                    // Verifica si el formulario es válido antes de abrir el modal
-                                    if (form.checkValidity()) {
-                                        confirmModal.show();
-                                    } else {
-                                        form.classList.add('was-validated');
-                                    }
-                                });
-
-                                // Agrega un evento de clic al botón de "Confirmar" dentro del modal
-                                var confirmarModalButton = document.getElementById('confirmarModalButton');
-                                confirmarModalButton.addEventListener('click', function () {
-                                    // Verifica si el formulario es válido antes de enviarlo
-                                    if (form.checkValidity()) {
-                                        form.submit(); // Envía el formulario
-                                        confirmModal.hide(); // Cierra el modal después de enviar
-                                    } else {
-                                        form.classList.add('was-validated'); // Muestra los mensajes de validación
-                                    }
-                                });
-                            });
-                        </script>
-                        <!-- Modal de confirmación -->
-                        <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog"
-                            aria-labelledby="confirmModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="confirmModalLabel">Confirmar envío</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        ¿Estás seguro de que deseas enviar el formulario?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Cancelar</button>
-                                        <button type="button" class="btn btn-primary"
-                                            id="confirmarModalButton">Confirmar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                 </form>
             </div>
         </div>
     </div>
-                    <!-- Modal de confirmación -->
-                    <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog"
-                        aria-labelledby="confirmModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="confirmModalLabel">Confirmar envío</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    ¿Estás seguro de que deseas enviar el formulario?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="button" class="btn btn-primary"
-                                        id="confirmarModalButton">Confirmar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Modal de éxito -->
-                    <div class="modal fade" id="successModal" tabindex="-1" role="dialog"
-                        aria-labelledby="successModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="successModalLabel">Éxito</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    La fase se ha creado exitosamente.
-                                </div>
-                            </div>
+    <!-- Modal de confirmación -->
+    <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalLabel">Confirmar envío</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Estás seguro de que deseas enviar el formulario?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="confirmarModalButton">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal de éxito -->
+    <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="successModalLabel">Éxito</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    La fase se ha creado exitosamente.
+                </div>
+            </div>
 
-                        </div>
-                    </div>
-    <script src="ReportarIncidente.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+        </div>
+        <script src="ReportarIncidente.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
 </body>
 
 </html>
