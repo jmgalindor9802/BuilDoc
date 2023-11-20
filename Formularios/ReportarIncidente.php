@@ -19,11 +19,13 @@
 					$("#tabla tbody tr:eq(0)").clone().removeClass('fila-fija').appendTo("#tabla");
 				});
 			 
-				// Evento que selecciona la fila y la elimina 
 				$(document).on("click",".eliminar",function(){
-					var parent = $(this).parents().get(0);
-					$(parent).remove();
-				});
+                    var parent = $(this).parents().get(0);
+                    // Eliminamos la fila
+                    $(parent).remove();
+                    // Eliminamos todos los elementos del input
+                    $(parent).find("input").empty();
+                });
 			});
 		</script>
 
@@ -52,6 +54,12 @@
         .custom-nav {
             padding-left: 4%;
             padding-right: 4%;
+        }
+        .btn-danger {
+            padding: 0px !important;
+            margin: 0px !important;
+            width: 25px;
+            height: 25px;
         }
     </style>
 </head>
@@ -121,15 +129,18 @@
                             <h5>Agregar Involucrados:</h5>
                             <table class="table bg-info"  id="tabla">
                                 <tr class="fila-fija">
-                                    <td><input required name="Nombre_involucrado[]" placeholder="Nombre"/></td>
-						            <td><input required name="Apellido_involucrado[]" placeholder="Apellido"/></td>
-						            <td><input required name="Identificación_involucrado[]" placeholder="Numero de Identificacion" id="idInvolucrado"/></td>
+                                    <td><input name="Nombre_involucrado[]" placeholder="Nombre"/></td>
+						            <td><input name="Apellido_involucrado[]" placeholder="Apellido"/></td>
+						            <td><input name="Identificación_involucrado[]" placeholder="Numero de Identificacion" id="idInvolucrado"/></td>
 						            <!-- Agrega el div para mostrar el mensaje de error -->
                                     <div class="invalid-feedback" id="idInvolucradoError">
                                     El campo de identificación debe contener solo números.
                                     </div>
-                                    <td><input required name="Justificacion_involucrado[]" placeholder="Justificacion"/></td>
-						            <td class="eliminar"><input type="button"   value="Menos -"/></td>
+                                    <td><input name="Justificacion_involucrado[]" placeholder="Justificacion"/></td>
+						            <td class="eliminar"><button type="button" class="btn btn-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+</svg></button></td>
                                 </tr>
                             </table>
                             <div class="btn-der">
@@ -245,6 +256,45 @@
             </div>
         </div>
     </div>
+                    <!-- Modal de confirmación -->
+                    <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog"
+                        aria-labelledby="confirmModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="confirmModalLabel">Confirmar envío</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    ¿Estás seguro de que deseas enviar el formulario?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-primary"
+                                        id="confirmarModalButton">Confirmar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal de éxito -->
+                    <div class="modal fade" id="successModal" tabindex="-1" role="dialog"
+                        aria-labelledby="successModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="successModalLabel">Éxito</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    La fase se ha creado exitosamente.
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
     <script src="ReportarIncidente.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
