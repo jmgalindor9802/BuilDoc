@@ -60,6 +60,9 @@
       background-color: #0074e4;
       color: white !important;
     }
+    .dropdown-menu .dropdown-item {
+    user-select: none;
+    }
   </style>
 </head>
 
@@ -138,6 +141,7 @@
               require("conexion.php");
               
               $sql = $conectar -> query("SELECT 
+              gii_incidente.pk_id_incidente,
               gii_incidente.incNombre,
               gii_incidente.incEstado,
               gii_incidente.incGravedad,
@@ -162,7 +166,10 @@
                 <?php echo $Resultado['proNombre']?>
               </td>
               <td>
-                <?php echo $Resultado['incFecha']?>
+              <?php // Utiliza la función date de PHP para formatear la fecha
+                                    $fechaHora = $Resultado['incFecha'];
+                                    $fechaFormateada = date("j M Y", strtotime($fechaHora)); 
+                                    echo $fechaFormateada;?>
               </td>
               <td><button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -183,6 +190,7 @@
                         <path
                           d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
                       </svg></a></li>
+                  <li><a href="actualizarIncidenteReportado.php?Id_recuperadoIncidente=<?php echo $Resultado['pk_id_incidente'];?>" class="dropdown-item btn-desplegable-Actualizar">Actualizar</a></li><a href=""></a>
                 </ul>
               </td>
             </tr>
