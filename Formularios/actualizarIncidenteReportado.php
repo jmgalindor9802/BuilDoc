@@ -242,7 +242,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <input type="hidden" name="Id_recuperadoIncidente" value="<?php echo $_REQUEST['Id_recuperadoIncidente']; ?>" disabled class="d-none">
+                        <input type="hidden" name="Id_incidente" value="<?php echo $_REQUEST['Id_recuperadoIncidente']; ?>" class="d-none">
                         <!-- Fin de la sub lista de involucrados -->
                         <button class="btn btn-lg float-end custom-btn" id="guardarIncidenteButton"
                             style="font-size: 15px;">Guardar incidente</button>

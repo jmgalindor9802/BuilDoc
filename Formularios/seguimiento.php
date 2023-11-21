@@ -2,13 +2,13 @@
 
 require 'conexion.php';
 // Verificar si los datos del formulario están presentes
+var_dump($_POST);
 if (
     isset($_POST["Descripcion_incidente"]) && !empty($_POST["Descripcion_incidente"]) &&
-    isset($_POST["Gravedad_incidente"]) && !empty($_POST["Proyecto_incidente"]) &&
     isset($_POST["Sugerencia_incidente"]) && isset($_POST["Nombre_involucrado"]) &&
     isset($_POST["Apellido_involucrado"]) && isset($_POST["Identificación_involucrado"]) &&
     isset($_POST["Evidencia_incidente"]) && isset($_POST["Justificacion_involucrado"]) &&
-    isset($_POST["Id_recuperadoIncidente"]) && !empty($_POST["Id_recuperadoIncidente"])
+    isset($_POST["Id_incidente"]) && !empty($_POST["Id_incidente"])
     ){
 
 
@@ -21,13 +21,14 @@ if (
         $items3 = array_map('intval' , $_POST["Identificación_involucrado"]);
         $items4 = ($_POST["Justificacion_involucrado"]);
         $EviInc = $_POST["Evidencia_incidente"];
-        $id_recuperado_incidente = $_POST["Id_recuperadoIncidente"];
+        $id_recuperado_incidente = $_POST["Id_incidente"];
+        $idIncidente = $id_recuperado_incidente;
         $stmt = $conectar->prepare("CALL InsertarSeguimiento(?, ?, ?)");
-        $stmt->bind_param("ssi", $DescInc, $SugInc, $id_recuperado_incidente);
+        $stmt->bind_param("ssi", $DescInc, $SugInc, $idIncidente);
 
         // Ejecutar la llamada al procedimiento almacenado
         if ($stmt->execute()) {
-           echo 'exito';
+            echo 'exito';
         } else {
             echo "Error, no se guardaron los datos correctamente: " . $stmt->error;
         }
@@ -55,7 +56,7 @@ if (
 		        $nomInv=(( $item1 !== false) ? $item1 : ", &nbsp;");
 		        $apeInv=(( $item2 !== false) ? $item2 : ", &nbsp;");
 		        $jusInv=(( $item4 !== false) ? $item4 : ", &nbsp;");
-                $fk= (int) $lastIncidenteId;
+                $fk= (int) $idIncidente;
 
                 // Llamada al procedimiento almacenado
                 $stmtInvolucrado = $conectar->prepare("CALL InsertarInvolucrado(?, ?, ?, ?, ?)");
