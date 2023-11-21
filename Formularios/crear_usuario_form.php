@@ -63,13 +63,11 @@
       <div class="col-12 custom-form vh-80">
         <br>
 
-        <form method="post" class="needs-validation" id="formRegistroUser" style="max-height: 70vh" 
-        onsubmit="return agregarNuevoUsuario()" novalidate> <?php //Se agrega funcion onsubmit para el ajax?>
-
+        <form id="formulario_usuario" class="needs-validation" method="post" action="crear_usuario.php" novalidate>
           <div class="row g-3">
             <div class="col-sm-12">
-              <label id="NumeroDocumento" for="document" class="form-label">Número de documento</label>
-              <input name="CC" type="number" class="form-control" id="document" placeholder="Documento usuario" value=""
+              <label id="Cedula" for="document" class="form-label">Número de documento</label>
+              <input name="Cedula" type="number" class="form-control" id="document" placeholder="Documento usuario" value=""
                 required>
               <div class="invalid-feedback">
                 Se requiere un numero válido.
@@ -93,7 +91,7 @@
             </div>
             <div class="col-sm-6">
               <label id="EPSusu" for="eps" class="form-label">EPS</label>
-              <input name="EPSusu" type="text" class="form-control" id="eps" placeholder="Nombre EPS" value="" required>
+              <input name="EPS" type="text" class="form-control" id="eps" placeholder="Nombre EPS" value="" required>
               <div class="invalid-feedback">
                 Se requiere una EPS válida.
               </div>
@@ -143,7 +141,7 @@
                 <input name="DireccionUsu" type="text" class="form-control" id="direccion"
                   placeholder="Dirección residencia" required>
                 <div class="invalid-feedback">
-                  Se requiere una direccion válido.
+                  Se requiere una direccion válida.
                 </div>
               </div>
             </div>
@@ -153,7 +151,7 @@
                 <input name="MunicipioUsu" type="text" class="form-control" id="municipio"
                   placeholder="Municipio residencia" required>
                 <div class="invalid-feedback">
-                  Se requiere una municipio válido.
+                  Se requiere un municipio válido.
                 </div>
               </div>
             </div>
@@ -214,14 +212,7 @@
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script type="text/javascript">
-     /* function confirmarGuardadoUsuario(event) {
-        event.preventDefault(); // Evitar que el formulario se envíe automáticamente
-
-        if (confirm("¿Estás seguro de guardar este usuario?")) {
-        agregarNuevoUsuario(); // Llamar a la función para agregar el usuario
-        }
-    } */
-
+    /*
     function agregarNuevoUsuario() {
         $.ajax({
             method: "POST",
@@ -230,12 +221,12 @@
             success: function(respuesta) {
                 respuesta = respuesta.trim();
 
-                if (respuesta == 1) {
+                  if (respuesta == 1) {
                     $('#formRegistroUser')[0].reset();
                     swal(":D", "Usuario agregado correctamente", "success");
-                } /*else if (respuesta == 2) {
+                } else if (respuesta == 2) {
                     swal("Error", "Este usuario ya existe, por favor añade otro.", "error");
-                }*/ else {
+                } else {
                     swal("Error", "Hubo un problema al agregar el usuario", "error");
                 }
             },
@@ -245,7 +236,7 @@
         });
 
         return false;
-    }
+    }*/
 </script>
 
 

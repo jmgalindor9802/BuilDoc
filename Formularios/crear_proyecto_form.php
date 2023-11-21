@@ -64,7 +64,7 @@
       <div class="col-12 custom-form vh-80">
         <br>
 
-        <form id="formulario" class="needs-validation" method="post" action="proyecto.php" novalidate>
+        <form id="formulario_proyecto" class="needs-validation" method="post" action="crear_proyecto.php" novalidate>
           <div class="row g-3">
             <div class="col-sm-6">
               <label id="NombreProyecto" for="name" class="form-label">Nombre</label>
@@ -175,7 +175,7 @@
                   });
 
                   // Validar que se haya seleccionado al menos una opción
-                  $('#formulario').submit(function() {
+                  $('#formulario_proyecto').submit(function() {
                     if ($('#usuarios-seleccionados li').length === 0) {
                       $('#error-mensaje-usuario').show();
                       return false; // Evitar el envío del formulario

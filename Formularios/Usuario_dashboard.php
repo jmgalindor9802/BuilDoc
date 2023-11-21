@@ -73,7 +73,7 @@
         <a href="crear_usuario_form.php"><button class="btn btn-lg float-end custom-btn" type="submit"
             style="font-size: 15px; margin-right: 5px;">+ Crear
             usuario</button></a>
-        <h1 class="display-6 mb-3" style="margin-bottom: 5px;">Usuarios</h1>
+        <h1 class="display-6 mb-3" style="margin-bottom: 5px;">Usuarios creados</h1>
         <div class="dropdown mb-3">
           <button id="proyectoSeleccionado" class="btn btn-secondary dropdown-toggle" type="button"
             data-bs-toggle="dropdown" aria-expanded="false">
@@ -115,7 +115,8 @@
             
             require("conexion.php");
             
-            $sql = $conectar->query("SELECT CONCAT(usuNombre, ' ', usuApellido) AS nombre_completo, usuMunicipio, usuTelefono, usuCorreo FROM usuario");
+            $sql = $conectar->query("SELECT CONCAT(usuNombre, ' ', usuApellido) AS nombre_completo, usuMunicipio, usuTelefono, usuCorreo 
+            FROM usuario ORDER BY usuMunicipio ASC");
 
 
 
