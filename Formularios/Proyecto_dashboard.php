@@ -10,6 +10,8 @@
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  
+
 
 
 
@@ -67,22 +69,38 @@
       </nav>
       <div>
         <h4 class="mb-3">Proyectos</h4>
-        <a href="crear_proyecto.php"><button class="btn btn-lg float-end custom-btn" type="submit"
+        <a href="crear_proyecto_form.php"><button class="btn btn-lg float-end custom-btn" type="submit"
             style="font-size: 15px; margin-right: 5px;">+ Crear
             proyecto</button></a>
         <h1 class="display-6 mb-3" style="margin-bottom: 5px;">Ultimos proyectos creados</h1>
         <div class="dropdown mb-3">
-          <button id="proyectoSeleccionado" class="btn btn-secondary dropdown-toggle" type="button"
-            data-bs-toggle="dropdown" aria-expanded="false">
+        <button id="proyectoSeleccionado" class="btn btn-secondary dropdown-toggle" type="button"
+            data-toggle="dropdown" aria-expanded="false">
             Todos los proyectos
           </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Todos los proyectos</a></li>
-            <li><a class="dropdown-item" href="#">Bogotá</a></li>
-            <li><a class="dropdown-item" href="#">Medellín</a></li>
-            <li><a class="dropdown-item" href="#">Barranquilla</a></li>
-            <li><a class="dropdown-item" href="#">Cali</a></li>
-            <li><a class="dropdown-item" href="#">Cartagena</a></li>
+          <ul class="dropdown-menu" style="max-height: 200px; overflow-y: auto;">
+              <li><a class="dropdown-item" href="#">Todos los proyectos</a></li>
+              <?php
+              require('conexion.php');
+
+              // Verificar la conexión
+              if (!$conectar) {
+                  die("Conexión fallida: " . mysqli_connect_error());
+              }
+              
+              // Consulta para obtener nombres e IDs de proyectos de la base de datos
+              $sql = "SELECT proMunicipio FROM ga_proyecto ORDER BY proMunicipio";
+              $result = mysqli_query($conectar, $sql);
+              
+              // Rellenar opciones del select con los resultados de la consulta
+              if ($result && mysqli_num_rows($result) > 0) {
+                  while($row = mysqli_fetch_assoc($result)) {
+                      echo '<li><a class="dropdown-item" href="#">' . $row["proMunicipio"] . '</a></li>';
+                  }
+              } else {
+                  echo "No se encontraron resultados.";
+              }              
+              ?>
           </ul>
         </div>
       </div>
@@ -105,7 +123,8 @@
             require("conexion.php");
             
             $sql = $conectar->query("SELECT * from ga_proyecto
-            INNER JOIN ga_cliente ON ga_proyecto.fk_id_cliente = ga_cliente.pk_id_cliente");
+            INNER JOIN ga_cliente ON ga_proyecto.fk_id_cliente = ga_cliente.pk_id_cliente 
+            ORDER BY proFecha_creacion DESC");
 
 
 
@@ -144,7 +163,6 @@
                       </svg></a>
                   </li>
                 </ul>
-
               </td>
             </tr>
             <?php
@@ -305,7 +323,6 @@
   }
   ?>
 
-
   <div class="modal" tabindex="-1" id="EliminarProyecto">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -322,12 +339,12 @@
       </div>
     </div>
   </div>
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy6n8L4KwGZUXZ0DIXWoA5n3VCXsbD9/D"
-    crossorigin="anonymous"></script>
+
   <script src="Proyecto.js"></script>
   <script src="Proyecto_dashboard.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>
