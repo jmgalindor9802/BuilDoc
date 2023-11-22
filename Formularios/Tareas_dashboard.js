@@ -98,23 +98,56 @@
       tbody.appendChild(tarea.fila);
     });
   });
-
-  $(document).ready(function() {
-    $('.dropdown-item').click(function(e) {
-        e.preventDefault();
-        var idProyecto = $(this).data('idproyecto');
-        $('#proyectoSeleccionado').html($(this).text()); // Actualiza el botón del dropdown con el proyecto seleccionado
-
-        // Realiza la solicitud AJAX para obtener y mostrar las tareas correspondientes
-        $.ajax({
-            type: 'POST',
-            url: 'obtener_tareas.php', // Archivo PHP que procesa la solicitud
-            data: { proyecto: idProyecto },
-            success: function(data) {
-                $('#tablaTareas tbody').html(data); // Actualiza el cuerpo de la tabla con las nuevas tareas
-            }
-        });
-    });
 });
 
-});
+// Tareas_dashboard.js
+
+function seleccionarProyecto(element) {
+  console.log("Proyecto seleccionado:", element.innerHTML);
+  
+  
+  // Actualiza la variable proyectoSeleccionado con el valor del data-id del elemento seleccionado
+  var proyectoSeleccionado = element.getAttribute('data-id');
+  console.log("El id del proyecto es:", proyectoSeleccionado)
+  // Actualiza el texto del botón con el nombre del proyecto seleccionado
+  document.getElementById('proyectoSeleccionado').innerHTML = element.innerHTML;
+
+  // Llamada AJAX al mismo archivo PHP para obtener los datos actualizados
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+          // Procesa la respuesta y actualiza la tabla
+          console.log(xhr.responseText)
+          var data = JSON.parse(xhr.responseText);
+          actualizarTabla(data);
+      }
+  };
+  xhr.open("POST", "tareas_dashboard.php", true);
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xhr.send("proyecto=" + proyectoSeleccionado);
+}
+
+function actualizarTabla(data) {
+  // Aquí puedes usar el objeto 'data' recibido para actualizar la tabla
+  console.log(data); // Puedes usar este console.log para depurar y ver los datos recibidos
+
+  // Ejemplo de cómo podrías actualizar la tabla
+  var tbody = document.getElementById('tablaTareas').getElementsByTagName('tbody')[0];
+  tbody.innerHTML = ''; // Limpia el contenido actual del tbody
+
+  // Itera sobre los datos y agrega las filas a la tabla
+  for (var i = 0; i < data.length; i++) {
+    var row = "<tr>";
+    row += "<td>" + data[i].Proyecto + "</td>";
+    row += "<td>" + data[i].Fase + "</td>";
+    row += "<td>" + data[i].Tarea + "</td>";
+    row += "<td>" + data[i].Fecha_Limite + "</td>";
+    row += "<td>" + data[i].Responsable + "</td>";
+    row += "<td>" + data[i].Tiempo_Restante + "</td>";
+    row += "</tr>";
+
+    tbody.innerHTML += row;
+  }
+}
+
+

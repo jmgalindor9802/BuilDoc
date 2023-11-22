@@ -2,7 +2,7 @@
 
 $host = "localhost";
 $user = "root";
-$clave = "1234";
+$clave = "";
 $bd = "bd_buildoc";
 
 $conectar=mysqli_connect($host, $user, $clave, $bd);

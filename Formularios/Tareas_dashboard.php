@@ -1,3 +1,17 @@
+<?php
+if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
+  // Configurar el encabezado para indicar que la respuesta es JSON
+  header('Content-Type: application/json');
+
+  // Tu código existente para manejar la solicitud AJAX
+  $tu_data_json = array('mensaje' => '¡La solicitud AJAX se procesó correctamente!');
+  
+  // Devolver los datos en formato JSON
+  echo json_encode($tu_data_json);
+  exit(); // Asegúrate de salir para evitar ejecución adicional del script
+}
+
+?>
 <!doctype html>
 <html lang="es">
 
@@ -92,41 +106,36 @@
             data-bs-toggle="dropdown" aria-expanded="false">
                      Proyectos </button>
           <ul class="dropdown-menu" style="max-height: 200px; overflow-y: auto;">
-              <li><a class="dropdown-item" href="#">Todos los proyectos</a></li>
-              <?php
-              require('conexion.php');
+          <li><a class="dropdown-item" href="#" onclick="seleccionarProyecto(this)" data-id="null">Todos los proyectos</a></li>
+    
+          <?php
+        require('conexion.php');
 
-              // Verificar la conexión
-              if (!$conectar) {
-                  die("Conexión fallida: " . mysqli_connect_error());
-              }
+        // Verificar la conexión
+        if (!$conectar) {
+            die("Conexión fallida: " . mysqli_connect_error());
+        }
 
-              // Consulta para obtener nombres e IDs de proyectos de la base de datos
-              $sql = "SELECT pk_id_proyecto, proNombre FROM ga_proyecto ORDER BY proNombre";
-              $result = mysqli_query($conectar, $sql);
+        // Consulta para obtener nombres e IDs de proyectos de la base de datos
+        $sql = "SELECT pk_id_proyecto, proNombre FROM ga_proyecto ORDER BY proNombre";
+        $result = mysqli_query($conectar, $sql);
 
-              // Rellenar opciones del select con los resultados de la consulta
-              if ($result && mysqli_num_rows($result) > 0) {
-                  while($row = mysqli_fetch_assoc($result)) {
-                      echo '<li><a class="dropdown-item" href="#">' . $row["proNombre"] . '</a></li>';
-                  }
-              }
-              ?>
+        // Verificar si hay resultados antes de intentar acceder a $result
+        if ($result && mysqli_num_rows($result) > 0) {
+            // Iterar sobre los resultados
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo '<li><a class="dropdown-item" href="#" onclick="seleccionarProyecto(this)" data-id="' . $row["pk_id_proyecto"] . '">' . $row["proNombre"] . '</a></li>';
+            }
+        } else {
+            // No hay resultados, puedes manejarlo según tus necesidades
+            echo '<li><a class="dropdown-item" href="#">No hay proyectos disponibles</a></li>';
+        }
 
-          </ul>
-
-          
+        // Cerrar la conexión
+        mysqli_close($conectar);
+        ?> 
+          </ul>         
         </div>
-        <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Dropdown button
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#">Action</a></li>
-    <li><a class="dropdown-item" href="#">Another action</a></li>
-    <li><a class="dropdown-item" href="#">Something else here</a></li>
-  </ul>
-</div>
       </div>
         <div class="table-responsive vh-80">
         <table id="tablaTareas" class="table table-striped table-hover sticky-header">
@@ -144,32 +153,39 @@
     <tbody>
 
     <?php
-    include('conexion.php');
+include('conexion.php');
 
-    // Verificar la conexión
-    if ($conectar->connect_error) {
-        die("Error en la conexión a la base de datos: " . $conectar->connect_error);
-    }
+// Verificar la conexión
+if ($conectar->connect_error) {
+    die("Error en la conexión a la base de datos: " . $conectar->connect_error);
+}
 
-    // Llamada al procedimiento almacenado
-    $proyecto = isset($_POST['proyecto']) ? $_POST['proyecto'] : NULL;
-    $result = $conectar->query("CALL listar_tareas_pendientes_proximos_7_dias_por_proyecto(6)");
+// Llamada al procedimiento almacenado
+$proyecto = isset($_POST['proyecto']) ? $_POST['proyecto'] : NULL;
+echo "El proyecto seleccionado es: $proyecto";
 
-    // Procesar los resultados y mostrar en la tabla
-    while ($row = $result->fetch_assoc()) {
-        echo "<tr>";
-        echo "<td>{$row['Proyecto']}</td>";
-        echo "<td>{$row['Fase']}</td>";
-        echo "<td>{$row['Tarea']}</td>";
-        echo "<td>{$row['Fecha_Limite']}</td>";
-        echo "<td>{$row['Responsable']}</td>";
-        echo "<td>{$row['Tiempo_Restante']}</td>";
-        echo "</tr>";
-    }
+// Preparar la consulta con un marcador de posición
+$stmt = $conectar->prepare("CALL listar_tareas_pendientes_proximos_7_dias_por_proyecto(?)");
+$stmt->bind_param("i", $proyecto);  // "i" indica que es un entero, ajusta según sea necesario
+$stmt->execute();
+$result = $stmt->get_result();
 
-    // Cerrar la conexión
-    $conectar->close();
-    ?>
+// Procesar los resultados y mostrar en la tabla
+while ($row = $result->fetch_assoc()) {
+    echo "<tr>";
+    echo "<td>{$row['Proyecto']}</td>";
+    echo "<td>{$row['Fase']}</td>";
+    echo "<td>{$row['Tarea']}</td>";
+    echo "<td>{$row['Fecha_Limite']}</td>";
+    echo "<td>{$row['Responsable']}</td>";
+    echo "<td>{$row['Tiempo_Restante']}</td>";
+    echo "</tr>";
+}
+
+// Cerrar la conexión
+$stmt->close();
+$conectar->close();
+?>
 
     </tbody>
 </table>
