@@ -1,11 +1,9 @@
 <?php
-
+// Requerir el archivo de conexión
 require 'conexion.php';
 
-
+// Verificar si se ha enviado una solicitud POST (para AJAX)
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    
-
     // Obtener datos del formulario
     $cedula = $_POST["Cedula"];
     $nombre = $_POST["NombreUsu"];
@@ -27,11 +25,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $resultado = $consulta_usuario->get_result();
 
     if ($resultado->num_rows > 0) {
-        // El usuario ya existe, redirigir al formulario nuevamente con un mensaje
-        header("Location: formulario.php?error=usuario_existente");
-        exit();
+        echo "2"; // El usuario ya existe
     } else {
-        // El usuario no existe, proceder con la inserción
+        // Preparar la consulta de inserción
         $insert_usuario = $conectar->prepare("INSERT INTO usuario 
             (pk_id_usuario, usuNombre, usuApellido, usuNombre_eps, usuNombre_arl, usuFecha_nacimiento,
             usuMunicipio, usuDireccion_residencia, usuProfesion, usuContrasenia, usuTelefono, usuCorreo) 
@@ -39,22 +35,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $insert_usuario->bind_param("isssssssssss", $cedula, $nombre, $apellido, $eps, $arl, $fechaNacimiento, 
             $direccion, $municipio, $profesion, $contrasenia, $telefono, $correo);
 
+        // Ejecutar la consulta de inserción
         if ($insert_usuario->execute()) {
-            // Usuario creado exitosamente
-            echo "Usuario creado exitosamente.";
+            echo "1"; // Usuario creado exitosamente
         } else {
-            // Error al crear el usuario
-            echo "Error al crear el usuario: " . $insert_usuario->error;
+            echo "0"; // Error al crear el usuario
         }
 
+        // Cerrar la consulta de inserción
         $insert_usuario->close();
     }
 
+    // Cerrar la consulta de verificación de usuario
     $consulta_usuario->close();
 } else {
-    // Datos de formulario incompletos
-    echo "Error: Datos de formulario incompletos.";
+    // Si los datos del formulario están incompletos o se accede directamente al archivo PHP, puedes manejarlo aquí.
+    echo "Error: Acceso inválido.";
 }
-
-
 ?>

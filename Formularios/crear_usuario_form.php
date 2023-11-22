@@ -8,7 +8,7 @@
   <link rel="shortcut icon" href="recursos/HeadLogo.png" type="image/x-icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 
   <style>
@@ -63,7 +63,8 @@
       <div class="col-12 custom-form vh-80">
         <br>
 
-        <form id="formulario_usuario" class="needs-validation" method="post" action="crear_usuario.php" novalidate>
+        <form id="formRegistroUsuario" class="needs-validation" method="post" action="crear_usuario.php" novalidate
+        onsubmit="agregarNuevoUsuario()">
           <div class="row g-3">
             <div class="col-sm-12">
               <label id="Cedula" for="document" class="form-label">Número de documento</label>
@@ -212,31 +213,30 @@
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script type="text/javascript">
-    /*
     function agregarNuevoUsuario() {
-        $.ajax({
-            method: "POST",
-            data: $('#formRegistroUser').serialize(),
-            url: "class_usuario.php",
-            success: function(respuesta) {
-                respuesta = respuesta.trim();
+    $.ajax({
+        method: "POST",
+        data: $('#formRegistroUsuario').serialize(),
+        url: "crear_usuario_form.php",
+        success: function(respuesta) {
+            respuesta = respuesta.trim();
 
-                  if (respuesta == 1) {
-                    $('#formRegistroUser')[0].reset();
-                    swal(":D", "Usuario agregado correctamente", "success");
-                } else if (respuesta == 2) {
-                    swal("Error", "Este usuario ya existe, por favor añade otro.", "error");
-                } else {
-                    swal("Error", "Hubo un problema al agregar el usuario", "error");
-                }
-            },
-            error: function() {
-                swal("Error", "Hubo un problema al comunicarse con el servidor", "error");
+            if (respuesta === "1") {
+                $('#formRegistroUsuario')[0].reset();
+                swal(":D", "Usuario agregado correctamente", "success");
+            } else if (respuesta === "2") {
+                swal("Error", "Este usuario ya existe, por favor añade otro.", "error");
+            } else {
+                swal("Error", "Hubo un problema al agregar el usuario", "error");
             }
-        });
+        },
+        error: function() {
+            swal("Error", "Hubo un problema al comunicarse con el servidor", "error");
+        }
+    });
 
-        return false;
-    }*/
+    return false;
+}
 </script>
 
 
