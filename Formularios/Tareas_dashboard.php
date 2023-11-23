@@ -10,7 +10,6 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
   echo json_encode($tu_data_json);
   exit(); // Asegúrate de salir para evitar ejecución adicional del script
 }
-
 ?>
 <!doctype html>
 <html lang="es">
