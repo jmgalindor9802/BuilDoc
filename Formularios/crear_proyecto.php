@@ -5,7 +5,6 @@ require 'conexion.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     
-
     // Obtener datos del formulario
     $nombre = $_POST["ProyectoNombre"];
     $municipio = $_POST["ProyectoMunicipio"];
@@ -13,6 +12,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $descripcion = $_POST["ProyectoDescripcion"];
     $ruta = $_POST["ProyectoRuta"];
     $cliente = $_POST["ProyectoCliente"];
+
+    // Consulta para verificar si el proyecto ya existe
+    $consulta_proyecto = $conectar->prepare("SELECT proNombre FROM ga_proyecto WHERE proNombre = ?");
+    $consulta_proyecto->bind_param("s", $nombre);
+    $consulta_proyecto->execute();
+    $resultado = $consulta_proyecto->get_result();
 
     $insert_proyecto = $conectar->prepare("INSERT INTO ga_proyecto (proNombre, proMunicipio, proDireccion, proDescripcion, proRuta, fk_id_cliente) 
     VALUES (?, ?, ?, ?, ?, ?)");
@@ -28,9 +33,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $insert_intermedia->execute();
             }
         }
-        echo "Proyecto creado exitosamente.";
+        echo "1";
     } else {
-        echo "Error al crear el proyecto: " . $insert_proyecto->error;
+        echo "2";
     }
 
     $insert_proyecto->close();

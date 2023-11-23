@@ -2,15 +2,13 @@
 <html lang="es">
 
 <head>
-  <meta charset="utf-8">
+<meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Proyecto</title>
   <link rel="shortcut icon" href="recursos/HeadLogo.png" type="image/x-icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
   <style>
     .border-left {
@@ -64,7 +62,8 @@
       <div class="col-12 custom-form vh-80">
         <br>
 
-        <form id="formulario_proyecto" class="needs-validation" method="post" action="crear_proyecto.php" novalidate>
+        <form id="formRegistroProyecto" class="needs-validation" method="post" action="crear_proyecto.php" 
+        onsubmit="agregarNuevoProyecto()" novalidate>
           <div class="row g-3">
             <div class="col-sm-6">
               <label id="NombreProyecto" for="name" class="form-label">Nombre</label>
@@ -108,7 +107,7 @@
             <div class="col-md-6">
               <label for="cliente" class="form-label">Cliente</label>
               <select name="ProyectoCliente" class="form-select" id="cliente" required>
-                <option selected disabled>Elegir...</option>
+                <option value="">Elegir...</option>
                 <?php
                 include ("conexion.php");
 
@@ -133,57 +132,26 @@
                 Se requiere una ruta válido.
               </div>
             </div>
+
             <div class="row g-3">
+              <div class="col-md-6">
               <h4>Asignar usuarios</h4>
-              <div class="col-md-6">
-                <label for="usuario_proyecto_disponible" class="form-label">Seleccione a quienes desea
-                  asignar al proyecto</label>
-                <select name="usuarios_proyecto[]" class="form-select" id="usuario_proyecto_disponible" multiple>
-                <?php
-                include ("conexion.php");
-                //CONCAT nombre y apellido de usuario
-                $sql = $conectar->query("SELECT CONCAT(usuNombre, ' ', usuApellido) AS nombre_completo FROM usuario");
-                while ($resultado = $sql->fetch_assoc()) {
-
-                echo "<option value='".$resultado['pk_id_usuario']."'>".$resultado
-                ['nombre_completo']."</option>";
-
-                }
-                ?>
-                </select>
-              </div>
-
-              <div class="col-md-6">
-                <label for="usuarios_proyecto" class="form-label">Proyecto asignado a: </label>
-                <div class="invalid-feedback" id="error-mensaje-usuario">
-                  Seleccione al menos una persona.
-                </div>
-                <ul class="list-group mt" id="usuarios-seleccionados" >
-                <script>
-                $(document).ready(function() {
-                  // Cuando se selecciona una opción en el primer select
-                  $('#usuario_proyecto_disponible').change(function() {
-                    // Vaciar la lista de usuarios seleccionados
-                    $('#usuarios-seleccionados').empty();
-
-                    // Iterar sobre las opciones seleccionadas y agregarlas al segundo select
-                    $('#usuario_proyecto_disponible option:selected').each(function() {
-                      var usuarioNombre = $(this).text();
-                      var usuarioId = $(this).val();
-                      $('#usuarios-seleccionados').append('<li name="usuarios_proyecto" class="list-group-item" data-id="' + usuarioId + '">' + usuarioNombre + '</li>');
-                    });
-                  });
-
-                  // Validar que se haya seleccionado al menos una opción
-                  $('#formulario_proyecto').submit(function() {
-                    if ($('#usuarios-seleccionados li').length === 0) {
-                      $('#error-mensaje-usuario').show();
-                      return false; // Evitar el envío del formulario
-                    }
-                  });
-                });
-                </script>
-                </ul>
+                  <label for="usuario_proyecto_disponible" class="form-label">Seleccione a quienes desea asignar al proyecto</label>
+                  <ul class="list-group" id="usuario_proyecto_disponible">
+                      <?php
+                      include("conexion.php");
+                      $sql = $conectar->query("SELECT pk_id_usuario, CONCAT(usuNombre, ' ', usuApellido) AS nombre_completo FROM usuario");
+                      while ($resultado = $sql->fetch_assoc()) {
+                          echo '<div class="form-check">
+                                  <input class="form-check-input" type="checkbox" name="usuarios_seleccionados[]" value="' . $resultado['pk_id_usuario'] . '" id="checkbox' . $resultado['pk_id_usuario'] . '">
+                                  <label class="form-check-label" for="checkbox' . $resultado['pk_id_usuario'] . '">' . $resultado['nombre_completo'] . '</label>
+                                  <div class="invalid-feedback">
+                                  Se requiere almenos un usuario.
+                                  </div>
+                                </div>';
+                      }
+                      ?>
+                  </ul>
               </div>
               <div class="py-4">
                 <button class="btn btn-lg float-end custom-btn" type="submit" style="font-size: 15px;">Guardar
@@ -198,6 +166,34 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script type="text/javascript">
+    function agregarNuevoProyecto() {
+    $.ajax({
+        method: "POST",
+        data: $('#formRegistroProyecto').serialize(),
+        url: "crear_proyecto_form.php",
+        success: function(respuesta) {
+            respuesta = respuesta.trim();
+
+            if (respuesta === "1") {
+                $('#formRegistroProyecto')[0].reset();
+                swal(":D", "Proyecto agregado correctamente", "success");
+            } else if (respuesta === "2") {
+                swal("Error", "Este proyecto ya existe, por favor añade otro.", "error");
+            } else {
+                swal("Error", "Hubo un problema al agregar el proyecto", "error");
+            }
+        },
+        error: function() {
+            swal("Error", "Hubo un problema al comunicarse con el servidor", "error");
+        }
+    });
+
+    return false;
+}
+</script>
 </body>
 
 </html>

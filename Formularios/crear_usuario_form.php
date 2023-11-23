@@ -63,8 +63,8 @@
       <div class="col-12 custom-form vh-80">
         <br>
 
-        <form id="formRegistroUsuario" class="needs-validation" method="post" action="crear_usuario.php" novalidate
-        onsubmit="agregarNuevoUsuario()">
+        <form id="formRegistroUsuario" class="needs-validation" method="post" action="crear_usuario.php"
+        onsubmit="agregarNuevoUsuario()" novalidate>
           <div class="row g-3">
             <div class="col-sm-12">
               <label id="Cedula" for="document" class="form-label">Número de documento</label>
@@ -197,9 +197,25 @@
               </div>
             </div>
             <div class="py-4">
-              <button class="btn btn-lg float-end custom-btn" type="submit" style="font-size: 15px;"
-              >Guardar
-                usuario</button>
+              <a class="btn btn-lg float-end custom-btn" style="font-size: 15px;"
+              data-bs-toggle="modal" data-bs-target="#CrearUsuario">Guardar
+                usuario</a>
+            </div>
+            <div class="modal" tabindex="-1" id="CrearUsuario">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Crear usuario</h5>
+                  </div>
+                  <div class="modal-body">
+                    <p>¿Estás seguro de crear este usuario?</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Aceptar</button>
+                  </div>
+                </div>
+              </div>
             </div>
         </form>
       </div>
@@ -236,7 +252,7 @@
     });
 
     return false;
-}
+  }
 </script>
 
 
