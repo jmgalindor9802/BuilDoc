@@ -1,21 +1,10 @@
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
-
 <head>
-
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/headers/">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
-  <!-- Agregar Bootstrap CSS -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous"></script>
 </head>
-
 <body>
   <header class="p-3 " style="background-color: #001f3f">
     <div class="container">
@@ -24,14 +13,11 @@
           <img src="recursos/logo_buildoc_blanco.png" alt="Logo_BuilDoc" width="auto" height="40" />
         </div>
         <div class="col-3"></div>
-
         <div class="col-6 col-lg-6 d-flex justify-content-end mt-3 mt-lg-0">
           <button type="button" class="btn btn-outline-light me-2 mx-2">Perfil</button>
           <button type="button" class="btn btn-warning mx-2">Cerrar sesión</button>
         </div>
       </div>
   </header>
-
 </body>
-
 </html>

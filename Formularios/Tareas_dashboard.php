@@ -1,14 +1,15 @@
 <?php
+// Verificar si es una solicitud AJAX
 if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
-  // Configurar el encabezado para indicar que la respuesta es JSON
-  header('Content-Type: application/json');
+    // Configurar el encabezado para indicar que la respuesta es JSON
+    header('Content-Type: application/json');
 
-  // Tu código existente para manejar la solicitud AJAX
-  $tu_data_json = array('mensaje' => '¡La solicitud AJAX se procesó correctamente!');
+    // Obtener los datos que deseas enviar como JSON
+    $tu_data_json = array('mensaje' => '¡La solicitud AJAX se procesó correctamente!');
   
-  // Devolver los datos en formato JSON
-  echo json_encode($tu_data_json);
-  exit(); // Asegúrate de salir para evitar ejecución adicional del script
+    // Devolver los datos en formato JSON
+    echo json_encode($tu_data_json);
+    exit(); // Asegúrate de salir para evitar ejecución adicional del script
 }
 ?>
 <!doctype html>
@@ -77,7 +78,7 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 
 <body style="height: 100vh; display: flex; flex-direction: column; overflow: hidden;">
   <header>
-    <iframe src="Header.html" class="w-100" height="78" style="max-height:78px;" title="Encabezado"></iframe>
+  <?php include('Header.php'); ?>
   </header>
 
   <div class="row flex-grow-1 ">
@@ -93,11 +94,11 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
       </nav>
       <div >
         <h4 class="mb-3">Tareas </h4>
-        
-        <a href="crear_tarea.html"><button class="btn btn-lg float-end custom-btn" type="submit"
+        <form id="formProyecto" method="post" action="Tareas_dashboard.php">
+        <a href="crear_tarea.php"><button class="btn btn-lg float-end custom-btn" type="button"
           style="font-size: 15px;">+ Crear
           tarea</button></a>
-          <a href="create_fase_form.php"><button class="btn btn-lg float-end custom-btn" type="submit"
+          <a href="create_fase_form.php"><button class="btn btn-lg float-end custom-btn" type="button"
           style="font-size: 15px; margin-right: 10px;">+ Crear fase</button></a>
         <h1 class="display-6">Tareas próximas</h1>
         <div class="dropdown">
@@ -105,8 +106,7 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
             data-bs-toggle="dropdown" aria-expanded="false">
                      Proyectos </button>
           <ul class="dropdown-menu" style="max-height: 200px; overflow-y: auto;">
-          <li><a class="dropdown-item" href="#" onclick="seleccionarProyecto(this)" data-id="null">Todos los proyectos</a></li>
-    
+          <li><a class="dropdown-item" href="#" onclick="seleccionarProyecto(this); document.getElementById('formProyecto').submit(); return false;" data-id="null">Todos los proyectos</a></li>
           <?php
         require('conexion.php');
 
@@ -135,6 +135,7 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
         ?> 
           </ul>         
         </div>
+      </form>
       </div>
         <div class="table-responsive vh-80">
         <table id="tablaTareas" class="table table-striped table-hover sticky-header">
@@ -161,6 +162,7 @@ if ($conectar->connect_error) {
 
 // Llamada al procedimiento almacenado
 $proyecto = isset($_POST['proyecto']) ? $_POST['proyecto'] : NULL;
+var_dump($proyecto);
 echo "El proyecto seleccionado es: $proyecto";
 
 // Preparar la consulta con un marcador de posición
@@ -194,10 +196,11 @@ $conectar->close();
     </div>
   </div>
 
-  <script src="Tareas_dashboard.js"></script>
+ 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
+    <script src="Tareas_dashboard.js"></script>
 </body>
 
 </html>

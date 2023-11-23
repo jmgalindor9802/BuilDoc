@@ -102,29 +102,41 @@
 
 // Tareas_dashboard.js
 
-function seleccionarProyecto(element) {
-  console.log("Proyecto seleccionado:", element.innerHTML);
-  
-  
-  // Actualiza la variable proyectoSeleccionado con el valor del data-id del elemento seleccionado
-  var proyectoSeleccionado = element.getAttribute('data-id');
-  console.log("El id del proyecto es:", proyectoSeleccionado)
-  // Actualiza el texto del botón con el nombre del proyecto seleccionado
-  document.getElementById('proyectoSeleccionado').innerHTML = element.innerHTML;
+function seleccionarProyecto(elemento) {
 
-  // Llamada AJAX al mismo archivo PHP para obtener los datos actualizados
-  var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function () {
-      if (xhr.readyState == 4 && xhr.status == 200) {
-          // Procesa la respuesta y actualiza la tabla
-          console.log(xhr.responseText)
-          var data = JSON.parse(xhr.responseText);
-          actualizarTabla(data);
-      }
-  };
-  xhr.open("POST", "tareas_dashboard.php", true);
-  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-  xhr.send("proyecto=" + proyectoSeleccionado);
+  // Obtener el ID del proyecto seleccionado
+  const projectId = elemento.dataset.id;
+
+  // Enviar una solicitud AJAX al servidor
+  const xhr = new XMLHttpRequest();
+  xhr.open("POST", "/Tareas_dashboard.php", true);
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.send(JSON.stringify({
+    projectId: projectId
+  }));
+
+  // Actualizar la tabla
+  const tablaTareas = document.getElementById("tablaTareas");
+  tablaTareas.innerHTML = "";
+
+  // Obtener las tareas para el proyecto seleccionado
+  const tareas = JSON.parse(xhr.responseText);
+
+  // Iterar sobre las tareas
+  tareas.forEach((tarea) => {
+
+    // Agregar una fila a la tabla
+    const fila = document.createElement("tr");
+    tablaTareas.appendChild(fila);
+
+    // Agregar las columnas a la fila
+    fila.appendChild(document.createTextNode(tarea.proyecto));
+    fila.appendChild(document.createTextNode(tarea.fase));
+    fila.appendChild(document.createTextNode(tarea.tarea));
+    fila.appendChild(document.createTextNode(tarea.fechaHoraLimite));
+    fila.appendChild(document.createTextNode(tarea.responsable));
+    fila.appendChild(document.createTextNode(tarea.tiempoRestante));
+  });
 }
 
 function actualizarTabla(data) {
@@ -149,5 +161,3 @@ function actualizarTabla(data) {
     tbody.innerHTML += row;
   }
 }
-
-
