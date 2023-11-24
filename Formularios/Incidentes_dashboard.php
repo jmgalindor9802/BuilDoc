@@ -149,7 +149,9 @@
               ga_proyecto.proNombre
               FROM gii_incidente
               INNER JOIN
-              ga_proyecto ON gii_incidente.fk_id_proyecto = ga_proyecto.pk_id_proyecto;");
+              ga_proyecto ON gii_incidente.fk_id_proyecto = ga_proyecto.pk_id_proyecto
+              ORDER BY incFecha DESC;");
+              // Obtener los resultados de la consulta SQL como un array asociativo
               while($Resultado = $sql->fetch_assoc()){
             ?>
             <tr>
@@ -190,7 +192,7 @@
                         <path
                           d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
                       </svg></a></li>
-                  <li><a href="actualizarIncidenteReportado.php?Id_recuperadoIncidente=<?php echo $Resultado['pk_id_incidente'];?>" class="dropdown-item btn-desplegable-Actualizar">Actualizar</a></li>
+                  <li><a href="actualizarIncidenteReportado.php?Id_recuperadoIncidente=<?php echo $Resultado['pk_id_incidente'];?>" class="dropdown-item btn-desplegable-Actualizar">Añadir seguimiento</a></li>
                 </ul>
               </td>
             </tr>
@@ -329,6 +331,7 @@
     </div>
   </div>
   <script src="Incidentes_dashboard.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
