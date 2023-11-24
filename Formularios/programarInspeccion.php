@@ -180,9 +180,8 @@ $periodicidades = array(
               <div class="col-md-6">
                 <label for="usuario_inspeccion_disponible" class="form-label">Seleccione quién va a realizar la
                   inspección</label>
-                <select name="Inspecctor" class="form-select" id="usuario_inspeccion_disponible" multiple>
+                <select name="InspecctorId[]" class="form-select" id="usuario_inspeccion_disponible" multiple>
                 <?php
-                require 'conexion.php';
                 //CONCAT nombre y apellido de usuario
                 $sql = $conectar->query("SELECT CONCAT(usuNombre, ' ', usuApellido) AS nombre_completo FROM usuario");
                 while ($resultado = $sql->fetch_assoc()) {
@@ -267,7 +266,7 @@ aria-labelledby="confirmModalLabel" aria-hidden="true">
     </div>
   </div>
   
-  <script src="programarInspeccion.js"></scrip>
+  <script defer src="programarInspeccion.js"></scrip>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
