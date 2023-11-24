@@ -23,20 +23,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     VALUES (?, ?, ?, ?, ?, ?)");
     $insert_proyecto->bind_param("sssssi", $nombre, $municipio, $direccion, $descripcion, $ruta, $cliente);
 
-    if ($insert_proyecto->execute()) {
-        $id_proyecto = $insert_proyecto->insert_id;
-        if (isset($_POST["usuarios_proyecto"]) && is_array($_POST["usuarios_proyecto"])) {
-            $usuarios_asignados = $_POST["usuarios_proyecto"];
-            foreach ($usuarios_asignados as $id_usuario) {
-                $insert_intermedia = $conectar->prepare("INSERT INTO usuarios_proyectos (fk_id_usuario, fk_id_proyecto) VALUES (?, ?)");
-                $insert_intermedia->bind_param("ii", $id_usuario, $id_proyecto);
-                $insert_intermedia->execute();
-            }
+    // Después de insertar el proyecto principal correctamente
+if ($insert_proyecto->execute()) {
+    $id_proyecto = $insert_proyecto->insert_id;
+
+    // Insertar usuarios seleccionados en la tabla intermedia
+    if (isset($_POST["usuarios_proyecto"]) && is_array($_POST["usuarios_proyecto"])) {
+        $usuarios_asignados = $_POST["usuarios_proyecto"];
+        foreach ($usuarios_asignados as $id_usuario) {
+            $insert_intermedia = $conectar->prepare("INSERT INTO usuarios_proyectos (fk_id_usuario, fk_id_proyecto) VALUES (?, ?)");
+            $insert_intermedia->bind_param("ii", $id_usuario, $id_proyecto);
+            $insert_intermedia->execute();
         }
-        echo "1";
-    } else {
-        echo "2";
     }
+
+    echo "1"; // Éxito al agregar el proyecto
+} else {
+    echo "2"; // Error al agregar el proyecto
+}
 
     $insert_proyecto->close();
 } else {

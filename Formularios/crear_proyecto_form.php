@@ -11,6 +11,12 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
   <style>
+
+    #usuario_proyecto_disponible {
+      max-height: 300px; /* Cambia este valor según la altura deseada */
+      overflow-y: auto;
+    }
+
     .border-left {
       border-left: 1px solid #d7d7d7;
       height: 100%;
@@ -111,7 +117,7 @@
                 <?php
                 include ("conexion.php");
 
-                $sql = $conectar->query("SELECT * FROM ga_cliente");
+                $sql = $conectar->query("SELECT * FROM ga_cliente ORDER BY cliNombre ASC");
                 while ($resultado = $sql->fetch_assoc()) {
 
                 echo "<option value='".$resultado['pk_id_cliente']."'>".$resultado
@@ -137,25 +143,41 @@
               <div class="col-md-6">
               <h4>Asignar usuarios</h4>
                   <label for="usuario_proyecto_disponible" class="form-label">Seleccione a quienes desea asignar al proyecto</label>
-                  <ul class="list-group" id="usuario_proyecto_disponible">
-                      <?php
-                      include("conexion.php");
-                      $sql = $conectar->query("SELECT pk_id_usuario, CONCAT(usuNombre, ' ', usuApellido) AS nombre_completo FROM usuario");
-                      while ($resultado = $sql->fetch_assoc()) {
-                          echo '<div class="form-check">
-                                  <input class="form-check-input" type="checkbox" name="usuarios_seleccionados[]" value="' . $resultado['pk_id_usuario'] . '" id="checkbox' . $resultado['pk_id_usuario'] . '">
-                                  <label class="form-check-label" for="checkbox' . $resultado['pk_id_usuario'] . '">' . $resultado['nombre_completo'] . '</label>
-                                  <div class="invalid-feedback">
-                                  Se requiere almenos un usuario.
-                                  </div>
-                                </div>';
-                      }
-                      ?>
+                  <ul class="list-group" id="usuario_proyecto_disponible" >
+                  <?php
+                  //Lista de Usuarios
+                  include("conexion.php");
+                  $sql = $conectar->query("SELECT pk_id_usuario, CONCAT(usuNombre, ' ', usuApellido) AS nombre_completo 
+                  FROM usuario ORDER BY nombre_completo ASC");
+                  while ($resultado = $sql->fetch_assoc()) {
+                      echo '<div class="form-check">
+                              <input class="form-check-input" type="checkbox" name="usuarios_proyecto[]" value="' . $resultado['pk_id_usuario'] . '" id="checkbox' . $resultado['pk_id_usuario'] . '">
+                              <label class="form-check-label" for="checkbox' . $resultado['pk_id_usuario'] . '">' . $resultado['nombre_completo'] . '</label>
+                            </div>';
+                  }
+                  ?>
                   </ul>
               </div>
               <div class="py-4">
-                <button class="btn btn-lg float-end custom-btn" type="submit" style="font-size: 15px;">Guardar
-                  proyecto</button>
+                <a class="btn btn-lg float-end custom-btn" style="font-size: 15px;"
+                data-bs-toggle="modal" data-bs-target="#CrearProyecto">Guardar
+                  proyecto</a>
+              </div>
+            </div>
+            <div class="modal" tabindex="-1" id="CrearProyecto">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Crear proyecto</h5>
+                  </div>
+                  <div class="modal-body">
+                    <p>¿Estás seguro de crear este proyecto?</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Aceptar</button>
+                  </div>
+                </div>
               </div>
             </div>
         </form>
