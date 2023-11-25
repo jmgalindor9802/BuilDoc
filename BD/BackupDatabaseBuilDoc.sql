@@ -125,6 +125,7 @@ create table gii_inspeccion (
   insFecha_inicial DATETIME not null,
   insPeriodicidad ENUM ("DIARIA", "SEMANAL", "MENSUAL", "NINGUNA") null,
   insFecha_final DATETIME NULL,
+  insFecha_creacion DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   fk_id_usuario BIGINT (20) not null,
   fk_id_proyecto BIGINT (20) not null,
   foreign key (fk_id_usuario) references usuario (pk_id_usuario)
