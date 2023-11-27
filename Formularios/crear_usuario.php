@@ -11,8 +11,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $eps = $_POST["EPS"];
     $arl = $_POST["ARL"];
     $fechaNacimiento = $_POST["FechaNacimientoUsu"];
-    $direccion = $_POST["DireccionUsu"];
     $municipio = $_POST["MunicipioUsu"];
+    $direccion = $_POST["DireccionUsu"];
     $correo = $_POST["CorreoUsu"];
     $telefono = $_POST["TelefonoUsu"];
     $profesion = $_POST["ProfesionUsu"];
@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             usuMunicipio, usuDireccion_residencia, usuProfesion, usuContrasenia, usuTelefono, usuCorreo) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $insert_usuario->bind_param("isssssssssss", $cedula, $nombre, $apellido, $eps, $arl, $fechaNacimiento, 
-            $direccion, $municipio, $profesion, $contrasenia, $telefono, $correo);
+            $municipio, $direccion, $profesion, $contrasenia, $telefono, $correo);
 
         // Ejecutar la consulta de inserción
         if ($insert_usuario->execute()) {
