@@ -66,24 +66,85 @@
                 </ol>
             </nav>
             <h4 class="mb-3 custom-form">Nueva tarea</h4>
-            <h4 class="mb-3 custom-form-h4">Construcción de Planta de Tratamiento - Medellín</h4>
             <div class="col-12 custom-form vh-80">
                 <br>
 
                 <form class="needs-validation " style="max-height: 70vh" novalidate>
+                    <!-- INSERTAR PROYECTO CON LISTA DESPLEGABLE -->
+                    <div class="row g-3">
+                            <div class="col-sm-6">
+                                    <label for="proyectoSelect" class="form-label">Proyecto</label>
+                                    <select  name="Proyecto_tarea" class="form-select" id="proyectoSelect" required>
+                                        <option value="">Elegir...</option>
+                                        <?php
+                                        require('conexion.php');
 
+                                        // Verificar la conexión
+                                        if (!$conectar) {
+                                            die("Conexión fallida: " . mysqli_connect_error());
+                                        }
+                                        
+                                        // Consulta para obtener nombres e IDs de proyectos de la base de datos
+                                        $sql = "SELECT pk_id_proyecto, proNombre FROM ga_proyecto ORDER BY proNombre";
+                                        $result = mysqli_query($conectar, $sql);
+
+                                        // Rellenar opciones del select con los resultados de la consulta
+                                        if ($result && mysqli_num_rows($result) > 0) {
+                                            while($row = mysqli_fetch_assoc($result)) {
+                                                echo "<option value='" . $row["pk_id_proyecto"] . "'>" . $row["proNombre"] . "</option>";
+                                            }
+                                        }
+                                        ?>
+                                        </select>
+
+                                        <div class="invalid-feedback">
+                                        Seleccione una fase.
+                                        </div>
+                            </div>
+                            <div class="col-sm-6">
+                            <label for="faseSelect" class="form-label">Fase</label>
+                                    <select  name="Fase_tarea" class="form-select" id="faseSelect" required>
+                                        <option value="">Elegir...</option>
+                                        <?php
+                                        include('conexion.php');
+
+                                        // Verificar la conexión
+                                        if (!$conectar) {
+                                            die("Conexión fallida: " . mysqli_connect_error());
+                                        }
+                                        
+                                        // Consulta para obtener nombres e IDs de proyectos de la base de datos
+                                        $sql = "SELECT pk_id_fase, fasNombre FROM gt_fase ORDER BY fasNombre";
+                                        $result = mysqli_query($conectar, $sql);
+
+                                        // Rellenar opciones del select con los resultados de la consulta
+                                        if ($result && mysqli_num_rows($result) > 0) {
+                                            while($row = mysqli_fetch_assoc($result)) {
+                                                echo "<option value='" . $row["pk_id_fase"] . "'>" . $row["fasNombre"] . "</option>";
+                                            }
+                                        }
+                                        ?>
+                                        </select>
+
+                                    <div class="invalid-feedback">
+                                        Seleccione una fase.
+                                    </div>
+                            </div>
+                    </div>
+                   
+                    <br>
                     <div class="row g-3">
                         <div class="col-sm-6">
-                            <label id="Nombre_Tarea" for="Nombre_Tarea" class="form-label">Nombre de la
+                            <label id="Nombre_Tarea" for="nombreTarea" class="form-label">Nombre de la
                                 tarea</label>
-                            <input type="text" class="form-control" id="firstName" placeholder="Nombre de la tarea"
+                            <input type="text" class="form-control" id="nombreTarea" placeholder="Nombre de la tarea"
                                 required>
                             <div class="invalid-feedback">
                                 Se requiere un nombre válido.
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <label id="Fechalimite_tarea" for="Fechalimite_tarea" class="form-label">Fecha y hora
+                            <label id="Fechalimite_tarea" for="fechaInicial" class="form-label">Fecha y hora
                                 límite</label>
                             <input type="datetime-local" class="form-control" id="fechaInicial" required>
                             <div class="invalid-feedback">
@@ -97,8 +158,8 @@
                     <br>
 
                     <div class="row g-3">
-                        <label id="Descripcion_tarea" for="Descripcion_tarea" class="form-label">Descripción</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"
+                        <label id="Descripcion_tarea" for="descripcionTarea" class="form-label">Descripción</label>
+                        <textarea class="form-control" id="descripcionTarea" rows="4"
                             placeholder="Descripción de la tarea" required maxlength="450"></textarea>
                         <div class="invalid-feedback">
                             Se requiere una descripción válida.
@@ -118,17 +179,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <label for="country" class="form-label">Fase</label>
-                            <select class="form-select" id="country">
-
-                                <option>Diseño Estructural</option>
-                                <option>Cerrajería</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Seleccione una fase.
-                            </div>
-                        </div>
+                       
                     </div>
                     <br>
                     <div class="row g-3">
@@ -143,9 +194,8 @@
                         </div>
 
                         <div class="col-md-6">
-                            <label for="tarea_tarea_seleccionado" class="form-label">Tareas dependientes:</label>
-
-                            <ul class="list-group mt-3" id="tareas_seleccionadas">
+                            <label for="tareasSelect" class="form-label">Tareas dependientes:</label>
+                            <ul class="list-group mt-3" id="tareasSelect">
                                 <!-- Aquí se agregarán las opciones seleccionadas por JavaScript -->
                             </ul>
 
@@ -175,14 +225,14 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label for="usuario_tarea_seleccionado" class="form-label">Tarea asignada a: </label>
+                                <label for="usuarioSelect" class="form-label">Tarea asignada a: </label>
+                               
+                                <ul class="list-group mt-3" id="usuarioSelect">
+                                    <!-- Aquí se agregarán las opciones seleccionadas por JavaScript -->
+                                </ul>
                                 <div class="invalid-feedback" id="error-mensaje-usuario">
                                     Seleccione al menos una persona.
                                 </div>
-                                <ul class="list-group mt-3" id="usuarios-seleccionados">
-                                    <!-- Aquí se agregarán las opciones seleccionadas por JavaScript -->
-                                </ul>
-
                             </div>
                             <div class="py-4">
                                 <button class="btn btn-lg float-end custom-btn" type="submit"
@@ -196,7 +246,7 @@
         </div>
     </div>
 
-    
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
