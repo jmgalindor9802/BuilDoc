@@ -2,55 +2,33 @@
 
 require 'conexion.php';
 // Verificar si los datos del formulario están presentes
+var_dump($_POST);
 if (
-    isset($_POST["Nombre_incidente"]) && !empty($_POST["Nombre_incidente"]) &&
     isset($_POST["Descripcion_incidente"]) && !empty($_POST["Descripcion_incidente"]) &&
-    isset($_POST["Gravedad_incidente"]) && !empty($_POST["Gravedad_incidente"]) &&
-    isset($_POST["Proyecto_incidente"]) && !empty($_POST["Proyecto_incidente"]) &&
     isset($_POST["Sugerencia_incidente"]) && isset($_POST["Nombre_involucrado"]) &&
     isset($_POST["Apellido_involucrado"]) && isset($_POST["Identificación_involucrado"]) &&
-    isset($_POST["Evidencia_incidente"]) && isset($_POST["Justificacion_involucrado"])
+    isset($_POST["Evidencia_incidente"]) && isset($_POST["Justificacion_involucrado"]) &&
+    isset($_POST["Id_incidente"]) && !empty($_POST["Id_incidente"])
     ){
 
 
         // Obtiene los datos del formulario
-        $Nombre = $_POST["Nombre_incidente"];
         $DescInc = $_POST["Descripcion_incidente"];
         $autor = (int) '1011234567';
-        $EstadoInc = 'INICIALIZADO';
-        $GraInc = $_POST["Gravedad_incidente"];
         $SugInc = $_POST["Sugerencia_incidente"];
-        $Proyecto = $_POST["Proyecto_incidente"];
         $items1 = ($_POST["Nombre_involucrado"]);
         $items2 = ($_POST["Apellido_involucrado"]);
         $items3 = array_map('intval' , $_POST["Identificación_involucrado"]);
         $items4 = ($_POST["Justificacion_involucrado"]);
         $EviInc = $_POST["Evidencia_incidente"];
-        $stmt = $conectar->prepare("CALL InsertarIncidente(?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssssii", $Nombre, $DescInc, $EstadoInc, $GraInc, $SugInc, $autor, $Proyecto);
+        $id_recuperado_incidente = $_POST["Id_incidente"];
+        $idIncidente = $id_recuperado_incidente;
+        $stmt = $conectar->prepare("CALL InsertarSeguimiento(?, ?, ?)");
+        $stmt->bind_param("ssi", $DescInc, $SugInc, $idIncidente);
 
         // Ejecutar la llamada al procedimiento almacenado
         if ($stmt->execute()) {
-            // Crear una consulta SQL para obtener el ID del incidente más grande
-            $consulta = "SELECT MAX(pk_id_incidente) AS id_incidente
-            FROM gii_incidente;";
-
-            // Ejecutar la consulta SQL
-            $resultado = $conectar->query($consulta);
-
-            // Obtener el valor del ID del incidente más grande
-            if ($resultado->num_rows === 1) {
-                $fila = $resultado->fetch_assoc();
-                $lastIncidenteId = $fila["id_incidente"];
-            } else {
-                echo"Fallo la insercion del ultimo ID";
-            }
-            if ($lastIncidenteId === NULL || is_null($lastIncidenteId)) {
-                echo "Error al insertar el incidente: El ID del incidente es NULL.";
-            } else {
-                echo "Los datos se almacenaron correctamente.ID: " . $lastIncidenteId;
-            }
-            var_dump($lastIncidenteId);
+            echo 'exito';
         } else {
             echo "Error, no se guardaron los datos correctamente: " . $stmt->error;
         }
@@ -78,7 +56,7 @@ if (
 		        $nomInv=(( $item1 !== false) ? $item1 : ", &nbsp;");
 		        $apeInv=(( $item2 !== false) ? $item2 : ", &nbsp;");
 		        $jusInv=(( $item4 !== false) ? $item4 : ", &nbsp;");
-                $fk= (int) $lastIncidenteId;
+                $fk= (int) $idIncidente;
 
                 // Llamada al procedimiento almacenado
                 $stmtInvolucrado = $conectar->prepare("CALL InsertarInvolucrado(?, ?, ?, ?, ?)");
