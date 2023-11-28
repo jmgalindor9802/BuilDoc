@@ -65,7 +65,7 @@
       <nav aria-label="breadcrumb">
         <ol class=" breadcrumb">
           <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-          <li class="breadcrumb-item"><a href="#">Proyectos</a></li>
+          <li class="breadcrumb-item"><a href="#">Usuarios</a></li>
         </ol>
       </nav>
       <div>
@@ -139,10 +139,8 @@
                 </button>
                 <ul class="dropdown-menu">
                   <li><a id="btn-desplegable-detalles" href="actualizar_usuario_form.php?pk_id_usuario=<?php echo $resultado['pk_id_usuario']?>" class="dropdown-item">Actualizar</a></li>
-                  <li><a id="btn-desplegable-seguimiento" href="detalles_usuario_form.php?pk_id_usuario=<?php echo $resultado['pk_id_usuario']?>" class="dropdown-item" data-bs-toggle="modal"
-                      data-bs-target="#DetallesUsuario">Detalles</a></li>
-                  <li><a class="dropdown-item text-danger" href="eliminar_usuario.php?pk_id_usuario=<?php echo $resultado['pk_id_usuario']?>" data-bs-toggle="modal"
-                      data-bs-target="#EliminarUsuario">Archivar <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                  <li><a id="btn-desplegable-seguimiento" href="detalles_usuario_form.php?pk_id_usuario=<?php echo $resultado['pk_id_usuario']?>" class="dropdown-item">Detalles</a></li>
+                  <li><a class="dropdown-item text-danger" href="eliminar_usuario.php?Id=<?php echo $resultado['pk_id_usuario']?>" class="dropdown-item">Archivar <svg xmlns="http://www.w3.org/2000/svg" width="16"
                         height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                         <path
                           d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
@@ -161,7 +159,7 @@
       </div>
     </div>
   </div>
-
+            
   <script src="Usuario.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"

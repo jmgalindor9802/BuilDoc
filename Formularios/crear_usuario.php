@@ -37,7 +37,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         // Ejecutar la consulta de inserción
         if ($insert_usuario->execute()) {
-            echo "1";
+            echo 1;
+            header("location:Usuario_dashboard.php");
         } else {
             echo "0"; // Error al crear el usuario
         }

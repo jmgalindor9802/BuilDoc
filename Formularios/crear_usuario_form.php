@@ -313,6 +313,7 @@
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title">Crear usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
                     <p>¿Estás seguro de crear este usuario?</p>
@@ -337,29 +338,30 @@
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script type="text/javascript">
     function agregarNuevoUsuario() {
-    $.ajax({
-        method: "POST",
-        data: $('#formRegistroUsuario').serialize(),
-        url: "crear_usuario_form.php",
-        success: function(respuesta) {
-            respuesta = respuesta.trim();
+        $.ajax({
+            method: "POST",
+            data: $('#formRegistroUsuario').serialize(),
+            url: "crear_usuario_form.php",
+            success: function(respuesta) {
+                respuesta = respuesta.trim();
 
-            if (respuesta === "1") {
-                $('#formRegistroUsuario')[0].reset();
-                swal(":D", "Usuario agregado correctamente", "success");
-            } else if (respuesta === "2") {
-                swal("Error", "Este usuario ya existe, por favor añade otro.", "error");
-            } else {
-                swal("Error", "Hubo un problema al agregar el usuario", "error");
+                if (respuesta === "1") {
+                    $('#formRegistroUsuario')[0].reset();
+                    swal(":D", "Usuario agregado correctamente", "success");
+                } else if (respuesta === "2") {
+                    swal("Error", "Este usuario ya existe, por favor añade otro.", "error");
+                } else {
+                    swal("Error", "Hubo un problema al agregar el usuario", "error");
+                }
+            },
+            error: function() {
+                swal("Error", "Hubo un problema al comunicarse con el servidor", "error");
             }
-        },
-        error: function() {
-            swal("Error", "Hubo un problema al comunicarse con el servidor", "error");
-        }
-    });
-    return false;
-  }
+        });
+        return false;
+    }
 </script>
+
 
 
 </body>
