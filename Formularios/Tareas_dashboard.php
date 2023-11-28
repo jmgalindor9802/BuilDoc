@@ -83,7 +83,7 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 
   <div class="row flex-grow-1 ">
     <div class="col-lg-2 ">
-      <iframe src="Menu.html" class="w-100 " height="100%" style="max-height: 100%;" title="Menú principal"></iframe>
+    <?php include('Menu.php'); ?>
     </div>
     <div class="col-10 border-left custom-form">
       <nav aria-label="breadcrumb" class="d-flex align-items-center custom-nav ">
