@@ -176,7 +176,8 @@ CREATE PROCEDURE InsertarInspeccion(
     IN fecha_final DATETIME,
     IN autor BIGINT,
     IN proyecto BIGINT,
-    IN inspector BIGINT)
+    IN inspector BIGINT
+)
 BEGIN
     DECLARE idInspeccion BIGINT;
     
@@ -194,10 +195,11 @@ BEGIN
     SET idInspeccion = LAST_INSERT_ID();
     
     INSERT INTO usuarios_gii_inspecciones (fk_id_usuario, fk_id_inspeccion)
-    VALUES (inspector, idInspeccion);
+    values (inspector, idInspeccion);
     
     COMMIT;
 END//
+
     
 CREATE PROCEDURE InsertarInvolucrado(
     IN numero_documento BIGINT,

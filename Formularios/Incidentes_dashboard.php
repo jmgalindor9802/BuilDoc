@@ -60,6 +60,9 @@
       background-color: #0074e4;
       color: white !important;
     }
+    .dropdown-menu .dropdown-item {
+    user-select: none;
+    }
   </style>
 </head>
 
@@ -138,6 +141,7 @@
               require("conexion.php");
               
               $sql = $conectar -> query("SELECT 
+              gii_incidente.pk_id_incidente,
               gii_incidente.incNombre,
               gii_incidente.incEstado,
               gii_incidente.incGravedad,
@@ -145,7 +149,9 @@
               ga_proyecto.proNombre
               FROM gii_incidente
               INNER JOIN
-              ga_proyecto ON gii_incidente.fk_id_proyecto = ga_proyecto.pk_id_proyecto;");
+              ga_proyecto ON gii_incidente.fk_id_proyecto = ga_proyecto.pk_id_proyecto
+              ORDER BY incFecha DESC;");
+              // Obtener los resultados de la consulta SQL como un array asociativo
               while($Resultado = $sql->fetch_assoc()){
             ?>
             <tr>
@@ -162,7 +168,10 @@
                 <?php echo $Resultado['proNombre']?>
               </td>
               <td>
-                <?php echo $Resultado['incFecha']?>
+              <?php // Utiliza la función date de PHP para formatear la fecha
+                                    $fechaHora = $Resultado['incFecha'];
+                                    $fechaFormateada = date("j M Y", strtotime($fechaHora)); 
+                                    echo $fechaFormateada;?>
               </td>
               <td><button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -176,13 +185,14 @@
                       data-bs-target="#modalDetallesIncidente">Detalles</a></li>
                   <li><a class="dropdown-item btn-desplegable-seguimiento" data-bs-toggle="modal"
                       data-bs-target="#modalDetallesIncidente">Seguimiento</a></li>
-                  <li><a class="dropdown-item text-danger" href="#">Quitar <svg xmlns="http://www.w3.org/2000/svg"
+                  <li><a href="eliminarReporteIncidente.php?Id_recuperadoIncidente=<?php echo $Resultado['pk_id_incidente'];?>" class="dropdown-item text-danger" href="#">Quitar <svg xmlns="http://www.w3.org/2000/svg"
                         width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                         <path
                           d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
                         <path
                           d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
                       </svg></a></li>
+                  <li><a href="actualizarIncidenteReportado.php?Id_recuperadoIncidente=<?php echo $Resultado['pk_id_incidente'];?>" class="dropdown-item btn-desplegable-Actualizar">Añadir seguimiento</a></li>
                 </ul>
               </td>
             </tr>
@@ -321,6 +331,7 @@
     </div>
   </div>
   <script src="Incidentes_dashboard.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>

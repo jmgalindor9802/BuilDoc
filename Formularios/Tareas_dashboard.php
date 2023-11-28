@@ -6,8 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tareas</title>
   <link rel="shortcut icon" href="recursos/HeadLogo.png" type="image/x-icon">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
 
   <style>
@@ -81,114 +80,99 @@
       </nav>
       <div >
         <h4 class="mb-3">Tareas </h4>
+        
         <a href="crear_tarea.html"><button class="btn btn-lg float-end custom-btn" type="submit"
           style="font-size: 15px;">+ Crear
           tarea</button></a>
-          <a href="crear_fase.php"><button class="btn btn-lg float-end custom-btn" type="submit"
+          <a href="create_fase_form.php"><button class="btn btn-lg float-end custom-btn" type="submit"
           style="font-size: 15px; margin-right: 10px;">+ Crear fase</button></a>
         <h1 class="display-6">Tareas próximas</h1>
         <div class="dropdown">
           <button id="proyectoSeleccionado" class="btn btn-secondary dropdown-toggle" type="button"
             data-bs-toggle="dropdown" aria-expanded="false">
-            Todos los proyectos
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Todos los proyectos</a></li>
-            <li><a class="dropdown-item" href="#">Proyecto de Carretera Transversal</a></li>
-            <li><a class="dropdown-item" href="#">Proyecto de Túnel Subterráneo</a></li>
-            <li><a class="dropdown-item" href="#">Ampliación de Aeropuerto Internacional</a></li>
+                     Proyectos </button>
+          <ul class="dropdown-menu" style="max-height: 200px; overflow-y: auto;">
+              <li><a class="dropdown-item" href="#">Todos los proyectos</a></li>
+              <?php
+              require('conexion.php');
+
+              // Verificar la conexión
+              if (!$conectar) {
+                  die("Conexión fallida: " . mysqli_connect_error());
+              }
+
+              // Consulta para obtener nombres e IDs de proyectos de la base de datos
+              $sql = "SELECT pk_id_proyecto, proNombre FROM ga_proyecto ORDER BY proNombre";
+              $result = mysqli_query($conectar, $sql);
+
+              // Rellenar opciones del select con los resultados de la consulta
+              if ($result && mysqli_num_rows($result) > 0) {
+                  while($row = mysqli_fetch_assoc($result)) {
+                      echo '<li><a class="dropdown-item" href="#">' . $row["proNombre"] . '</a></li>';
+                  }
+              }
+              ?>
+
           </ul>
+
           
         </div>
+        <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Dropdown button
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#">Action</a></li>
+    <li><a class="dropdown-item" href="#">Another action</a></li>
+    <li><a class="dropdown-item" href="#">Something else here</a></li>
+  </ul>
+</div>
       </div>
         <div class="table-responsive vh-80">
-          <table id="tablaTareas" class="table table-striped table-hover sticky-header" >
-            <caption>Esta tabla muestra las tareas pendientes por proyecto seleccionado</caption>
-            <thead >
-              <tr>
-                <th class="col-2" scope="col">Proyecto</th>
-                <th class="col-2" scope="col">Fase</th>
-                <th class="col-3" scope="col">Tarea</th>
-                <th class="col-2" scope="col">Fecha y Hora Límite</th>
-                <th class="col-2" scope="col">Responsable</th>
-                <th class="col-1" scope="col">Tiempo Restante</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Puente Peatonal</td>
-                <td>Diseño Estructural</td>
-                <td>Matriz de Riesgos de Construcción de Presa Eléctrica</td>
-                <td>2023-11-20T15:20:45</td>
-                <td>Juan Pérez</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Construcción de Viaducto Sur</td>
-                <td>Planificación</td>
-                <td>Planificación de Obra</td>
-                <td>2023-10-22T08:30:15</td>
-                <td>Maria Gómez</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Proyecto de Carretera Transversal</td>
-                <td>Presupuesto</td>
-                <td>Revisión de Presupuesto</td>
-                <td>2023-11-20T15:20:45</td>
-                <td>Luis Ramírez</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Ampliación de Aeropuerto Internacional</td>
-                <td>Estudio Ambiental</td>
-                <td>Evaluación Ambiental</td>
-                <td>2023-11-18T10:55:00</td>
-                <td>Sofía Martínez</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Proyecto de Túnel Subterráneo</td>
-                <td>Inspección de Seguridad</td>
-                <td>Informe de Avance</td>
-                <td>2023-10-27T14:10:20</td>
-                <td>Pablo Mendoza</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Construcción de Puentes y Pasarelas</td>
-                <td>Seguridad</td>
-                <td>Supervisión de Seguridad</td>
-                <td>2023-11-30T11:25:40</td>
-                <td>María González</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Proyecto de Reciclaje de Agua</td>
-                <td>Sostenibilidad</td>
-                <td>Informe de Sostenibilidad</td>
-                <td>2023-12-05T13:35:50</td>
-                <td>José Ramírez</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Construcción de Vías Rurales</td>
-                <td>Mantenimiento</td>
-                <td>Plan de Mantenimiento</td>
-                <td>2023-12-12T09:40:10</td>
-                <td>Lucía Gómez</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Proyecto de Presa Hidroeléctrica</td>
-                <td>Impacto Ambiental</td>
-                <td>Informe de Impacto Ambiental</td>
-                <td>2023-12-20T16:15:30</td>
-                <td>Carlos Pérez</td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
+        <table id="tablaTareas" class="table table-striped table-hover sticky-header">
+    <caption>Esta tabla muestra las tareas pendientes por proyecto seleccionado</caption>
+    <thead>
+    <tr>
+        <th class="col-2" scope="col">Proyecto</th>
+        <th class="col-2" scope="col">Fase</th>
+        <th class="col-3" scope="col">Tarea</th>
+        <th class="col-2" scope="col">Fecha y Hora Límite</th>
+        <th class="col-2" scope="col">Responsable</th>
+        <th class="col-1" scope="col">Tiempo Restante</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <?php
+    include('conexion.php');
+
+    // Verificar la conexión
+    if ($conectar->connect_error) {
+        die("Error en la conexión a la base de datos: " . $conectar->connect_error);
+    }
+
+    // Llamada al procedimiento almacenado
+    $proyecto = isset($_POST['proyecto']) ? $_POST['proyecto'] : NULL;
+    $result = $conectar->query("CALL listar_tareas_pendientes_proximos_7_dias_por_proyecto(6)");
+
+    // Procesar los resultados y mostrar en la tabla
+    while ($row = $result->fetch_assoc()) {
+        echo "<tr>";
+        echo "<td>{$row['Proyecto']}</td>";
+        echo "<td>{$row['Fase']}</td>";
+        echo "<td>{$row['Tarea']}</td>";
+        echo "<td>{$row['Fecha_Limite']}</td>";
+        echo "<td>{$row['Responsable']}</td>";
+        echo "<td>{$row['Tiempo_Restante']}</td>";
+        echo "</tr>";
+    }
+
+    // Cerrar la conexión
+    $conectar->close();
+    ?>
+
+    </tbody>
+</table>
           
               </div>
       </div>

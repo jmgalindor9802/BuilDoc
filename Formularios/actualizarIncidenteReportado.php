@@ -86,45 +86,107 @@
                     <li class="breadcrumb-item active" aria-current="page">Reportar incidente</li>
                 </ol>
             </nav>
-            <h4 class="mb-3 custom-form">Reportar incidente</h4>
+            <h4 class="mb-3 custom-form">Actualizar incidente</h4>
             <div class="col-12 custom-form vh-80">
                 <br>
 
-                <form action="Incidente.php" method="POST" class="needs-validation " style="max-height: 70vh"
+                <form action="seguimiento.php" method="POST" class="needs-validation " style="max-height: 70vh"
                     novalidate>
-
+                    <?php
+                        include_once('conexion.php');
+                        // Verificar si la variable está definida y no es nula antes de usarla en la consulta
+                        if (isset($_REQUEST['Id_recuperadoIncidente']) && !empty($_REQUEST['Id_recuperadoIncidente'])) {
+                            // Utilizar una consulta parametrizada para evitar la inyección de SQL
+                            $sql = "SELECT i.*, gi.invNombre, gi.invApellido, gi.invNumDocumento, gi.invJustificacion, gp.proNombre
+                            FROM 
+                            gii_incidente i
+                            LEFT JOIN 
+                            gii_involucrado gi ON i.pk_id_incidente = gi.fk_id_incidente
+                            LEFT JOIN 
+                            ga_proyecto gp ON i.fk_id_proyecto = gp.pk_id_proyecto
+                            WHERE 
+                            i.pk_id_incidente = ?";
+                            // Preparar la consulta
+                            $stmt = $conectar->prepare($sql);
+                            // Vincular el parámetro
+                            $stmt->bind_param("i", $_REQUEST['Id_recuperadoIncidente']);
+                            // Ejecutar la consulta
+                            $stmt->execute();
+                            // Obtener el resultado
+                            $resultadoConsulta = $stmt->get_result();
+                            // Verificar si hay resultados
+                            if ($resultadoConsulta->num_rows > 0) {
+                                $row = $resultadoConsulta->fetch_assoc();
+                            } else {
+                                echo "No se encontró ningún incidente con esa ID";
+                            }
+                            // Cerrar la declaración
+                            $stmt->close();
+                        } else {
+                            echo "ID de incidente no válida";
+                        }
+                    ?>
                     <div class="row g-3">
                         <div class="col-sm-6">
                             <label id="NombreProyecto" for="firstName" class="form-label">Incidente</label>
                             <input name="Nombre_incidente" type="text" class="form-control" id="firstName"
-                                placeholder="Nombre Proyecto" value="" required required maxlength="280">
+                                value="<?php echo $row['incNombre']?>" disabled readonly>
                             <div class="invalid-feedback">
                                 Se requiere un nombre válido.
                             </div>
                         </div>
                         <div class="col-md-6">
                             <label for="proyecto" class="form-label">Proyecto</label>
-                            <select name="Proyecto_incidente" class="form-select" id="proyecto" required height="100px"
-                                width="100%">
-                                <option value="">Seleccionar...</option>
-                                <?php
-                                    include_once 'conexion.php';
-
-                                    $sql = "SELECT pk_id_proyecto, proNombre FROM ga_proyecto ORDER BY proNombre";
-                                $result = mysqli_query($conectar, $sql);
-
-                                // Rellenar opciones del select con los resultados de la consulta
-                                if ($result && mysqli_num_rows($result) > 0) {
-                                    while($row = mysqli_fetch_assoc($result)) {
-                                        echo "<option value='" . $row["pk_id_proyecto"] . "'>" . $row["proNombre"] . "</option>";
-                                    }}
-                                ?>
+                            <select name="Proyecto_incidente" class="form-select" id="proyecto" height="100px"
+                                width="100%" disabled readonly>
+                                <option value="<?php echo $row['fk_id_proyecto']; ?>"><?php echo $row['proNombre']; ?></option>
                             </select>
                             <div class="invalid-feedback">
                                 Se requiere un proyecto válido.
                             </div>
                         </div>
                         <br>
+                        <div class="mb-3">
+                            <label for="Descripcion" class="form-label">Descripción</label>
+                            <textarea name="Descripcion_incidente" class="form-control" id="Descripcion" rows="5"
+                                placeholder="Descripción sobre cómo sucedió el incidente" required
+                                maxlength="5000"></textarea>
+                            <div class="invalid-feedback">
+                                Se requiere una descripcion válido.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="Sugerencia" class="form-label">Sugerencia</label>
+                            <textarea name="Sugerencia_incidente" class="form-control" id="Sugerencia" rows="5"
+                                placeholder="Añada una sugerencia para que el incidente no vuelva a suceder"
+                                maxlength="5000"></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="Gravedad" class="form-label">Nivel de Gravedad</label>
+                            <button type="button" class="btn btn-sm btn-secondary" id="ayudaGravedad"
+                                data-bs-toggle="popover" data-bs-placement="top" title="Ayuda sobre la Gravedad"
+                                data-bs-content="Haga clic aquí para obtener más información">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+                                </svg>
+                            </button>
+                            <select name="Gravedad_incidente" class="form-select" id="Gravedad" disabled readonly>
+                                <option value=""><?php echo $row['incGravedad']; ?></option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Se requiere seleccionar un nivel de gravedad válido.
+                            </div>
+                        </div>
+                        <br>
+                        <div class="col-md-6">
+                            <label for="Evidencia" class="form-label">Evidencia</label>
+                            <input name="Evidencia_incidente" class="form-control" type="file" id="Evidencia" multiple>
+                            <div class="invalid-feedback">
+                                Se requiere adjuntar una evidencia válida.
+                            </div>
+                        </div>
                         <!-- Sub lista de involucrados -->
                         <div class="mb-12">
                             <h5>Agregar Involucrados:</h5>
@@ -155,56 +217,33 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <h5>Involucrados Registrados:</h5>
-                            <ul class="list-group" id="listaInvolucrados">
-                                <!-- Aquí se agregarán los involucrados registrados -->
-                            </ul>
+                        <table>
+                            <tbody>
+                            <?php
+                                while ($row = $resultadoConsulta->fetch_assoc()) {
+                            ?>
+                            <tr>
+                                <td>
+                                    <?php echo $row['invNombre'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['invApellido'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['invNumDocumento'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['invJustificacion'] ?>
+                                </td>
+                            </tr>
+                            <?php
+                            }
+                            ?>
+                                </tbody>
+                            </table>
                         </div>
+                        <input type="hidden" name="Id_incidente" value="<?php echo $_REQUEST['Id_recuperadoIncidente']; ?>" class="d-none">
                         <!-- Fin de la sub lista de involucrados -->
-                        <div class="mb-3">
-                            <label for="Descripcion" class="form-label">Descripción</label>
-                            <textarea name="Descripcion_incidente" class="form-control" id="Descripcion" rows="5"
-                                placeholder="Descripción sobre cómo sucedió el incidente" required
-                                maxlength="5000"></textarea>
-                            <div class="invalid-feedback">
-                                Se requiere una descripcion válido.
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="Sugerencia" class="form-label">Sugerencia</label>
-                            <textarea name="Sugerencia_incidente" class="form-control" id="Sugerencia" rows="5"
-                                placeholder="Añada una sugerencia para que el incidente no vuelva a suceder"
-                                maxlength="5000"></textarea>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="Gravedad" class="form-label">Nivel de Gravedad</label>
-                            <button type="button" class="btn btn-sm btn-secondary" id="ayudaGravedad"
-                                data-bs-toggle="popover" data-bs-placement="top" title="Ayuda sobre la Gravedad"
-                                data-bs-content="Haga clic aquí para obtener más información">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-info-circle-fill" viewBox="0 0 16 16">
-                                    <path
-                                        d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
-                                </svg>
-                            </button>
-                            <select name="Gravedad_incidente" class="form-select" id="Gravedad" required>
-                                <option value="">Seleccione...</option>
-                                <option value="ALTO">ALTO</option>
-                                <option value="MEDIO">MEDIO</option>
-                                <option value="BAJO">BAJO</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Se requiere seleccionar un nivel de gravedad válido.
-                            </div>
-                        </div>
-                        <br>
-                        <div class="col-md-6">
-                            <label for="Evidencia" class="form-label">Evidencia</label>
-                            <input name="Evidencia_incidente" class="form-control" type="file" id="Evidencia" multiple>
-                            <div class="invalid-feedback">
-                                Se requiere adjuntar una evidencia válida.
-                            </div>
-                        </div>
                         <button class="btn btn-lg float-end custom-btn" id="guardarIncidenteButton"
                             style="font-size: 15px;">Guardar incidente</button>
                 </form>
@@ -247,7 +286,6 @@
 
         </div>
         <script src="ReportarIncidente.js"></script>
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous"></script>

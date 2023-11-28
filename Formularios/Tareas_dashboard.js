@@ -20,46 +20,6 @@
     );
   });
  
-  document.addEventListener("DOMContentLoaded", function () {
-    const tablaTareas = document.getElementById("tablaTareas");
-    const dropdown = document.querySelector(".dropdown");
-
-    dropdown.addEventListener("click", function (event) {
-      if (event.target.classList.contains("dropdown-item")) {
-        const selectedProject = event.target.textContent;
-        filterTable(selectedProject);
-      }
-    });
-
-    function filterTable(selectedProject) {
-      const rows = tablaTareas.querySelectorAll("tbody tr");
-      rows.forEach(function (row) {
-        const proyecto = row.cells[0].textContent;
-        if (
-          selectedProject === "Todos los proyectos" ||
-          proyecto === selectedProject
-        ) {
-          row.style.display = "";
-        } else {
-          row.style.display = "none";
-        }
-      });
-    }
-  });
-
-  document.addEventListener("DOMContentLoaded", function () {
-    const proyectoSeleccionadoBtn = document.getElementById(
-      "proyectoSeleccionado"
-    );
-    const dropdown = document.querySelector(".dropdown");
-
-    dropdown.addEventListener("click", function (event) {
-      if (event.target.classList.contains("dropdown-item")) {
-        const selectedProject = event.target.textContent;
-        proyectoSeleccionadoBtn.textContent = selectedProject;
-      }
-    });
-  });
 
   document.addEventListener('DOMContentLoaded', function () {
     // Función para calcular el tiempo restante
@@ -138,10 +98,23 @@
       tbody.appendChild(tarea.fila);
     });
   });
-  
-  
-  
-  
 
+  $(document).ready(function() {
+    $('.dropdown-item').click(function(e) {
+        e.preventDefault();
+        var idProyecto = $(this).data('idproyecto');
+        $('#proyectoSeleccionado').html($(this).text()); // Actualiza el botón del dropdown con el proyecto seleccionado
 
-})();
+        // Realiza la solicitud AJAX para obtener y mostrar las tareas correspondientes
+        $.ajax({
+            type: 'POST',
+            url: 'obtener_tareas.php', // Archivo PHP que procesa la solicitud
+            data: { proyecto: idProyecto },
+            success: function(data) {
+                $('#tablaTareas tbody').html(data); // Actualiza el cuerpo de la tabla con las nuevas tareas
+            }
+        });
+    });
+});
+
+});

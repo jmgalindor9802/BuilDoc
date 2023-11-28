@@ -88,8 +88,8 @@
             </div>
             <div class="col-md-6">
               <label id="nombreInspeccion" for="firstName" class="form-label">Nombre de la inspección</label>
-              <input name="nombre_Inspeccion" type="text" class="form-control" id="firstName" placeholder="Nombre de la inspección" value=""
-                required required maxlength="280">
+              <input name="nombre_Inspeccion" type="text" class="form-control" id="firstName"
+                placeholder="Nombre de la inspección" value="" required required maxlength="280">
               <div class="invalid-feedback">
                 Se requiere un nombre válido.
               </div>
@@ -138,7 +138,8 @@ $periodicidades = array(
             </div>
             <div class="col-md-12" style="display: none;" id="contenedor_FechaInspeccion">
               <label for="FechaInspeccion"> Fecha y hora de la inspección</label>
-              <input name="fecha_unica_inspeccion" type="datetime-local" class="form-control" id="FechaInspeccion" required>
+              <input name="fecha_unica_inspeccion" type="datetime-local" class="form-control" id="FechaInspeccion"
+                required>
               <div class="invalid-feedback" id="error-fechaInspeccion-mensaje">
                 Seleccione una fecha y hora válida.
               </div>
@@ -148,7 +149,8 @@ $periodicidades = array(
             </div>
             <div class="col-md-6" style="display: none;" id="contenedor_fechaInicial">
               <label for="fechaInicial">Fecha y hora de inicio:</label>
-              <input name="fechaInicialInspeccion" type="datetime-local" class="form-control" id="fechaInicial" required>
+              <input name="fechaInicialInspeccion" type="datetime-local" class="form-control" id="fechaInicial"
+                required>
               <div class="invalid-feedback" id="error-fechaInicial-mensaje">
                 Seleccione una fecha y hora válida.
               </div>
@@ -176,101 +178,57 @@ $periodicidades = array(
               </div>
             </div>
             <div class="row g-3">
-              <h4>Asignar Inspector</h4>
               <div class="col-md-6">
-                <label for="usuario_inspeccion_disponible" class="form-label">Seleccione quién va a realizar la
-                  inspección</label>
-                <select name="Inspecctor" class="form-select" id="usuario_inspeccion_disponible" multiple>
-                <?php
-                require 'conexion.php';
-                //CONCAT nombre y apellido de usuario
-                $sql = $conectar->query("SELECT CONCAT(usuNombre, ' ', usuApellido) AS nombre_completo FROM usuario");
-                while ($resultado = $sql->fetch_assoc()) {
-
-                echo "<option value='".$resultado['pk_id_usuario']."'>".$resultado
-                ['nombre_completo']."</option>";
-
-                }
-                ?>
-                </select>
-              </div>
-              <div class="col-md-6">
-                <label for="usuario_inspeccion_seleccionado" class="form-label">Inspector asignado</label>
-                <div class="invalid-feedback" id="error-mensaje">
-                  Seleccione al menos una persona.
-                </div>
-                <ul class="list-group mt-3" id="inspectores-seleccionados">
-                  <!-- Aquí se agregarán las opciones seleccionadas por JavaScript -->
+                <h4>Asignar usuarios</h4>
+                <label for="usuario_proyecto_disponible" class="form-label">Seleccione a quienes desea asignar al
+                  proyecto</label>
+                <ul class="list-group" id="usuario_proyecto_disponible">
+                  <?php
+                  //Lista de Usuarios
+                  include("conexion.php");
+                  $sql = $conectar->query("SELECT pk_id_usuario, CONCAT(usuNombre, ' ', usuApellido) AS nombre_completo 
+                  FROM usuario ORDER BY nombre_completo ASC");
+                  while ($resultado = $sql->fetch_assoc()) {
+                      echo '<div class="form-check">
+                              <input class="form-check-input" type="checkbox" name="usuarios_proyecto[]" value="' . $resultado['pk_id_usuario'] . '" id="checkbox' . $resultado['pk_id_usuario'] . '">
+                              <label class="form-check-label" for="checkbox' . $resultado['pk_id_usuario'] . '">' . $resultado['nombre_completo'] . '</label>
+                            </div>';
+                  }
+                  ?>
                 </ul>
               </div>
+              <div class="py-4">
+                <a class="btn btn-lg float-end custom-btn" style="font-size: 15px;" data-bs-toggle="modal"
+                  data-bs-target="#ProgramarInspeccion">Guardar
+                  Inspeccion</a>
+              </div>
             </div>
-
           </div>
-          <div class="py-4">
-          <button class="btn btn-lg float-end custom-btn" id="guardarFaseButton"
-                            style="font-size: 15px;">Guardar incidente</button>
-                            <script>
-
-document.addEventListener("DOMContentLoaded", function () {
-    var form = document.querySelector('.needs-validation');
-    var guardarFaseButton = document.getElementById('guardarFaseButton');
-    var confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
-
-    guardarFaseButton.addEventListener('click', function () {
-        // Verifica si el formulario es válido antes de abrir el modal
-        if (form.checkValidity()) {
-            confirmModal.show();
-        } else {
-            form.classList.add('was-validated');
-        }
-    });
-
-    // Agrega un evento de clic al botón de "Confirmar" dentro del modal
-    var confirmarModalButton = document.getElementById('confirmarModalButton');
-    confirmarModalButton.addEventListener('click', function () {
-        // Verifica si el formulario es válido antes de enviarlo
-        if (form.checkValidity()) {
-            form.submit(); // Envía el formulario
-            confirmModal.hide(); // Cierra el modal después de enviar
-        } else {
-            form.classList.add('was-validated'); // Muestra los mensajes de validación
-        }
-    });
-});
-</script>
-<!-- Modal de confirmación -->
-<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog"
-aria-labelledby="confirmModalLabel" aria-hidden="true">
-<div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="confirmModalLabel">Confirmar envío</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            ¿Estás seguro de que deseas enviar el formulario?
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary"
-                data-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary"
-                id="confirmarModalButton">Confirmar</button>
-        </div>
-    </div>
-</div>
-</div>
-          </div>
-        </form>
+          <div class="modal" tabindex="-1" id="ProgramarInspeccion">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Programar Inspeccion</h5>
+                  </div>
+                  <div class="modal-body">
+                    <p>¿Estás seguro de programar esta inspeccion?</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Aceptar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
       </div>
+      </form>
     </div>
   </div>
-  
-  <script src="programarInspeccion.js"></scrip>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous"></script>
-</body>
+  </div>
 
+  <script src="programarInspeccion.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
 </html>
