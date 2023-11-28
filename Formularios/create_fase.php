@@ -28,7 +28,7 @@ if (
     $stmt->close();
     mysqli_close($conectar);
 
-    header
+    header("location: Tareas_dashboard.php");
 } else {
     echo "Error: Datos de formulario incompletos.";
 }

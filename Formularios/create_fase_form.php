@@ -125,24 +125,24 @@
                     </div>
                     <br>
                     <!-- Botón "Guardar fase" que abre el modal -->
-                    <a data-bs-toggle="modal" data-bs-target="#CrearUsuario"></a>
+                    <a data-bs-toggle="modal" data-bs-target="#CrearFase">Guardar fase</a>
 
-                        <div class="modal" tabindex="-1" id="CrearUsuario">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title">Crear usuario</h5>
-                  </div>
-                  <div class="modal-body">
-                    <p>¿Estás seguro de crear este usuario?</p>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Aceptar</button>
-                  </div>
+                    <div class="modal" tabindex="-1" id="CrearFase">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Crear fase</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <p>¿Estás seguro de crear esta fase?</p>
+                                </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Aceptar</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
                 </form>
             </div>
         </div>
