@@ -1,25 +1,33 @@
-<?php 
-
+<?php
 require 'conexion.php';
+var_dump($_POST);
+// Verificar si los datos del formulario están presentes
+if (
+    isset($_POST["Nombre_fase"]) && !empty($_POST["Nombre_fase"]) &&
+    isset($_POST["Proyecto_fase"]) && !empty($_POST["Proyecto_fase"]) &&
+    isset($_POST["Descripcion_fase"]) && !empty($_POST["Descripcion_fase"])
+) {
+    // Obtener datos del formulario
+    $Nombre = $_POST["Nombre_fase"];
+    $Proyecto = $_POST["Proyecto_fase"];
+    $Descripcion = $_POST["Descripcion_fase"];
+    $Estado = "PENDIENTE";
 
+    // Llamada al procedimiento almacenado
+    $stmt = $conectar->prepare("CALL InsertarFase(?, ?, ?, ?)");
+    $stmt->bind_param("sssi", $Nombre, $Descripcion, $Estado, $Proyecto);
 
-$Nombre = $_POST["Nombre_fase"];
-$Proyecto = $_POST["Proyecto_fase"];
-$Descripcion = $_POST["Descripcion_fase"];
+    // Ejecutar la llamada al procedimiento almacenado
+    if ($stmt->execute()) {
+        echo "Los datos se almacenaron correctamente.";
+    } else {
+        echo "Error, no se guardaron los datos correctamente: " . $stmt->error;
+    }
 
-
-$insert = "INSERT INTO gt_fase(fasNombre, fasDescripcion, fk_id_proyecto) VALUES ('$Nombre', '$Proyecto', '$Descripcion')";
-
-$query = mysqli_query($conectar, $insert);
-
-if($query){
-
-    echo "Los datos se amacenaron correctamente.";
-
-}else{
-
-    echo "Error, no se guardaron los datos correctamente.";
-
+    // Cerrar la conexión y liberar recursos
+    $stmt->close();
+    mysqli_close($conectar);
+} else {
+    echo "Error: Datos de formulario incompletos.";
 }
-
 ?>

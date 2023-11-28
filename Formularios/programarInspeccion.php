@@ -62,25 +62,33 @@
       <div class="col-12 custom-form vh-80">
         <br>
 
-        <form class="needs-validation " style="max-height: 70vh" novalidate>
+        <form action="inspecciones.php" method="POST" class="needs-validation " style="max-height: 70vh" novalidate>
 
           <div class="row g-3">
             <div class="col-md-6">
               <label for="proyecto" class="form-label">Proyecto</label>
-              <select class="form-select" id="proyecto" required>
+              <select name="proyecto_inspeccion" class="form-select" id="proyecto" required>
                 <option value="">Seleccionar...</option>
-                <option value="1">Proyecto de Puente Peatonal</option>
-                <option value="2">Construcción de Viaducto Sur</option>
-                <option value="3">Proyecto de Carretera Transversal</option>
-                <option value="4">Ampliación de Aeropuerto Internacional</option>
+                <?php
+                                    include_once 'conexion.php';
+
+                                    $sql = "SELECT pk_id_proyecto, proNombre FROM ga_proyecto ORDER BY proNombre";
+                                $result = mysqli_query($conectar, $sql);
+
+                                // Rellenar opciones del select con los resultados de la consulta
+                                if ($result && mysqli_num_rows($result) > 0) {
+                                    while($row = mysqli_fetch_assoc($result)) {
+                                        echo "<option value='" . $row["pk_id_proyecto"] . "'>" . $row["proNombre"] . "</option>";
+                                    }}
+                                ?>
               </select>
               <div class="invalid-feedback">
                 Se requiere seleccionar un proyecto válido.
               </div>
             </div>
             <div class="col-md-6">
-              <label id="NombreProyecto" for="firstName" class="form-label">Nombre de la inspección</label>
-              <input type="text" class="form-control" id="firstName" placeholder="Nombre de la inspección" value=""
+              <label id="nombreInspeccion" for="firstName" class="form-label">Nombre de la inspección</label>
+              <input name="nombre_Inspeccion" type="text" class="form-control" id="firstName" placeholder="Nombre de la inspección" value=""
                 required required maxlength="280">
               <div class="invalid-feedback">
                 Se requiere un nombre válido.
@@ -88,6 +96,7 @@
             </div>
             <div class="col-md-6">
               <label for="periodicidad" class="form-label">Periodicidad</label>
+              <!-- boton de ayuda -->
               <button type="button" class="btn btn-sm btn-secondary" id="ayudaGravedad" data-bs-toggle="popover"
                 data-bs-placement="top" title="Ayuda sobre la Gravedad"
                 data-bs-content="Haga clic aquí para obtener más información">
@@ -97,12 +106,24 @@
                     d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
                 </svg>
               </button>
-              <select class="form-select" id="periodicidad" required>
+              <!-- lista de opciones para la seleccion -->
+              <?php
+// Definir un array asociativo para mapear los valores de la base de datos a los valores del formulario
+$periodicidades = array(
+    "DIARIA" => "Diaria",
+    "SEMANAL" => "Semanal",
+    "MENSUAL" => "Mensual",
+    "NINGUNA" => "Ninguna",
+    // Añade el valor "Ninguna" si lo necesitas
+);
+?>
+              <select name="insPeriodicidad" class="form-select" id="periodicidad" required>
                 <option value="">Seleccionar...</option>
-                <option value="1">Diaria</option>
-                <option value="2">Semanal</option>
-                <option value="3">Mensual</option>
-                <option value="4">Ninguna</option>
+                <?php
+                foreach ($periodicidades as $valorBD => $valorFormulario) {
+                  echo '<option value="' . $valorBD . '">' . $valorFormulario . '</option>';
+              }
+              ?>
               </select>
               <div class="invalid-feedback">
                 Se requiere seleccionar una periodicidad válida.
@@ -110,14 +131,14 @@
             </div>
             <div class="col-md-6">
               <label for="Evidencia" class="form-label">Adjuntar formulario de inspección</label>
-              <input class="form-control" type="file" id="Evidencia" multiple required>
+              <input name="fourmulario_inspeccion" class="form-control" type="file" id="Evidencia" multiple required>
               <div class="invalid-feedback">
                 Se requiere adjuntar una evidencia válida.
               </div>
             </div>
             <div class="col-md-12" style="display: none;" id="contenedor_FechaInspeccion">
               <label for="FechaInspeccion"> Fecha y hora de la inspección</label>
-              <input type="datetime-local" class="form-control" id="FechaInspeccion" required>
+              <input name="fecha_unica_inspeccion" type="datetime-local" class="form-control" id="FechaInspeccion" required>
               <div class="invalid-feedback" id="error-fechaInspeccion-mensaje">
                 Seleccione una fecha y hora válida.
               </div>
@@ -127,7 +148,7 @@
             </div>
             <div class="col-md-6" style="display: none;" id="contenedor_fechaInicial">
               <label for="fechaInicial">Fecha y hora de inicio:</label>
-              <input type="datetime-local" class="form-control" id="fechaInicial" required>
+              <input name="fechaInicialInspeccion" type="datetime-local" class="form-control" id="fechaInicial" required>
               <div class="invalid-feedback" id="error-fechaInicial-mensaje">
                 Seleccione una fecha y hora válida.
               </div>
@@ -137,7 +158,7 @@
             </div>
             <div class="col-md-6" style="display: none;" id="contenedor_fechaFinal">
               <label for="fechaFinal">Fecha y hora de finalización:</label>
-              <input type="datetime-local" class="form-control" id="fechaFinal" required>
+              <input name="fechaFinalInspeccion" type="datetime-local" class="form-control" id="fechaFinal" required>
               <div class="invalid-feedback" id="error-fechaFinal-mensaje">
                 La fecha y hora de finalización es inválida.
               </div>
@@ -148,7 +169,7 @@
 
             <div class="mb-3">
               <label for="exampleFormControlTextarea1" class="form-label">Descripción</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"
+              <textarea name="descripcionInspeccion" class="form-control" id="exampleFormControlTextarea1" rows="5"
                 placeholder="Descripción del proyecto" required maxlength="5000"></textarea>
               <div class="invalid-feedback">
                 Se requiere una descripción válida.
@@ -159,20 +180,18 @@
               <div class="col-md-6">
                 <label for="usuario_inspeccion_disponible" class="form-label">Seleccione quién va a realizar la
                   inspección</label>
-                <select class="form-select" id="usuario_inspeccion_disponible" multiple>
-                  <option>Julian Amado</option>
-                  <option>Nicolas Chiquiza</option>
-                  <option>Juan Galindo</option>
-                  <option>Marta Gómez</option>
-                  <option>Luisa Martínez</option>
-                  <option>Carlos Rodríguez</option>
-                  <option>Andrés Gutiérrez</option>
-                  <option>Luis Ortega</option>
-                  <option>Ana Pérez</option>
-                  <option>Mario Sánchez</option>
-                  <option>José López</option>
-                  <option>Maria Fernández</option>
-                  <option>Andrea Gómez</option>
+                <select name="Inspecctor" class="form-select" id="usuario_inspeccion_disponible" multiple>
+                <?php
+                require 'conexion.php';
+                //CONCAT nombre y apellido de usuario
+                $sql = $conectar->query("SELECT CONCAT(usuNombre, ' ', usuApellido) AS nombre_completo FROM usuario");
+                while ($resultado = $sql->fetch_assoc()) {
+
+                echo "<option value='".$resultado['pk_id_usuario']."'>".$resultado
+                ['nombre_completo']."</option>";
+
+                }
+                ?>
                 </select>
               </div>
               <div class="col-md-6">
@@ -188,15 +207,67 @@
 
           </div>
           <div class="py-4">
-            <button class="btn btn-lg float-end custom-btn" type="submit" style="font-size: 15px;">Guardar
-              inspección</button>
+          <button class="btn btn-lg float-end custom-btn" id="guardarFaseButton"
+                            style="font-size: 15px;">Guardar incidente</button>
+                            <script>
+
+document.addEventListener("DOMContentLoaded", function () {
+    var form = document.querySelector('.needs-validation');
+    var guardarFaseButton = document.getElementById('guardarFaseButton');
+    var confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+
+    guardarFaseButton.addEventListener('click', function () {
+        // Verifica si el formulario es válido antes de abrir el modal
+        if (form.checkValidity()) {
+            confirmModal.show();
+        } else {
+            form.classList.add('was-validated');
+        }
+    });
+
+    // Agrega un evento de clic al botón de "Confirmar" dentro del modal
+    var confirmarModalButton = document.getElementById('confirmarModalButton');
+    confirmarModalButton.addEventListener('click', function () {
+        // Verifica si el formulario es válido antes de enviarlo
+        if (form.checkValidity()) {
+            form.submit(); // Envía el formulario
+            confirmModal.hide(); // Cierra el modal después de enviar
+        } else {
+            form.classList.add('was-validated'); // Muestra los mensajes de validación
+        }
+    });
+});
+</script>
+<!-- Modal de confirmación -->
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog"
+aria-labelledby="confirmModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="confirmModalLabel">Confirmar envío</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            ¿Estás seguro de que deseas enviar el formulario?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary"
+                data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary"
+                id="confirmarModalButton">Confirmar</button>
+        </div>
+    </div>
+</div>
+</div>
           </div>
         </form>
       </div>
     </div>
   </div>
   
-  <script src="Inspeccion.js"></script>
+  <script src="programarInspeccion.js"></scrip>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>

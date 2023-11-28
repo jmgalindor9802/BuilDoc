@@ -43,7 +43,7 @@
       fechaInspeccionInput.required = false;
   
       // Mostrar solo el campo correspondiente a "Ninguna"
-      if (selectedOption === "4") {
+      if (selectedOption === "NINGUNA") {
         fechaInspeccionDiv.style.display = "block";
         fechaInspeccionInput.required = true;
       } else if (selectedOption !== "") {
@@ -72,12 +72,17 @@
       }
     }
   
-    // Función para actualizar las listas de inspectores
-    function actualizarListas() {
-      // Actualizar lista de disponibles
-      Array.from(usuarioInspeccionDisponible.options).forEach(option => {
-        option.disabled = inspectoresSeleccionadosSet.has(option.value);
-      });
+  // Función para actualizar las listas de inspectores
+function actualizarListas() {
+  // Obtener los valores de los elementos DOM
+  const usuarioInspeccionDisponible = document.getElementById('usuario_inspeccion_disponible');
+  const inspectoresSeleccionadosSet = new Set();
+
+  // Iterar sobre las opciones del elemento DOM
+  Array.from(usuarioInspeccionDisponible.options).forEach(option => {
+    // Establecer el atributo disabled
+    option.disabled = inspectoresSeleccionadosSet.has(option.value);
+  });
   
       // Actualizar lista de seleccionados
       while (inspectoresSeleccionados.firstChild) {

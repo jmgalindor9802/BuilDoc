@@ -9,6 +9,23 @@
     <link rel="shortcut icon" href="recursos\HeadLogo.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js"></script>
+
+    <script>
+			
+    		$(function(){
+				// Clona la fila oculta que tiene los campos base, y la agrega al final de la tabla
+				$("#adicional").on('click', function(){
+					$("#tabla tbody tr:eq(0)").clone().removeClass('fila-fija').appendTo("#tabla");
+				});
+			 
+				// Evento que selecciona la fila y la elimina 
+				$(document).on("click",".eliminar",function(){
+					var parent = $(this).parents().get(0);
+					$(parent).remove();
+				});
+			});
+		</script>
 
 
     <style>
@@ -64,25 +81,35 @@
             <div class="col-12 custom-form vh-80">
                 <br>
 
-                <form class="needs-validation " style="max-height: 70vh" novalidate>
+                <form action="Incidente.php" method="POST" class="needs-validation " style="max-height: 70vh"
+                    novalidate>
 
                     <div class="row g-3">
                         <div class="col-sm-6">
                             <label id="NombreProyecto" for="firstName" class="form-label">Incidente</label>
-                            <input name="Nombre_incidente" type="text" class="form-control" id="firstName" placeholder="Nombre Proyecto"
-                                value="" required required maxlength="280">
+                            <input name="Nombre_incidente" type="text" class="form-control" id="firstName"
+                                placeholder="Nombre Proyecto" value="" required required maxlength="280">
                             <div class="invalid-feedback">
                                 Se requiere un nombre válido.
                             </div>
                         </div>
                         <div class="col-md-6">
                             <label for="proyecto" class="form-label">Proyecto</label>
-                            <select name="Proyecto_incidente" class="form-select" id="proyecto" required>
+                            <select name="Proyecto_incidente" class="form-select" id="proyecto" required height="100px"
+                                width="100%">
                                 <option value="">Seleccionar...</option>
-                                <option value="1">Proyecto de Puente Peatonal</option>
-                                <option value="2">Construcción de Viaducto Sur</option>
-                                <option value="3">Proyecto de Carretera Transversal</option>
-                                <option value="4">Ampliación de Aeropuerto Internacional</option>
+                                <?php
+                                    include_once 'conexion.php';
+
+                                    $sql = "SELECT pk_id_proyecto, proNombre FROM ga_proyecto ORDER BY proNombre";
+                                $result = mysqli_query($conectar, $sql);
+
+                                // Rellenar opciones del select con los resultados de la consulta
+                                if ($result && mysqli_num_rows($result) > 0) {
+                                    while($row = mysqli_fetch_assoc($result)) {
+                                        echo "<option value='" . $row["pk_id_proyecto"] . "'>" . $row["proNombre"] . "</option>";
+                                    }}
+                                ?>
                             </select>
                             <div class="invalid-feedback">
                                 Se requiere un proyecto válido.
@@ -90,30 +117,24 @@
                         </div>
                         <br>
                         <!-- Sub lista de involucrados -->
-                        <div class="mb-3">
+                        <div class="mb-12">
                             <h5>Agregar Involucrados:</h5>
-                            <div class="row g-3">
-                                <div class="col-md-4">
-                                    <label for="nombreInvolucrado" class="form-label">Nombre</label>
-                                    <input name="Nombre_involucrado" type="text" class="form-control" id="nombreInvolucrado" placeholder="Nombre">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="apellidoInvolucrado" class="form-label">Apellido</label>
-                                    <input name="Apellido_involucrado" type="text" class="form-control" id="apellidoInvolucrado"
-                                        placeholder="Apellido">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="idInvolucrado" class="form-label">Número de Identificación</label>
-                                    <input name="Identificación_involucrado" type="text" class="form-control" id="idInvolucrado"
-                                        placeholder="Número de Identificación">
-                                    <!-- Agrega el div para mostrar el mensaje de error -->
+                            <table class="table bg-info"  id="tabla">
+                                <tr class="fila-fija">
+                                    <td><input required name="Nombre_involucrado[]" placeholder="Nombre"/></td>
+						            <td><input required name="Apellido_involucrado[]" placeholder="Apellido"/></td>
+						            <td><input required name="Identificación_involucrado[]" placeholder="Numero de Identificacion" id="idInvolucrado"/></td>
+						            <!-- Agrega el div para mostrar el mensaje de error -->
                                     <div class="invalid-feedback" id="idInvolucradoError">
-                                        El campo de identificación debe contener solo números.
+                                    El campo de identificación debe contener solo números.
                                     </div>
-                                </div>
-                            </div>
-                            <button type="button" class="btn btn-primary" onclick="agregarInvolucrado()">Agregar
-                                Involucrado</button>
+                                    <td><input required name="Justificacion_involucrado[]" placeholder="Justificacion"/></td>
+						            <td class="eliminar"><input type="button"   value="Menos -"/></td>
+                                </tr>
+                            </table>
+                            <div class="btn-der">
+					            <button id="adicional" name="adicional" type="button" class="btn btn-warning"> Más + </button>
+				            </div>
                         </div>
                         <div class="mb-3">
                             <h5>Involucrados Registrados:</h5>
@@ -150,10 +171,9 @@
                             </button>
                             <select name="Gravedad_incidente" class="form-select" id="Gravedad" required>
                                 <option value="">Seleccione...</option>
-                                <option value="I">I</option>
-                                <option value="II">II</option>
-                                <option value="III">III</option>
-                                <option value="IV">IV</option>
+                                <option value="ALTO">ALTO</option>
+                                <option value="MEDIO">MEDIO</option>
+                                <option value="BAJO">BAJO</option>
                             </select>
                             <div class="invalid-feedback">
                                 Se requiere seleccionar un nivel de gravedad válido.
@@ -167,17 +187,66 @@
                                 Se requiere adjuntar una evidencia válida.
                             </div>
                         </div>
-                        <div class="py-4">
-                            <button class="btn btn-lg float-end custom-btn" type="submit"
-                                style="font-size: 15px;">Guardar
-                                Reporte</button>
+                        <!-- Botón "Guardar fase" que abre el modal -->
+                        <button class="btn btn-lg float-end custom-btn" id="guardarFaseButton"
+                            style="font-size: 15px;">Guardar incidente</button>
+                        <script>
+
+                            document.addEventListener("DOMContentLoaded", function () {
+                                var form = document.querySelector('.needs-validation');
+                                var guardarFaseButton = document.getElementById('guardarFaseButton');
+                                var confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+
+                                guardarFaseButton.addEventListener('click', function () {
+                                    // Verifica si el formulario es válido antes de abrir el modal
+                                    if (form.checkValidity()) {
+                                        confirmModal.show();
+                                    } else {
+                                        form.classList.add('was-validated');
+                                    }
+                                });
+
+                                // Agrega un evento de clic al botón de "Confirmar" dentro del modal
+                                var confirmarModalButton = document.getElementById('confirmarModalButton');
+                                confirmarModalButton.addEventListener('click', function () {
+                                    // Verifica si el formulario es válido antes de enviarlo
+                                    if (form.checkValidity()) {
+                                        form.submit(); // Envía el formulario
+                                        confirmModal.hide(); // Cierra el modal después de enviar
+                                    } else {
+                                        form.classList.add('was-validated'); // Muestra los mensajes de validación
+                                    }
+                                });
+                            });
+                        </script>
+                        <!-- Modal de confirmación -->
+                        <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog"
+                            aria-labelledby="confirmModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="confirmModalLabel">Confirmar envío</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ¿Estás seguro de que deseas enviar el formulario?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-primary"
+                                            id="confirmarModalButton">Confirmar</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                 </form>
             </div>
         </div>
     </div>
-
-    <script src="Incidente.js"></script>
+    <script src="ReportarIncidente.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
