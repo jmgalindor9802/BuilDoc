@@ -24,11 +24,12 @@ if (
         echo "Error, no se guardaron los datos correctamente: " . $stmt->error;
     }
 
+    // Redirigir a Inspecciones_dashboard.php
+    header("Location: Tareas_dashboard.php");
     // Cerrar la conexión y liberar recursos
     $stmt->close();
     mysqli_close($conectar);
 
-    header("location: Tareas_dashboard.php");
 } else {
     echo "Error: Datos de formulario incompletos.";
 }
