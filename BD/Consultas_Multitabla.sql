@@ -1,5 +1,4 @@
 DELIMITER //
-use BD_BUILDOC;
 /*---GESTION DE ARCHIVOS---*/
 
 /*Listar todos los proyectos por nombre de un municipio especifico, 
@@ -76,47 +75,67 @@ END //
 /* Listar las tareas pendientes por proyecto para los proximos 7 dias tomando como referencia la fecha actual */
 /* call listar_tareas_pendientes_proximos_7_dias_por_proyecto(4); */
 CREATE PROCEDURE listar_tareas_pendientes_proximos_7_dias_por_proyecto (
-    IN proyecto BIGINT)
+    IN proyecto BIGINT
+)
 BEGIN
     IF proyecto IS NULL THEN
-        SELECT 
-			p.pk_id_proyecto AS "ID Proyecto",
+        SELECT
             p.proNombre AS Proyecto,
             f.fasNombre AS Fase,
             t.tarNombre AS Tarea,
             t.tarFecha_limite AS Fecha_Limite,
-            CONCAT(u.usuNombre, " ", u.usuApellido) AS Responsable
-        FROM 
+            CONCAT(u.usuNombre, " ", u.usuApellido) AS Responsable,
+            TIMESTAMPDIFF(HOUR, NOW(), t.tarFecha_limite) AS Tiempo_Restante
+        FROM
             gt_tarea t
             JOIN gt_fase f ON t.fk_id_fase = f.pk_id_fase
             JOIN ga_proyecto p ON f.fk_id_proyecto = p.pk_id_proyecto
             JOIN usuarios_gt_tareas ut ON t.pk_id_tarea = ut.fk_id_tarea
             JOIN usuario u ON u.pk_id_usuario = ut.fk_id_usuario
-        WHERE 
+        WHERE
             t.tarEstado = 'PENDIENTE'
             AND t.tarFecha_limite BETWEEN NOW() AND DATE_ADD(NOW(), INTERVAL 7 DAY)
-        ORDER BY 
+        ORDER BY
             p.proNombre, f.fasNombre, t.tarFecha_limite;
     ELSE
-        SELECT 
+        SELECT
             p.proNombre AS Proyecto,
             f.fasNombre AS Fase,
             t.tarNombre AS Tarea,
             t.tarFecha_limite AS Fecha_Limite,
-            CONCAT(u.usuNombre, " ", u.usuApellido) AS Responsable
-        FROM 
+            CONCAT(u.usuNombre, " ", u.usuApellido) AS Responsable,
+            TIMESTAMPDIFF(HOUR, NOW(), t.tarFecha_limite) AS Tiempo_Restante
+        FROM
             gt_tarea t
             JOIN usuarios_gt_tareas ut ON ut.fk_id_tarea = t.pk_id_tarea
-			JOIN usuario u ON ut.fk_id_usuario = u.pk_id_usuario
-			JOIN gt_fase f ON t.fk_id_fase = f.pk_id_fase
-			JOIN ga_proyecto p ON f.fk_id_proyecto = p.pk_id_proyecto
-        WHERE 
+            JOIN usuario u ON ut.fk_id_usuario = u.pk_id_usuario
+            JOIN gt_fase f ON t.fk_id_fase = f.pk_id_fase
+            JOIN ga_proyecto p ON f.fk_id_proyecto = p.pk_id_proyecto
+        WHERE
             t.tarEstado = 'PENDIENTE'
             AND t.tarFecha_limite BETWEEN NOW() AND DATE_ADD(NOW(), INTERVAL 7 DAY)
-            AND p.pk_id_proyecto = proyecto;
+            AND p.pk_id_proyecto = proyecto
+        ORDER BY
+            p.proNombre, f.fasNombre, t.tarFecha_limite;
     END IF;
-    COMMIT;
-END//
+END //
+
+/* Listar las fases que hay en un proyecto*/
+CREATE PROCEDURE listar_fases_por_proyecto (
+    IN proyecto BIGINT
+)
+BEGIN
+        SELECT
+            f.fasNombre AS Fase,
+            f.pk_id_fase AS id_fase
+        FROM
+            gt_fase f
+        WHERE
+          f.fk_id_proyecto = proyecto
+        ORDER BY
+       f.fasNombre;
+
+END // 
 
 /* Listar las tareas por id del usuario y por el nombre del proyecto*/
 /* CALL listar_tareas_por_usuario_por_proyecto (1011234567,"planta" ) */
