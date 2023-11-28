@@ -49,7 +49,7 @@
     <!-- Encabezado de la pagina -->
     <header>
         <!-- Revisar que  max-height:78px funcione sin problemas en diferentes pantallas-->
-        <iframe src="Header.html" class="w-100" height="78" style="max-height:78px;" title="Encabezado"></iframe>
+        <iframe src="Header.php" class="w-100" height="78" style="max-height:78px;" title="Encabezado"></iframe>
     </header>
 
     <div class="row flex-grow-1">
@@ -125,48 +125,24 @@
                     </div>
                     <br>
                     <!-- Botón "Guardar fase" que abre el modal -->
-                    <button class="btn btn-lg float-end custom-btn" id="guardarFaseButton"
-                        style="font-size: 15px;">Guardar fase</button>
+                    <a data-bs-toggle="modal" data-bs-target="#CrearUsuario"></a>
 
-                    <!-- Modal de confirmación -->
-                    <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog"
-                        aria-labelledby="confirmModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="confirmModalLabel">Confirmar envío</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    ¿Estás seguro de que deseas enviar el formulario?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="button" class="btn btn-primary"
-                                        id="confirmarModalButton">Confirmar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Modal de éxito -->
-                    <div class="modal fade" id="successModal" tabindex="-1" role="dialog"
-                        aria-labelledby="successModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="successModalLabel">Éxito</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    La fase se ha creado exitosamente.
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
+                        <div class="modal" tabindex="-1" id="CrearUsuario">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Crear usuario</h5>
+                  </div>
+                  <div class="modal-body">
+                    <p>¿Estás seguro de crear este usuario?</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Aceptar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
                 </form>
             </div>
         </div>

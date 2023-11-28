@@ -27,6 +27,8 @@ if (
     // Cerrar la conexión y liberar recursos
     $stmt->close();
     mysqli_close($conectar);
+
+    header
 } else {
     echo "Error: Datos de formulario incompletos.";
 }

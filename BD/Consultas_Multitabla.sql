@@ -120,6 +120,22 @@ BEGIN
     END IF;
 END //
 
+/* Listar las fases que hay en un proyecto*/
+CREATE PROCEDURE listar_fases_por_proyecto (
+    IN proyecto BIGINT
+)
+BEGIN
+        SELECT
+            f.fasNombre AS Fase,
+            f.pk_id_fase AS id_fase
+        FROM
+            gt_fase f
+        WHERE
+          f.fk_id_proyecto = proyecto
+        ORDER BY
+       f.fasNombre;
+
+END // 
 
 /* Listar las tareas por id del usuario y por el nombre del proyecto*/
 /* CALL listar_tareas_por_usuario_por_proyecto (1011234567,"planta" ) */

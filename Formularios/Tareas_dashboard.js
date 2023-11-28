@@ -20,46 +20,6 @@
     );
   });
  
-  document.addEventListener("DOMContentLoaded", function () {
-    const tablaTareas = document.getElementById("tablaTareas");
-    const dropdown = document.querySelector(".dropdown");
-
-    dropdown.addEventListener("click", function (event) {
-      if (event.target.classList.contains("dropdown-item")) {
-        const selectedProject = event.target.textContent;
-        filterTable(selectedProject);
-      }
-    });
-
-    function filterTable(selectedProject) {
-      const rows = tablaTareas.querySelectorAll("tbody tr");
-      rows.forEach(function (row) {
-        const proyecto = row.cells[0].textContent;
-        if (
-          selectedProject === "Todos los proyectos" ||
-          proyecto === selectedProject
-        ) {
-          row.style.display = "";
-        } else {
-          row.style.display = "none";
-        }
-      });
-    }
-  });
-
-  document.addEventListener("DOMContentLoaded", function () {
-    const proyectoSeleccionadoBtn = document.getElementById(
-      "proyectoSeleccionado"
-    );
-    const dropdown = document.querySelector(".dropdown");
-
-    dropdown.addEventListener("click", function (event) {
-      if (event.target.classList.contains("dropdown-item")) {
-        const selectedProject = event.target.textContent;
-        proyectoSeleccionadoBtn.textContent = selectedProject;
-      }
-    });
-  });
 
   document.addEventListener('DOMContentLoaded', function () {
     // Función para calcular el tiempo restante
@@ -138,23 +98,66 @@
       tbody.appendChild(tarea.fila);
     });
   });
-
-  $(document).ready(function() {
-    $('.dropdown-item').click(function(e) {
-        e.preventDefault();
-        var idProyecto = $(this).data('idproyecto');
-        $('#proyectoSeleccionado').html($(this).text()); // Actualiza el botón del dropdown con el proyecto seleccionado
-
-        // Realiza la solicitud AJAX para obtener y mostrar las tareas correspondientes
-        $.ajax({
-            type: 'POST',
-            url: 'obtener_tareas.php', // Archivo PHP que procesa la solicitud
-            data: { proyecto: idProyecto },
-            success: function(data) {
-                $('#tablaTareas tbody').html(data); // Actualiza el cuerpo de la tabla con las nuevas tareas
-            }
-        });
-    });
 });
 
-})();
+// Tareas_dashboard.js
+
+function seleccionarProyecto(elemento) {
+
+  // Obtener el ID del proyecto seleccionado
+  const projectId = elemento.dataset.id;
+
+  // Enviar una solicitud AJAX al servidor
+  const xhr = new XMLHttpRequest();
+  xhr.open("POST", "/Tareas_dashboard.php", true);
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.send(JSON.stringify({
+    projectId: projectId
+  }));
+
+  // Actualizar la tabla
+  const tablaTareas = document.getElementById("tablaTareas");
+  tablaTareas.innerHTML = "";
+
+  // Obtener las tareas para el proyecto seleccionado
+  const tareas = JSON.parse(xhr.responseText);
+
+  // Iterar sobre las tareas
+  tareas.forEach((tarea) => {
+
+    // Agregar una fila a la tabla
+    const fila = document.createElement("tr");
+    tablaTareas.appendChild(fila);
+
+    // Agregar las columnas a la fila
+    fila.appendChild(document.createTextNode(tarea.proyecto));
+    fila.appendChild(document.createTextNode(tarea.fase));
+    fila.appendChild(document.createTextNode(tarea.tarea));
+    fila.appendChild(document.createTextNode(tarea.fechaHoraLimite));
+    fila.appendChild(document.createTextNode(tarea.responsable));
+    fila.appendChild(document.createTextNode(tarea.tiempoRestante));
+  });
+}
+
+function actualizarTabla(data) {
+  // Aquí puedes usar el objeto 'data' recibido para actualizar la tabla
+  console.log(data); // Puedes usar este console.log para depurar y ver los datos recibidos
+
+  // Ejemplo de cómo podrías actualizar la tabla
+  var tbody = document.getElementById('tablaTareas').getElementsByTagName('tbody')[0];
+  tbody.innerHTML = ''; // Limpia el contenido actual del tbody
+
+  // Itera sobre los datos y agrega las filas a la tabla
+  for (var i = 0; i < data.length; i++) {
+    var row = "<tr>";
+    row += "<td>" + data[i].Proyecto + "</td>";
+    row += "<td>" + data[i].Fase + "</td>";
+    row += "<td>" + data[i].Tarea + "</td>";
+    row += "<td>" + data[i].Fecha_Limite + "</td>";
+    row += "<td>" + data[i].Responsable + "</td>";
+    row += "<td>" + data[i].Tiempo_Restante + "</td>";
+    row += "</tr>";
+
+    tbody.innerHTML += row;
+  }
+}
