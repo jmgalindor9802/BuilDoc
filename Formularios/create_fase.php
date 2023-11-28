@@ -1,6 +1,6 @@
 <?php
 require 'conexion.php';
-var_dump($_POST);
+
 // Verificar si los datos del formulario están presentes
 if (
     isset($_POST["Nombre_fase"]) && !empty($_POST["Nombre_fase"]) &&
@@ -10,7 +10,7 @@ if (
     // Obtener datos del formulario
     $Nombre = $_POST["Nombre_fase"];
     $Proyecto = $_POST["Proyecto_fase"];
-    $Descripcion = $_POST[ "Descripcion_fase"];
+    $Descripcion = $_POST["Descripcion_fase"];
     $Estado = "PENDIENTE";
 
     // Llamada al procedimiento almacenado
@@ -19,18 +19,20 @@ if (
 
     // Ejecutar la llamada al procedimiento almacenado
     if ($stmt->execute()) {
-        echo "Los datos se almacenaron correctamente.";
+        // Imprimir mensaje en la consola del navegador
+        echo "<script>console.log('Procedimiento almacenado ejecutado con éxito.');</script>";
+        
+        // Redirigir a Inspecciones_dashboard.php
+        header("Location: Tareas_dashboard.php");
+        // Cerrar la conexión y liberar recursos
+        $stmt->close();
+        mysqli_close($conectar);
     } else {
-        echo "Error, no se guardaron los datos correctamente: " . $stmt->error;
+        // Imprimir mensaje de error en la consola del navegador
+        echo "<script>console.error('Error al ejecutar el procedimiento almacenado: " . $stmt->error . "');</script>";
     }
-
-    // Redirigir a Inspecciones_dashboard.php
-    header("Location: Tareas_dashboard.php");
-    // Cerrar la conexión y liberar recursos
-    $stmt->close();
-    mysqli_close($conectar);
-
 } else {
-    echo "Error: Datos de formulario incompletos.";
+    // Imprimir mensaje en la consola del navegador
+    echo "<script>console.error('Error: Datos de formulario incompletos.');</script>";
 }
 ?>
