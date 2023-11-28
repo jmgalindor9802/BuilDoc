@@ -168,27 +168,38 @@ COMMIT;
 END//
 
 CREATE PROCEDURE InsertarInspeccion(
-	IN nombre VARCHAR(280),
+    IN nombre VARCHAR(280),
     IN descripcion VARCHAR(5000),
     IN estado ENUM('PENDIENTE','EN PROGRESO','COMPLETADO'),
     IN fecha DATETIME,
-    IN periodicidad ENUM('DIARIA', 'SEMANAL','MENSUAL'),
+    IN periodicidad ENUM('DIARIA', 'SEMANAL','MENSUAL', 'NINGUNA'),
     IN fecha_final DATETIME,
     IN autor BIGINT,
     IN proyecto BIGINT,
-    IN inspector BIGINT)
+    IN inspector BIGINT
+)
 BEGIN
-	DECLARE idInspeccion BIGINT;
+    DECLARE idInspeccion BIGINT;
+    
+    IF periodicidad = 'NINGUNA' THEN
+        SET fecha_final = fecha; -- Asignar el mismo valor que fecha
+    END IF;
+
     IF periodicidad IS NULL THEN
         SET fecha_final = NULL;
     END IF;
-	INSERT INTO gii_inspeccion (insNombre, insDescripcion, insEstado, insFecha_inicial, insPeriodicidad, insFecha_final, fk_id_usuario, fk_id_proyecto)
+
+    INSERT INTO gii_inspeccion (insNombre, insDescripcion, insEstado, insFecha_inicial, insPeriodicidad, insFecha_final, fk_id_usuario, fk_id_proyecto)
     VALUES (nombre, descripcion, estado, fecha, periodicidad, fecha_final, autor, proyecto);
+    
     SET idInspeccion = LAST_INSERT_ID();
+    
     INSERT INTO usuarios_gii_inspecciones (fk_id_usuario, fk_id_inspeccion)
     values (inspector, idInspeccion);
+    
     COMMIT;
-    END//
+END//
+
     
 CREATE PROCEDURE InsertarInvolucrado(
     IN numero_documento BIGINT,
@@ -201,6 +212,7 @@ BEGIN
     DECLARE usuario_existente INT;
     DECLARE usuario_nombre VARCHAR(280);
     DECLARE usuario_apellido VARCHAR(280);
+    DECLARE last_incidente BIGINT;
 
     -- Verificar si el número de documento existe en la tabla de usuarios
     SELECT COUNT(*) INTO usuario_existente
@@ -217,9 +229,18 @@ BEGIN
         SET usuario_apellido = apellido;
     END IF;
 
+    -- Si se proporciona el incidente manualmente, úsalo; de lo contrario, obtén el último incidente
+    IF incidente IS NOT NULL THEN
+        SET last_incidente = incidente;
+    ELSE
+        -- Obtener el último incidente reportado
+        SELECT MAX(pk_id_incidente) INTO last_incidente
+        FROM gii_involucrado;
+    END IF;
+
     -- Insertar en la tabla gii_involucrado
     INSERT INTO gii_involucrado (invNombre, invApellido, invNumDocumento, invJustificacion, fk_id_incidente)
-    VALUES (usuario_nombre, usuario_apellido, numero_documento, justificacion, incidente);
+    VALUES (usuario_nombre, usuario_apellido, numero_documento, justificacion, last_incidente);
 
     COMMIT;
 END//

@@ -52,4 +52,3 @@ dropdownItems.forEach(function (item) {
     dropdown.textContent = item.textContent;
   });
 });
-

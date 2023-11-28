@@ -63,12 +63,11 @@
       <div class="col-12 custom-form vh-80">
         <br>
 
-        <form action="usuario.php" method="post" class="needs-validation " style="max-height: 70vh" novalidate>
-
+        <form id="formulario_usuario" class="needs-validation" method="post" action="crear_usuario.php" novalidate>
           <div class="row g-3">
             <div class="col-sm-12">
-              <label id="NumeroDocumento" for="document" class="form-label">Número de documento</label>
-              <input name="CC" type="number" class="form-control" id="document" placeholder="Documento usuario" value=""
+              <label id="Cedula" for="document" class="form-label">Número de documento</label>
+              <input name="Cedula" type="number" class="form-control" id="document" placeholder="Documento usuario" value=""
                 required>
               <div class="invalid-feedback">
                 Se requiere un numero válido.
@@ -92,7 +91,7 @@
             </div>
             <div class="col-sm-6">
               <label id="EPSusu" for="eps" class="form-label">EPS</label>
-              <input name="EPSusu" type="text" class="form-control" id="eps" placeholder="Nombre EPS" value="" required>
+              <input name="EPS" type="text" class="form-control" id="eps" placeholder="Nombre EPS" value="" required>
               <div class="invalid-feedback">
                 Se requiere una EPS válida.
               </div>
@@ -142,7 +141,7 @@
                 <input name="DireccionUsu" type="text" class="form-control" id="direccion"
                   placeholder="Dirección residencia" required>
                 <div class="invalid-feedback">
-                  Se requiere una direccion válido.
+                  Se requiere una direccion válida.
                 </div>
               </div>
             </div>
@@ -152,7 +151,7 @@
                 <input name="MunicipioUsu" type="text" class="form-control" id="municipio"
                   placeholder="Municipio residencia" required>
                 <div class="invalid-feedback">
-                  Se requiere una municipio válido.
+                  Se requiere un municipio válido.
                 </div>
               </div>
             </div>
@@ -197,7 +196,8 @@
               </div>
             </div>
             <div class="py-4">
-              <button class="btn btn-lg float-end custom-btn" type="submit" style="font-size: 15px;">Guardar
+              <button class="btn btn-lg float-end custom-btn" type="submit" style="font-size: 15px;"
+              >Guardar
                 usuario</button>
             </div>
         </form>
@@ -205,10 +205,40 @@
     </div>
   </div>
 
-  <script src="Usuario.js"></script>
+  <script src="crear_usuario_form.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
-</body>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script type="text/javascript">
+    /*
+    function agregarNuevoUsuario() {
+        $.ajax({
+            method: "POST",
+            data: $('#formRegistroUser').serialize(),
+            url: "class_usuario.php",
+            success: function(respuesta) {
+                respuesta = respuesta.trim();
 
+                  if (respuesta == 1) {
+                    $('#formRegistroUser')[0].reset();
+                    swal(":D", "Usuario agregado correctamente", "success");
+                } else if (respuesta == 2) {
+                    swal("Error", "Este usuario ya existe, por favor añade otro.", "error");
+                } else {
+                    swal("Error", "Hubo un problema al agregar el usuario", "error");
+                }
+            },
+            error: function() {
+                swal("Error", "Hubo un problema al comunicarse con el servidor", "error");
+            }
+        });
+
+        return false;
+    }*/
+</script>
+
+
+</body>
 </html>
