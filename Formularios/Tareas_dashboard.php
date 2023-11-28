@@ -75,11 +75,11 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 
   </style>
 </head>
-
-<body style="height: 100vh; display: flex; flex-direction: column; overflow: hidden;">
-  <header>
+<header>
   <?php include('Header.php'); ?>
   </header>
+<body style="height: 100vh; display: flex; flex-direction: column; overflow: hidden;">
+  
 
   <div class="row flex-grow-1 ">
     <div class="col-lg-2 ">

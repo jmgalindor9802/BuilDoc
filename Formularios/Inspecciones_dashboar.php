@@ -64,10 +64,12 @@
   </style>
 </head>
 <header>
-  <?php include('Header.php'); ?>
-</header>
+<?php include('Header.php'); ?>
+  </header>
 <body style="height: 100vh; display: flex; flex-direction: column; overflow: hidden;">
-    
+  <!-- Encabezado de la pagina -->
+ 
+
   <!-- Cuerpo de la pagina -->
   <div class="row flex-grow-1">
     <div class="col-lg-2">
