@@ -131,7 +131,7 @@
             <div class="dropdown">
                 <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
                     data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="recursos/foto_usuario.jpeg" alt="" width="32" height="32" class="rounded-circle me-2">
+                    <img src="../recursos/fotoUsuario.jpg" alt="" width="32" height="32" class="rounded-circle me-2">
                     <strong>Julián Amado</strong>
                 </a>
 
