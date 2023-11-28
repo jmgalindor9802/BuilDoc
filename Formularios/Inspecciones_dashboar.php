@@ -8,7 +8,8 @@
   <link rel="shortcut icon" href="recursos/HeadLogo.png" type="image/x-icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
 
   <style>
     .border-left {
@@ -100,28 +101,28 @@
 
         <h1>Ultimas Inspecciones</h1>
 
-        <div class="dropdown" style="margin-top: 20px;">
+        <!-- <div class="dropdown" style="margin-top: 20px;">
           <button id="proyectoSeleccionado" class="btn btn-secondary dropdown-toggle" type="button"
             data-bs-toggle="dropdown" aria-expanded="false">
             Todos los proyectos
           </button>
           <ul class="dropdown-menu">
 
-            <!-- Actualizar los datos del boton -->
+            Actualizar los datos del boton -->
 
 
-            <li><a class="dropdown-item" href="#">Todos los proyectos</a></li>
+            <!-- <li><a class="dropdown-item" href="#">Todos los proyectos</a></li>
             <li><a class="dropdown-item" href="#">Proyecto de Carretera Transversal</a></li>
             <li><a class="dropdown-item" href="#">Ampliación de Aeropuerto Internacional</a></li>
             <li><a class="dropdown-item" href="#"> Proyecto de Túnel Subterráneo</a></li>
           </ul>
 
-        </div>
+        </div> --> 
       </div>
 
-      <div class="table-responsive vh-80">
-
-        <table id="Tabla_incidentes" class="table table-striped table-hover sticky-header">
+      <div class="table-responsive dataTables_wrapper dt-bootstrap5">
+      
+        <table id="Tabla_incidentes" class="table table-striped sticky-header" style="width:100%">
           <thead>
             <tr>
               <th scope="col">Inspeccion</th>
@@ -330,6 +331,17 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+  <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+  <script type="text/javascript">
+
+    $(document).ready(function(){
+        $('#Tabla_incidentes').DataTable();
+    });
+
+  </script>
+  
 </body>
 
 </html>
