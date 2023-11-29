@@ -80,27 +80,6 @@
           </button>
           <ul class="dropdown-menu" style="max-height: 200px; overflow-y: auto;">
               <li><a class="dropdown-item" href="#">Todos los proyectos</a></li>
-              <?php
-              require('conexion.php');
-
-              // Verificar la conexión
-              if (!$conectar) {
-                  die("Conexión fallida: " . mysqli_connect_error());
-              }
-              
-              // Consulta para obtener nombres e IDs de proyectos de la base de datos
-              $sql = "SELECT proMunicipio FROM ga_proyecto ORDER BY proMunicipio";
-              $result = mysqli_query($conectar, $sql);
-              
-              // Rellenar opciones del select con los resultados de la consulta
-              if ($result && mysqli_num_rows($result) > 0) {
-                  while($row = mysqli_fetch_assoc($result)) {
-                      echo '<li><a class="dropdown-item" href="#">' . $row["proMunicipio"] . '</a></li>';
-                  }
-              } else {
-                  echo "No se encontraron resultados.";
-              }              
-              ?>
           </ul>
         </div>
       </div>
