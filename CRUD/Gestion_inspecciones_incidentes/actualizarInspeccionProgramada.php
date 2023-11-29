@@ -37,18 +37,14 @@
     }
   </style>
 </head>
-
-<body style="height: 100vh; display: flex; flex-direction: column; overflow: hidden;">
-  <!-- Encabezado de la pagina -->
-  <header>
-    <!-- Revisar que  max-height:78px funcione sin problemas en diferentes pantallas-->
-    <iframe src="Header.html" class="w-100" height="78" style="max-height:78px;" title="Encabezado"></iframe>
+<header>
+<?php include('../Header.php'); ?>
   </header>
-
+<body style="height: 100vh; display: flex; flex-direction: column; overflow: hidden;">
   <div class="row flex-grow-1">
     <div class="col-lg-2">
       <!-- Menu lateral izquierdo que permite el despasamiento de la pagina -->
-      <iframe src="Menu.html" class="w-100 " height="100%" style="max-height: 100%;" title="Menú principal"></iframe>
+      <?php include('../Menu.php'); ?>
     </div>
     <div class="col-10 border-left ">
       <nav aria-label="breadcrumb" class="d-flex align-items-center custom-nav ">
@@ -64,7 +60,7 @@
 
         <form action="inspecciones.php" method="POST" class="needs-validation " style="max-height: 70vh" novalidate>
           <?php
-include_once('conexion.php');
+include_once('../conexion.php');
 
 // Verificar si la variable está definida y no es nula antes de usarla en la consulta
 if (isset($_REQUEST['Id_recuperadoInspeccion']) && !empty($_REQUEST['Id_recuperadoInspeccion'])) {

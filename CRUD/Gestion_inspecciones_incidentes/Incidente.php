@@ -1,6 +1,6 @@
 <?php 
 
-require 'conexion.php';
+require '../conexion.php';
 // Verificar si los datos del formulario están presentes
 if (
     isset($_POST["Nombre_incidente"]) && !empty($_POST["Nombre_incidente"]) &&

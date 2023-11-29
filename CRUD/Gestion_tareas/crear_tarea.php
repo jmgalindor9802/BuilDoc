@@ -54,8 +54,7 @@
     <div class="row flex-grow-1">
         <div class="col-lg-2">
             <!-- Menu lateral izquierdo que permite el despasamiento de la pagina -->
-            <iframe src="Menu.html" class="w-100 " height="100%" style="max-height: 100%;"
-                title="Menú principal"></iframe>
+            <?php include('../Menu.php'); ?>
         </div>
         <div class="col-10 border-left ">
             <nav aria-label="breadcrumb" class="d-flex align-items-center custom-nav ">
@@ -77,7 +76,7 @@
                                     <select  name="Proyecto_tarea" class="form-select" id="proyectoSelect" required>
                                         <option value="">Elegir...</option>
                                         <?php
-                                        require('conexion.php');
+                                        require('../conexion.php');
 
                                         // Verificar la conexión
                                         if (!$conectar) {
@@ -106,7 +105,7 @@
                                     <select  name="Fase_tarea" class="form-select" id="faseSelect" required>
                                         <option value="">Elegir...</option>
                                         <?php
-                                        include('conexion.php');
+                                        include('../conexion.php');
 
                                         // Verificar la conexión
                                         if (!$conectar) {

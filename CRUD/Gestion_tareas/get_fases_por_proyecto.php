@@ -4,7 +4,7 @@
 if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) !== 'xmlhttprequest') {
     die('Esta página solo puede ser accedida mediante una solicitud AJAX.');
 }
-require('conexion.php');
+require('../conexion.php');
 
 // Verificar si es una solicitud AJAX
 if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {

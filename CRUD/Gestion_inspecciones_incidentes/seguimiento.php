@@ -1,6 +1,6 @@
 <?php 
 
-require 'conexion.php';
+require '../conexion.php';
 // Verificar si los datos del formulario están presentes
 var_dump($_POST);
 if (

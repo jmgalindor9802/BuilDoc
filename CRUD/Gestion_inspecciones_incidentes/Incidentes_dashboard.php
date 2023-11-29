@@ -65,19 +65,15 @@
     }
   </style>
 </head>
-
-<body style="height: 100vh; display: flex; flex-direction: column; overflow: hidden;">
-  <!-- Encabezado de la pagina -->
-  <header>
-    <!-- Revisar que  max-height:78px funcione sin problemas en diferentes pantallas-->
-    <iframe src="Header.html" class="w-100" height="78" style="max-height:78px;" title="Encabezado"></iframe>
+<header>
+<?php include('../Header.php'); ?>
   </header>
-
+<body style="height: 100vh; display: flex; flex-direction: column; overflow: hidden;">
   <!-- Cuerpo de la pagina -->
   <div class="row flex-grow-1">
     <div class="col-lg-2">
       <!-- Menu lateral izquierdo que permite el despasamiento de la pagina -->
-      <iframe src="Menu.html" class="w-100 " height="100%" style="max-height: 100%;" title="Menú principal"></iframe>
+      <?php include('../Menu.php'); ?>
     </div>
     <div class="col-10 border-left custom-form">
       <nav aria-label="breadcrumb" class="d-flex align-items-center custom-nav">
@@ -138,7 +134,7 @@
           </thead>
           <tbody>
             <?php
-              require("conexion.php");
+              require("../conexion.php");
               
               $sql = $conectar -> query("SELECT 
               gii_incidente.pk_id_incidente,
