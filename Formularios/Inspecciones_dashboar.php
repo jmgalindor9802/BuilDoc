@@ -77,7 +77,7 @@
       <?php include('Menu.php'); ?>
     </div>
     <div class="col-10 border-left custom-form">
-      <nav aria-label="breadcrumb" class="d-flex align-items-center custom-nav">
+      <nav aria-label="breadcrumb">
         <!-- indicador de la ubicacion actual en la pagina -->
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="#">Inicio</a></li>
@@ -121,7 +121,7 @@
 
       <div class="table-responsive dataTables_wrapper dt-bootstrap5">
 
-        <table id="Tabla_incidentes" class="table table-striped sticky-header" style="width:100%">
+        <table id="Tabla_inspecciones" class="table table-striped sticky-header" style="width:100%">
           <thead>
             <tr>
               <th scope="col">Inspeccion</th>
@@ -336,7 +336,7 @@
   <script type="text/javascript">
 
     $(document).ready(function(){
-        $('#Tabla_incidentes').DataTable();
+        $('#Tabla_inspecciones').DataTable();
     });
 
   </script>

@@ -50,8 +50,8 @@
       <!-- Menu lateral izquierdo que permite el despasamiento de la pagina -->
       <iframe src="Menu.html" class="w-100 " height="100%" style="max-height: 100%;" title="Menú principal"></iframe>
     </div>
-    <div class="col-10 border-left ">
-      <nav aria-label="breadcrumb" class="d-flex align-items-center custom-nav ">
+    <div class="col-10 border-left custom-form">
+      <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="#">Inicio</a></li>
           <li class="breadcrumb-item"><a href="#">Inspección</a></li>

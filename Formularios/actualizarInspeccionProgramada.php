@@ -62,43 +62,40 @@
       <div class="col-12 custom-form vh-80">
         <br>
 
-        <form action="inspecciones.php" method="POST" class="needs-validation " style="max-height: 70vh" novalidate>
+        <form action="actualizarIns.php" method="POST" class="needs-validation " style="max-height: 70vh" novalidate>
           <?php
-include_once('conexion.php');
-
-// Verificar si la variable está definida y no es nula antes de usarla en la consulta
-if (isset($_REQUEST['Id_recuperadoInspeccion']) && !empty($_REQUEST['Id_recuperadoInspeccion'])) {
-    $sql = "SELECT
-        i.*,
-        u.usuNombre AS nombre_usuario,
-        u.usuApellido AS apellido_usuario,
-        gp.proNombre AS nombre_proyecto
-        FROM 
-        gii_inspeccion i
-        INNER JOIN usuarios_gii_inspecciones ugi ON i.pk_id_inspeccion = ugi.fk_id_inspeccion
-        INNER JOIN usuario u ON ugi.fk_id_usuario = u.pk_id_usuario
-        INNER JOIN ga_proyecto gp ON i.fk_id_proyecto = gp.pk_id_proyecto
-        WHERE 
-        i.pk_id_inspeccion = ?";
-    $stmt = $conectar->prepare($sql);
-    if (!$stmt) {
-        die("Error al preparar la consulta: " . $conectar->error);
-    }
-    $stmt->bind_param("i", $_REQUEST['Id_recuperadoInspeccion']);
-    $stmt->execute();
-    $resultadoConsulta = $stmt->get_result();
-
-    if ($resultadoConsulta->num_rows > 0) {
-        $row = $resultadoConsulta->fetch_assoc();
-    } else {
-        echo "No se encontró ningún incidente con esa ID";
-    }
-
-    $stmt->close();
-} else {
-    echo "ID de incidente no válida";
-}
-?>
+            include_once('conexion.php');
+            // Verificar si la variable está definida y no es nula antes de usarla en la consulta
+            if (isset($_REQUEST['Id_recuperadoInspeccion']) && !empty($_REQUEST['Id_recuperadoInspeccion'])) {
+            $sql = "SELECT
+                    i.*,
+                    u.usuNombre AS nombre_usuario,
+                    u.usuApellido AS apellido_usuario,
+                    gp.proNombre AS nombre_proyecto
+                    FROM 
+                    gii_inspeccion i
+                    INNER JOIN usuarios_gii_inspecciones ugi ON i.pk_id_inspeccion = ugi.fk_id_inspeccion
+                    INNER JOIN usuario u ON ugi.fk_id_usuario = u.pk_id_usuario
+                    INNER JOIN ga_proyecto gp ON i.fk_id_proyecto = gp.pk_id_proyecto
+                    WHERE 
+                    i.pk_id_inspeccion = ?";
+            $stmt = $conectar->prepare($sql);
+            if (!$stmt) {
+              die("Error al preparar la consulta: " . $conectar->error);
+            }
+            $stmt->bind_param("i", $_REQUEST['Id_recuperadoInspeccion']);
+            $stmt->execute();
+            $resultadoConsulta = $stmt->get_result();
+            if ($resultadoConsulta->num_rows > 0) {
+              $row = $resultadoConsulta->fetch_assoc();
+            } else {
+              echo "No se encontró ningún incidente con esa ID";
+            }
+            $stmt->close();
+            } else {
+              echo "ID de incidente no válida";
+            }
+          ?>
           <div class="row g-3">
             <div class="col-md-6">
               <label for="proyecto" class="form-label">Proyecto</label>
@@ -259,6 +256,7 @@ $stmtInspectoresAsignados->close();
         ?>
     </ul>
 </div>
+<input type="hidden" name="Id_inspeccion" value="<?php echo $_REQUEST['Id_recuperadoInspeccion']; ?>" class="d-none">
 
               <div class="py-4">
                 <a class="btn btn-lg float-end custom-btn" style="font-size: 15px;" data-bs-toggle="modal"

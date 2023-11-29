@@ -33,7 +33,7 @@
             <!-- Lista de elementos del menú -->
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
-                    <a href="inicio.html" class="nav-link active" aria-current="page" target="_blank">
+                    <a href="inicio.html" class="nav-link active" aria-current="page" >
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-house-door" viewBox="0 0 16 16" style="margin-right: 8px;">
                             <path
@@ -43,7 +43,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="..\PaginasError\Error404.html" class="nav-link link-body-emphasis" target="_blank">
+                    <a href="..\PaginasError\Error404.html" class="nav-link link-body-emphasis" >
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-speedometer2" viewBox="0 0 16 16" style="margin-right: 8px;">
                             <path
@@ -55,7 +55,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="Proyecto_dashboard.html" class="nav-link link-body-emphasis" target="_blank">
+                    <a href="Proyecto_dashboard.html" class="nav-link link-body-emphasis" >
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-buildings" viewBox="0 0 16 16" style="margin-right: 8px;">
                             <path
@@ -67,7 +67,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="Usuario.html" class="nav-link link-body-emphasis" target="_blank">
+                    <a href="Usuario.html" class="nav-link link-body-emphasis" >
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-people" viewBox="0 0 16 16" style="margin-right: 8px;">
                             <path
@@ -78,7 +78,7 @@
                 </li>
 
                 <li>
-                    <a href="..\PaginasError\Error500.html" class="nav-link link-body-emphasis" target="_blank">
+                    <a href="..\PaginasError\Error500.html" class="nav-link link-body-emphasis" >
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-folder2" viewBox="0 0 16 16" style="margin-right: 8px;">
                             <path
@@ -89,7 +89,7 @@
                 </li>
 
                 <li>
-                    <a href="Tareas_dashboard.php" class="nav-link link-body-emphasis" target="_blank">
+                    <a href="Tareas_dashboard.php" class="nav-link link-body-emphasis" >
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-card-checklist" viewBox="0 0 16 16" style="margin-right: 8px;">
                             <path
@@ -102,7 +102,7 @@
                 </li>
 
                 <li>
-                    <a href="Inspeccion.html" class="nav-link link-body-emphasis" target="_blank">
+                    <a href="Inspecciones_dashboar.php" class="nav-link link-body-emphasis" >
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-search" viewBox="0 0 16 16" style="margin-right: 8px;">
                             <path
@@ -113,7 +113,7 @@
                 </li>
 
                 <li>
-                    <a href="Incidente.html" class="nav-link link-body-emphasis" target="_blank">
+                    <a href="Incidentes_dashboard.php" class="nav-link link-body-emphasis">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-exclamation-triangle" viewBox="0 0 16 16" style="margin-right: 8px;">
                             <path

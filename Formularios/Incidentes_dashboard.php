@@ -8,7 +8,8 @@
   <link rel="shortcut icon" href="recursos/HeadLogo.png" type="image/x-icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
 
   <style>
     .border-left {
@@ -65,22 +66,18 @@
     }
   </style>
 </head>
-
-<body style="height: 100vh; display: flex; flex-direction: column; overflow: hidden;">
-  <!-- Encabezado de la pagina -->
-  <header>
-    <!-- Revisar que  max-height:78px funcione sin problemas en diferentes pantallas-->
-    <iframe src="Header.html" class="w-100" height="78" style="max-height:78px;" title="Encabezado"></iframe>
+<header>
+<?php include('Header.php'); ?>
   </header>
-
+<body style="height: 100vh; display: flex; flex-direction: column; overflow: hidden;">
   <!-- Cuerpo de la pagina -->
   <div class="row flex-grow-1">
     <div class="col-lg-2">
       <!-- Menu lateral izquierdo que permite el despasamiento de la pagina -->
-      <iframe src="Menu.html" class="w-100 " height="100%" style="max-height: 100%;" title="Menú principal"></iframe>
+      <?php include('Menu.php'); ?>
     </div>
     <div class="col-10 border-left custom-form">
-      <nav aria-label="breadcrumb" class="d-flex align-items-center custom-nav">
+      <nav aria-label="breadcrumb">
         <!-- indicador de la ubicacion actual en la pagina -->
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="#">Inicio</a></li>
@@ -335,6 +332,14 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+  <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+        $('#Tabla_incidentes').DataTable();
+    });
+  </script>
 </body>
 
 </html>
