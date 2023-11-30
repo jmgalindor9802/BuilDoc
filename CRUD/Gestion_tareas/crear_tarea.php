@@ -56,7 +56,7 @@
             <!-- Menu lateral izquierdo que permite el despasamiento de la pagina -->
             <?php include('../Menu.php'); ?>
         </div>
-        <div class="col-10 border-left ">
+        <div class="col-10 border-left " style="padding-right: 5%;padding-left: 5%;">
             <nav aria-label="breadcrumb" class="d-flex align-items-center custom-nav ">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Inicio</a></li>
