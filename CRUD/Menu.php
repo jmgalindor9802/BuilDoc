@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-        <div class="col-12">
+        <div class="col-12" style="padding-right:5%; padding-left:5%">
             <hr>
             <p class="fs-4 text-center">Servinco SAS</p>
             <hr>
