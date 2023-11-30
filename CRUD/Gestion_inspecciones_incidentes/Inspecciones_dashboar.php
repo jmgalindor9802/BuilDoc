@@ -121,7 +121,7 @@
 
       <div class="table-responsive dataTables_wrapper dt-bootstrap5">
 
-        <table id="Tabla_incidentes" class="table table-striped sticky-header" style="width:100%">
+        <table id="Tabla_incidentes" class="table table-striped sticky-header">
           <thead>
             <tr>
               <th scope="col">Inspeccion</th>
