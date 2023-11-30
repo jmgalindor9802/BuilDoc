@@ -161,3 +161,4 @@ function actualizarTabla(data) {
     tbody.innerHTML += row;
   }
 }
+

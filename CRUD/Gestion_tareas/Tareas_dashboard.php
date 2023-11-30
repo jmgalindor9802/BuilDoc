@@ -1,17 +1,3 @@
-<?php
-// Verificar si es una solicitud AJAX
-if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
-    // Configurar el encabezado para indicar que la respuesta es JSON
-    header('Content-Type: application/json');
-
-    // Obtener los datos que deseas enviar como JSON
-    $tu_data_json = array('mensaje' => '¡La solicitud AJAX se procesó correctamente!');
-  
-    // Devolver los datos en formato JSON
-    echo json_encode($tu_data_json);
-    exit(); // Asegúrate de salir para evitar ejecución adicional del script
-}
-?>
 <!doctype html>
 <html lang="es">
 
@@ -21,7 +7,8 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
   <title>Tareas</title>
   <link rel="shortcut icon" href="recursos/HeadLogo.png" type="image/x-icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
 
   <style>
     .border-left {
@@ -42,118 +29,87 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
     .custom-form {
       padding-left: 5%;
       padding-right: 5%;
-      
+
     }
 
     .custom-nav {
       padding-left: 4%;
       padding-right: 4%;
     }
+
     .sticky-header thead th {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  background-color: #ffffff; /* Puedes ajustar el color de fondo según tus preferencias */
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background-color: #ffffff;
+      /* Puedes ajustar el color de fondo según tus preferencias */
 
     }
 
-  .tiempo-restante-rojo {
-    border-left: 4px solid #FF0000; /* Rojo */
-}
+    .tiempo-restante-rojo {
+      border-left: 4px solid #FF0000;
+      /* Rojo */
+    }
 
-.tiempo-restante-amarillo {
-    border-left: 4px solid #FFFF00; /* Amarillo */
-}
+    .tiempo-restante-amarillo {
+      border-left: 4px solid #FFFF00;
+      /* Amarillo */
+    }
 
-.tiempo-restante-verde {
-    border-left: 4px solid #00FF00; /* Verde */
-}
-
-  
-
-
+    .tiempo-restante-verde {
+      border-left: 4px solid #00FF00;
+      /* Verde */
+    }
   </style>
 </head>
 <header>
   <?php include('../Header.php'); ?>
-  </header>
-<body style="height: 100vh; display: flex; flex-direction: column; overflow: hidden;">
+</header>
+
+<body >
   <div class="row flex-grow-1 ">
     <div class="col-lg-2 ">
-    <?php include('../Menu.php'); ?>
+      <?php include('../Menu.php'); ?>
     </div>
-    <div class="col-10 border-left custom-form">
+    <div class="col-10 border-left custom-form" style="padding-right: 5%;padding-left: 5%;">
       <nav aria-label="breadcrumb" class="d-flex align-items-center custom-nav ">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="#">Inicio</a></li>
           <li class="breadcrumb-item"><a href="#">Tareas</a></li>
         </ol>
       </nav>
-      <div >
+      <div>
         <h4 class="mb-3">Tareas </h4>
         <form id="formProyecto" method="post" action="Tareas_dashboard.php">
-        <a href="crear_tarea.php"><button class="btn btn-lg float-end custom-btn" type="button"
-          style="font-size: 15px;">+ Crear
-          tarea</button></a>
-          <a href="create_fase_form.php"><button class="btn btn-lg float-end custom-btn" type="button"
-          style="font-size: 15px; margin-right: 10px;">+ Crear fase</button></a>
-        <h1 class="display-6">Tareas próximas</h1>
-        <div class="dropdown">
-          <button id="proyectoSeleccionado" class="btn btn-secondary dropdown-toggle" type="button"
-            data-bs-toggle="dropdown" aria-expanded="false">
-                     Proyectos </button>
-          <ul class="dropdown-menu" style="max-height: 200px; overflow-y: auto;">
-          <li><a class="dropdown-item" href="#" onclick="seleccionarProyecto(this); document.getElementById('formProyecto').submit(); return false;" data-id="null">Todos los proyectos</a></li>
-          <?php
-        require('../conexion.php');
+          <a href="crear_tarea.php"><button class="btn btn-lg float-end custom-btn" type="button" style="font-size: 15px;">+ Crear
+              tarea</button></a>
+          <a href="create_fase_form.php"><button class="btn btn-lg float-end custom-btn" type="button" style="font-size: 15px; margin-right: 10px;">+ Crear fase</button></a>
+          <h1 class="display-6">Tareas próximas</h1>
+          <div class="dropdown">
 
-        // Verificar la conexión
-        if (!$conectar) {
-            die("Conexión fallida: " . mysqli_connect_error());
-        }
-
-        // Consulta para obtener nombres e IDs de proyectos de la base de datos
-        $sql = "SELECT pk_id_proyecto, proNombre FROM ga_proyecto ORDER BY proNombre";
-        $result = mysqli_query($conectar, $sql);
-
-        // Verificar si hay resultados antes de intentar acceder a $result
-        if ($result && mysqli_num_rows($result) > 0) {
-            // Iterar sobre los resultados
-            while ($row = mysqli_fetch_assoc($result)) {
-                echo '<li><a class="dropdown-item" href="#" onclick="seleccionarProyecto(this)" data-id="' . $row["pk_id_proyecto"] . '">' . $row["proNombre"] . '</a></li>';
-            }
-        } else {
-            // No hay resultados, puedes manejarlo según tus necesidades
-            echo '<li><a class="dropdown-item" href="#">No hay proyectos disponibles</a></li>';
-        }
-
-        // Cerrar la conexión
-        mysqli_close($conectar);
-        ?> 
-          </ul>         
-        </div>
-      </form>
+          </div>
+        </form>
       </div>
-        <div class="table-responsive vh-80">
-        <table id="tablaTareas" class="table table-striped table-hover sticky-header">
-    <caption>Esta tabla muestra las tareas pendientes por proyecto seleccionado</caption>
-    <thead>
-    <tr>
-        <th class="col-2" scope="col">Proyecto</th>
-        <th class="col-2" scope="col">Fase</th>
-        <th class="col-3" scope="col">Tarea</th>
-        <th class="col-2" scope="col">Fecha y Hora Límite</th>
-        <th class="col-2" scope="col">Responsable</th>
-        <th class="col-1" scope="col">Tiempo Restante</th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
+      <div class="table-responsive vh-80 dataTables_wrapper dt-bootstrap5">
+        <table id="tablaTareas" class="table table-striped sticky-header">
+          <caption>Esta tabla muestra las tareas pendientes por proyecto seleccionado</caption>
+          <thead>
+            <tr>
+              <th class="col-2" scope="col">Proyecto</th>
+              <th class="col-2" scope="col">Fase</th>
+              <th class="col-3" scope="col">Tarea</th>
+              <th class="col-2" scope="col">Fecha y Hora Límite</th>
+              <th class="col-2" scope="col">Responsable</th>
+              <th class="col-1" scope="col">Tiempo Restante</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
 
-    <?php
-      require("../conexion.php");
-      $sql = mysqli_query($conectar, "SELECT
+            <?php
+            require("../conexion.php");
+            $sql = mysqli_query($conectar, "SELECT
       gt_tarea.pk_id_tarea,
       gt_tarea.tarNombre,
       gt_tarea.tarDescripcion,
@@ -170,72 +126,93 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
       INNER JOIN ga_proyecto ON gt_fase.fk_id_proyecto = ga_proyecto.pk_id_proyecto
       INNER JOIN usuarios_gt_tareas ON gt_tarea.pk_id_tarea = usuarios_gt_tareas.fk_id_tarea
       INNER JOIN usuario ON usuario.pk_id_usuario = usuarios_gt_tareas.fk_id_usuario");
-      while ($resultado = $sql->fetch_assoc()){
-      ?>
-<!-- // // Llamada al procedimiento almacenado
-// $proyecto = isset($_POST['proyecto']) ? $_POST['proyecto'] : NULL;
-// var_dump($proyecto);
-// echo "El proyecto seleccionado es: $proyecto";
+            while ($resultado = $sql->fetch_assoc()) {
+            ?>
+              <!-- // // Llamada al procedimiento almacenado
+            // $proyecto = isset($_POST['proyecto']) ? $_POST['proyecto'] : NULL;
+            // var_dump($proyecto);
+            // echo "El proyecto seleccionado es: $proyecto";
 
-// // Preparar la consulta con un marcador de posición
-// $stmt = $conectar->prepare("CALL listar_tareas_pendientes_proximos_7_dias_por_proyecto(?)");
-// $stmt->bind_param("i", $proyecto);  // "i" indica que es un entero, ajusta según sea necesario
-// $stmt->execute();
-// $result = $stmt->get_result();
+            // // Preparar la consulta con un marcador de posición
+            // $stmt = $conectar->prepare("CALL listar_tareas_pendientes_proximos_7_dias_por_proyecto(?)");
+            // $stmt->bind_param("i", $proyecto);  // "i" indica que es un entero, ajusta según sea necesario
+            // $stmt->execute();
+            // $result = $stmt->get_result();
 
-// Procesar los resultados y mostrar en la tabla -->
-<tr>
-              <td scope="row"><?php echo $resultado ['nombre_proyecto']?></td>
-              <td scope="row"><?php echo $resultado ['nombre_fase']?></td>
-              <td scope="row"><?php echo $resultado ['tarNombre']?></td>
-              <td scope="row"><?php echo $resultado ['tarFecha_limite']?></td>
-              <td scope="row"><?php echo $resultado ['nombre_completo']?></td>
-              <td></td>
-              <td scope="row">
-                <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                    <path
-                      d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
-                  </svg>
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a id="btn-desplegable-detalles" href="actualizar_usuario_form.php?pk_id_usuario=<?php echo $resultado['pk_id_tarea']?>" class="dropdown-item">Actualizar</a></li>
-                  <li><a id="btn-desplegable-seguimiento" href="detalles_usuario_form.php?pk_id_usuario=<?php echo $resultado['pk_id_tarea']?>" class="dropdown-item">Detalles</a></li>
-                  <li><a class="dropdown-item text-danger" href="eliminar_usuario.php?pk_id_usuario=<?php echo $resultado['pk_id_tarea']?>" data-bs-toggle="modal"
-                      data-bs-target="#EliminarUsuario">Archivar <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                        height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                        <path
-                          d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
-                        <path
-                          d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
-                      </svg></a>
-                  </li>
-                </ul>
-              </td>
-            </tr>
+            // Procesar los resultados y mostrar en la tabla -->
+              <tr>
+                <td scope="row"><?php echo $resultado['nombre_proyecto'] ?></td>
+                <td scope="row"><?php echo $resultado['nombre_fase'] ?></td>
+                <td scope="row"><?php echo $resultado['tarNombre'] ?></td>
+                <td scope="row"><?php
+                                $fechaHoraInicial = $resultado['tarFecha_limite'];
+                                $fechaFormateadaInicial = date("j M Y", strtotime($fechaHoraInicial));
+                                echo $fechaFormateadaInicial ?></td>
+                <td scope="row"><?php echo $resultado['nombre_completo'] ?></td>
+                <td></td>
+                <td scope="row">
+                  <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                      <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                    </svg>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a id="btn-desplegable-detalles" href="actualizar_usuario_form.php?pk_id_usuario=<?php echo $resultado['pk_id_tarea'] ?>" class="dropdown-item">Actualizar</a></li>
+                    <li><a id="btn-desplegable-seguimiento" href="detalles_usuario_form.php?pk_id_usuario=<?php echo $resultado['pk_id_tarea'] ?>" class="dropdown-item">Detalles</a></li>
+                    <li><a class="dropdown-item text-danger" href="eliminar_usuario.php?pk_id_usuario=<?php echo $resultado['pk_id_tarea'] ?>" data-bs-toggle="modal" data-bs-target="#EliminarUsuario">Archivar <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                          <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+                          <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+                        </svg></a>
+                    </li>
+                  </ul>
+                </td>
+              </tr>
 
-  <!-- Cerrar la conexión
+              <!-- Cerrar la conexión
   $stmt->close();
   $conectar->close(); -->
 
-<?php
-}
-?>
+            <?php
+            }
+            ?>
 
-    </tbody>
-</table>
-          
-              </div>
+          </tbody>
+        </table>
+
       </div>
     </div>
   </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+  <script src="Incidentes_dashboard.js"></script>
+  <script type="text/javascript"></script>
+  <script src="Tareas_dashboard.js"></script>
+  <script type="text/javascript">
+    let table = new DataTable('#tablaTareas', {
+    //Para cambiar el lenguaje a español
+    "language": {
+        "lengthMenu": "Mostrar _MENU_ registros",
+        "zeroRecords": "No se encontraron resultados",
+        "info": "Mostrando del _START_ al _END_ de _TOTAL_ registros",
+        "infoEmpty": "Mostrando del 0 al 0 de 0 registros",
+        "infoFiltered": "(de un total de _MAX_ registros)",
+        "sSearch": "Buscar:",
+        "oPaginate": {
+            "sFirst": "Primero",
+            "sLast": "Último",
+            "sNext": "Siguiente",
+            "sPrevious": "Anterior"
+        },
+        "sProcessing": "Procesando..."
+    }
+})
+  </script>
 
- 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous"></script>
-    <script src="Tareas_dashboard.js"></script>
 </body>
 
 </html>
