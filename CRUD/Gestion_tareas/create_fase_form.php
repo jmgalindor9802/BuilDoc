@@ -45,21 +45,15 @@
     </style>
 </head>
 <header>
-  <?php include('Header.php'); ?>
+  <?php include('../Header.php'); ?>
   </header>
 <body style="height: 100vh; display: flex; flex-direction: column; overflow: hidden;">
     <!-- Encabezado de la pagina -->
-  
-
     <div class="row flex-grow-1">
         <div class="col-lg-2">
             <!-- Menu lateral izquierdo que permite el despasamiento de la pagina -->
-            <?php include('Menu.php'); ?>
-           
+            <?php include('../Menu.php'); ?>    
         </div>
-
-
-
         <div class="col-10 border-left ">
             <nav aria-label="breadcrumb" class="d-flex align-items-center custom-nav ">
                 <ol class="breadcrumb">

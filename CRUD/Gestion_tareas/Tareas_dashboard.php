@@ -76,14 +76,12 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
   </style>
 </head>
 <header>
-  <?php include('Header.php'); ?>
+  <?php include('../Header.php'); ?>
   </header>
 <body style="height: 100vh; display: flex; flex-direction: column; overflow: hidden;">
-  
-
   <div class="row flex-grow-1 ">
     <div class="col-lg-2 ">
-    <?php include('Menu.php'); ?>
+    <?php include('../Menu.php'); ?>
     </div>
     <div class="col-10 border-left custom-form">
       <nav aria-label="breadcrumb" class="d-flex align-items-center custom-nav ">
