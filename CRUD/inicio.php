@@ -39,16 +39,14 @@
   
   </style>
 </head>
-
-<body style="height: auto;">
-  <header>
-    <iframe src="Header.html" class="w-100" height="78"></iframe>
+<header>
+<?php include('Header.php'); ?>
   </header>
-
+<body style="height: auto;">
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-2">
-        <iframe src="Menu.html" class="w-100" height="100%"></iframe>
+        <?php include('Menu.php'); ?>
       </div>
       <div class="col-10 border-left ">
         <nav aria-label="breadcrumb" class="d-flex align-items-center custom-nav ">
@@ -275,4 +273,3 @@
 </body>
 
 </html>
-<p>prueba</p>

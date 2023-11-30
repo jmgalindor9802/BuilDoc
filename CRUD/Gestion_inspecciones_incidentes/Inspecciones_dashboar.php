@@ -88,7 +88,7 @@
       <div>
         <h4 class="mb-3">Inspecciones</h4>
 
-        <a href="Incidente.html">
+        <a href="programarInspeccion.php">
           <!-- Boton para agregar nuevos incidentes -->
           <button class="btn btn-lg float-end custom-btn" type="submit" style="font-size: 15px;"><svg
               xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg"
@@ -99,24 +99,6 @@
           </button></a>
 
         <h1>Ultimas Inspecciones</h1>
-
-        <!-- <div class="dropdown" style="margin-top: 20px;">
-          <button id="proyectoSeleccionado" class="btn btn-secondary dropdown-toggle" type="button"
-            data-bs-toggle="dropdown" aria-expanded="false">
-            Todos los proyectos
-          </button>
-          <ul class="dropdown-menu">
-
-            Actualizar los datos del boton -->
-
-
-            <!-- <li><a class="dropdown-item" href="#">Todos los proyectos</a></li>
-            <li><a class="dropdown-item" href="#">Proyecto de Carretera Transversal</a></li>
-            <li><a class="dropdown-item" href="#">Ampliación de Aeropuerto Internacional</a></li>
-            <li><a class="dropdown-item" href="#"> Proyecto de Túnel Subterráneo</a></li>
-          </ul>
-
-        </div> --> 
       </div>
 
       <div class="table-responsive dataTables_wrapper dt-bootstrap5">
