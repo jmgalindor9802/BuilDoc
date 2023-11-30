@@ -76,7 +76,7 @@
       <!-- Menu lateral izquierdo que permite el despasamiento de la pagina -->
       <?php include('../Menu.php'); ?>
     </div>
-    <div class="col-10 border-left custom-form">
+    <div class="col-10 border-left custom-form" style="padding-right: 5%;padding-left: 5%;">
       <nav aria-label="breadcrumb" class="d-flex align-items-center custom-nav">
         <!-- indicador de la ubicacion actual en la pagina -->
         <ol class="breadcrumb">
