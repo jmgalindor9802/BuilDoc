@@ -83,7 +83,7 @@
                             <select name="Proyecto_fase" class="form-select" id="country" required>
                                 <option value="">Elegir...</option>
                                 <?php
-                                require('conexion.php');
+                                require('../conexion.php');
 
                                 // Verificar la conexión
                                 if (!$conectar) {

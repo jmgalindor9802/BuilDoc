@@ -1,6 +1,6 @@
 <?php 
 
-include_once("conexion.php");
+include_once("../conexion.php");
 
     $Id = $_GET['Id'];
     $sql = "DELETE FROM usuario WHERE pk_id_usuario ='$Id'";

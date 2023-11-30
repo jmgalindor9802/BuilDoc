@@ -1,6 +1,6 @@
 <?php 
 
-include_once("conexion.php");
+include_once("../conexion.php");
 
     $Id = $_POST['IdUser'];
     $EPS = $_POST['ActEPS'];

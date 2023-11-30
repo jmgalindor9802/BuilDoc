@@ -76,7 +76,7 @@
                                     <select  name="Proyecto_tarea" class="form-select" id="proyectoSelect" required>
                                         <option value="">Elegir...</option>
                                         <?php
-                                        require('conexion.php');
+                                        require('../conexion.php');
 
                                         // Verificar la conexión
                                         if (!$conectar) {
@@ -105,7 +105,7 @@
                                     <select  name="Fase_tarea" class="form-select" id="faseSelect" required>
                                         <option value="">Elegir...</option>
                                         <?php
-                                        include('conexion.php');
+                                        include('../conexion.php');
 
                                         // Verificar la conexión
                                         if (!$conectar) {

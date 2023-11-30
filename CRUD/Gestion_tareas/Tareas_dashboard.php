@@ -106,7 +106,7 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
           <ul class="dropdown-menu" style="max-height: 200px; overflow-y: auto;">
           <li><a class="dropdown-item" href="#" onclick="seleccionarProyecto(this); document.getElementById('formProyecto').submit(); return false;" data-id="null">Todos los proyectos</a></li>
           <?php
-        require('conexion.php');
+        require('../conexion.php');
 
         // Verificar la conexión
         if (!$conectar) {
@@ -152,7 +152,7 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
     <tbody>
 
     <?php
-      require("conexion.php");
+      require("../conexion.php");
       $sql = mysqli_query($conectar, "SELECT
       gt_tarea.pk_id_tarea,
       gt_tarea.tarNombre,
