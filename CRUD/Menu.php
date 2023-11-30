@@ -18,10 +18,7 @@
 
 
 </head>
-
 <body>
-    
-
         <div class="col-12">
             <hr>
             <p class="fs-4 text-center">Servinco SAS</p>
@@ -29,7 +26,7 @@
             <!-- Lista de elementos del menú -->
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
-                    <a href="..\inicio.html" class="nav-link active" aria-current="page" >
+                    <a href="../inicio.php" class="nav-link active" aria-current="page" >
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-house-door" viewBox="0 0 16 16" style="margin-right: 8px;">
                             <path
