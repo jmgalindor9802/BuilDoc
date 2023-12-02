@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Fase</title>
     <link rel="shortcut icon" href="recursos/HeadLogo.png" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
 
     <style>
@@ -25,42 +24,20 @@
             max-height: 80vh;
             overflow-y: auto;
         }
-
-        .custom-form {
-            padding-left: 8%;
-            padding-right: 8%;
-        }
-
-        .custom-form-h4 {
-            padding-left: 8%;
-            padding-right: 8%;
-            font-size: 15px;
-        }
-
-
-        .custom-nav {
-            padding-left: 4%;
-            padding-right: 4%;
-        }
     </style>
 </head>
 <header>
-  <?php include('../Header.php'); ?>
-  </header>
-<body style="height: 100vh; display: flex; flex-direction: column; overflow: hidden;">
-    <!-- Encabezado de la pagina -->
-  
+    <?php include('../../Header.php'); ?>
+</header>
 
+<body>
+    <!-- Encabezado de la pagina -->
     <div class="row flex-grow-1">
         <div class="col-lg-2">
             <!-- Menu lateral izquierdo que permite el despasamiento de la pagina -->
-            <?php include('../Menu.php'); ?>
-           
+            <?php include('../../Menu.php'); ?>
         </div>
-
-
-
-        <div class="col-10 border-left ">
+        <div class="col-lg-10" style="padding-left: 5%; padding-right: 5%;">
             <nav aria-label="breadcrumb" class="d-flex align-items-center custom-nav ">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Inicio</a></li>
@@ -68,8 +45,8 @@
                     <li class="breadcrumb-item active" aria-current="page">Crear fase</li>
                 </ol>
             </nav>
-            <h4 class="mb-3 custom-form">Nueva fase</h4>
-            <div class="col-12 custom-form vh-80">
+            <h4 class="mb-3">Nueva fase</h4>
+            <div class="col-12  ">
                 <br>
                 <form action="fase.php" method="post" class="needs-validation " style="max-height: 70vh" novalidate>
                     <!-- INSERTAR NOMBRE FASE -->
@@ -77,8 +54,7 @@
                         <div class="col-sm-6">
                             <label id="Nombre_fase" for="Nombre_fase" class="form-label">Nombre de la
                                 fase</label>
-                            <input name="Nombre_fase" type="text" class="form-control" id="firstName"
-                                placeholder="Nombre de la fase" required>
+                            <input name="Nombre_fase" type="text" class="form-control" id="firstName" placeholder="Nombre de la fase" required>
                             <div class="invalid-feedback">
                                 Se requiere un nombre válido.
                             </div>
@@ -95,14 +71,14 @@
                                 if (!$conectar) {
                                     die("Conexión fallida: " . mysqli_connect_error());
                                 }
-                                
+
                                 // Consulta para obtener nombres e IDs de proyectos de la base de datos
                                 $sql = "SELECT pk_id_proyecto, proNombre FROM ga_proyecto ORDER BY proNombre";
                                 $result = mysqli_query($conectar, $sql);
 
                                 // Rellenar opciones del select con los resultados de la consulta
                                 if ($result && mysqli_num_rows($result) > 0) {
-                                    while($row = mysqli_fetch_assoc($result)) {
+                                    while ($row = mysqli_fetch_assoc($result)) {
                                         echo "<option value='" . $row["pk_id_proyecto"] . "'>" . $row["proNombre"] . "</option>";
                                     }
                                 }
@@ -118,8 +94,7 @@
                     <!-- DESCRIPCION DE LA FASE -->
                     <div class="row g-3">
                         <label id="Descripcion_fase" for="Descripcion_fase" class="form-label">Descripción</label>
-                        <textarea name="Descripcion_fase" class="form-control" id="exampleFormControlTextarea1" rows="4"
-                            placeholder="Descripción de la fase" required maxlength="450"></textarea>
+                        <textarea name="Descripcion_fase" class="form-control" id="exampleFormControlTextarea1" rows="4" placeholder="Descripción de la fase" required maxlength="450"></textarea>
                         <div class="invalid-feedback">
                             Se requiere una descripción válida.
                         </div>
@@ -127,27 +102,27 @@
                     <br>
                     <!-- Botón "Guardar fase" que abre el modal -->
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CrearFase">
-        Guardar fase
-    </button>
+                        Guardar fase
+                    </button>
 
                     <div class="modal" tabindex="-1" id="CrearFase">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Crear fase</h5>
-                </div>
-                <div class="modal-body">
-                    <p>¿Estás seguro de crear esta fase?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <!-- Botón para enviar el formulario -->
-                    <button type="submit" class="btn btn-primary">Aceptar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Crear fase</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <p>¿Estás seguro de crear esta fase?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <!-- Botón para enviar el formulario -->
+                                    <button type="submit" class="btn btn-primary">Aceptar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </form>
             </div>
         </div>
@@ -155,9 +130,7 @@
 
 
     <!-- <script src="crear_fase.js"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
 </body>
 

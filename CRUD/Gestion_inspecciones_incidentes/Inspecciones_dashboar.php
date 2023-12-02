@@ -76,7 +76,7 @@
       <!-- Menu lateral izquierdo que permite el despasamiento de la pagina -->
       <?php include('../Menu.php'); ?>
     </div>
-    <div class="col-10 border-left custom-form">
+    <div class="col-10 border-left custom-form" style="padding-right: 5%;padding-left: 5%;">
       <nav aria-label="breadcrumb" class="d-flex align-items-center custom-nav">
         <!-- indicador de la ubicacion actual en la pagina -->
         <ol class="breadcrumb">
@@ -88,7 +88,7 @@
       <div>
         <h4 class="mb-3">Inspecciones</h4>
 
-        <a href="Incidente.html">
+        <a href="programarInspeccion.php">
           <!-- Boton para agregar nuevos incidentes -->
           <button class="btn btn-lg float-end custom-btn" type="submit" style="font-size: 15px;"><svg
               xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg"
@@ -99,29 +99,11 @@
           </button></a>
 
         <h1>Ultimas Inspecciones</h1>
-
-        <!-- <div class="dropdown" style="margin-top: 20px;">
-          <button id="proyectoSeleccionado" class="btn btn-secondary dropdown-toggle" type="button"
-            data-bs-toggle="dropdown" aria-expanded="false">
-            Todos los proyectos
-          </button>
-          <ul class="dropdown-menu">
-
-            Actualizar los datos del boton -->
-
-
-            <!-- <li><a class="dropdown-item" href="#">Todos los proyectos</a></li>
-            <li><a class="dropdown-item" href="#">Proyecto de Carretera Transversal</a></li>
-            <li><a class="dropdown-item" href="#">Ampliación de Aeropuerto Internacional</a></li>
-            <li><a class="dropdown-item" href="#"> Proyecto de Túnel Subterráneo</a></li>
-          </ul>
-
-        </div> --> 
       </div>
 
       <div class="table-responsive dataTables_wrapper dt-bootstrap5">
 
-        <table id="Tabla_incidentes" class="table table-striped sticky-header" style="width:100%">
+        <table id="Tabla_incidentes" class="table table-striped sticky-header">
           <thead>
             <tr>
               <th scope="col">Inspeccion</th>
@@ -336,9 +318,24 @@
   <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
   <script src="Incidentes_dashboard.js"></script>
   <script type="text/javascript">
-    $(document).ready(function(){
-        $('#Tabla_incidentes').DataTable();
-    });
+    let table = new DataTable('#Tabla_incidentes', {
+    //Para cambiar el lenguaje a español
+    "language": {
+        "lengthMenu": "Mostrar _MENU_ registros",
+        "zeroRecords": "No se encontraron resultados",
+        "info": "Mostrando del _START_ al _END_ de _TOTAL_ registros",
+        "infoEmpty": "Mostrando del 0 al 0 de 0 registros",
+        "infoFiltered": "(de un total de _MAX_ registros)",
+        "sSearch": "Buscar:",
+        "oPaginate": {
+            "sFirst": "Primero",
+            "sLast": "Último",
+            "sNext": "Siguiente",
+            "sPrevious": "Anterior"
+        },
+        "sProcessing": "Procesando..."
+    }
+})
   </script>
 
   

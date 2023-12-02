@@ -5,31 +5,16 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/headers/">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
-
-    <!-- JavaScript de Bootstrap -->
-    
-    <!-- Link para iconos de bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-
-
 </head>
-
 <body>
-    
-
-        <div class="col-12">
+        <div class="col-12" style="padding-right:5%; padding-left:5%">
             <hr>
             <p class="fs-4 text-center">Servinco SAS</p>
             <hr>
             <!-- Lista de elementos del menú -->
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
-                    <a href="inicio.html" class="nav-link active" aria-current="page" >
+                    <a href="../inicio.php" class="nav-link active" aria-current="page" >
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-house-door" viewBox="0 0 16 16" style="margin-right: 8px;">
                             <path
@@ -51,7 +36,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="..\Gestion_archivos\Proyecto_dashboard.php" class="nav-link link-body-emphasis" >
+                    <a href="Proyecto_dashboard.html" class="nav-link link-body-emphasis" target="_blank">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-buildings" viewBox="0 0 16 16" style="margin-right: 8px;">
                             <path
@@ -144,12 +129,6 @@
 
 
     <script src="Menu.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
 </body>
 
 </html>
