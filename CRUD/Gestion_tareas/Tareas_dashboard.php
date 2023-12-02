@@ -76,14 +76,14 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
   </style>
 </head>
 <header>
-  <?php include('Header.php'); ?>
+  <?php include('../Header.php'); ?>
   </header>
 <body style="height: 100vh; display: flex; flex-direction: column; overflow: hidden;">
   
 
   <div class="row flex-grow-1 ">
     <div class="col-lg-2 ">
-    <?php include('Menu.php'); ?>
+    <?php include('../Menu.php'); ?>
     </div>
     <div class="col-10 border-left custom-form">
       <nav aria-label="breadcrumb" class="d-flex align-items-center custom-nav ">
@@ -92,7 +92,7 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
           <li class="breadcrumb-item"><a href="#">Tareas</a></li>
         </ol>
       </nav>
-      <div >
+      <div style="padding-right:5%">
         <h4 class="mb-3">Tareas </h4>
         <form id="formProyecto" method="post" action="Tareas_dashboard.php">
         <a href="crear_tarea.php"><button class="btn btn-lg float-end custom-btn" type="button"

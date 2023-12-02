@@ -44,13 +44,13 @@
         }
     </style>
 </head>
+<header>
+  <?php include('../Header.php'); ?>
+  </header>
 
 <body style="height: 100vh; display: flex; flex-direction: column; overflow: hidden;">
     <!-- Encabezado de la pagina -->
-  <header>
-  <?php include('Header.php'); ?>
-  </header>
-
+ 
     <div class="row flex-grow-1">
         <div class="col-lg-2">
             <!-- Menu lateral izquierdo que permite el despasamiento de la pagina -->
@@ -68,7 +68,7 @@
             <div class="col-12 custom-form vh-80">
                 <br>
 
-                <form class="needs-validation " style="max-height: 70vh" novalidate>
+                <form class="needs-validation " style="max-height: 70vh; padding:5%" novalidate>
                     <!-- INSERTAR PROYECTO CON LISTA DESPLEGABLE -->
                     <div class="row g-3">
                             <div class="col-sm-6">
