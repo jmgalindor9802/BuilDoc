@@ -1,193 +1,80 @@
-// Example starter JavaScript for disabling form submissions if there are invalid fields
 (() => {
-    'use strict'
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    const forms = document.querySelectorAll('.needs-validation')
-  
-    // Loop over them and prevent submission
-    Array.from(forms).forEach(form => {
+  'use strict'
+
+  const forms = document.querySelectorAll('.needs-validation');
+
+  Array.from(forms).forEach(form => {
       form.addEventListener('submit', event => {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
-        }
-  
-        form.classList.add('was-validated')
-      }, false)
-    })
-  })();
-  
-  document.addEventListener('DOMContentLoaded', function () {
-    const fechaLimiteInput = document.getElementById('fechaInicial');
-    const errorFechaMensaje = document.getElementById('error-fecha-mensaje');
-  
-    fechaLimiteInput.addEventListener('change', function () {
-      const fechaLimite = new Date(fechaLimiteInput.value);
-      const ahora = new Date();
-  
-      if (fechaLimite <= ahora) {
-        errorFechaMensaje.style.display = 'block';
-      } else {
-        errorFechaMensaje.style.display = 'none';
-      }
-    });
-  
-    document.querySelector('form').addEventListener('submit', function (event) {
-      const fechaLimite = new Date(fechaLimiteInput.value);
-      const ahora = new Date();
-  
-      if (fechaLimite <= ahora) {
-        event.preventDefault();
-        errorFechaMensaje.style.display = 'block';
-      }
-    });
-  });
-  
-  document.addEventListener('DOMContentLoaded', function () {
-    const tareaTareaDisponible = document.getElementById('tarea_tarea_disponible');
-    const tareaTareaSeleccionado = document.getElementById('tareas_seleccionadas');
-    const usuarioTareaDisponible = document.getElementById('usuario_tarea_disponible');
-    const usuarioTareaSeleccionado = document.getElementById('usuarios-seleccionados');
-    const errorMensajeTarea = document.getElementById('error-mensaje-tarea');
-    const errorMensajeUsuario = document.getElementById('error-mensaje-usuario');
-    const tareasSeleccionadasSet = new Set();
-    const usuariosSeleccionadosSet = new Set();
-  
-    function actualizarErrorTarea() {
-      if (tareasSeleccionadasSet.size === 0) {
-        errorMensajeTarea.style.display = 'block';
-      } else {
-        errorMensajeTarea.style.display = 'none';
-      }
-    }
-  
-    function actualizarErrorUsuario() {
-      if (usuariosSeleccionadosSet.size === 0) {
-        errorMensajeUsuario.style.display = 'block';
-      } else {
-        errorMensajeUsuario.style.display = 'none';
-      }
-    }
-  
-    function actualizarListas() {
-      // Actualizar lista de disponibles (tareas)
-      Array.from(tareaTareaDisponible.options).forEach(option => {
-        option.disabled = tareasSeleccionadasSet.has(option.value);
-      });
-  
-      // Actualizar lista de seleccionados (tareas)
-      while (tareaTareaSeleccionado.firstChild) {
-        tareaTareaSeleccionado.removeChild(tareaTareaSeleccionado.firstChild);
-      }
-      tareasSeleccionadasSet.forEach(value => {
-        const listItem = document.createElement('li');
-        listItem.className = 'list-group-item';
-        listItem.textContent = value;
-  
-        const removeButton = document.createElement('button');
-        removeButton.className = 'btn btn-sm btn-danger float-end';
-        removeButton.textContent = 'x';
-        removeButton.addEventListener('click', function () {
-          tareasSeleccionadasSet.delete(value);
-          actualizarListas();
-          actualizarErrorTarea();
-        });
-  
-        listItem.appendChild(removeButton);
-        tareaTareaSeleccionado.appendChild(listItem);
-      });
-  
-      // Actualizar lista de disponibles (usuarios)
-      Array.from(usuarioTareaDisponible.options).forEach(option => {
-        option.disabled = usuariosSeleccionadosSet.has(option.value);
-      });
-  
-      // Actualizar lista de seleccionados (usuarios)
-      while (usuarioTareaSeleccionado.firstChild) {
-        usuarioTareaSeleccionado.removeChild(usuarioTareaSeleccionado.firstChild);
-      }
-      usuariosSeleccionadosSet.forEach(value => {
-        const listItem = document.createElement('li');
-        listItem.className = 'list-group-item';
-        listItem.textContent = value;
-  
-        const removeButton = document.createElement('button');
-        removeButton.className = 'btn btn-sm btn-danger float-end';
-        removeButton.textContent = 'x';
-        removeButton.addEventListener('click', function () {
-          usuariosSeleccionadosSet.delete(value);
-          actualizarListas();
-          actualizarErrorUsuario();
-        });
-  
-        listItem.appendChild(removeButton);
-        usuarioTareaSeleccionado.appendChild(listItem);
-      });
-    }
-  
-    tareaTareaDisponible.addEventListener('change', function () {
-      const selectedOptions = Array.from(tareaTareaDisponible.selectedOptions);
-      selectedOptions.forEach(option => {
-        const value = option.value;
-        if (!tareasSeleccionadasSet.has(value)) {
-          tareasSeleccionadasSet.add(value);
-        }
-      });
-      actualizarListas();
-      actualizarErrorTarea();
-    });
-  
-    usuarioTareaDisponible.addEventListener('change', function () {
-      const selectedOptions = Array.from(usuarioTareaDisponible.selectedOptions);
-      selectedOptions.forEach(option => {
-        const value = option.value;
-        if (!usuariosSeleccionadosSet.has(value)) {
-          usuariosSeleccionadosSet.add(value);
-        }
-      });
-      actualizarListas();
-      actualizarErrorUsuario();
-    });
-  
-    tareaTareaSeleccionado.addEventListener('change', function () {
-      const selectedOptions = Array.from(tareaTareaSeleccionado.selectedOptions);
-      selectedOptions.forEach(option => {
-        const value = option.value;
-        tareasSeleccionadasSet.delete(value);
-      });
-      actualizarListas();
-      actualizarErrorTarea();
-    });
-  
-    usuarioTareaSeleccionado.addEventListener('change', function () {
-      const selectedOptions = Array.from(usuarioTareaSeleccionado.selectedOptions);
-      selectedOptions.forEach(option => {
-        const value = option.value;
-        usuariosSeleccionadosSet.delete(value);
-      });
-      actualizarListas();
-      actualizarErrorUsuario();
-    });
+          if (!form.checkValidity()) {
+              event.preventDefault();
+              event.stopPropagation();
+          }
 
-    $('#proyectoSelect').on('change', function () {
-        // Obtén el ID del proyecto seleccionado
-        var selectedProject = $(this).val();
-
-        // Realiza una solicitud AJAX para obtener fases asociadas al proyecto
-        $.ajax({
-            type: 'POST',
-            url: 'get_fases_por_proyecto.php', // Ruta al archivo PHP
-            data: { proyecto: selectedProject }, // Datos a enviar al servidor
-            success: function (response) {
-                console.log('Response from server:', response);
-                // Actualiza el contenido del dropdown de Fase con las opciones devueltas
-                $('#faseSelect').html(response);
-            },
-            error: function (error) {
-                console.error('Error en la solicitud AJAX:', error);
-                
-            }
-        });
-    });
+          form.classList.add('was-validated');
+      }, false);
   });
-  
+
+  document.addEventListener('DOMContentLoaded', function () {
+      document.getElementById('faseSelect').addEventListener('change', function () {
+          console.log('Cambio en la fase');
+          obtenerYActualizarTareas();
+      });
+
+      document.getElementById('proyectoSelect').addEventListener('change', function () {
+          console.log('Cambio en el proyecto');
+          obtenerYActualizarTareas();
+      });
+          // Manejador del evento submit del formulario
+      document.querySelector('form').addEventListener('submit', function (event) {
+            // Evita que el formulario se envíe de la manera tradicional
+          event.preventDefault();
+          obtenerYActualizarTareas();
+      });
+  });
+
+  function obtenerYActualizarTareas() {
+      console.log('Obteniendo y actualizando tareas...');
+      var idProyecto = document.getElementById('proyectoSelect').value;
+      var idFase = document.getElementById('faseSelect').value;
+
+        // Realiza la solicitud Ajax solo si ambos valores están seleccionados
+        if (idProyecto && idFase) {
+      realizarSolicitudAjax(idProyecto, idFase, function (tareas) {
+          updateTaskContainer(tareas);
+          console.log(tareas);
+      });
+  }
+}
+  function realizarSolicitudAjax(idProyecto, idFase, callback) {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+              if (xhr.status === 200) {
+                  var tareas = JSON.parse(xhr.responseText);
+                  callback(tareas);
+              } else {
+                  console.error('Error en la solicitud Ajax. Estado:', xhr.status);
+              }
+          }
+      };
+
+      xhr.open('POST', 'ajax_obtener_tareas.php', true);
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      xhr.send('idProyecto=' + idProyecto + '&idFase=' + idFase);
+  }
+
+  function updateTaskContainer(tasks) {
+      var tasksContainer = document.getElementById('tasksContainer');
+      tasksContainer.innerHTML = '';
+
+      if (tasks.length > 0) {
+          tasks.forEach(function (task) {
+              var taskDiv = document.createElement('div');
+              taskDiv.textContent = task.tarNombre; // Assuming tarNombre is the task name property
+              tasksContainer.appendChild(taskDiv);
+          });
+      } else {
+          tasksContainer.textContent = 'No tasks available.';
+      }
+  }
+})();

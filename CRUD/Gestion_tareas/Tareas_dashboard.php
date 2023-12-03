@@ -68,12 +68,12 @@
             <li class="breadcrumb-item"><a href="#">Tareas</a></li>
           </ol>
         </nav>
-        <divstyle="padding-right:5%">
+        <div style="padding-right:5%">
           <h4 class="mb-3">Tareas </h4>
           <form id="formProyecto" method="post" action="Tareas_dashboard.php">
-            <a href="crear_tarea.php"><button class="btn btn-lg float-end custom-btn" type="button" style="font-size: 15px;">+ Crear
+            <a href="crear_tarea_form.php"><button class="btn btn-lg float-end custom-btn" type="button" style="font-size: 15px; margin-right:1%">+ Crear
                 tarea</button></a>
-            <a href="create_fase_form.php"><button class="btn btn-lg float-end custom-btn" type="button" style="font-size: 15px; ">+ Crear fase</button></a>
+            <a href="create_fase_form.php"><button class="btn btn-lg float-end custom-btn" type="button" style="font-size: 15px ;margin-right:1% ">+ Crear fase</button></a>
             <h1 class="display-6">Tareas próximas</h1>
             <div class="dropdown">
 
@@ -99,22 +99,22 @@
               <?php
               require("../conexion.php");
               $sql = mysqli_query($conectar, "SELECT
-        gt_tarea.pk_id_tarea,
-        gt_tarea.tarNombre,
-        gt_tarea.tarDescripcion,
-        gt_tarea.tarPrioridad,
-        gt_tarea.tarEstado,
-        gt_tarea.tarFecha_creacion,
-        gt_tarea.tarFecha_limite,
-        ga_proyecto.proNombre AS nombre_proyecto,
-        gt_fase.fasNombre AS nombre_fase,
-        CONCAT(usuario.usuNombre, ' ', usuario.usuApellido) AS nombre_completo
-        FROM
-        gt_tarea
-        INNER JOIN gt_fase ON gt_tarea.fk_id_fase = gt_fase.pk_id_fase
-        INNER JOIN ga_proyecto ON gt_fase.fk_id_proyecto = ga_proyecto.pk_id_proyecto
-        INNER JOIN usuarios_gt_tareas ON gt_tarea.pk_id_tarea = usuarios_gt_tareas.fk_id_tarea
-        INNER JOIN usuario ON usuario.pk_id_usuario = usuarios_gt_tareas.fk_id_usuario");
+                gt_tarea.pk_id_tarea,
+                gt_tarea.tarNombre,
+                gt_tarea.tarDescripcion,
+                gt_tarea.tarPrioridad,
+                gt_tarea.tarEstado,
+                gt_tarea.tarFecha_creacion,
+                gt_tarea.tarFecha_limite,
+                ga_proyecto.proNombre AS nombre_proyecto,
+                gt_fase.fasNombre AS nombre_fase,
+                CONCAT(usuario.usuNombre, ' ', usuario.usuApellido) AS nombre_completo
+                FROM
+                gt_tarea
+                INNER JOIN gt_fase ON gt_tarea.fk_id_fase = gt_fase.pk_id_fase
+                INNER JOIN ga_proyecto ON gt_fase.fk_id_proyecto = ga_proyecto.pk_id_proyecto
+                INNER JOIN usuarios_gt_tareas ON gt_tarea.pk_id_tarea = usuarios_gt_tareas.fk_id_tarea
+                INNER JOIN usuario ON usuario.pk_id_usuario = usuarios_gt_tareas.fk_id_usuario");
               while ($resultado = $sql->fetch_assoc()) {
               ?>
                 <tr>
