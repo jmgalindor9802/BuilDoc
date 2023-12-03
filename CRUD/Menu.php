@@ -128,7 +128,7 @@
         </div>
 
 
-    <script src="Menu.js"></script>
+    <script src="../Menu.js"></script>
 </body>
 
 </html>

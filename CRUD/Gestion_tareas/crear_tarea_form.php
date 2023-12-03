@@ -68,7 +68,7 @@
             <div class="col-12 custom-form vh-80">
                 <br>
 
-                <form class="needs-validation " style="max-height: 70vh;" novalidate method="post">
+                <form class="needs-validation " style="max-height: 70vh;" novalidate >
                     <!-- INSERTAR PROYECTO CON LISTA DESPLEGABLE -->
                     <div class="row g-3">
                             <div class="col-sm-6">
@@ -185,8 +185,7 @@
                             <div class="row g-3" >
                                 <div class="col-md-6">
                                     <h4>Asignar usuarios</h4>
-                                    <label for="usuario_tarea_disponible" class="form-label">Seleccione a quienes desea asignar a la tarea</label>
-                                    <ul class="list-group" id="usuario_tarea_disponible" >
+                                    <ul class="list-group" >
                                     <?php
                                     //Lista de Usuarios
                                     include("../conexion.php");
@@ -201,30 +200,9 @@
                                     ?>
                                     </ul>
                                 </div>
-                                <div class="col-md-6" id="tasksContainer">
-                                    <h4>Asignar tareas dependientes</h4>
-                                    <label for="tarea_tarea_dependiente" class="form-label">Seleccione a quienes desea asignar a la tarea</label>
-                                    <ul class="list-group" id="tarea_tarea_dependiente" >
-                                    <?php
-                                    //Lista de Usuarios
-                                    include("../conexion.php");
-                                    $id_fase_seleccionada = $_POST['Fase_tarea']; 
-                                    $id_proyecto_seleccionado = $_POST['Proyecto_tarea'];
-                                    
-                                    // Llamada al procedimiento almacenado
-                                        $sql = "CALL ListarTareasPorFaseYProyecto(?, ?)";
-                                        $stmt = $conectar->prepare($sql);
-                                        $stmt->bind_param('ii', $id_fase_seleccionada, $id_proyecto_seleccionado);
-                                        $stmt->execute();
-                                        $result = $stmt->get_result();
-                                    //Rellenar las opciones del select
-                                    while ($resultado = $result->fetch_assoc()) {
-                                        echo '<div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="tarea_tarea_dependiente[]" value="' . $resultado['pk_id_tarea'] . '" id="checkbox' . $resultado['pk_id_tarea'] . '">
-                                                <label class="form-check-label" for="checkbox' . $resultado['pk_id_tarea'] . '">' . $resultado['tarNombre'] . '</label>
-                                                </div>';
-                                    }
-                                    ?>
+                                <div class="col-md-6" >
+                                    <h4>Asignar tareas dependientes</h4>    
+                                    <ul class="list-group" id="tasksContainer">
                                     </ul>
                                 </div>
                             </div>    
