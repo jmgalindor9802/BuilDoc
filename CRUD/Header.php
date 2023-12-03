@@ -10,7 +10,7 @@
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-between justify-content-lg-start">
         <div class="col-3 col-lg-3">
-          <img src="../recursos/logoBlanco.png" alt="Logo_BuilDoc" width="auto" height="40" />
+          <img src="../recursos/logo_buildoc_blanco.png" alt="Logo_BuilDoc" width="auto" height="40" />
         </div>
         <div class="col-3"></div>
         <div class="col-6 col-lg-6 d-flex justify-content-end mt-3 mt-lg-0">
