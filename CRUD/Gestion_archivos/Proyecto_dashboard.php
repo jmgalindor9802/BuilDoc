@@ -118,12 +118,9 @@
                   </svg>
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a id="btn-desplegable-detalles" href="#" class="dropdown-item" data-bs-toggle="modal"
-                      data-bs-target="#ActualizarProyecto">Actualizar</a></li>
-                  <li><a id="btn-desplegable-seguimiento" href="#" class="dropdown-item" data-bs-toggle="modal"
-                      data-bs-target="#DetallesProyecto">Detalles</a></li>
-                  <li><a class="dropdown-item text-danger" data-bs-toggle="modal"
-                      data-bs-target="#EliminarProyecto">Archivar <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                  <li><a href="actualizar_proyecto_form.php?pk_id_proyecto=<?php echo $resultado['pk_id_proyecto']?>" class="dropdown-item">Actualizar</a></li>
+                  <li><a href="detalles_proyecto_form.php?pk_id_proyecto=<?php echo $resultado['pk_id_proyecto']?>" class="dropdown-item">Detalles</a></li>
+                  <li><a class="dropdown-item text-danger" href="eliminar_proyecto.php?Id=<?php echo $resultado['pk_id_proyecto']; ?>">Archivar <svg xmlns="http://www.w3.org/2000/svg" width="16"
                         height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                         <path
                           d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />

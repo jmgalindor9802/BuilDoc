@@ -249,9 +249,11 @@
               </div>
             </div>
             <div class="py-4">
-              <button class="btn btn-lg float-end custom-btn" style="font-size: 15px;"
+              <button class="btn btn-lg float-start custom-btn" style="font-size: 15px;"
               type="submit">Actualizar
                 usuario</button>
+              <a class="btn btn-lg float-end custom-btn" style="font-size: 15px;"
+              href="Proyecto_dashboard.php">Cancelar</a>
             </div>
           </div>
         </div>
