@@ -5,7 +5,7 @@
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Registro proyecto</title>
-  <link rel="shortcut icon" href="recursos/HeadLogo.png" type="image/x-icon">
+  <link rel="shortcut icon" href="../recursos/HeadLogo.png" type="image/x-icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
@@ -81,7 +81,7 @@
           <div class="row g-3">
           <div class="col-md-6">
               <label for="departamento" class="form-label">Departamento</label>
-              <select name="ProyectoDepartamento" class="form-select" id="departamento" required>
+              <select name="departamento" class="form-select" id="departamento" required>
                 <option value="">Elegir...</option>
                 <option value="Amazonas">Amazonas</option>
                 <option value="Antioquia">Antioquia</option>
@@ -160,41 +160,38 @@
               };
 
               const departamentoSelect = document.getElementById("departamento");
-              const municipioSelect = document.getElementById("municipio");
+    const municipioSelect = document.getElementById("municipio");
 
-              // Función para cargar municipios según el departamento seleccionado
-              function actualizarMunicipios() {
-                  const selectedDepartamento = departamentoSelect.value;
-                  municipioSelect.innerHTML = ""; // Limpiar opciones
+    // Asignar evento change al campo del departamento
+    departamentoSelect.addEventListener("change", function () {
+        const selectedDepartamento = departamentoSelect.value;
+        municipioSelect.innerHTML = ""; // Limpiar opciones
 
-                  // Si se selecciona un departamento válido, cargar los municipios correspondientes
-                  if (municipiosPorDepartamento.hasOwnProperty(selectedDepartamento)) {
-                      const municipios = municipiosPorDepartamento[selectedDepartamento];
-                      municipios.forEach(municipio => {
-                          const option = document.createElement("option");
-                          option.text = municipio;
-                          option.value = municipio;
-                          municipioSelect.appendChild(option);
-                      });
-                  } else {
-                      const option = document.createElement("option");
-                      option.text = "Selecciona un departamento válido";
-                      municipioSelect.appendChild(option);
-                  }
-              }
-
-              // Escuchar cambios en el select de departamento para actualizar los municipios
-              departamentoSelect.addEventListener("change", actualizarMunicipios);
-          });
+        // Si se selecciona un departamento válido, cargar los municipios correspondientes
+        if (municipiosPorDepartamento.hasOwnProperty(selectedDepartamento)) {
+            const municipios = municipiosPorDepartamento[selectedDepartamento];
+            municipios.forEach(municipio => {
+                const option = document.createElement("option");
+                option.text = municipio;
+                option.value = municipio;
+                municipioSelect.appendChild(option);
+            });
+        } else {
+            const option = document.createElement("option");
+            option.text = "Selecciona un departamento válido";
+            municipioSelect.appendChild(option);
+        }
+    });
+});
             </script>
             <div class="col-md-6">
-              <label for="municipio" class="form-label">Municipio</label>
-              <select name="ProyectoMunicipio" class="form-select" id="municipio" required>
-                  <option value="">Elegir...</option>
-              </select>
-              <div class="invalid-feedback">
-                Se requiere un municipio válido.
-              </div>
+                <label for="municipio" class="form-label">Municipio</label>
+                <select name="ProyectoMunicipio" class="form-select" id="municipio" required>
+                    <option value="">Elegir...</option>
+                </select>
+                <div class="invalid-feedback">
+                    Se requiere un municipio válido.
+                </div>
             </div>
             <div class="col-12">
               <label class="form-label">Dirección</label>
@@ -236,7 +233,7 @@
               </div>
             </div>
             <div class="col-sm-6">
-              <label id="RutaProyecto" for="name" class="form-label">Ruta</label>
+              <label id="ProyectoRuta" for="name" class="form-label">Ruta</label>
               <input name="ProyectoRuta" type="text" class="form-control" id="name" placeholder="Ruta proyecto"
                 value="" required>
               <div class="invalid-feedback">

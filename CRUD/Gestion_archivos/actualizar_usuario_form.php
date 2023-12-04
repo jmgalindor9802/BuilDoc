@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Actualizar usuario</title>
-  <link rel="shortcut icon" href="recursos/HeadLogo.png" type="image/x-icon">
+  <link rel="shortcut icon" href="../recursos/HeadLogo.png" type="image/x-icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
@@ -249,9 +249,11 @@
               </div>
             </div>
             <div class="py-4">
-              <button class="btn btn-lg float-end custom-btn" style="font-size: 15px;"
+              <button class="btn btn-lg float-start custom-btn" style="font-size: 15px;"
               type="submit">Actualizar
                 usuario</button>
+              <a class="btn btn-lg float-end custom-btn" style="font-size: 15px;"
+              href="Proyecto_dashboard.php">Cancelar</a>
             </div>
           </div>
         </div>

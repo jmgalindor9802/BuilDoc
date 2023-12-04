@@ -5,11 +5,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Proyecto</title>
-  <link rel="shortcut icon" href="recursos/HeadLogo.png" type="image/x-icon">
+  <link rel="shortcut icon" href="../recursos/HeadLogo.png" type="image/x-icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
   
 
 
@@ -67,20 +67,11 @@
         </ol>
       </nav>
       <div>
-        <h4 class="mb-3">Proyectos</h4>
+        <h4 class="mb-3">Dashboard de proyectos</h4>
         <a href="crear_proyecto_form.php"><button class="btn btn-lg float-end custom-btn" type="submit"
             style="font-size: 15px; margin-right: 5px;">+ Crear
             proyecto</button></a>
         <h1 class="display-6 mb-3" style="margin-bottom: 5px;">Ultimos proyectos creados</h1>
-        <div class="dropdown mb-3">
-        <button id="proyectoSeleccionado" class="btn btn-secondary dropdown-toggle" type="button"
-            data-toggle="dropdown" aria-expanded="false">
-            Todos los proyectos
-          </button>
-          <ul class="dropdown-menu" style="max-height: 200px; overflow-y: auto;">
-              <li><a class="dropdown-item" href="#">Todos los proyectos</a></li>
-          </ul>
-        </div>
       </div>
 
       <div class="table-responsive vh-80">
@@ -127,12 +118,9 @@
                   </svg>
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a id="btn-desplegable-detalles" href="#" class="dropdown-item" data-bs-toggle="modal"
-                      data-bs-target="#ActualizarProyecto">Actualizar</a></li>
-                  <li><a id="btn-desplegable-seguimiento" href="#" class="dropdown-item" data-bs-toggle="modal"
-                      data-bs-target="#DetallesProyecto">Detalles</a></li>
-                  <li><a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
-                      data-bs-target="#EliminarProyecto">Archivar <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                  <li><a href="actualizar_proyecto_form.php?pk_id_proyecto=<?php echo $resultado['pk_id_proyecto']?>" class="dropdown-item">Actualizar</a></li>
+                  <li><a href="detalles_proyecto_form.php?pk_id_proyecto=<?php echo $resultado['pk_id_proyecto']?>" class="dropdown-item">Detalles</a></li>
+                  <li><a class="dropdown-item text-danger" href="eliminar_proyecto.php?Id=<?php echo $resultado['pk_id_proyecto']; ?>">Archivar <svg xmlns="http://www.w3.org/2000/svg" width="16"
                         height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                         <path
                           d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
@@ -152,155 +140,6 @@
     </div>
   </div>
   
-  <?php 
-  require("../conexion.php");
-            
-  $sql = $conectar->query("SELECT * from ga_proyecto
-  INNER JOIN ga_cliente ON ga_proyecto.fk_id_cliente = ga_cliente.pk_id_cliente");
-
-  while ($resultado = $sql->fetch_assoc()){
-            
-  ?>
-  <!-- Ventanas emergentes o modals -->
-  <div class="modal fade" id="ActualizarProyecto" tabindex="-1" aria-labelledby="ActualizarProyecto" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-lg">
-      <div class="modal-content">
-        <!-- Encabezado de la ventana importante ponerlo -->
-        <div class="modal-header">
-          <div class="row align-items-center w-100">
-            <div class="col-6">
-              <h5 class="modal-title"><?php echo $resultado ['proNombre']?></h5>
-            </div>
-
-          </div>
-        </div>
-        <!-- cuerpo de la ventana nesesario ponerlo -->
-        <div class="modal-body">
-          <div id="Act" style="display: block; width: 700px;">
-            <div class="border-bottom row">
-              <div class="col-8">
-                <p class="lead text-black">Actualización Proyecto</p>
-              </div>
-            </div>
-            <div style="padding: 5%;">
-            <h6 class="text-muted text-bold">Nuevo nombre</h6>
-            <input type="text" name="proNombreActualizar" class="form-control" id="proNombreActualizar" 
-            placeholder="Nombre" required>
-            <div class="invalid-feedback">
-                  Se requiere una dirección válido.
-            </div>
-            <br>
-            <h6 class="text-muted text-bold">Nuevo municipio</h6>
-            <input type="text" name="proMunicipioActualizar" class="form-control" id="proMunicipioActualizar" 
-            placeholder="Municipio" required>
-            <div class="invalid-feedback">
-                  Se requiere una dirección válido.
-            </div>
-            <br>  
-            <h6 class="text-muted text-bold">Nueva direccion</h6>
-            <input type="text" name="proDireccionActualizar" class="form-control" id="proDireccionActualizar" 
-            placeholder="Direccion" required>
-            <br>  
-            <h6 class="text-muted text-bold">Nueva descripcion</h6>
-            <input type="text" name="proDescripcionActualizar" class="form-control" id="proDescripcionActualizar" 
-            placeholder="Descripcion" required>
-            <div class="invalid-feedback">
-                  Se requiere una dirección válido.
-            </div>
-            <br>            
-            <h6 class="text-muted text-bold">Nueva ruta</h6>
-            <input type="text" name="proRutaActualizar" class="form-control" id="prRutaActualizar" 
-            placeholder="Ruta" required>
-            <div class="invalid-feedback">
-                  Se requiere una dirección válido.
-            </div>
-            <br>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary">Guardar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <?php
-  }
-  ?>
-
-  <?php 
-  require("../conexion.php");
-            
-  $sql = $conectar->query("SELECT * from ga_proyecto
-  INNER JOIN ga_cliente ON ga_proyecto.fk_id_cliente = ga_cliente.pk_id_cliente");
-
-  while ($resultado = $sql->fetch_assoc()){
-            
-  ?>
-  <div class="modal fade" id="DetallesProyecto" tabindex="-1" aria-labelledby="DetallesProyecto" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-lg">
-      <div class="modal-content">
-        <!-- Encabezado de la ventana importante ponerlo -->
-        <div class="modal-header">
-          <div class="row align-items-center w-100">
-            <div class="col-6">
-              <h5 class="modal-title"><?php echo $resultado ['proNombre']?></h5>
-            </div>
-            <div class="col-6 text-end">
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            
-          </div>
-        </div>
-        <!-- cuerpo de la ventana nesesario ponerlo -->
-        <div class="modal-body">
-          <div id="Detalles_incidente" style="display: block; width: 700px;">
-            <div class="border-bottom row">
-              <div class="col-8">
-                <p class="lead text-black">Informacion Proyecto</p>
-              </div>
-            </div>
-            <div style="padding: 5%;">
-            <h6 class="text-muted text-bold">Municipio</h6>
-              <p class="lead text-black"><?php echo $resultado ['proMunicipio']?></p>
-              <h6 class="text-muted text-bold">Direccion</h6>
-              <p class="lead text-black"><?php echo $resultado ['proDireccion']?></p>
-              <h6 class="text-muted text-bold">Descripcion</h6>
-              <p class="lead text-black"><?php echo $resultado ['proDescripcion']?></p>
-              <h6 class="text-muted text-bold">Fecha de Creacion</h6>
-              <p class="lead text-black"><?php
-                // $resultado['proFecha_creacion'] debería contener la fecha en formato ISO 8601, por ejemplo, "2023-11-15T12:30:00"
-                $fechaHora = $resultado['proFecha_creacion'];
-                // Llama a la función formatearFechaHora con la fecha y hora
-                $fechaHoraFormateada = formatearFechaHora($fechaHora);
-                echo $fechaHoraFormateada;
-              ?></p>
-              <h6 class="text-muted text-bold">Ruta</h6>
-              <p class="lead text-black"><?php echo $resultado ['proRuta']?></p>
-            </div>
-            <div class="border-bottom row">
-              <div class="col-8">
-                <p class="lead text-black">Informacion Cliente</p>
-              </div>
-            </div>
-            <div style="padding: 5%;">
-            <h6 class="text-muted text-bold">Nombre</h6>
-              <p class="lead text-black"><?php echo $resultado ['cliNombre']?></p>
-              <h6 class="text-muted text-bold">Correo</h6>
-              <p class="lead text-black"><?php echo $resultado ['cliCorreo']?></p>
-              <h6 class="text-muted text-bold">Telefono</h6>
-              <p class="lead text-black"><?php echo $resultado ['cliTelefono']?></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <?php
-  }
-  ?>
-
   <div class="modal" tabindex="-1" id="EliminarProyecto">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -318,11 +157,35 @@
     </div>
   </div>
 
-  <script src="Proyecto.js"></script>
-  <script src="Proyecto_dashboard.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
+  <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+  <script src="Proyecto_dashboard.js"></script>
+  <script type="text/javascript">
+    let table = new DataTable('#tablaProyectos', {
+    //Para cambiar el lenguaje a español
+    "language": {
+        "lengthMenu": "Mostrar _MENU_ registros",
+        "zeroRecords": "No se encontraron resultados",
+        "info": "Mostrando del _START_ al _END_ de _TOTAL_ registros",
+        "infoEmpty": "Mostrando del 0 al 0 de 0 registros",
+        "infoFiltered": "(de un total de _MAX_ registros)",
+        "sSearch": "Buscar:",
+        "oPaginate": {
+            "sFirst": "Primero",
+            "sLast": "Último",
+            "sNext": "Siguiente",
+            "sPrevious": "Anterior"
+        },
+        "sProcessing": "Procesando..."
+    }
+   })
+  </script>
 </body>
 
 </html>

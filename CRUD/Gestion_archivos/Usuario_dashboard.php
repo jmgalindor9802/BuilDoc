@@ -5,11 +5,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Usuario</title>
-  <link rel="shortcut icon" href="recursos/HeadLogo.png" type="image/x-icon">
+  <link rel="shortcut icon" href="../recursos/HeadLogo.png" type="image/x-icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
 
 
 
@@ -65,34 +65,11 @@
         </ol>
       </nav>
       <div>
-        <h4 class="mb-3">Usuarios</h4>
+        <h4 class="mb-3">Dashboard de usuarios</h4>
         <a href="crear_usuario_form.php"><button class="btn btn-lg float-end custom-btn" type="submit"
             style="font-size: 15px; margin-right: 5px;">+ Crear
             usuario</button></a>
         <h1 class="display-6 mb-3" style="margin-bottom: 5px;">Usuarios creados</h1>
-        <div class="dropdown mb-3">
-          <button id="proyectoSeleccionado" class="btn btn-secondary dropdown-toggle" type="button"
-            data-bs-toggle="dropdown" aria-expanded="false">
-            Todos los usuarios
-          </button>
-          <?php
-            
-            require("../conexion.php");
-            
-            $sql = $conectar->query("SELECT usuMunicipio FROM usuario");
-
-
-
-            while ($resultado = $sql->fetch_assoc()){
-            
-          ?>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#"><?php echo $resultado ['usuMunicipio']?></a></li>
-          <?php
-            }
-          ?>  
-          </ul>
-        </div>
       </div>
       <div class="table-responsive vh-80">
         <table id="tablaUsuarios" class="table table-striped table-hover sticky-header">
@@ -134,9 +111,9 @@
                   </svg>
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a id="btn-desplegable-detalles" href="actualizar_usuario_form.php?pk_id_usuario=<?php echo $resultado['pk_id_usuario']?>" class="dropdown-item">Actualizar</a></li>
-                  <li><a id="btn-desplegable-seguimiento" href="detalles_usuario_form.php?pk_id_usuario=<?php echo $resultado['pk_id_usuario']?>" class="dropdown-item">Detalles</a></li>
-                  <li><a class="dropdown-item text-danger" href="eliminar_usuario.php?Id=<?php echo $resultado['pk_id_usuario']?>" class="dropdown-item">Archivar <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                  <li><a href="actualizar_usuario_form.php?pk_id_usuario=<?php echo $resultado['pk_id_usuario']?>" class="dropdown-item">Actualizar</a></li>
+                  <li><a href="detalles_usuario_form.php?pk_id_usuario=<?php echo $resultado['pk_id_usuario']?>" class="dropdown-item">Detalles</a></li>
+                  <li><a class="dropdown-item text-danger" class="dropdown-item" href="eliminar_usuario.php?Id=<?php echo $resultado['pk_id_usuario']; ?>">Archivar <svg xmlns="http://www.w3.org/2000/svg" width="16"
                         height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                         <path
                           d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
@@ -155,11 +132,53 @@
       </div>
     </div>
   </div>
+
+  <div class="modal" tabindex="-1" id="EliminarUsuario">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Eliminar proyecto</h5>
+        </div>
+        <div class="modal-body">
+          <p>¿Estás seguro de eliminar este proyecto?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
             
-  <script src="Usuario.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+  <script src="Usuario.js"></script>
+  <script type="text/javascript">
+    let table = new DataTable('#tablaUsuarios', {
+    //Para cambiar el lenguaje a español
+    "language": {
+        "lengthMenu": "Mostrar _MENU_ registros",
+        "zeroRecords": "No se encontraron resultados",
+        "info": "Mostrando del _START_ al _END_ de _TOTAL_ registros",
+        "infoEmpty": "Mostrando del 0 al 0 de 0 registros",
+        "infoFiltered": "(de un total de _MAX_ registros)",
+        "sSearch": "Buscar:",
+        "oPaginate": {
+            "sFirst": "Primero",
+            "sLast": "Último",
+            "sNext": "Siguiente",
+            "sPrevious": "Anterior"
+        },
+        "sProcessing": "Procesando..."
+    }
+   })
+  </script>  
 </body>
 
 </html>
