@@ -14,5 +14,15 @@
 
       form.classList.add('was-validated')
     }, false)
-  })
-})()
+  });
+
+$(document).ready(function () {
+  $('#guardarFaseButton').on('click', function (event) {
+       // Evitar la redirección predeterminada
+       event.preventDefault();
+    // Lógica para abrir el modal
+    $('#confirmModal').modal('show');
+  });
+});
+
+})();

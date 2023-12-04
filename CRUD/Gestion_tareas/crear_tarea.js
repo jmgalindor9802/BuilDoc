@@ -27,13 +27,6 @@
         console.log('Cambio en el proyecto');
         obtenerYActualizarTareas();
       });
-      // Manejador del evento submit del formulario
-      document.querySelector('form').addEventListener('submit', function (event) {
-        // Evita que el formulario se envíe de la manera tradicional
-        event.preventDefault();
-        obtenerYActualizarTareas();
-        return false; 
-      });
     });
 
     function obtenerYActualizarTareas() {

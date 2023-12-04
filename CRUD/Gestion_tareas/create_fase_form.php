@@ -25,17 +25,17 @@
             overflow-y: auto;
         }
     </style>
-</head>
-<header>
-    <?php include('../../Header.php'); ?>
-</header>
 
+<header>
+    <?php include('../Header.php'); ?>
+</header>
+</head>
 <body>
     <!-- Encabezado de la pagina -->
     <div class="row flex-grow-1">
         <div class="col-lg-2">
             <!-- Menu lateral izquierdo que permite el despasamiento de la pagina -->
-            <?php include('../../Menu.php'); ?>
+            <?php include('../Menu.php'); ?>
         </div>
         <div class="col-lg-10" style="padding-left: 5%; padding-right: 5%;">
             <nav aria-label="breadcrumb" class="d-flex align-items-center custom-nav ">
@@ -48,13 +48,13 @@
             <h4 class="mb-3">Nueva fase</h4>
             <div class="col-12  ">
                 <br>
-                <form action="fase.php" method="post" class="needs-validation " style="max-height: 70vh" novalidate>
+                <form action="create_fase.php" method="post" class="needs-validation " style="max-height: 70vh" novalidate>
                     <!-- INSERTAR NOMBRE FASE -->
                     <div class="row g-3">
                         <div class="col-sm-6">
-                            <label id="Nombre_fase" for="Nombre_fase" class="form-label">Nombre de la
+                            <label  for="Nombre_fase" class="form-label">Nombre de la
                                 fase</label>
-                            <input name="Nombre_fase" type="text" class="form-control" id="firstName" placeholder="Nombre de la fase" required>
+                            <input name="Nombre_fase" type="text" class="form-control" id="Nombre_fase" placeholder="Nombre de la fase" required>
                             <div class="invalid-feedback">
                                 Se requiere un nombre válido.
                             </div>
@@ -93,33 +93,54 @@
                     <br>
                     <!-- DESCRIPCION DE LA FASE -->
                     <div class="row g-3">
-                        <label id="Descripcion_fase" for="Descripcion_fase" class="form-label">Descripción</label>
-                        <textarea name="Descripcion_fase" class="form-control" id="exampleFormControlTextarea1" rows="4" placeholder="Descripción de la fase" required maxlength="450"></textarea>
+                        <label  for="Descripcion_fase" class="form-label">Descripción</label>
+                        <textarea name="Descripcion_fase" class="form-control" id="Descripcion_fase" rows="4" placeholder="Descripción de la fase" required maxlength="450"></textarea>
                         <div class="invalid-feedback">
                             Se requiere una descripción válida.
                         </div>
                     </div>
                     <br>
                     <!-- Botón "Guardar fase" que abre el modal -->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CrearFase">
-                        Guardar fase
-                    </button>
+                    <button class="btn btn-lg float-end custom-btn" id="guardarFaseButton"
+                        style="font-size: 15px;">Guardar fase</button>
 
-                    <div class="modal" tabindex="-1" id="CrearFase">
-                        <div class="modal-dialog">
+                    <!-- Modal de confirmación -->
+                    <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog"
+                        aria-labelledby="confirmModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Crear fase</h5>
+                                    <h5 class="modal-title" id="confirmModalLabel">Confirmar envío</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <p>¿Estás seguro de crear esta fase?</p>
+                                    ¿Estás seguro de que deseas enviar el formulario?
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                    <!-- Botón para enviar el formulario -->
-                                    <button type="submit" class="btn btn-primary">Aceptar</button>
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary"
+                                        id="confirmarModalButton">Confirmar</button>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <!-- Modal de éxito -->
+                    <div class="modal fade" id="successModal" tabindex="-1" role="dialog"
+                        aria-labelledby="successModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="successModalLabel">Éxito</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    La fase se ha creado exitosamente.
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
@@ -128,9 +149,22 @@
         </div>
     </div>
 
+<!-- ... Bibliotecas jQuery y Bootstrap ... -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
-    <!-- <script src="crear_fase.js"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<!-- ... Tu script personalizado ... -->
+<script src="../crear_fase.js"></script>
+<script>
+$(document).ready(function () {
+  $('#guardarFaseButton').on('click', function (event) {
+       // Evitar la redirección predeterminada
+       event.preventDefault();
+    // Lógica para abrir el modal
+    $('#confirmModal').modal('show');
+  });
+});
+</script>
 
 </body>
 
