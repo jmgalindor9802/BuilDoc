@@ -10,20 +10,13 @@
 
 
     <style>
-        .border-left {
-            border-left: 1px solid #d7d7d7;
-            height: 100%;
-        }
-
+    
         .custom-btn {
             background-color: #0074e4;
             color: #ffffff;
         }
 
-        .vh-80 {
-            max-height: 80vh;
-            overflow-y: auto;
-        }
+      
     </style>
 
 <header>
@@ -32,13 +25,13 @@
 </head>
 <body>
     <!-- Encabezado de la pagina -->
-    <div class="row flex-grow-1">
+    <div class="row ">
         <div class="col-lg-2">
             <!-- Menu lateral izquierdo que permite el despasamiento de la pagina -->
             <?php include('../Menu.php'); ?>
         </div>
         <div class="col-lg-10" style="padding-left: 5%; padding-right: 5%;">
-            <nav aria-label="breadcrumb" class="d-flex align-items-center custom-nav ">
+            <nav aria-label="breadcrumb" class="d-flex align-items-center  ">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Inicio</a></li>
                     <li class="breadcrumb-item"><a href="#">Tareas</a></li>
@@ -48,9 +41,9 @@
             <h4 class="mb-3">Nueva fase</h4>
             <div class="col-12  ">
                 <br>
-                <form action="create_fase.php" method="post" class="needs-validation " style="max-height: 70vh" novalidate>
+                <form action="create_fase.php" method="post" class="needs-validation " style="max-height: 70vh; " novalidate>
                     <!-- INSERTAR NOMBRE FASE -->
-                    <div class="row g-3">
+                    <div class="row g-3">   
                         <div class="col-sm-6">
                             <label  for="Nombre_fase" class="form-label">Nombre de la
                                 fase</label>
@@ -89,23 +82,23 @@
                                 Seleccione una fase.
                             </div>
                         </div>
-                    </div>
-                    <br>
-                    <!-- DESCRIPCION DE LA FASE -->
-                    <div class="row g-3">
+                        </div>
+                        <br>
+                        <!-- DESCRIPCION DE LA FASE -->
+                        <div class="row g-3">
                         <label  for="Descripcion_fase" class="form-label">Descripción</label>
                         <textarea name="Descripcion_fase" class="form-control" id="Descripcion_fase" rows="4" placeholder="Descripción de la fase" required maxlength="450"></textarea>
                         <div class="invalid-feedback">
                             Se requiere una descripción válida.
                         </div>
-                    </div>
-                    <br>
-                    <!-- Botón "Guardar fase" que abre el modal -->
-                    <button class="btn btn-lg float-end custom-btn" id="guardarFaseButton"
+                        </div>
+                        <br>
+                        <!-- Botón "Guardar fase" que abre el modal -->
+                        <button class="btn btn-lg float-end custom-btn" id="guardarFaseButton"
                         style="font-size: 15px;">Guardar fase</button>
 
-                    <!-- Modal de confirmación -->
-                    <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog"
+                        <!-- Modal de confirmación -->
+                        <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog"
                         aria-labelledby="confirmModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
@@ -125,9 +118,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Modal de éxito -->
-                    <div class="modal fade" id="successModal" tabindex="-1" role="dialog"
+                        </div>
+                        <!-- Modal de éxito -->
+                        <div class="modal fade" id="successModal" tabindex="-1" role="dialog"
                         aria-labelledby="successModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">

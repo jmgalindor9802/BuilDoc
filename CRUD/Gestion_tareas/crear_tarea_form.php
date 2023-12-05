@@ -21,34 +21,15 @@
             color: #ffffff;
         }
 
-        .vh-80 {
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
-        .custom-form {
-            padding-left: 8%;
-            padding-right: 8%;
-        }
-
-        .custom-form-h4 {
-            padding-left: 8%;
-            padding-right: 8%;
-            font-size: 15px;
-        }
-
-
-        .custom-nav {
-            padding-left: 4%;
-            padding-right: 4%;
-        }
+       
+  
     </style>
 </head>
 <header>
   <?php include('../Header.php'); ?>
   </header>
 
-<body style="height: 100vh; display: flex; flex-direction: column; overflow: hidden;">
+<body >
     <!-- Encabezado de la pagina -->
  
     <div class="row flex-grow-1">
@@ -56,24 +37,24 @@
             <!-- Menu lateral izquierdo que permite el despasamiento de la pagina -->
             <?php include('../Menu.php'); ?>
         </div>
-        <div class="col-10">
-            <nav aria-label="breadcrumb" class="d-flex align-items-center custom-nav ">
+        <div class="col-10" style="padding-left: 5%; padding-right: 5%;">
+            <nav aria-label="breadcrumb" class="d-flex align-items-center ">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Inicio</a></li>
                     <li class="breadcrumb-item"><a href="#">Tareas</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Crear tarea</li>
                 </ol>
             </nav>
-            <h4 class="mb-3 custom-form">Nueva tarea</h4>
-            <div class="col-12 custom-form vh-80">
+            <h4 class="mb-3 ">Nueva tarea</h4>
+            <div class="col-12 ">
                 <br>
 
-                <form class="needs-validation " style="max-height: 70vh;" novalidate >
+                <form class="needs-validation " style="max-height: 70vh;  overflow-y;" novalidate method="post" action="crear_tarea.php" >
                     <!-- INSERTAR PROYECTO CON LISTA DESPLEGABLE -->
-                    <div class="row g-3">
-                            <div class="col-sm-6">
+                    <div class="row g-3 ">
+                            <div class="col-sm-5" >
                                     <label for="proyectoSelect" class="form-label">Proyecto</label>
-                                    <select  name="Proyecto_tarea" class="form-select" id="proyectoSelect" required>
+                                    <select  name="Proyecto_tarea" class="form-select" id="proyectoSelect" required onchange="cargarFases()">
                                         <option value="">Elegir...</option>
                                         <?php
                                         require('../conexion.php');
@@ -99,53 +80,34 @@
                                         <div class="invalid-feedback">
                                         Seleccione una fase.
                                         </div>
-                            </div>
-                            <div class="col-sm-6">
-                            <label for="faseSelect" class="form-label">Fase</label>
-                                    <select  name="Fase_tarea" class="form-select" id="faseSelect" required>
-                                        <option value="">Elegir...</option>
-                                        <?php
-                                        include('../conexion.php');
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <label for="faseSelect" class="form-label">Fase</label>
+                                                    <select name="Fase_tarea" class="form-select" id="faseSelect" required data-proyecto-id="">
+                                                        <option value="">Elegir...</option>
+                                                    </select>
 
-                                        // Verificar la conexión
-                                        if (!$conectar) {
-                                            die("Conexión fallida: " . mysqli_connect_error());
-                                        }
-                                        
-                                        // Consulta para obtener nombres e IDs de proyectos de la base de datos
-                                        $sql = "SELECT pk_id_fase, fasNombre FROM gt_fase ORDER BY fasNombre";
-                                        $result = mysqli_query($conectar, $sql);
-
-                                        // Rellenar opciones del select con los resultados de la consulta
-                                        if ($result && mysqli_num_rows($result) > 0) {
-                                            while($row = mysqli_fetch_assoc($result)) {
-                                                echo "<option value='" . $row["pk_id_fase"] . "'>" . $row["fasNombre"] . "</option>";
-                                            }
-                                        }
-                                        ?>
-                                        </select>
-
-                                    <div class="invalid-feedback">
-                                        Seleccione una fase.
-                                    </div>
-                            </div>
-                    </div>
-                   
+                                                    <div class="invalid-feedback">
+                                                        Seleccione una fase.
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    
                     <br>
                     <div class="row g-3">
-                        <div class="col-sm-6">
-                            <label id="Nombre_Tarea" for="nombreTarea" class="form-label">Nombre de la
+                        <div class="col-sm-5">
+                            <label for="Nombre_Tarea" class="form-label">Nombre de la
                                 tarea</label>
-                            <input type="text" class="form-control" id="nombreTarea" placeholder="Nombre de la tarea"
+                            <input name="Nombre_tarea" type="text" class="form-control" id="Nombre_Tarea" placeholder="Nombre de la tarea"
                                 required>
                             <div class="invalid-feedback">
                                 Se requiere un nombre válido.
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                            <label id="Fechalimite_tarea" for="fechaInicial" class="form-label">Fecha y hora
+                        <div class="col-sm-5">
+                            <label  for="fechaLimite" class="form-label">Fecha y hora
                                 límite</label>
-                            <input type="datetime-local" class="form-control" id="fechaInicial" required>
+                            <input name="fechaLimite" type="datetime-local" class="form-control" id="fechaLimite" required>
                             <div class="invalid-feedback">
                                 Seleccione una fecha y hora válida.
                             </div>
@@ -157,18 +119,20 @@
                     <br>
 
                     <div class="row g-3">
-                        <label id="Descripcion_tarea" for="descripcionTarea" class="form-label">Descripción</label>
-                        <textarea class="form-control" id="descripcionTarea" rows="4"
+                    <div class="col-sm-10">
+                        <label for="descripcionTarea" class="form-label">Descripción</label>
+                        <textarea name="descripcionTarea" class="form-control" id="descripcionTarea" rows="4"
                             placeholder="Descripción de la tarea" required maxlength="450"></textarea>
                         <div class="invalid-feedback">
                             Se requiere una descripción válida.
                         </div>
                     </div>
+                    </div>
                     <br>
                     <div class="row g-3">
-                        <div class="col-md-6">
-                            <label for="state" class="form-label">Prioridad</label>
-                            <select class="form-select" id="state" required>
+                        <div class="col-md-5">
+                            <label for="prioridad" class="form-label">Prioridad</label>
+                            <select name="prioridad" class="form-select" id="prioridad" required>
                                 <option value="">Seleccionar</option>
                                 <option value="1">Alta</option>
                                 <option value="2">Baja</option>
@@ -183,7 +147,7 @@
                     <br>
                    
                             <div class="row g-3" >
-                                <div class="col-md-6">
+                                <div class="col-md-5">
                                     <h4>Asignar usuarios</h4>
                                     <ul class="list-group" >
                                     <?php
@@ -193,28 +157,66 @@
                                     FROM usuario ORDER BY nombre_completo ASC");
                                     while ($resultado = $sql->fetch_assoc()) {
                                         echo '<div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="usuarios_tareas[]" value="' . $resultado['pk_id_usuario'] . '" id="checkbox' . $resultado['pk_id_usuario'] . '">
-                                                <label class="form-check-label" for="checkbox' . $resultado['pk_id_usuario'] . '">' . $resultado['nombre_completo'] . '</label>
-                                                </div>';
+                                        <input class="form-check-input" type="checkbox" name="usuarios_tareas[]" value="' . $resultado['pk_id_usuario'] . '" id="checkbox' . $resultado['pk_id_usuario'] . '">
+                                        <label class="form-check-label" for="usuarios_tareas' . $resultado['pk_id_usuario'] . '">' . $resultado['nombre_completo'] . '</label>
+                                      </div>';
                                     }
                                     ?>
                                     </ul>
                                 </div>
-                                <div class="col-md-6" >
+                                <div class="col-md-5" >
                                     <h4>Asignar tareas dependientes</h4>    
                                     <ul class="list-group" id="tasksContainer">
                                     </ul>
                                 </div>
-                            </div>    
+                            </div>   
+                            <br> 
+                            <div class="col-md-5">               
+                            <!-- Botón "Guardar tarea" que abre el modal -->
+                        <button class="btn btn-lg float-end custom-btn" id="guardarTareaButton"
+                        style="font-size: 15px;">Guardar tarea</button>
 
-                           
-                            <div class="py-4">
-                                <button class="btn btn-lg float-end custom-btn" type="submit"
-                                    style="font-size: 15px;">Guardar
-                                    tarea</button>
+                        <!-- Modal de confirmación -->
+                        <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog"
+                        aria-labelledby="confirmModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="confirmModalLabel">Confirmar envío</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    ¿Estás seguro de que deseas enviar el formulario?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary"
+                                        id="confirmarModalButton">Confirmar</button>
+                                </div>
                             </div>
                         </div>
+                        </div>
+                        <!-- Modal de éxito -->
+                        <div class="modal fade" id="successModal" tabindex="-1" role="dialog"
+                        aria-labelledby="successModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="successModalLabel">Éxito</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    La tarea se ha creado exitosamente.
+                                </div>
+                            </div>
 
+                        </div>
+                           
+                        </div>
+                        </div>
                 </form>
             </div>
         </div>
@@ -224,7 +226,19 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
-    <script src="crear_tarea.js"></script>
+    <!-- ... Tu script personalizado ... -->
+<script src="crear_tarea.js"></script>
+<script>
+$(document).ready(function () {
+  $('#guardarTareaButton').on('click', function (event) {
+       // Evitar la redirección predeterminada
+       event.preventDefault();
+    // Lógica para abrir el modal
+    $('#confirmModal').modal('show');
+  });
+});
+</script>
+
 </body>
 
 </html>

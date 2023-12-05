@@ -2,18 +2,18 @@
 // Realiza la lógica para obtener las tareas según el proyecto y la fase
 
 // Verifica si se han proporcionado los parámetros esperados
-if (isset($_POST['idProyecto']) && isset($_POST['idFase'])) {
+if ( isset($_POST['idFase'])) {
     // Obtiene los valores de los parámetros
-    $idProyecto = $_POST['idProyecto'];
+  
     $idFase = $_POST['idFase'];
 
     // Realiza la conexión a la base de datos (asegúrate de tener tu lógica de conexión aquí)
     include('../conexion.php');
 
     // Llamada al procedimiento almacenado
-    $sql = "CALL ListarTareasPorFaseYProyecto(?, ?)";
+    $sql = "CALL ListarTareasPorFase(?)";
     $stmt = $conectar->prepare($sql);
-    $stmt->bind_param('ii', $idFase, $idProyecto);
+    $stmt->bind_param('i', $idFase);
     $stmt->execute();
     $result = $stmt->get_result();
 
