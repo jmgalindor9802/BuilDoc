@@ -71,6 +71,27 @@ BEGIN
 END //
 
 /*---GESTION DE TAREAS---*/
+/*Listar tareas por fase y proyecto*/
+CREATE PROCEDURE ListarTareasPorFaseYProyecto(
+    IN fase_id INT,
+    IN proyecto_id INT
+)
+BEGIN
+    SELECT
+        t.pk_id_tarea AS "ID de Tarea",
+        t.tarNombre AS "Nombre de Tarea"
+    FROM
+        gt_tarea t
+        JOIN gt_fase f ON t.fk_id_fase = f.pk_id_fase
+        JOIN ga_proyecto p ON f.fk_id_proyecto = p.pk_id_proyecto
+        JOIN usuarios_gt_tareas ut ON t.pk_id_tarea = ut.fk_id_tarea
+     
+    WHERE
+        f.pk_id_fase = fase_id
+        AND p.pk_id_proyecto = proyecto_id;
+    COMMIT;
+END //
+
 
 /* Listar las tareas pendientes por proyecto para los proximos 7 dias tomando como referencia la fecha actual */
 /* call listar_tareas_pendientes_proximos_7_dias_por_proyecto(4); */
