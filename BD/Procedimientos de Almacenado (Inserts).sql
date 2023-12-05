@@ -121,28 +121,23 @@ CREATE PROCEDURE InsertarTarea(
 	IN nombre VARCHAR(45),
     IN descripcion VARCHAR(5000),
     IN prioridad ENUM ('ALTA','BAJA'),
+    IN estado ENUM ('PENDIENTE','EN PROGRESO','COMPLETADO'),
     IN fechalimite DATETIME,
     IN fase BIGINT,
-    IN tareadependiente BIGINT ,
-    IN usuario BIGINT
+    IN tareadependiente BIGINT 
 )
 BEGIN
 	DECLARE idtarea BIGINT;
-	INSERT INTO gt_tarea (tarNombre, tarDescripcion, tarPrioridad, tarFecha_limite, fk_id_fase)
-    VALUES (nombre, descripcion, prioridad, fechalimite, fase);
-    -- Obtener el ID de la tarea recién insertada
-    SET idtarea = LAST_INSERT_ID();
-
-    -- Verificar si hay tarea dependiente
-    IF tareadependiente IS NOT NULL THEN
-        -- Insertar en gt_dependenciatareas solo si hay tarea dependiente
-        INSERT INTO gt_dependenciatareas (depTareaPrincipal, depTareaDependiente)
-        VALUES (idtarea, tareadependiente);
+	INSERT INTO gt_tarea (tarNombre, tarDescripcion, tarPrioridad, tarEstado, tarFecha_limite, fk_id_fase)
+    VALUES (nombre, descripcion, prioridad, estado, fechalimite, fase);
+    SET idtarea= LAST_INSERT_ID();
+    IF tareadependiente IS NULL THEN 
+    INSERT INTO gt_dependenciatareas (depTareaPrincipal, depTareaDependiente)
+    VALUES (idtarea, idtarea);
+    ELSE
+    INSERT INTO gt_dependenciatareas (depTareaPrincipal, depTareaDependiente)
+    VALUES (idtarea, tareadependiente);
     END IF;
-
-    -- Insertar en usuarios_gt_tareas
-    INSERT INTO usuarios_gt_tareas (fk_id_usuario, fk_id_tarea)
-    VALUES (usuario, idtarea);
     COMMIT;
     END//
     
@@ -189,18 +184,17 @@ BEGIN
     IF periodicidad = 'NINGUNA' THEN
         SET fecha_final = fecha; -- Asignar el mismo valor que fecha
     END IF;
-
-    IF periodicidad IS NULL THEN
-        SET fecha_final = NULL;
-    END IF;
-
+    
     INSERT INTO gii_inspeccion (insNombre, insDescripcion, insEstado, insFecha_inicial, insPeriodicidad, insFecha_final, fk_id_usuario, fk_id_proyecto)
     VALUES (nombre, descripcion, estado, fecha, periodicidad, fecha_final, autor, proyecto);
     
     SET idInspeccion = LAST_INSERT_ID();
     
-    INSERT INTO usuarios_gii_inspecciones (fk_id_usuario, fk_id_inspeccion)
-    values (inspector, idInspeccion);
+    -- Verificar si el inspector no es nulo antes de realizar la inserción
+    IF inspector IS NOT NULL THEN
+        INSERT INTO usuarios_gii_inspecciones (fk_id_usuario, fk_id_inspeccion)
+        VALUES (inspector, idInspeccion);
+    END IF;
     
     COMMIT;
 END//
@@ -261,5 +255,31 @@ INSERT INTO gii_seguimiento (actDescripcion, actSugerencia, fk_id_incidente)
 VALUES (descripcion, Sugerencias, Incidente);
 COMMIT;
 END//
+
+CREATE PROCEDURE actualizar_inspeccionProgramada(
+    IN p_pk_id_inspeccion BIGINT,
+    IN p_insNombre varchar(280),
+    IN p_insDescripcion varchar(5000),
+    IN p_insEstado ENUM('PENDIENTE', 'EN PROGRESO', 'COMPLETADO'),
+    IN p_insFecha_inicial DATETIME,
+    IN p_insPeriodicidad ENUM('DIARIA', 'SEMANAL', 'MENSUAL'),
+    IN p_insFecha_final DATETIME
+)
+BEGIN
+    UPDATE gii_inspeccion
+    SET
+        insNombre = p_insNombre,
+        insDescripcion = p_insDescripcion,
+        insEstado = p_insEstado,
+        insFecha_inicial = p_insFecha_inicial,
+        insPeriodicidad = p_insPeriodicidad,
+        insFecha_final = p_insFecha_final
+    WHERE
+        pk_id_inspeccion = p_pk_id_inspeccion;
+
+    -- No actualizamos las llaves foráneas
+commit;
+
+END //
 
 DELIMITER ;

@@ -38,8 +38,9 @@
   </style>
 </head>
 <header>
-<?php include('../Header.php'); ?>
-  </header>
+  <?php include('../Header.php'); ?>
+</header>
+
 <body style="height: 100vh; display: flex; flex-direction: column; overflow: hidden;">
   <div class="row flex-grow-1">
     <div class="col-lg-2">
@@ -58,7 +59,8 @@
       <div class="col-12 custom-form vh-80">
         <br>
 
-        <form action="inspecciones.php" method="POST" class="needs-validation " style="max-height: 70vh" novalidate>
+        <form action="actualizarInspeccion.php" method="POST" class="needs-validation " style="max-height: 70vh"
+          novalidate>
           <?php
 include_once('../conexion.php');
 
@@ -171,40 +173,40 @@ if (isset($_REQUEST['Id_recuperadoInspeccion']) && !empty($_REQUEST['Id_recupera
               </div>
             </div>
             <div class="col-md-12" id="contenedor_FechaInspeccion">
-    <label for="FechaInspeccion">Fecha y hora de la inspección</label>
-    <input name="fecha_unica_inspeccion" type="datetime-local" class="form-control" id="FechaInspeccion"
-           value="<?php echo date('Y-m-d\TH:i', strtotime($row['insFecha_inicial'])); ?>" required>
-    <div class="invalid-feedback" id="error-fechaInspeccion-mensaje">
-        Seleccione una fecha y hora válida.
-    </div>
-    <div class="invalid-feedback" id="error-fechaInspeccion-anterior-mensaje">
-        La fecha y hora de inspección debe ser posterior a la actual.
-    </div>
-</div>
+              <label for="FechaInspeccion">Fecha y hora de la inspección</label>
+              <input name="fecha_unica_inspeccion" type="datetime-local" class="form-control" id="FechaInspeccion"
+                value="<?php echo date('Y-m-d\TH:i', strtotime($row['insFecha_inicial'])); ?>" required>
+              <div class="invalid-feedback" id="error-fechaInspeccion-mensaje">
+                Seleccione una fecha y hora válida.
+              </div>
+              <div class="invalid-feedback" id="error-fechaInspeccion-anterior-mensaje">
+                La fecha y hora de inspección debe ser posterior a la actual.
+              </div>
+            </div>
 
-<div class="col-md-6" id="contenedor_fechaInicial">
-    <label for="fechaInicial">Fecha y hora de inicio:</label>
-    <input name="fechaInicialInspeccion" type="datetime-local" class="form-control" id="fechaInicial"
-           value="<?php echo date('Y-m-d\TH:i', strtotime($row['insFecha_inicial'])); ?>" required>
-    <div class="invalid-feedback" id="error-fechaInicial-mensaje">
-        Seleccione una fecha y hora válida.
-    </div>
-    <div class="invalid-feedback" id="error-fechaInicial-anterior-mensaje">
-        La fecha y hora de inicio debe ser posterior a la actual.
-    </div>
-</div>
+            <div class="col-md-6" id="contenedor_fechaInicial">
+              <label for="fechaInicial">Fecha y hora de inicio:</label>
+              <input name="fechaInicialInspeccion" type="datetime-local" class="form-control" id="fechaInicial"
+                value="<?php echo date('Y-m-d\TH:i', strtotime($row['insFecha_inicial'])); ?>" required>
+              <div class="invalid-feedback" id="error-fechaInicial-mensaje">
+                Seleccione una fecha y hora válida.
+              </div>
+              <div class="invalid-feedback" id="error-fechaInicial-anterior-mensaje">
+                La fecha y hora de inicio debe ser posterior a la actual.
+              </div>
+            </div>
 
-<div class="col-md-6" id="contenedor_fechaFinal">
-    <label for="fechaFinal">Fecha y hora de finalización:</label>
-    <input name="fechaFinalInspeccion" type="datetime-local" class="form-control" id="fechaFinal"
-           value="<?php echo date('Y-m-d\TH:i', strtotime($row['insFecha_final'])); ?>" required>
-    <div class="invalid-feedback" id="error-fechaFinal-mensaje">
-        La fecha y hora de finalización es inválida.
-    </div>
-    <div class="invalid-feedback" id="error-fechaFinal-anterior-mensaje">
-        La fecha y hora de finalización debe ser posterior a la actual.
-    </div>
-</div>
+            <div class="col-md-6" id="contenedor_fechaFinal">
+              <label for="fechaFinal">Fecha y hora de finalización:</label>
+              <input name="fechaFinalInspeccion" type="datetime-local" class="form-control" id="fechaFinal"
+                value="<?php echo date('Y-m-d\TH:i', strtotime($row['insFecha_final'])); ?>" required>
+              <div class="invalid-feedback" id="error-fechaFinal-mensaje">
+                La fecha y hora de finalización es inválida.
+              </div>
+              <div class="invalid-feedback" id="error-fechaFinal-anterior-mensaje">
+                La fecha y hora de finalización debe ser posterior a la actual.
+              </div>
+            </div>
 
 
             <div class="mb-3">
@@ -217,45 +219,41 @@ if (isset($_REQUEST['Id_recuperadoInspeccion']) && !empty($_REQUEST['Id_recupera
               </div>
             </div>
             <div class="row g-3">
-            <?php
-// Recuperar inspectores asignados a la inspección actual
-$sqlInspectoresAsignados = "SELECT fk_id_usuario FROM usuarios_gii_inspecciones WHERE fk_id_inspeccion = ?";
-$stmtInspectoresAsignados = $conectar->prepare($sqlInspectoresAsignados);
-
-if (!$stmtInspectoresAsignados) {
-    die("Error al preparar la consulta: " . $conectar->error);
-}
-
-$stmtInspectoresAsignados->bind_param("i", $row['pk_id_inspeccion']);
-$stmtInspectoresAsignados->execute();
-$resultInspectoresAsignados = $stmtInspectoresAsignados->get_result();
-$inspectoresAsignados = array();
-
-while ($rowInspectorAsignado = $resultInspectoresAsignados->fetch_assoc()) {
-    $inspectoresAsignados[] = $rowInspectorAsignado['fk_id_usuario'];
-}
-
-$stmtInspectoresAsignados->close();
-?>
+              <?php
+                // Recuperar inspectores asignados a la inspección actual
+                $sqlInspectoresAsignados = "SELECT fk_id_usuario FROM usuarios_gii_inspecciones WHERE fk_id_inspeccion = ?";
+                $stmtInspectoresAsignados = $conectar->prepare($sqlInspectoresAsignados);
+                if (!$stmtInspectoresAsignados) {
+                  die("Error al preparar la consulta: " . $conectar->error);
+                }
+                $stmtInspectoresAsignados->bind_param("i", $row['pk_id_inspeccion']);
+                $stmtInspectoresAsignados->execute();
+                $resultInspectoresAsignados = $stmtInspectoresAsignados->get_result();
+                $inspectoresAsignados = array();
+                while ($rowInspectorAsignado = $resultInspectoresAsignados->fetch_assoc()) {
+                  $inspectoresAsignados[] = $rowInspectorAsignado['fk_id_usuario'];
+                }
+                $stmtInspectoresAsignados->close();
+              ?>
               <div class="col-md-6">
-    <h4>Asignar usuarios</h4>
-    <label for="usuario_proyecto_disponible" class="form-label">Seleccione a quienes desea asignar al proyecto</label>
-    <ul class="list-group" id="usuario_proyecto_disponible">
-        <?php
-        // Lista de Usuarios
-        $sqlUsuarios = $conectar->query("SELECT pk_id_usuario, CONCAT(usuNombre, ' ', usuApellido) AS nombre_completo FROM usuario ORDER BY nombre_completo ASC");
-
-        while ($resultadoUsuario = $sqlUsuarios->fetch_assoc()) {
-            $isChecked = in_array($resultadoUsuario['pk_id_usuario'], $inspectoresAsignados) ? 'checked' : '';
-            echo '<div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="usuarios_proyecto[]" value="' . $resultadoUsuario['pk_id_usuario'] . '" id="checkbox' . $resultadoUsuario['pk_id_usuario'] . '" ' . $isChecked . '>
-                    <label class="form-check-label" for="checkbox' . $resultadoUsuario['pk_id_usuario'] . '">' . $resultadoUsuario['nombre_completo'] . '</label>
-                </div>';
-        }
-        ?>
-    </ul>
-</div>
-
+                <h4>Asignar usuarios</h4>
+                <label for="usuario_proyecto_disponible" class="form-label">Seleccione a quienes desea asignar al
+                  proyecto</label>
+                <ul class="list-group" id="usuario_proyecto_disponible">
+                  <?php
+                  // Lista de Usuarios
+                    $sqlUsuarios = $conectar->query("SELECT pk_id_usuario, CONCAT(usuNombre, ' ', usuApellido) AS nombre_completo FROM usuario ORDER BY nombre_completo ASC");
+                    while ($resultadoUsuario = $sqlUsuarios->fetch_assoc()) {
+                      $isChecked = in_array($resultadoUsuario['pk_id_usuario'], $inspectoresAsignados) ? 'checked' : '';
+                      echo '<div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="usuarios_proyecto[]" value="' . $resultadoUsuario['pk_id_usuario'] . '" id="checkbox' . $resultadoUsuario['pk_id_usuario'] . '" ' . $isChecked . '>
+                      <label class="form-check-label" for="checkbox' . $resultadoUsuario['pk_id_usuario'] . '">' . $resultadoUsuario['nombre_completo'] . '</label>
+                      </div>';
+                    }
+                  ?>
+                </ul>
+              </div>
+              <input type="hidden" name="Id_inspeccion" value="<?php echo $_REQUEST['Id_recuperadoInspeccion']; ?>" class="d-none">
               <div class="py-4">
                 <a class="btn btn-lg float-end custom-btn" style="font-size: 15px;" data-bs-toggle="modal"
                   data-bs-target="#ProgramarInspeccion">Guardar
