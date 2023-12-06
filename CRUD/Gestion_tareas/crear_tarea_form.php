@@ -11,6 +11,8 @@
 
 
     <style>
+
+
         .border-left {
             border-left: 1px solid #d7d7d7;
             height: 100%;
@@ -149,7 +151,7 @@
                             <div class="row g-3" >
                                 <div class="col-md-5">
                                     <h4>Asignar usuarios</h4>
-                                    <ul class="list-group" >
+                                    <ul class="list-group" style="max-height: 300px; overflow-y: auto;" >
                                     <?php
                                     //Lista de Usuarios
                                     include("../conexion.php");
@@ -166,7 +168,7 @@
                                 </div>
                                 <div class="col-md-5" >
                                     <h4>Asignar tareas dependientes</h4>    
-                                    <ul class="list-group" id="tasksContainer">
+                                    <ul class="list-group" id="tasksContainer" style="max-height: 300px; overflow-y: auto;">
                                     </ul>
                                 </div>
                             </div>   

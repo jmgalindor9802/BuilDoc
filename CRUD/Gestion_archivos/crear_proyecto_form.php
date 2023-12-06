@@ -160,29 +160,28 @@
               };
 
               const departamentoSelect = document.getElementById("departamento");
-    const municipioSelect = document.getElementById("municipio");
+              const municipioSelect = document.getElementById("municipio");
+          
+              departamentoSelect.addEventListener("change", function () {
+                  const selectedDepartamento = departamentoSelect.value;
+                  municipioSelect.innerHTML = ""; // Limpiar opciones
 
-    // Asignar evento change al campo del departamento
-    departamentoSelect.addEventListener("change", function () {
-        const selectedDepartamento = departamentoSelect.value;
-        municipioSelect.innerHTML = ""; // Limpiar opciones
-
-        // Si se selecciona un departamento válido, cargar los municipios correspondientes
-        if (municipiosPorDepartamento.hasOwnProperty(selectedDepartamento)) {
-            const municipios = municipiosPorDepartamento[selectedDepartamento];
-            municipios.forEach(municipio => {
-                const option = document.createElement("option");
-                option.text = municipio;
-                option.value = municipio;
-                municipioSelect.appendChild(option);
-            });
-        } else {
-            const option = document.createElement("option");
-            option.text = "Selecciona un departamento válido";
-            municipioSelect.appendChild(option);
-        }
-    });
-});
+                  // Si se selecciona un departamento válido, cargar los municipios correspondientes
+                  if (municipiosPorDepartamento.hasOwnProperty(selectedDepartamento)) {
+                      const municipios = municipiosPorDepartamento[selectedDepartamento];
+                      municipios.forEach(municipio => {
+                          const option = document.createElement("option");
+                          option.text = municipio;
+                          option.value = municipio;
+                          municipioSelect.appendChild(option);
+                      });
+                  } else {
+                      const option = document.createElement("option");
+                      option.text = "Selecciona un departamento válido";
+                      municipioSelect.appendChild(option);
+                  }
+              });
+          });
             </script>
             <div class="col-md-6">
                 <label for="municipio" class="form-label">Municipio</label>
