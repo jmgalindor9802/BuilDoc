@@ -62,6 +62,7 @@ if (
             // Redirigir a Inspecciones_dashboard.php
             header("Location: Inspecciones_dashboar.php");
             exit(); // Asegúrate de salir después de redirigir
+            
         } else {
             echo "Fallo la insercion del ultimo ID";
         }

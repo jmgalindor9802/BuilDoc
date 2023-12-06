@@ -151,10 +151,24 @@
 <script>
 $(document).ready(function () {
   $('#guardarFaseButton').on('click', function (event) {
-       // Evitar la redirección predeterminada
-       event.preventDefault();
-    // Lógica para abrir el modal
-    $('#confirmModal').modal('show');
+    // Evitar la redirección predeterminada
+    event.preventDefault();
+
+    // Validar todos los campos del formulario
+    var form = $('form')[0];
+    if (form.checkValidity() === false) {
+      // Si hay campos no válidos, mostrar mensajes de validación
+      event.stopPropagation();
+      form.classList.add('was-validated');
+    } else {
+      // Si todos los campos son válidos, abrir el modal
+      $('#confirmModal').modal('show');
+    }
+  });
+
+  // Limpiar la clase de validación al cerrar el modal
+  $('#confirmModal').on('hidden.bs.modal', function () {
+    $('form').removeClass('was-validated');
   });
 });
 </script>

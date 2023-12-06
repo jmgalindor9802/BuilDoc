@@ -11,6 +11,8 @@
 
 
     <style>
+
+
         .border-left {
             border-left: 1px solid #d7d7d7;
             height: 100%;
@@ -49,7 +51,7 @@
             <div class="col-12 ">
                 <br>
 
-                <form class="needs-validation " style="max-height: 70vh;  overflow-y;" novalidate method="post" action="crear_tarea.php" >
+                <form class="needs-validation " style="max-height: 70vh;  overflow-y:auto" novalidate method="post" action="crear_tarea.php" >
                     <!-- INSERTAR PROYECTO CON LISTA DESPLEGABLE -->
                     <div class="row g-3 ">
                             <div class="col-sm-5" >
@@ -149,7 +151,7 @@
                             <div class="row g-3" >
                                 <div class="col-md-5">
                                     <h4>Asignar usuarios</h4>
-                                    <ul class="list-group" >
+                                    <ul class="list-group" style="max-height: 300px; overflow-y: auto;" >
                                     <?php
                                     //Lista de Usuarios
                                     include("../conexion.php");
@@ -157,7 +159,7 @@
                                     FROM usuario ORDER BY nombre_completo ASC");
                                     while ($resultado = $sql->fetch_assoc()) {
                                         echo '<div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="usuarios_tareas[]" value="' . $resultado['pk_id_usuario'] . '" id="checkbox' . $resultado['pk_id_usuario'] . '">
+                                        <input class="form-check-input" type="checkbox" name="usuarios_tareas[]" value="' . $resultado['pk_id_usuario'] . '" id="checkbox' . $resultado['pk_id_usuario'] . '" required>
                                         <label class="form-check-label" for="usuarios_tareas' . $resultado['pk_id_usuario'] . '">' . $resultado['nombre_completo'] . '</label>
                                       </div>';
                                     }
@@ -166,7 +168,7 @@
                                 </div>
                                 <div class="col-md-5" >
                                     <h4>Asignar tareas dependientes</h4>    
-                                    <ul class="list-group" id="tasksContainer">
+                                    <ul class="list-group" id="tasksContainer" style="max-height: 300px; overflow-y: auto;">
                                     </ul>
                                 </div>
                             </div>   
@@ -230,21 +232,29 @@
 <script src="crear_tarea.js"></script>
 <script>
 
-// Lógica para abrir el modal de confirmación
-$('#guardarTareaButton').on('click', function (event) {
-  // Evitar la redirección predeterminada
-  event.preventDefault();
-  // Lógica para abrir el modal
-  $('#confirmModal').modal('show');
+$(document).ready(function () {
+  $('#guardarTareaButton').on('click', function (event) {
+    // Evitar la redirección predeterminada
+    event.preventDefault();
+
+    // Validar todos los campos del formulario
+    var form = $('form')[0];
+    if (form.checkValidity() === false) {
+      // Si hay campos no válidos, mostrar mensajes de validación
+      event.stopPropagation();
+      form.classList.add('was-validated');
+    } else {
+      // Si todos los campos son válidos, abrir el modal
+      $('#confirmModal').modal('show');
+    }
+  });
+
+  // Limpiar la clase de validación al cerrar el modal
+  $('#confirmModal').on('hidden.bs.modal', function () {
+    $('form').removeClass('was-validated');
+  });
 });
 
-// Lógica para enviar el formulario cuando se confirma en el modal
-$('#confirmarModalButton').on('click', function () {
-  // Descomentar la siguiente línea si deseas enviar el formulario desde el modal
-  $('form').submit();
-  // Cerrar el modal de confirmación
-  $('#confirmModal').modal('hide');
-});
 </script>
 
 </body>

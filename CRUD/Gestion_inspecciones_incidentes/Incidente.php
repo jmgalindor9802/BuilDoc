@@ -101,6 +101,7 @@ if (
             } else {
                 echo "Error, no se guardaron los datos del involucrado correctamente: " . $stmtInvolucrado->error;
             }
+            header("Location: Incidentes_dashboard.php");
     
             // Cerrar la conexión y liberar recursos
             $stmtInvolucrado->close();
