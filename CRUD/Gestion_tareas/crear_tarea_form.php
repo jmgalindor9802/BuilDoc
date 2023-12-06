@@ -159,7 +159,7 @@
                                     FROM usuario ORDER BY nombre_completo ASC");
                                     while ($resultado = $sql->fetch_assoc()) {
                                         echo '<div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="usuarios_tareas[]" value="' . $resultado['pk_id_usuario'] . '" id="checkbox' . $resultado['pk_id_usuario'] . '">
+                                        <input class="form-check-input" type="checkbox" name="usuarios_tareas[]" value="' . $resultado['pk_id_usuario'] . '" id="checkbox' . $resultado['pk_id_usuario'] . '" required>
                                         <label class="form-check-label" for="usuarios_tareas' . $resultado['pk_id_usuario'] . '">' . $resultado['nombre_completo'] . '</label>
                                       </div>';
                                     }
@@ -232,21 +232,29 @@
 <script src="crear_tarea.js"></script>
 <script>
 
-// Lógica para abrir el modal de confirmación
-$('#guardarTareaButton').on('click', function (event) {
-  // Evitar la redirección predeterminada
-  event.preventDefault();
-  // Lógica para abrir el modal
-  $('#confirmModal').modal('show');
+$(document).ready(function () {
+  $('#guardarTareaButton').on('click', function (event) {
+    // Evitar la redirección predeterminada
+    event.preventDefault();
+
+    // Validar todos los campos del formulario
+    var form = $('form')[0];
+    if (form.checkValidity() === false) {
+      // Si hay campos no válidos, mostrar mensajes de validación
+      event.stopPropagation();
+      form.classList.add('was-validated');
+    } else {
+      // Si todos los campos son válidos, abrir el modal
+      $('#confirmModal').modal('show');
+    }
+  });
+
+  // Limpiar la clase de validación al cerrar el modal
+  $('#confirmModal').on('hidden.bs.modal', function () {
+    $('form').removeClass('was-validated');
+  });
 });
 
-// Lógica para enviar el formulario cuando se confirma en el modal
-$('#confirmarModalButton').on('click', function () {
-  // Descomentar la siguiente línea si deseas enviar el formulario desde el modal
-  $('form').submit();
-  // Cerrar el modal de confirmación
-  $('#confirmModal').modal('hide');
-});
 </script>
 
 </body>
