@@ -51,7 +51,7 @@
             <div class="col-12 ">
                 <br>
 
-                <form class="needs-validation " style="max-height: 70vh;  overflow-y;" novalidate method="post" action="crear_tarea.php" >
+                <form class="needs-validation " style="max-height: 70vh;  overflow-y:auto" novalidate method="post" action="crear_tarea.php" >
                     <!-- INSERTAR PROYECTO CON LISTA DESPLEGABLE -->
                     <div class="row g-3 ">
                             <div class="col-sm-5" >
