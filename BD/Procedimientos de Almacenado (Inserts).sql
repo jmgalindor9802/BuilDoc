@@ -25,16 +25,13 @@ CREATE PROCEDURE InsertarUsuario (
     IN Contrasenia VARCHAR(45),
     IN Telefono VARCHAR(12),
     IN Correo VARCHAR(60),
-    IN IdRol INT (11)
+    IN IdRol bigint (20)
 )
 BEGIN
     INSERT INTO Usuario (pk_id_usuario, usuNombre, usuApellido, usuNombre_eps, 
     usuNombre_arl, usuFecha_nacimiento, usuMunicipio, usuDireccion_residencia, usuProfesion, 
-    usuContrasenia, usuTelefono, usuCorreo)
-    VALUES (Id, Nombre, Apellido, EPS, ARL, Fecha_nacimiento, Municipio, Direccion, Profesion, Contrasenia, Telefono, Correo);
-    
-    INSERT INTO usuarios_roles (fk_id_rol, fk_id_usuario)
-    VALUES (IdRol, Id);
+    usuContrasenia, usuTelefono, usuCorreo, fk_id_rol)
+    VALUES (Id, Nombre, Apellido, EPS, ARL, Fecha_nacimiento, Municipio, Direccion, Profesion, Contrasenia, Telefono, Correo, IdRol);
     
     COMMIT;
 END//
@@ -44,43 +41,39 @@ CREATE PROCEDURE InsertarProyecto (
     IN municipio VARCHAR(50),
     IN direccion VARCHAR(100),
     IN descripcion VARCHAR(5000),
-    IN ruta VARCHAR(280),
     IN cliente BIGINT (20))
 BEGIN
-    INSERT INTO ga_proyecto (proNombre, proMunicipio, proDireccion, proDescripcion, proRuta, fk_id_cliente)
-    VALUES (nombre, municipio, direccion, descripcion, ruta, cliente);
+    INSERT INTO ga_proyecto (proNombre, proMunicipio, proDireccion, proDescripcion, fk_id_cliente)
+    VALUES (nombre, municipio, direccion, descripcion, cliente);
     
     COMMIT;
 END//
 
 CREATE PROCEDURE InsertarCarpeta (
     IN nombre VARCHAR(100),
-    IN ruta VARCHAR(280),
     IN clave VARCHAR(20),
     IN descripcion VARCHAR(5000),
     IN autor BIGINT (20),
     IN proyecto BIGINT (20))
 BEGIN
-    INSERT INTO ga_carpeta (carNombre, carRuta, carEtiqueta, carDescripcion, fk_id_usuario, fk_id_proyecto)
-    VALUES (nombre, ruta, clave, descripcion, autor, proyecto);
+    INSERT INTO ga_carpeta (carNombre, carEtiqueta, carDescripcion, fk_id_usuario, fk_id_proyecto)
+    VALUES (nombre, clave, descripcion, autor, proyecto);
     
     COMMIT;
 END//
 
 CREATE PROCEDURE InsertarArchivo (
     IN nombreOriginal VARCHAR(100),
-    IN ruta VARCHAR(280),
     IN tipo VARCHAR(45),
     IN tamaño VARCHAR(45),
-    IN etiqueta VARCHAR(20),
     IN autor BIGINT,
     IN carpeta BIGINT,
     IN origen BIGINT)
 BEGIN
     DECLARE archivo BIGINT;
     
-    INSERT INTO ga_archivo (arcNombre_Original, arcRuta, arcTipo, arcTamaño, arcEtiqueta, fk_id_usuario, fk_id_carpeta)
-    VALUES (nombreOriginal, ruta, tipo, tamaño, etiqueta, autor, carpeta);
+    INSERT INTO ga_archivo (arcNombre_Original, arcTipo, arcTamaño, fk_id_usuario, fk_id_carpeta)
+    VALUES (nombreOriginal, tipo, tamaño, autor, carpeta);
     
     SET archivo = LAST_INSERT_ID();
     
