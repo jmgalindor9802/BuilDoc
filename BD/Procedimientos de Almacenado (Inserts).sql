@@ -121,7 +121,6 @@ CREATE PROCEDURE `InsertarTarea`(
     IN nombre VARCHAR(45),
     IN descripcion VARCHAR(5000),
     IN prioridad ENUM ('ALTA','BAJA'),
-    IN estado ENUM ('PENDIENTE','EN PROGRESO','COMPLETADO'),
     IN fechalimite DATETIME,
     IN fase BIGINT,
     IN tareadependiente BIGINT ,
