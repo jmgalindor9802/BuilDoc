@@ -74,7 +74,7 @@
             $row = $resultado->fetch_assoc();
             
           ?>
-          <input type="hidden" class="form-control" name="IdUser" value="<?php echo $row['pk_id_proyecto'] ?>">
+          <input type="hidden" class="form-control" name="IdProyecto" value="<?php echo $row['pk_id_proyecto'] ?>">
           <div class="row g-3">
             <div class="col-sm-12">
               <label id="ProyectoNombre" for="document" class="form-label">Nombre</label>
