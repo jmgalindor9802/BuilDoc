@@ -105,11 +105,6 @@
                 value="<?php echo $row['proFecha_creacion']?>" disabled readonly>
               </div>
             </div>
-            <div class="col-md-6">
-              <label id="ActProRuta" for="municipio" class="form-label">Ruta</label>
-              <input name="ActProRuta" type="text" class="form-control"
-              value="<?php echo $row['proRuta']?>">
-            </div>
             <?php
             include ('../conexion.php');
             

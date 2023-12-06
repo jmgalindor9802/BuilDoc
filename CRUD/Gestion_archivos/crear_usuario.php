@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $apellido = $_POST["ApellidoUsu"];
     $eps = $_POST["EPS"];
     $arl = $_POST["ARL"];
-    $fechaNacimiento = $_POST["FechaNacimientoUsu"];
+    $fechaNacimiento = $_POST["FechaNacimiento"];
     $municipio = $_POST["MunicipioUsu"];
     $direccion = $_POST["DireccionUsu"];
     $correo = $_POST["CorreoUsu"];
