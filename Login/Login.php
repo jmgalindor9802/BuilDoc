@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="utf-8">
@@ -113,8 +113,6 @@
         </style>
 
 
-        <!-- Custom styles for this template -->
-        <link href="sign-in.css" rel="stylesheet">
         </head>
 
         <body class="d-flex align-items-center py bg-body-tertiary">
@@ -139,12 +137,16 @@
           </svg>
 
           <main class="form-signin w-100 m-auto">
-            <form id="myForm">
+            <form id="myForm" method="post">
               <img class="mb-4" src="Resources/Logo.png" alt="" width="140" height="57">
+              <?php
+              include ('LoginController.php');
+              ?>
               <h1 class="h3 mb-3 fw-normal">Iniciar sesion</h1>
 
               <div class="form-floating">
-                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+                <input type="email" class="form-control" id="floatingInput" 
+                name="Correo" placeholder="name@example.com" required>
                 <label for="floatingInput">Direccion Correo</label>
                 <div class="invalid-feedback">
                   Se requiere un correo válido.
@@ -152,7 +154,8 @@
               </div>
               <br>
               <div class="form-floating">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+                <input type="password" class="form-control" id="floatingPassword" 
+                name="Contrasenia" placeholder="Password" required>
                 <label for="floatingPassword">Contraseña</label>
                 <div class="invalid-feedback">
                   Completar este campo.
@@ -166,9 +169,9 @@
                 </label>
               </div>
 
-              <button class="btn btn-primary w-100 py-2">
-                <div class="relative -top-[1px]">Log in</div>
-              </button>
+              <input name="btnIngresar" class="btn btn-primary w-100 py-2" 
+              type="submit" value="Log In">
+              </input>
 
               <p class="mt-5 mb-3 text-body-secondary">&copy; 2023 BuilDoc. Todos los derechos reservados.</p>
             </form>
