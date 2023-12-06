@@ -117,19 +117,22 @@ BEGIN
     COMMIT;
 END//
 
-CREATE PROCEDURE InsertarTarea(
-	IN nombre VARCHAR(45),
+CREATE PROCEDURE `InsertarTarea`(
+    IN nombre VARCHAR(45),
     IN descripcion VARCHAR(5000),
     IN prioridad ENUM ('ALTA','BAJA'),
     IN fechalimite DATETIME,
     IN fase BIGINT,
     IN tareadependiente BIGINT ,
-    IN usuario BIGINT
+    IN usuarios_list VARCHAR(500)  -- Lista de usuarios separados por comas (por ejemplo, '1,2,3')
 )
 BEGIN
-	DECLARE idtarea BIGINT;
-	INSERT INTO gt_tarea (tarNombre, tarDescripcion, tarPrioridad, tarFecha_limite, fk_id_fase)
+    DECLARE idtarea BIGINT;
+    
+    -- Insertar en gt_tarea
+    INSERT INTO gt_tarea (tarNombre, tarDescripcion, tarPrioridad, tarFecha_limite, fk_id_fase)
     VALUES (nombre, descripcion, prioridad, fechalimite, fase);
+    
     -- Obtener el ID de la tarea recién insertada
     SET idtarea = LAST_INSERT_ID();
 
@@ -139,12 +142,21 @@ BEGIN
         INSERT INTO gt_dependenciatareas (depTareaPrincipal, depTareaDependiente)
         VALUES (idtarea, tareadependiente);
     END IF;
+    -- Insertar en usuarios_gt_tareas para cada usuario
+    -- Insertar en usuarios_gt_tareas para cada usuario
+SET usuarios_list = CONCAT(usuarios_list, ',');
 
-    -- Insertar en usuarios_gt_tareas
+WHILE LENGTH(usuarios_list) > 0 DO
+    SET @userId = SUBSTRING_INDEX(usuarios_list, ',', 1);
+    SET usuarios_list = SUBSTRING(usuarios_list, LENGTH(@userId) + 2);
+      -- Insertar en usuarios_gt_tareas
     INSERT INTO usuarios_gt_tareas (fk_id_usuario, fk_id_tarea)
-    VALUES (usuario, idtarea);
+    VALUES (@userId, idtarea);
+END WHILE;
+    
     COMMIT;
-    END//
+END//
+
     
     CREATE PROCEDURE InsertarUsuariosTareas(
     IN usuario BIGINT,

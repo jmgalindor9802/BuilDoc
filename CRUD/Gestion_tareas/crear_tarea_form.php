@@ -98,7 +98,7 @@
                         <div class="col-sm-5">
                             <label for="Nombre_Tarea" class="form-label">Nombre de la
                                 tarea</label>
-                            <input name="Nombre_tarea" type="text" class="form-control" id="Nombre_Tarea" placeholder="Nombre de la tarea"
+                            <input name="Nombre_Tarea" type="text" class="form-control" id="Nombre_Tarea" placeholder="Nombre de la tarea"
                                 required>
                             <div class="invalid-feedback">
                                 Se requiere un nombre válido.
@@ -198,22 +198,22 @@
                             </div>
                         </div>
                         </div>
-                        <!-- Modal de éxito -->
-                        <div class="modal fade" id="successModal" tabindex="-1" role="dialog"
-                        aria-labelledby="successModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="successModalLabel">Éxito</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    La tarea se ha creado exitosamente.
-                                </div>
-                            </div>
+                                        <!-- Modal de éxito -->
+                                        <div class="modal fade" id="successModal" tabindex="-1" role="dialog"
+                                        aria-labelledby="successModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="successModalLabel">Éxito</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    La tarea se ha creado exitosamente.
+                                                </div>
+                                            </div>
 
-                        </div>
+                                        </div>
                            
                         </div>
                         </div>
@@ -229,13 +229,21 @@
     <!-- ... Tu script personalizado ... -->
 <script src="crear_tarea.js"></script>
 <script>
-$(document).ready(function () {
-  $('#guardarTareaButton').on('click', function (event) {
-       // Evitar la redirección predeterminada
-       event.preventDefault();
-    // Lógica para abrir el modal
-    $('#confirmModal').modal('show');
-  });
+
+// Lógica para abrir el modal de confirmación
+$('#guardarTareaButton').on('click', function (event) {
+  // Evitar la redirección predeterminada
+  event.preventDefault();
+  // Lógica para abrir el modal
+  $('#confirmModal').modal('show');
+});
+
+// Lógica para enviar el formulario cuando se confirma en el modal
+$('#confirmarModalButton').on('click', function () {
+  // Descomentar la siguiente línea si deseas enviar el formulario desde el modal
+  $('form').submit();
+  // Cerrar el modal de confirmación
+  $('#confirmModal').modal('hide');
 });
 </script>
 
