@@ -32,7 +32,7 @@
     document.querySelector('form').addEventListener('submit', function (event) {
       // Evita que el formulario se envíe de la manera tradicional
       event.preventDefault();
-      obtenerYActualizarTareas();
+      
       return false; 
     });
   });
