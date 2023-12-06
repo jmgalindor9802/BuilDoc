@@ -10,7 +10,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $municipio = $_POST["ProyectoMunicipio"];
     $direccion = $_POST["ProyectoDireccion"];
     $descripcion = $_POST["ProyectoDescripcion"];
-    $ruta = $_POST["ProyectoRuta"];
     $cliente = $_POST["ProyectoCliente"];
 
     // Consulta para verificar si el proyecto ya existe
@@ -19,9 +18,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $consulta_proyecto->execute();
     $resultado = $consulta_proyecto->get_result();
 
-    $insert_proyecto = $conectar->prepare("INSERT INTO ga_proyecto (proNombre, proMunicipio, proDireccion, proDescripcion, proRuta, fk_id_cliente) 
-    VALUES (?, ?, ?, ?, ?, ?)");
-    $insert_proyecto->bind_param("sssssi", $nombre, $municipio, $direccion, $descripcion, $ruta, $cliente);
+    $insert_proyecto = $conectar->prepare("INSERT INTO ga_proyecto (proNombre, proMunicipio, proDireccion, proDescripcion, fk_id_cliente) 
+    VALUES (?, ?, ?, ?, ?)");
+    $insert_proyecto->bind_param("ssssi", $nombre, $municipio, $direccion, $descripcion, $cliente);
 
     // Después de insertar el proyecto principal correctamente
 if ($insert_proyecto->execute()) {
