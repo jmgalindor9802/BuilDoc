@@ -100,28 +100,9 @@
 
         <h1>Ultimos incidentes reportados</h1>
 
-        <div class="dropdown" style="margin-top: 20px;">
-          <button id="proyectoSeleccionado" class="btn btn-secondary dropdown-toggle" type="button"
-            data-bs-toggle="dropdown" aria-expanded="false">
-            Todos los proyectos
-          </button>
-          <ul class="dropdown-menu">
+        <div class="table-responsive dataTables_wrapper dt-bootstrap5">
 
-            <!-- Actualizar los datos del boton -->
-
-
-            <li><a class="dropdown-item" href="#">Todos los proyectos</a></li>
-            <li><a class="dropdown-item" href="#">Proyecto de Carretera Transversal</a></li>
-            <li><a class="dropdown-item" href="#">Ampliación de Aeropuerto Internacional</a></li>
-            <li><a class="dropdown-item" href="#"> Proyecto de Túnel Subterráneo</a></li>
-          </ul>
-
-        </div>
-      </div>
-
-      <div class="table-responsive vh-80">
-
-        <table id="Tabla_incidentes" class="table table-striped table-hover sticky-header">
+        <table id="Tabla_incidentes" class="table table-striped sticky-header">
           <thead>
             <tr>
               <th scope="col">Incidente</th>
@@ -326,11 +307,35 @@
       </div>
     </div>
   </div>
-  <script src="Incidentes_dashboard.js"></script>
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+  <script src="Incidentes_dashboard.js"></script>
+  <script type="text/javascript">
+    let table = new DataTable('#Tabla_incidentes', {
+    //Para cambiar el lenguaje a español
+    "language": {
+        "lengthMenu": "Mostrar _MENU_ registros",
+        "zeroRecords": "No se encontraron resultados",
+        "info": "Mostrando del _START_ al _END_ de _TOTAL_ registros",
+        "infoEmpty": "Mostrando del 0 al 0 de 0 registros",
+        "infoFiltered": "(de un total de _MAX_ registros)",
+        "sSearch": "Buscar:",
+        "oPaginate": {
+            "sFirst": "Primero",
+            "sLast": "Último",
+            "sNext": "Siguiente",
+            "sPrevious": "Anterior"
+        },
+        "sProcessing": "Procesando..."
+    }
+})
+  </script>
 </body>
 
 </html>
