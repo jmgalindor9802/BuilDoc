@@ -15,10 +15,8 @@ usuDireccion_residencia varchar (100) not null,
 usuProfesion varchar (50) not null,
 usuContrasenia varchar (45) not null,
 usuTelefono varchar (12) not null,
-usuCorreo varchar (60) not null,
-fk_id_rol BIGINT (20) not null,
-foreign key (fk_id_rol)references rol (pk_id_rol)
-ON DELETE CASCADE ON UPDATE CASCADE);
+usuCorreo varchar (60) not null);
+
 create table ga_cliente (
 pk_id_cliente BIGINT (20) primary key not null,
 cliNombre varchar (45) not null,

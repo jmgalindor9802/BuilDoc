@@ -24,16 +24,16 @@ CREATE PROCEDURE InsertarUsuario (
     IN Profesion VARCHAR(50),
     IN Contrasenia VARCHAR(45),
     IN Telefono VARCHAR(12),
-    IN Correo VARCHAR(60),
-    IN IdRol bigint (20)
+    IN Correo VARCHAR(60)
+
 )
 BEGIN
     INSERT INTO Usuario (pk_id_usuario, usuNombre, usuApellido, usuNombre_eps, 
     usuNombre_arl, usuFecha_nacimiento, usuMunicipio, usuDireccion_residencia, usuProfesion, 
-    usuContrasenia, usuTelefono, usuCorreo, fk_id_rol)
-    VALUES (Id, Nombre, Apellido, EPS, ARL, Fecha_nacimiento, Municipio, Direccion, Profesion, Contrasenia, Telefono, Correo, IdRol);
-    
-    COMMIT;
+    usuContrasenia, usuTelefono, usuCorreo)
+    VALUES (Id, Nombre, Apellido, EPS, ARL, Fecha_nacimiento, Municipio, Direccion, Profesion, Contrasenia, Telefono, Correo);
+  
+
 END//
 
 CREATE PROCEDURE InsertarProyecto (
@@ -41,39 +41,43 @@ CREATE PROCEDURE InsertarProyecto (
     IN municipio VARCHAR(50),
     IN direccion VARCHAR(100),
     IN descripcion VARCHAR(5000),
+    IN ruta VARCHAR(280),
     IN cliente BIGINT (20))
 BEGIN
-    INSERT INTO ga_proyecto (proNombre, proMunicipio, proDireccion, proDescripcion, fk_id_cliente)
-    VALUES (nombre, municipio, direccion, descripcion, cliente);
+    INSERT INTO ga_proyecto (proNombre, proMunicipio, proDireccion, proDescripcion, proRuta, fk_id_cliente)
+    VALUES (nombre, municipio, direccion, descripcion, ruta, cliente);
     
     COMMIT;
 END//
 
 CREATE PROCEDURE InsertarCarpeta (
     IN nombre VARCHAR(100),
+    IN ruta VARCHAR(280),
     IN clave VARCHAR(20),
     IN descripcion VARCHAR(5000),
     IN autor BIGINT (20),
     IN proyecto BIGINT (20))
 BEGIN
-    INSERT INTO ga_carpeta (carNombre, carEtiqueta, carDescripcion, fk_id_usuario, fk_id_proyecto)
-    VALUES (nombre, clave, descripcion, autor, proyecto);
+    INSERT INTO ga_carpeta (carNombre, carRuta, carEtiqueta, carDescripcion, fk_id_usuario, fk_id_proyecto)
+    VALUES (nombre, ruta, clave, descripcion, autor, proyecto);
     
     COMMIT;
 END//
 
 CREATE PROCEDURE InsertarArchivo (
     IN nombreOriginal VARCHAR(100),
+    IN ruta VARCHAR(280),
     IN tipo VARCHAR(45),
     IN tamaño VARCHAR(45),
+    IN etiqueta VARCHAR(20),
     IN autor BIGINT,
     IN carpeta BIGINT,
     IN origen BIGINT)
 BEGIN
     DECLARE archivo BIGINT;
     
-    INSERT INTO ga_archivo (arcNombre_Original, arcTipo, arcTamaño, fk_id_usuario, fk_id_carpeta)
-    VALUES (nombreOriginal, tipo, tamaño, autor, carpeta);
+    INSERT INTO ga_archivo (arcNombre_Original, arcRuta, arcTipo, arcTamaño, arcEtiqueta, fk_id_usuario, fk_id_carpeta)
+    VALUES (nombreOriginal, ruta, tipo, tamaño, etiqueta, autor, carpeta);
     
     SET archivo = LAST_INSERT_ID();
     
@@ -116,37 +120,46 @@ CREATE PROCEDURE `InsertarTarea`(
     IN prioridad ENUM ('ALTA','BAJA'),
     IN fechalimite DATETIME,
     IN fase BIGINT,
-    IN tareadependiente BIGINT ,
+    IN tareadependiente_list VARCHAR(500), -- Lista de tareas dependientes separadas por comas
     IN usuarios_list VARCHAR(500)  -- Lista de usuarios separados por comas (por ejemplo, '1,2,3')
 )
 BEGIN
     DECLARE idtarea BIGINT;
-    
+
     -- Insertar en gt_tarea
     INSERT INTO gt_tarea (tarNombre, tarDescripcion, tarPrioridad, tarFecha_limite, fk_id_fase)
     VALUES (nombre, descripcion, prioridad, fechalimite, fase);
-    
+
     -- Obtener el ID de la tarea recién insertada
     SET idtarea = LAST_INSERT_ID();
 
-    -- Verificar si hay tarea dependiente
-    IF tareadependiente IS NOT NULL THEN
-        -- Insertar en gt_dependenciatareas solo si hay tarea dependiente
-        INSERT INTO gt_dependenciatareas (depTareaPrincipal, depTareaDependiente)
-        VALUES (idtarea, tareadependiente);
-    END IF;
-    -- Insertar en usuarios_gt_tareas para cada usuario
-    -- Insertar en usuarios_gt_tareas para cada usuario
-SET usuarios_list = CONCAT(usuarios_list, ',');
+    -- Verificar si hay tareas dependientes
+    IF tareadependiente_list IS NOT NULL THEN
+        -- Insertar en gt_dependenciatareas solo si hay tareas dependientes
+        SET tareadependiente_list = CONCAT(tareadependiente_list, ',');
 
-WHILE LENGTH(usuarios_list) > 0 DO
-    SET @userId = SUBSTRING_INDEX(usuarios_list, ',', 1);
-    SET usuarios_list = SUBSTRING(usuarios_list, LENGTH(@userId) + 2);
-      -- Insertar en usuarios_gt_tareas
-    INSERT INTO usuarios_gt_tareas (fk_id_usuario, fk_id_tarea)
-    VALUES (@userId, idtarea);
-END WHILE;
-    
+        WHILE LENGTH(tareadependiente_list) > 0 DO
+            SET @tareaId = SUBSTRING_INDEX(tareadependiente_list, ',', 1);
+            SET tareadependiente_list = SUBSTRING(tareadependiente_list, LENGTH(@tareaId) + 2);
+
+            -- Insertar en gt_dependenciatareas
+            INSERT INTO gt_dependenciatareas (depTareaPrincipal, depTareaDependiente)
+            VALUES (idtarea, @tareaId);
+        END WHILE;
+    END IF;
+
+    -- Insertar en usuarios_gt_tareas para cada usuario
+    SET usuarios_list = CONCAT(usuarios_list, ',');
+
+    WHILE LENGTH(usuarios_list) > 0 DO
+        SET @userId = SUBSTRING_INDEX(usuarios_list, ',', 1);
+        SET usuarios_list = SUBSTRING(usuarios_list, LENGTH(@userId) + 2);
+
+        -- Insertar en usuarios_gt_tareas
+        INSERT INTO usuarios_gt_tareas (fk_id_usuario, fk_id_tarea)
+        VALUES (@userId, idtarea);
+    END WHILE;
+
     COMMIT;
 END//
 
@@ -194,17 +207,18 @@ BEGIN
     IF periodicidad = 'NINGUNA' THEN
         SET fecha_final = fecha; -- Asignar el mismo valor que fecha
     END IF;
-    
+
+    IF periodicidad IS NULL THEN
+        SET fecha_final = NULL;
+    END IF;
+
     INSERT INTO gii_inspeccion (insNombre, insDescripcion, insEstado, insFecha_inicial, insPeriodicidad, insFecha_final, fk_id_usuario, fk_id_proyecto)
     VALUES (nombre, descripcion, estado, fecha, periodicidad, fecha_final, autor, proyecto);
     
     SET idInspeccion = LAST_INSERT_ID();
     
-    -- Verificar si el inspector no es nulo antes de realizar la inserción
-    IF inspector IS NOT NULL THEN
-        INSERT INTO usuarios_gii_inspecciones (fk_id_usuario, fk_id_inspeccion)
-        VALUES (inspector, idInspeccion);
-    END IF;
+    INSERT INTO usuarios_gii_inspecciones (fk_id_usuario, fk_id_inspeccion)
+    values (inspector, idInspeccion);
     
     COMMIT;
 END//
@@ -265,31 +279,5 @@ INSERT INTO gii_seguimiento (actDescripcion, actSugerencia, fk_id_incidente)
 VALUES (descripcion, Sugerencias, Incidente);
 COMMIT;
 END//
-
-CREATE PROCEDURE actualizar_inspeccionProgramada(
-    IN p_pk_id_inspeccion BIGINT,
-    IN p_insNombre varchar(280),
-    IN p_insDescripcion varchar(5000),
-    IN p_insEstado ENUM('PENDIENTE', 'EN PROGRESO', 'COMPLETADO'),
-    IN p_insFecha_inicial DATETIME,
-    IN p_insPeriodicidad ENUM('DIARIA', 'SEMANAL', 'MENSUAL'),
-    IN p_insFecha_final DATETIME
-)
-BEGIN
-    UPDATE gii_inspeccion
-    SET
-        insNombre = p_insNombre,
-        insDescripcion = p_insDescripcion,
-        insEstado = p_insEstado,
-        insFecha_inicial = p_insFecha_inicial,
-        insPeriodicidad = p_insPeriodicidad,
-        insFecha_final = p_insFecha_final
-    WHERE
-        pk_id_inspeccion = p_pk_id_inspeccion;
-
-    -- No actualizamos las llaves foráneas
-commit;
-
-END //
 
 DELIMITER ;
